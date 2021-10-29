@@ -33,7 +33,7 @@ TARGET_DIR="sdk/python/v$MINOR_VERSION"
 rm -rf "$TARGET_DIR"
 cp -r "$WORK/docs" "$TARGET_DIR"
 
-MOST_RECENT=$(ls sdk/python | python "$WORK/most_recent_version.py")
+MOST_RECENT=$(ls sdk/python | grep -v latest | python "$WORK/most_recent_version.py")
 rm -rf "$WORK"
 rm -rf "sdk/python/latest"
 cp -r "sdk/python/$MOST_RECENT" "sdk/python/latest"
