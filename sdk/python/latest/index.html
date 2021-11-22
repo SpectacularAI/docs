@@ -240,7 +240,7 @@ in a loop where <a class="reference internal" href="#spectacularAI.depthai.Sessi
 <dl class="py method">
 <dt class="sig sig-object py" id="spectacularAI.VioOutput.getCameraPose">
 <span class="sig-name descname"><span class="pre">getCameraPose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.VioOutput" title="spectacularAI.VioOutput"><span class="pre">spectacularAI.VioOutput</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#spectacularAI.CameraPose" title="spectacularAI.CameraPose"><span class="pre">spectacularAI.CameraPose</span></a></span></span><a class="headerlink" href="#spectacularAI.VioOutput.getCameraPose" title="Permalink to this definition">¶</a></dt>
-<dd><p><a class="reference internal" href="#spectacularAI.CameraPose" title="spectacularAI.CameraPose"><code class="xref py py-class docutils literal notranslate"><span class="pre">CameraPose</span></code></a> corresponding to a camera whose index is given as the parameter. Index 0 corresponds to the _primary_ camera and index 1 the _secondary_ camera.</p>
+<dd><p><a class="reference internal" href="#spectacularAI.CameraPose" title="spectacularAI.CameraPose"><code class="xref py py-class docutils literal notranslate"><span class="pre">CameraPose</span></code></a> corresponding to a camera whose index is given as the parameter. Index 0 corresponds to the <em>primary</em> camera and index 1 the <em>secondary</em> camera.</p>
 </dd></dl>
 
 <dl class="py property">
@@ -264,7 +264,7 @@ in a loop where <a class="reference internal" href="#spectacularAI.depthai.Sessi
 <dl class="py property">
 <dt class="sig sig-object py" id="spectacularAI.VioOutput.status">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">status</span></span><a class="headerlink" href="#spectacularAI.VioOutput.status" title="Permalink to this definition">¶</a></dt>
-<dd><p>current <a href="#id1"><span class="problematic" id="id2">:enum:`.TrackingStatus`</span></a></p>
+<dd><p>current <a class="reference internal" href="#spectacularAI.TrackingStatus" title="spectacularAI.TrackingStatus"><code class="xref py py-class docutils literal notranslate"><span class="pre">TrackingStatus</span></code></a></p>
 </dd></dl>
 
 <dl class="py property">
@@ -291,7 +291,7 @@ in a loop where <a class="reference internal" href="#spectacularAI.depthai.Sessi
 <p>Overloaded function.</p>
 <ol class="arabic simple">
 <li><p>__init__(self: spectacularAI.depthai.Configuration) -&gt; None</p></li>
-<li><p>__init__(self: spectacularAI.depthai.Configuration, <a href="#id3"><span class="problematic" id="id4">**</span></a>kwargs) -&gt; None</p></li>
+<li><p>__init__(self: spectacularAI.depthai.Configuration, <a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs) -&gt; None</p></li>
 </ol>
 <dl class="py method">
 <dt class="sig sig-object py" id="spectacularAI.depthai.Configuration.asDict">
@@ -388,7 +388,7 @@ in a loop where <a class="reference internal" href="#spectacularAI.depthai.Sessi
 </ol>
 <p>Initialize with a <code class="docutils literal notranslate"><span class="pre">depthai.Pipeline</span></code> and custom <a class="reference internal" href="#spectacularAI.depthai.Configuration" title="spectacularAI.depthai.Configuration"><code class="xref py py-class docutils literal notranslate"><span class="pre">Configuration</span></code></a></p>
 <ol class="arabic simple" start="3">
-<li><p>__init__(self: spectacularAI.depthai.Pipeline, arg0: object, <a href="#id5"><span class="problematic" id="id6">**</span></a>kwargs) -&gt; None</p></li>
+<li><p>__init__(self: spectacularAI.depthai.Pipeline, arg0: object, <a href="#id3"><span class="problematic" id="id4">**</span></a>kwargs) -&gt; None</p></li>
 </ol>
 <p>Initialize with a <code class="docutils literal notranslate"><span class="pre">depthai.Pipeline</span></code> and custom kwargs (see <a class="reference internal" href="#spectacularAI.depthai.Configuration" title="spectacularAI.depthai.Configuration"><code class="xref py py-class docutils literal notranslate"><span class="pre">Configuration</span></code></a>)</p>
 <dl class="py property">
@@ -462,7 +462,7 @@ in a loop where <a class="reference internal" href="#spectacularAI.depthai.Sessi
 <dl class="py class">
 <dt class="sig sig-object py" id="spectacularAI.depthai.Session">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spectacularAI.depthai.</span></span><span class="sig-name descname"><span class="pre">Session</span></span><a class="headerlink" href="#spectacularAI.depthai.Session" title="Permalink to this definition">¶</a></dt>
-<dd><p>VIO session. Should be created via :py:meth:~`spectacularAI.depthai.Pipeline.startSession`</p>
+<dd><p>VIO session. Should be created via <a class="reference internal" href="#spectacularAI.depthai.Pipeline.startSession" title="spectacularAI.depthai.Pipeline.startSession"><code class="xref py py-func docutils literal notranslate"><span class="pre">spectacularAI.depthai.Pipeline.startSession()</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="spectacularAI.depthai.Session.addTrigger">
 <span class="sig-name descname"><span class="pre">addTrigger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.depthai.Session" title="spectacularAI.depthai.Session"><span class="pre">spectacularAI.depthai.Session</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#spectacularAI.depthai.Session.addTrigger" title="Permalink to this definition">¶</a></dt>
