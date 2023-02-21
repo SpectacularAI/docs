@@ -1,0 +1,1180 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Spectacular AI SDK for OAK-D &#8212; spectacularAI  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="spectacular-ai-sdk-for-oak-d">
+<h1>Spectacular AI SDK for OAK-D<a class="headerlink" href="#spectacular-ai-sdk-for-oak-d" title="Permalink to this heading">¶</a></h1>
+<p>The main steps for using this SDK are:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Initialize a <code class="docutils literal notranslate"><span class="pre">depthai.Pipeline</span></code> (see <a class="reference external" href="https://docs.luxonis.com/projects/api/en/latest/references/python/">Luxonis documentation</a> for more info)</p></li>
+<li><p>Create a <a class="reference internal" href="#spectacularAI.depthai.Pipeline" title="spectacularAI.depthai.Pipeline"><code class="xref py py-class docutils literal notranslate"><span class="pre">spectacularAI.depthai.Pipeline</span></code></a> using that
+(with optional configuration as keyword arguments, see <a class="reference internal" href="#spectacularAI.depthai.Configuration" title="spectacularAI.depthai.Configuration"><code class="xref py py-class docutils literal notranslate"><span class="pre">spectacularAI.depthai.Configuration</span></code></a>)</p></li>
+<li><p>Create a <a class="reference internal" href="#spectacularAI.depthai.Session" title="spectacularAI.depthai.Session"><code class="xref py py-class docutils literal notranslate"><span class="pre">spectacularAI.depthai.Session</span></code></a> using <a class="reference internal" href="#spectacularAI.depthai.Pipeline.startSession" title="spectacularAI.depthai.Pipeline.startSession"><code class="xref py py-meth docutils literal notranslate"><span class="pre">startSession()</span></code></a></p></li>
+<li><p>Poll outputs from the VIO session queue using <a class="reference internal" href="#spectacularAI.depthai.Session.getOutput" title="spectacularAI.depthai.Session.getOutput"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getOutput()</span></code></a>
+in a loop where <a class="reference internal" href="#spectacularAI.depthai.Session.work" title="spectacularAI.depthai.Session.work"><code class="xref py py-meth docutils literal notranslate"><span class="pre">work()</span></code></a> is also periodically called</p></li>
+<li><p>Utilize the <a class="reference internal" href="#spectacularAI.VioOutput" title="spectacularAI.VioOutput"><code class="xref py py-class docutils literal notranslate"><span class="pre">spectacularAI.VioOutput</span></code></a> objects with 6-DoF poses and other data</p></li>
+</ol>
+</div></blockquote>
+<p>Example code:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">depthai</span>
+<span class="kn">import</span> <span class="nn">spectacularAI</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">depthai</span><span class="o">.</span><span class="n">Pipeline</span><span class="p">()</span> <span class="c1"># -- 1 --</span>
+
+<span class="n">vio_pipeline</span> <span class="o">=</span> <span class="n">spectacularAI</span><span class="o">.</span><span class="n">depthai</span><span class="o">.</span><span class="n">Pipeline</span><span class="p">(</span><span class="n">pipeline</span><span class="p">)</span> <span class="c1"># -- 2 --</span>
+<span class="c1"># options, e.g.: spectacularAI.depthai.Pipeline(pipeline, useStereo=False)</span>
+
+<span class="k">with</span> <span class="n">depthai</span><span class="o">.</span><span class="n">Device</span><span class="p">(</span><span class="n">pipeline</span><span class="p">)</span> <span class="k">as</span> <span class="n">device</span><span class="p">:</span>
+    <span class="n">vio_session</span> <span class="o">=</span> <span class="n">vio_pipeline</span><span class="o">.</span><span class="n">startSession</span><span class="p">(</span><span class="n">device</span><span class="p">)</span> <span class="c1"># -- 3 --</span>
+
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">vio_session</span><span class="o">.</span><span class="n">hasOutput</span><span class="p">():</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">vio_session</span><span class="o">.</span><span class="n">getOutput</span><span class="p">()</span> <span class="c1"># -- 4 --</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">asJson</span><span class="p">())</span>           <span class="c1"># -- 5 --</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">vio_session</span><span class="o">.</span><span class="n">work</span><span class="p">():</span>
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.005</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="module-spectacularAI">
+<span id="spectacular-ai-types"></span><h2>Spectacular AI types<a class="headerlink" href="#module-spectacularAI" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="spectacularAI.Bitmap">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spectacularAI.</span></span><span class="sig-name descname"><span class="pre">Bitmap</span></span><a class="headerlink" href="#spectacularAI.Bitmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents a grayscale or RGB bitmap</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.Bitmap.getColorFormat">
+<span class="sig-name descname"><span class="pre">getColorFormat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.Bitmap" title="spectacularAI.Bitmap"><span class="pre">spectacularAI.Bitmap</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#spectacularAI.ColorFormat" title="spectacularAI.ColorFormat"><span class="pre">spectacularAI.ColorFormat</span></a></span></span><a class="headerlink" href="#spectacularAI.Bitmap.getColorFormat" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="#spectacularAI.ColorFormat" title="spectacularAI.ColorFormat"><code class="xref py py-class docutils literal notranslate"><span class="pre">ColorFormat</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.Bitmap.getHeight">
+<span class="sig-name descname"><span class="pre">getHeight</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.Bitmap" title="spectacularAI.Bitmap"><span class="pre">spectacularAI.Bitmap</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#spectacularAI.Bitmap.getHeight" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">int</span></code> bitmap height</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.Bitmap.getWidth">
+<span class="sig-name descname"><span class="pre">getWidth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.Bitmap" title="spectacularAI.Bitmap"><span class="pre">spectacularAI.Bitmap</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#spectacularAI.Bitmap.getWidth" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">int</span></code> bitmap width</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.Bitmap.toArray">
+<span class="sig-name descname"><span class="pre">toArray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.Bitmap" title="spectacularAI.Bitmap"><span class="pre">spectacularAI.Bitmap</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#spectacularAI.Bitmap.toArray" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns array representation of the bitmap</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="spectacularAI.Camera">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spectacularAI.</span></span><span class="sig-name descname"><span class="pre">Camera</span></span><a class="headerlink" href="#spectacularAI.Camera" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents the intrinsic parameters of a particular camera. If the input image is distorted, the camera and projection matrices correspond to the undistorted / rectified image.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.Camera.getIntrinsicMatrix">
+<span class="sig-name descname"><span class="pre">getIntrinsicMatrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.Camera" title="spectacularAI.Camera"><span class="pre">spectacularAI.Camera</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#spectacularAI.Camera.getIntrinsicMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>3x3 intrinsic camera matrix (OpenCV convention, undistorted).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.Camera.getProjectionMatrixOpenGL">
+<span class="sig-name descname"><span class="pre">getProjectionMatrixOpenGL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.Camera" title="spectacularAI.Camera"><span class="pre">spectacularAI.Camera</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#spectacularAI.Camera.getProjectionMatrixOpenGL" title="Permalink to this definition">¶</a></dt>
+<dd><p>4x4 projection matrix for OpenGL (undistorted)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="spectacularAI.CameraPose">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spectacularAI.</span></span><span class="sig-name descname"><span class="pre">CameraPose</span></span><a class="headerlink" href="#spectacularAI.CameraPose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents the pose (position &amp; orientation) and other parameters of a particular camera.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.CameraPose.camera">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">camera</span></span><a class="headerlink" href="#spectacularAI.CameraPose.camera" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="#spectacularAI.Camera" title="spectacularAI.Camera"><code class="xref py py-class docutils literal notranslate"><span class="pre">Camera</span></code></a>: camera parameteres</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.CameraPose.getCameraToWorldMatrix">
+<span class="sig-name descname"><span class="pre">getCameraToWorldMatrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.CameraPose" title="spectacularAI.CameraPose"><span class="pre">spectacularAI.CameraPose</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#spectacularAI.CameraPose.getCameraToWorldMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>4x4 homogeneous camera-to-world matrix</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.CameraPose.getPosition">
+<span class="sig-name descname"><span class="pre">getPosition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.CameraPose" title="spectacularAI.CameraPose"><span class="pre">spectacularAI.CameraPose</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#spectacularAI.Vector3d" title="spectacularAI.Vector3d"><span class="pre">spectacularAI.Vector3d</span></a></span></span><a class="headerlink" href="#spectacularAI.CameraPose.getPosition" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="#spectacularAI.Vector3d" title="spectacularAI.Vector3d"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vector3d</span></code></a> position of the camera</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.CameraPose.getWorldToCameraMatrix">
+<span class="sig-name descname"><span class="pre">getWorldToCameraMatrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.CameraPose" title="spectacularAI.CameraPose"><span class="pre">spectacularAI.CameraPose</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#spectacularAI.CameraPose.getWorldToCameraMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>4x4 homogeneous world-to-camera matrix</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="spectacularAI.ColorFormat">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spectacularAI.</span></span><span class="sig-name descname"><span class="pre">ColorFormat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.ColorFormat" title="spectacularAI.ColorFormat"><span class="pre">spectacularAI.ColorFormat</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spectacularAI.ColorFormat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Members:</p>
+<p>NONE</p>
+<p>GRAY</p>
+<p>RGB</p>
+<p>RGBA</p>
+<p>GRAY16</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="spectacularAI.ColorFormat.GRAY">
+<span class="sig-name descname"><span class="pre">GRAY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ColorFormat.GRAY:</span> <span class="pre">1&gt;</span></em><a class="headerlink" href="#spectacularAI.ColorFormat.GRAY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="spectacularAI.ColorFormat.GRAY16">
+<span class="sig-name descname"><span class="pre">GRAY16</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ColorFormat.GRAY16:</span> <span class="pre">7&gt;</span></em><a class="headerlink" href="#spectacularAI.ColorFormat.GRAY16" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="spectacularAI.ColorFormat.NONE">
+<span class="sig-name descname"><span class="pre">NONE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ColorFormat.NONE:</span> <span class="pre">0&gt;</span></em><a class="headerlink" href="#spectacularAI.ColorFormat.NONE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="spectacularAI.ColorFormat.RGB">
+<span class="sig-name descname"><span class="pre">RGB</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ColorFormat.RGB:</span> <span class="pre">2&gt;</span></em><a class="headerlink" href="#spectacularAI.ColorFormat.RGB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="spectacularAI.ColorFormat.RGBA">
+<span class="sig-name descname"><span class="pre">RGBA</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ColorFormat.RGBA:</span> <span class="pre">3&gt;</span></em><a class="headerlink" href="#spectacularAI.ColorFormat.RGBA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.ColorFormat.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#spectacularAI.ColorFormat.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.ColorFormat.value">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">value</span></span><a class="headerlink" href="#spectacularAI.ColorFormat.value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="spectacularAI.Frame">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spectacularAI.</span></span><span class="sig-name descname"><span class="pre">Frame</span></span><a class="headerlink" href="#spectacularAI.Frame" title="Permalink to this definition">¶</a></dt>
+<dd><p>A camera frame with a pose</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.Frame.cameraPose">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cameraPose</span></span><a class="headerlink" href="#spectacularAI.Frame.cameraPose" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="#spectacularAI.CameraPose" title="spectacularAI.CameraPose"><code class="xref py py-class docutils literal notranslate"><span class="pre">CameraPose</span></code></a> corresponding this camera</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.Frame.image">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">image</span></span><a class="headerlink" href="#spectacularAI.Frame.image" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="#spectacularAI.Bitmap" title="spectacularAI.Bitmap"><code class="xref py py-class docutils literal notranslate"><span class="pre">Bitmap</span></code></a> that will contain bitmap image if it’s available</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.Frame.index">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">index</span></span><a class="headerlink" href="#spectacularAI.Frame.index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Camera index</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="spectacularAI.GnssVioOutput">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spectacularAI.</span></span><span class="sig-name descname"><span class="pre">GnssVioOutput</span></span><a class="headerlink" href="#spectacularAI.GnssVioOutput" title="Permalink to this definition">¶</a></dt>
+<dd><p>GNSS-VIO output</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.GnssVioOutput.coordinates">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">coordinates</span></span><a class="headerlink" href="#spectacularAI.GnssVioOutput.coordinates" title="Permalink to this definition">¶</a></dt>
+<dd><p>current <a class="reference internal" href="#spectacularAI.WgsCoordinates" title="spectacularAI.WgsCoordinates"><code class="xref py py-class docutils literal notranslate"><span class="pre">WgsCoordinates</span></code></a></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.GnssVioOutput.enuPositionCovariance">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">enuPositionCovariance</span></span><a class="headerlink" href="#spectacularAI.GnssVioOutput.enuPositionCovariance" title="Permalink to this definition">¶</a></dt>
+<dd><p>enu position uncertainty, 3x3 covariance matrix</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.GnssVioOutput.getEnuCameraPose">
+<span class="sig-name descname"><span class="pre">getEnuCameraPose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.GnssVioOutput" title="spectacularAI.GnssVioOutput"><span class="pre">spectacularAI.GnssVioOutput</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.WgsCoordinates" title="spectacularAI.WgsCoordinates"><span class="pre">spectacularAI.WgsCoordinates</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">spectacularAI::CameraPose</span></span></span><a class="headerlink" href="#spectacularAI.GnssVioOutput.getEnuCameraPose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the global pose of a particular camera. The “world” coordinate system of the camera pose is an East-North-Up system, whose origin is at the given WGS84 coordinates.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.GnssVioOutput.orientation">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">orientation</span></span><a class="headerlink" href="#spectacularAI.GnssVioOutput.orientation" title="Permalink to this definition">¶</a></dt>
+<dd><p>current <a class="reference internal" href="#spectacularAI.Quaternion" title="spectacularAI.Quaternion"><code class="xref py py-class docutils literal notranslate"><span class="pre">Quaternion</span></code></a></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.GnssVioOutput.velocity">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">velocity</span></span><a class="headerlink" href="#spectacularAI.GnssVioOutput.velocity" title="Permalink to this definition">¶</a></dt>
+<dd><p>current <a class="reference internal" href="#spectacularAI.Vector3d" title="spectacularAI.Vector3d"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vector3d</span></code></a></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.GnssVioOutput.velocityCovariance">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">velocityCovariance</span></span><a class="headerlink" href="#spectacularAI.GnssVioOutput.velocityCovariance" title="Permalink to this definition">¶</a></dt>
+<dd><p>velocity uncertainty, 3x3 covariance matrix</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="spectacularAI.Pose">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spectacularAI.</span></span><span class="sig-name descname"><span class="pre">Pose</span></span><a class="headerlink" href="#spectacularAI.Pose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents the pose (position &amp; orientation) of a device at a given time. This typically corresponds the pose of the IMU (configurable). See <a class="reference internal" href="#spectacularAI.CameraPose" title="spectacularAI.CameraPose"><code class="xref py py-class docutils literal notranslate"><span class="pre">CameraPose</span></code></a> for exact poses of the cameras.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.Pose.asMatrix">
+<span class="sig-name descname"><span class="pre">asMatrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.Pose" title="spectacularAI.Pose"><span class="pre">spectacularAI.Pose</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#spectacularAI.Pose.asMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>4x4 matrix that converts homogeneous local coordinates to homogeneous world coordinates</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.Pose.fromMatrix">
+<span class="sig-name descname"><span class="pre">fromMatrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">4</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">4</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#spectacularAI.Pose" title="spectacularAI.Pose"><span class="pre">spectacularAI.Pose</span></a></span></span><a class="headerlink" href="#spectacularAI.Pose.fromMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a pose from a timestamp and 4x4 local-to-world matrix</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.Pose.orientation">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">orientation</span></span><a class="headerlink" href="#spectacularAI.Pose.orientation" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="#spectacularAI.Quaternion" title="spectacularAI.Quaternion"><code class="xref py py-class docutils literal notranslate"><span class="pre">Quaternion</span></code></a> orientation of the IMU / camera, local-to-world</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.Pose.position">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">position</span></span><a class="headerlink" href="#spectacularAI.Pose.position" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="#spectacularAI.Vector3d" title="spectacularAI.Vector3d"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vector3d</span></code></a> position of the IMU / camera</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.Pose.time">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">time</span></span><a class="headerlink" href="#spectacularAI.Pose.time" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">float</span></code> timestamp in seconds, synchronized with <code class="docutils literal notranslate"><span class="pre">time.monotonic()</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="spectacularAI.Quaternion">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spectacularAI.</span></span><span class="sig-name descname"><span class="pre">Quaternion</span></span><a class="headerlink" href="#spectacularAI.Quaternion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Quaternion representation of a rotation. Hamilton convention. Each property is a <code class="docutils literal notranslate"><span class="pre">float</span></code>.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.Quaternion.w">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">w</span></span><a class="headerlink" href="#spectacularAI.Quaternion.w" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.Quaternion.x">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">x</span></span><a class="headerlink" href="#spectacularAI.Quaternion.x" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.Quaternion.y">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">y</span></span><a class="headerlink" href="#spectacularAI.Quaternion.y" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.Quaternion.z">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">z</span></span><a class="headerlink" href="#spectacularAI.Quaternion.z" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="spectacularAI.Replay">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spectacularAI.</span></span><span class="sig-name descname"><span class="pre">Replay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spectacularAI.Replay" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replay previously recorded data</p>
+<p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>__init__(self: spectacularAI.Replay, folder: str, <a href="#id1"><span class="problematic" id="id2">*</span></a>, mapperCallback: Callable[[spectacularAI::mapping::MapperOutput], None] = None, configuration: dict = {}) -&gt; None</p></li>
+</ol>
+<p>Build a replay from a given folder containing the dataset</p>
+<ol class="arabic simple" start="2">
+<li><p>__init__(self: spectacularAI.Replay, folder: str, mapperCallback: Callable[[spectacularAI::mapping::MapperOutput], None], <a href="#id3"><span class="problematic" id="id4">*</span></a>, configuration: dict = {}) -&gt; None</p></li>
+</ol>
+<p>Build a replay from a given folder containing the dataset with a mapping callback</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.Replay.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.Replay" title="spectacularAI.Replay"><span class="pre">spectacularAI.Replay</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#spectacularAI.Replay.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Closes replay.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.Replay.runReplay">
+<span class="sig-name descname"><span class="pre">runReplay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.Replay" title="spectacularAI.Replay"><span class="pre">spectacularAI.Replay</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#spectacularAI.Replay.runReplay" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starts replaying the data and blocks until close() is called or the entire session has played out</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.Replay.setExtendedOutputCallback">
+<span class="sig-name descname"><span class="pre">setExtendedOutputCallback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.Replay" title="spectacularAI.Replay"><span class="pre">spectacularAI.Replay</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#spectacularAI.VioOutput" title="spectacularAI.VioOutput"><span class="pre">spectacularAI.VioOutput</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#spectacularAI.Frame" title="spectacularAI.Frame"><span class="pre">spectacularAI.Frame</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#spectacularAI.Replay.setExtendedOutputCallback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set a callback that’s called for new output</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.Replay.setOutputCallback">
+<span class="sig-name descname"><span class="pre">setOutputCallback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.Replay" title="spectacularAI.Replay"><span class="pre">spectacularAI.Replay</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#spectacularAI.VioOutput" title="spectacularAI.VioOutput"><span class="pre">spectacularAI.VioOutput</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#spectacularAI.Replay.setOutputCallback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set a callback that’s called for new output</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.Replay.setPlaybackSpeed">
+<span class="sig-name descname"><span class="pre">setPlaybackSpeed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.Replay" title="spectacularAI.Replay"><span class="pre">spectacularAI.Replay</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#spectacularAI.Replay.setPlaybackSpeed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets playbacks speed, 1.0 == real time, 2.0 == fast forward 2x, 0.5 == at half speed, -1.0 == unlimited. Defaults to 1.0.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.Replay.startReplay">
+<span class="sig-name descname"><span class="pre">startReplay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.Replay" title="spectacularAI.Replay"><span class="pre">spectacularAI.Replay</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#spectacularAI.Replay.startReplay" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starts replaying the data in the background until close() is called or entire session has been played.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="spectacularAI.TrackingStatus">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spectacularAI.</span></span><span class="sig-name descname"><span class="pre">TrackingStatus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.TrackingStatus" title="spectacularAI.TrackingStatus"><span class="pre">spectacularAI.TrackingStatus</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spectacularAI.TrackingStatus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Members:</p>
+<p>INIT</p>
+<p>TRACKING</p>
+<p>LOST_TRACKING</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="spectacularAI.TrackingStatus.INIT">
+<span class="sig-name descname"><span class="pre">INIT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TrackingStatus.INIT:</span> <span class="pre">0&gt;</span></em><a class="headerlink" href="#spectacularAI.TrackingStatus.INIT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="spectacularAI.TrackingStatus.LOST_TRACKING">
+<span class="sig-name descname"><span class="pre">LOST_TRACKING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TrackingStatus.LOST_TRACKING:</span> <span class="pre">2&gt;</span></em><a class="headerlink" href="#spectacularAI.TrackingStatus.LOST_TRACKING" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="spectacularAI.TrackingStatus.TRACKING">
+<span class="sig-name descname"><span class="pre">TRACKING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TrackingStatus.TRACKING:</span> <span class="pre">1&gt;</span></em><a class="headerlink" href="#spectacularAI.TrackingStatus.TRACKING" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.TrackingStatus.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#spectacularAI.TrackingStatus.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.TrackingStatus.value">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">value</span></span><a class="headerlink" href="#spectacularAI.TrackingStatus.value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="spectacularAI.Vector3d">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spectacularAI.</span></span><span class="sig-name descname"><span class="pre">Vector3d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spectacularAI.Vector3d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vector in R^3. Can represent, e.g., velocity, position or angular velocity. Each property is a <code class="docutils literal notranslate"><span class="pre">float</span></code>.</p>
+<p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>__init__(self: spectacularAI.Vector3d) -&gt; None</p></li>
+<li><p>__init__(self: spectacularAI.Vector3d, arg0: float, arg1: float, arg2: float) -&gt; None</p></li>
+</ol>
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.Vector3d.x">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">x</span></span><a class="headerlink" href="#spectacularAI.Vector3d.x" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.Vector3d.y">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">y</span></span><a class="headerlink" href="#spectacularAI.Vector3d.y" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.Vector3d.z">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">z</span></span><a class="headerlink" href="#spectacularAI.Vector3d.z" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="spectacularAI.Vector3f">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spectacularAI.</span></span><span class="sig-name descname"><span class="pre">Vector3f</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spectacularAI.Vector3f" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vector in R^3. Single precision.</p>
+<p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>__init__(self: spectacularAI.Vector3f) -&gt; None</p></li>
+<li><p>__init__(self: spectacularAI.Vector3f, arg0: float, arg1: float, arg2: float) -&gt; None</p></li>
+</ol>
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.Vector3f.x">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">x</span></span><a class="headerlink" href="#spectacularAI.Vector3f.x" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.Vector3f.y">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">y</span></span><a class="headerlink" href="#spectacularAI.Vector3f.y" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.Vector3f.z">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">z</span></span><a class="headerlink" href="#spectacularAI.Vector3f.z" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="spectacularAI.VioOutput">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spectacularAI.</span></span><span class="sig-name descname"><span class="pre">VioOutput</span></span><a class="headerlink" href="#spectacularAI.VioOutput" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main output structure</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.VioOutput.angularVelocity">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">angularVelocity</span></span><a class="headerlink" href="#spectacularAI.VioOutput.angularVelocity" title="Permalink to this definition">¶</a></dt>
+<dd><p>angular velocity vector in SI units (<a class="reference internal" href="#spectacularAI.Vector3d" title="spectacularAI.Vector3d"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vector3d</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.VioOutput.asJson">
+<span class="sig-name descname"><span class="pre">asJson</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.VioOutput" title="spectacularAI.VioOutput"><span class="pre">spectacularAI.VioOutput</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#spectacularAI.VioOutput.asJson" title="Permalink to this definition">¶</a></dt>
+<dd><p>a JSON representation of this object</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.VioOutput.getCameraPose">
+<span class="sig-name descname"><span class="pre">getCameraPose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.VioOutput" title="spectacularAI.VioOutput"><span class="pre">spectacularAI.VioOutput</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#spectacularAI.CameraPose" title="spectacularAI.CameraPose"><span class="pre">spectacularAI.CameraPose</span></a></span></span><a class="headerlink" href="#spectacularAI.VioOutput.getCameraPose" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="#spectacularAI.CameraPose" title="spectacularAI.CameraPose"><code class="xref py py-class docutils literal notranslate"><span class="pre">CameraPose</span></code></a> corresponding to a camera whose index is given as the parameter. Index 0 corresponds to the <em>primary</em> camera and index 1 the <em>secondary</em> camera.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.VioOutput.globalPose">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">globalPose</span></span><a class="headerlink" href="#spectacularAI.VioOutput.globalPose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Global pose, only returned if GNSS information is provided via <a class="reference internal" href="#spectacularAI.depthai.Session" title="spectacularAI.depthai.Session"><code class="xref py py-class docutils literal notranslate"><span class="pre">Session</span></code></a>.addGnss(…)</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.VioOutput.pose">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pose</span></span><a class="headerlink" href="#spectacularAI.VioOutput.pose" title="Permalink to this definition">¶</a></dt>
+<dd><p>latest <a class="reference internal" href="#spectacularAI.Pose" title="spectacularAI.Pose"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pose</span></code></a></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.VioOutput.poseTrail">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">poseTrail</span></span><a class="headerlink" href="#spectacularAI.VioOutput.poseTrail" title="Permalink to this definition">¶</a></dt>
+<dd><p>trail of smoothed historical poses (list of <a class="reference internal" href="#spectacularAI.Pose" title="spectacularAI.Pose"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pose</span></code></a> objects)</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.VioOutput.positionCovariance">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">positionCovariance</span></span><a class="headerlink" href="#spectacularAI.VioOutput.positionCovariance" title="Permalink to this definition">¶</a></dt>
+<dd><p>position uncertainty, 3x3 covariance matrix</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.VioOutput.status">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">status</span></span><a class="headerlink" href="#spectacularAI.VioOutput.status" title="Permalink to this definition">¶</a></dt>
+<dd><p>current <a class="reference internal" href="#spectacularAI.TrackingStatus" title="spectacularAI.TrackingStatus"><code class="xref py py-class docutils literal notranslate"><span class="pre">TrackingStatus</span></code></a></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.VioOutput.tag">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tag</span></span><a class="headerlink" href="#spectacularAI.VioOutput.tag" title="Permalink to this definition">¶</a></dt>
+<dd><p>input tag from <code class="docutils literal notranslate"><span class="pre">addTrigger</span></code>. Set to 0 for other outputs.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.VioOutput.velocity">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">velocity</span></span><a class="headerlink" href="#spectacularAI.VioOutput.velocity" title="Permalink to this definition">¶</a></dt>
+<dd><p>current velocity (<a class="reference internal" href="#spectacularAI.Vector3d" title="spectacularAI.Vector3d"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vector3d</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.VioOutput.velocityCovariance">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">velocityCovariance</span></span><a class="headerlink" href="#spectacularAI.VioOutput.velocityCovariance" title="Permalink to this definition">¶</a></dt>
+<dd><p>velocity uncertainty, 3x3 covariance matrix</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="spectacularAI.WgsCoordinates">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spectacularAI.</span></span><span class="sig-name descname"><span class="pre">WgsCoordinates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.WgsCoordinates" title="spectacularAI.WgsCoordinates"><span class="pre">spectacularAI.WgsCoordinates</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spectacularAI.WgsCoordinates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents the pose (position &amp; orientation) of a device at a given time.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.WgsCoordinates.altitude">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">altitude</span></span><a class="headerlink" href="#spectacularAI.WgsCoordinates.altitude" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.WgsCoordinates.latitude">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">latitude</span></span><a class="headerlink" href="#spectacularAI.WgsCoordinates.latitude" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.WgsCoordinates.longitude">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">longitude</span></span><a class="headerlink" href="#spectacularAI.WgsCoordinates.longitude" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-spectacularAI.depthai">
+<span id="depth-ai-plugin-class-reference"></span><h2>Depth AI plugin class reference<a class="headerlink" href="#module-spectacularAI.depthai" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Configuration">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spectacularAI.depthai.</span></span><span class="sig-name descname"><span class="pre">Configuration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spectacularAI.depthai.Configuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plugin and Spectacular AI VIO SDK configuration variables.</p>
+<p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>__init__(self: spectacularAI.depthai.Configuration) -&gt; None</p></li>
+<li><p>__init__(self: spectacularAI.depthai.Configuration, <a href="#id5"><span class="problematic" id="id6">**</span></a>kwargs) -&gt; None</p></li>
+</ol>
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Configuration.accFrequencyHz">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">accFrequencyHz</span></span><a class="headerlink" href="#spectacularAI.depthai.Configuration.accFrequencyHz" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Configuration.asDict">
+<span class="sig-name descname"><span class="pre">asDict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#spectacularAI.depthai.Configuration.asDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary representation of this configuration.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Configuration.depthQueueSize">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">depthQueueSize</span></span><a class="headerlink" href="#spectacularAI.depthai.Configuration.depthQueueSize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Configuration.depthScaleCorrection">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">depthScaleCorrection</span></span><a class="headerlink" href="#spectacularAI.depthai.Configuration.depthScaleCorrection" title="Permalink to this definition">¶</a></dt>
+<dd><p>DEPRECATED</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Configuration.ensureSufficientUsbSpeed">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ensureSufficientUsbSpeed</span></span><a class="headerlink" href="#spectacularAI.depthai.Configuration.ensureSufficientUsbSpeed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Configuration.extendedDisparity">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">extendedDisparity</span></span><a class="headerlink" href="#spectacularAI.depthai.Configuration.extendedDisparity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use DepthAI extended disparity mode</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Configuration.fastImu">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fastImu</span></span><a class="headerlink" href="#spectacularAI.depthai.Configuration.fastImu" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Configuration.fastVio">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fastVio</span></span><a class="headerlink" href="#spectacularAI.depthai.Configuration.fastVio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use more light-weight VIO settings</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Configuration.forceRectified">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">forceRectified</span></span><a class="headerlink" href="#spectacularAI.depthai.Configuration.forceRectified" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Configuration.gyroFrequencyHz">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">gyroFrequencyHz</span></span><a class="headerlink" href="#spectacularAI.depthai.Configuration.gyroFrequencyHz" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Configuration.imuFrequencyHz">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">imuFrequencyHz</span></span><a class="headerlink" href="#spectacularAI.depthai.Configuration.imuFrequencyHz" title="Permalink to this definition">¶</a></dt>
+<dd><p>DEPRECATED, use accFrequencyHz and gyroFrequencyHz instead</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Configuration.imuQueueSize">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">imuQueueSize</span></span><a class="headerlink" href="#spectacularAI.depthai.Configuration.imuQueueSize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Configuration.imuToGnss">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">imuToGnss</span></span><a class="headerlink" href="#spectacularAI.depthai.Configuration.imuToGnss" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Configuration.inputResolution">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">inputResolution</span></span><a class="headerlink" href="#spectacularAI.depthai.Configuration.inputResolution" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Configuration.internalParameters">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">internalParameters</span></span><a class="headerlink" href="#spectacularAI.depthai.Configuration.internalParameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal SDK parameters (key-value pairs converted to string-string). Not safe for unsanitized user input</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Configuration.keyframeCandidateEveryNthFrame">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">keyframeCandidateEveryNthFrame</span></span><a class="headerlink" href="#spectacularAI.depthai.Configuration.keyframeCandidateEveryNthFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>When <code class="docutils literal notranslate"><span class="pre">useSlam</span> <span class="pre">=</span> <span class="pre">True</span></code>, <code class="docutils literal notranslate"><span class="pre">useFeatureTracker</span> <span class="pre">=</span> <span class="pre">True</span></code> and <code class="docutils literal notranslate"><span class="pre">keyframeCandidateEveryNthFrame</span> <span class="pre">&gt;</span> <span class="pre">0</span></code>, a mono gray image is captured every N frames for SLAM.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Configuration.mapLoadPath">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mapLoadPath</span></span><a class="headerlink" href="#spectacularAI.depthai.Configuration.mapLoadPath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load existing SLAM map (.bin format required)</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Configuration.mapSavePath">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mapSavePath</span></span><a class="headerlink" href="#spectacularAI.depthai.Configuration.mapSavePath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output filename. Supported outputs types: .ply, .csv and .pcd (point cloud), and .bin (Spectacular AI SLAM map).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Configuration.meshRectification">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">meshRectification</span></span><a class="headerlink" href="#spectacularAI.depthai.Configuration.meshRectification" title="Permalink to this definition">¶</a></dt>
+<dd><p>DEPRECATED</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Configuration.monoQueueSize">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">monoQueueSize</span></span><a class="headerlink" href="#spectacularAI.depthai.Configuration.monoQueueSize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Configuration.recordingFolder">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">recordingFolder</span></span><a class="headerlink" href="#spectacularAI.depthai.Configuration.recordingFolder" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Configuration.recordingOnly">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">recordingOnly</span></span><a class="headerlink" href="#spectacularAI.depthai.Configuration.recordingOnly" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Configuration.silenceUsbWarnings">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">silenceUsbWarnings</span></span><a class="headerlink" href="#spectacularAI.depthai.Configuration.silenceUsbWarnings" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Configuration.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#spectacularAI.depthai.Configuration.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the contents of this object with kwargs corresponding to a subset of the member names</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Configuration.useColor">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">useColor</span></span><a class="headerlink" href="#spectacularAI.depthai.Configuration.useColor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use DepthAI color camera for tracking. Only supported for OAK-D series 2.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Configuration.useFeatureTracker">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">useFeatureTracker</span></span><a class="headerlink" href="#spectacularAI.depthai.Configuration.useFeatureTracker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use Movidius VPU-accelelerated feature tracking</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Configuration.useReaderThread">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">useReaderThread</span></span><a class="headerlink" href="#spectacularAI.depthai.Configuration.useReaderThread" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Configuration.useSlam">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">useSlam</span></span><a class="headerlink" href="#spectacularAI.depthai.Configuration.useSlam" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enable the SLAM module</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Configuration.useStereo">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">useStereo</span></span><a class="headerlink" href="#spectacularAI.depthai.Configuration.useStereo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use stereo vision. Set to false for monocular mode (i.e., using one camera only).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Pipeline">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spectacularAI.depthai.</span></span><span class="sig-name descname"><span class="pre">Pipeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spectacularAI.depthai.Pipeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Spectacular AI pipeline for Depth AI API. It is recommended to build this using the constructors provided, but it is also possible to replace or configure all parts manually. The class properties correspond to Depth AI objects created by the Spetacular AI SDK and it is possbile to share them, e.g., by creating new output links from them, but modifying their settings (e.g., changing camera FPS), might affect VIO performance.</p>
+<p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>__init__(self: spectacularAI.depthai.Pipeline, arg0: object) -&gt; None</p></li>
+<li><p>__init__(self: spectacularAI.depthai.Pipeline, arg0: object, arg1: spectacularAI.depthai.Configuration) -&gt; None</p></li>
+</ol>
+<p>Initialize with a <code class="docutils literal notranslate"><span class="pre">depthai.Pipeline</span></code> and custom <a class="reference internal" href="#spectacularAI.depthai.Configuration" title="spectacularAI.depthai.Configuration"><code class="xref py py-class docutils literal notranslate"><span class="pre">Configuration</span></code></a></p>
+<ol class="arabic simple" start="3">
+<li><p>__init__(self: spectacularAI.depthai.Pipeline, arg0: object, arg1: spectacularAI.depthai.Configuration, arg2: Callable[[spectacularAI.mapping.MapperOutput], None]) -&gt; None</p></li>
+</ol>
+<p>Initialize with a <code class="docutils literal notranslate"><span class="pre">depthai.Pipeline</span></code> and custom <a class="reference internal" href="#spectacularAI.depthai.Configuration" title="spectacularAI.depthai.Configuration"><code class="xref py py-class docutils literal notranslate"><span class="pre">Configuration</span></code></a> with a mapper callback function</p>
+<ol class="arabic simple" start="4">
+<li><p>__init__(self: spectacularAI.depthai.Pipeline, arg0: object, <a href="#id7"><span class="problematic" id="id8">**</span></a>kwargs) -&gt; None</p></li>
+</ol>
+<p>Initialize with a <code class="docutils literal notranslate"><span class="pre">depthai.Pipeline</span></code> and custom kwargs (see <a class="reference internal" href="#spectacularAI.depthai.Configuration" title="spectacularAI.depthai.Configuration"><code class="xref py py-class docutils literal notranslate"><span class="pre">Configuration</span></code></a>)</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Pipeline.color">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">color</span></span><a class="headerlink" href="#spectacularAI.depthai.Pipeline.color" title="Permalink to this definition">¶</a></dt>
+<dd><p>DepthAI color camera node. Requires OAK-D Series 2 and <code class="docutils literal notranslate"><span class="pre">useColor=true</span></code> (see <a class="reference internal" href="#spectacularAI.depthai.Configuration" title="spectacularAI.depthai.Configuration"><code class="xref py py-class docutils literal notranslate"><span class="pre">Configuration</span></code></a>).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Pipeline.featureTracker">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">featureTracker</span></span><a class="headerlink" href="#spectacularAI.depthai.Pipeline.featureTracker" title="Permalink to this definition">¶</a></dt>
+<dd><p>DepthAI feature tracker node</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Pipeline.imu">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">imu</span></span><a class="headerlink" href="#spectacularAI.depthai.Pipeline.imu" title="Permalink to this definition">¶</a></dt>
+<dd><p>DepthAI IMU node</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Pipeline.imuToCameraLeft">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">imuToCameraLeft</span></span><a class="headerlink" href="#spectacularAI.depthai.Pipeline.imuToCameraLeft" title="Permalink to this definition">¶</a></dt>
+<dd><p>IMU to left camera extrinsic matrix</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Pipeline.monoLeft">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">monoLeft</span></span><a class="headerlink" href="#spectacularAI.depthai.Pipeline.monoLeft" title="Permalink to this definition">¶</a></dt>
+<dd><p>DepthAI left monocular camera node</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Pipeline.monoPrimary">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">monoPrimary</span></span><a class="headerlink" href="#spectacularAI.depthai.Pipeline.monoPrimary" title="Permalink to this definition">¶</a></dt>
+<dd><p>DepthAI primary monocular camera node</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Pipeline.monoRight">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">monoRight</span></span><a class="headerlink" href="#spectacularAI.depthai.Pipeline.monoRight" title="Permalink to this definition">¶</a></dt>
+<dd><p>DepthAI right monocular camera node</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Pipeline.monoSecondary">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">monoSecondary</span></span><a class="headerlink" href="#spectacularAI.depthai.Pipeline.monoSecondary" title="Permalink to this definition">¶</a></dt>
+<dd><p>DepthAI secondary monocular camera node</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Pipeline.spectacularAIConfigurationYAML">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">spectacularAIConfigurationYAML</span></span><a class="headerlink" href="#spectacularAI.depthai.Pipeline.spectacularAIConfigurationYAML" title="Permalink to this definition">¶</a></dt>
+<dd><p>SDK internal override parameters (do not touch)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Pipeline.startSession">
+<span class="sig-name descname"><span class="pre">startSession</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.depthai.Pipeline" title="spectacularAI.depthai.Pipeline"><span class="pre">spectacularAI.depthai.Pipeline</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">spectacularAI::daiPlugin::Session</span></span></span><a class="headerlink" href="#spectacularAI.depthai.Pipeline.startSession" title="Permalink to this definition">¶</a></dt>
+<dd><p>Start a VIO session. The argument must be a <code class="docutils literal notranslate"><span class="pre">depthai.Device</span></code></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Pipeline.stereo">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">stereo</span></span><a class="headerlink" href="#spectacularAI.depthai.Pipeline.stereo" title="Permalink to this definition">¶</a></dt>
+<dd><p>DepthAI stereo depth node</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Pipeline.xoutDepth">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">xoutDepth</span></span><a class="headerlink" href="#spectacularAI.depthai.Pipeline.xoutDepth" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Pipeline.xoutFeatures">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">xoutFeatures</span></span><a class="headerlink" href="#spectacularAI.depthai.Pipeline.xoutFeatures" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Pipeline.xoutImu">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">xoutImu</span></span><a class="headerlink" href="#spectacularAI.depthai.Pipeline.xoutImu" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Pipeline.xoutLeft">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">xoutLeft</span></span><a class="headerlink" href="#spectacularAI.depthai.Pipeline.xoutLeft" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Pipeline.xoutRight">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">xoutRight</span></span><a class="headerlink" href="#spectacularAI.depthai.Pipeline.xoutRight" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Session">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spectacularAI.depthai.</span></span><span class="sig-name descname"><span class="pre">Session</span></span><a class="headerlink" href="#spectacularAI.depthai.Session" title="Permalink to this definition">¶</a></dt>
+<dd><p>VIO session. Should be created via <a class="reference internal" href="#spectacularAI.depthai.Pipeline.startSession" title="spectacularAI.depthai.Pipeline.startSession"><code class="xref py py-func docutils literal notranslate"><span class="pre">spectacularAI.depthai.Pipeline.startSession()</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Session.addAbsolutePose">
+<span class="sig-name descname"><span class="pre">addAbsolutePose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.depthai.Session" title="spectacularAI.depthai.Session"><span class="pre">spectacularAI.depthai.Session</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.Pose" title="spectacularAI.Pose"><span class="pre">spectacularAI.Pose</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">3</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">3</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#spectacularAI.depthai.Session.addAbsolutePose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add external pose information.VIO will correct its estimates to match the pose.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Session.addGnss">
+<span class="sig-name descname"><span class="pre">addGnss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.depthai.Session" title="spectacularAI.depthai.Session"><span class="pre">spectacularAI.depthai.Session</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.WgsCoordinates" title="spectacularAI.WgsCoordinates"><span class="pre">spectacularAI.WgsCoordinates</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">3</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">3</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#spectacularAI.depthai.Session.addGnss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add GNSS input (for GNSS-VIO fusion)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Session.addTrigger">
+<span class="sig-name descname"><span class="pre">addTrigger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.depthai.Session" title="spectacularAI.depthai.Session"><span class="pre">spectacularAI.depthai.Session</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#spectacularAI.depthai.Session.addTrigger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add an external trigger input. Causes additional output corresponding to a certain timestamp to be generated.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Session.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.depthai.Session" title="spectacularAI.depthai.Session"><span class="pre">spectacularAI.depthai.Session</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#spectacularAI.depthai.Session.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close VIO session and free resources. Also consider using the <code class="docutils literal notranslate"><span class="pre">with</span></code> statement</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Session.getOutput">
+<span class="sig-name descname"><span class="pre">getOutput</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.depthai.Session" title="spectacularAI.depthai.Session"><span class="pre">spectacularAI.depthai.Session</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#spectacularAI.VioOutput" title="spectacularAI.VioOutput"><span class="pre">spectacularAI.VioOutput</span></a></span></span><a class="headerlink" href="#spectacularAI.depthai.Session.getOutput" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes the first unread output from an internal queue and returns it</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Session.getRgbCameraPose">
+<span class="sig-name descname"><span class="pre">getRgbCameraPose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.depthai.Session" title="spectacularAI.depthai.Session"><span class="pre">spectacularAI.depthai.Session</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.VioOutput" title="spectacularAI.VioOutput"><span class="pre">spectacularAI.VioOutput</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#spectacularAI.CameraPose" title="spectacularAI.CameraPose"><span class="pre">spectacularAI.CameraPose</span></a></span></span><a class="headerlink" href="#spectacularAI.depthai.Session.getRgbCameraPose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the <a class="reference internal" href="#spectacularAI.CameraPose" title="spectacularAI.CameraPose"><code class="xref py py-class docutils literal notranslate"><span class="pre">CameraPose</span></code></a> corresponding to the OAK RGB camera at a certain <a class="reference internal" href="#spectacularAI.VioOutput" title="spectacularAI.VioOutput"><code class="xref py py-class docutils literal notranslate"><span class="pre">VioOutput</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Session.hasOutput">
+<span class="sig-name descname"><span class="pre">hasOutput</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.depthai.Session" title="spectacularAI.depthai.Session"><span class="pre">spectacularAI.depthai.Session</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#spectacularAI.depthai.Session.hasOutput" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if there is new output available</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Session.waitForOutput">
+<span class="sig-name descname"><span class="pre">waitForOutput</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.depthai.Session" title="spectacularAI.depthai.Session"><span class="pre">spectacularAI.depthai.Session</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#spectacularAI.VioOutput" title="spectacularAI.VioOutput"><span class="pre">spectacularAI.VioOutput</span></a></span></span><a class="headerlink" href="#spectacularAI.depthai.Session.waitForOutput" title="Permalink to this definition">¶</a></dt>
+<dd><p>Waits until there is new output available and returns it</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Session.work">
+<span class="sig-name descname"><span class="pre">work</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.depthai.Session" title="spectacularAI.depthai.Session"><span class="pre">spectacularAI.depthai.Session</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#spectacularAI.depthai.Session.work" title="Permalink to this definition">¶</a></dt>
+<dd><p>Only use with <code class="docutils literal notranslate"><span class="pre">useReaderThread=False</span></code> configuration</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-spectacularAI.mapping">
+<span id="mapping-api-reference"></span><h2>Mapping API reference<a class="headerlink" href="#module-spectacularAI.mapping" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="spectacularAI.mapping.Frame">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spectacularAI.mapping.</span></span><span class="sig-name descname"><span class="pre">Frame</span></span><a class="headerlink" href="#spectacularAI.mapping.Frame" title="Permalink to this definition">¶</a></dt>
+<dd><p>A single camera frame with a pose and bitmap image</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.mapping.Frame.cameraPose">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cameraPose</span></span><a class="headerlink" href="#spectacularAI.mapping.Frame.cameraPose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Camera pose information</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.mapping.Frame.depthScale">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">depthScale</span></span><a class="headerlink" href="#spectacularAI.mapping.Frame.depthScale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scale of depth image, for non-depth images this is -1.0</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.mapping.Frame.image">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">image</span></span><a class="headerlink" href="#spectacularAI.mapping.Frame.image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Image data if it exists</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="spectacularAI.mapping.FrameSet">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spectacularAI.mapping.</span></span><span class="sig-name descname"><span class="pre">FrameSet</span></span><a class="headerlink" href="#spectacularAI.mapping.FrameSet" title="Permalink to this definition">¶</a></dt>
+<dd><p>A set of camera frames from multiple cameras at a moment of time.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.mapping.FrameSet.depthFrame">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">depthFrame</span></span><a class="headerlink" href="#spectacularAI.mapping.FrameSet.depthFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>The depth camera</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.mapping.FrameSet.getAlignedDepthFrame">
+<span class="sig-name descname"><span class="pre">getAlignedDepthFrame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self:</span> <span class="pre">spectacularAI.mapping.FrameSet</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0:</span> <span class="pre">spectacularAI::mapping::Frame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">spectacularAI::mapping::Frame</span></span></span><a class="headerlink" href="#spectacularAI.mapping.FrameSet.getAlignedDepthFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the depth map at the camera pose of the input frame (for example rgbFrame). If depthFrame is already aligned to the the input camera, returns depthFrame.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.mapping.FrameSet.getUndistortedFrame">
+<span class="sig-name descname"><span class="pre">getUndistortedFrame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self:</span> <span class="pre">spectacularAI.mapping.FrameSet</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0:</span> <span class="pre">spectacularAI::mapping::Frame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">spectacularAI::mapping::Frame</span></span></span><a class="headerlink" href="#spectacularAI.mapping.FrameSet.getUndistortedFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an undistorted version of the input frame (i.e., with camera model = undistorted pinhole). If the input frame is not distorted, returns the input frame.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.mapping.FrameSet.primaryFrame">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">primaryFrame</span></span><a class="headerlink" href="#spectacularAI.mapping.FrameSet.primaryFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>The primary camera</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.mapping.FrameSet.rgbFrame">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rgbFrame</span></span><a class="headerlink" href="#spectacularAI.mapping.FrameSet.rgbFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>The RGB camera</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.mapping.FrameSet.secondaryFrame">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">secondaryFrame</span></span><a class="headerlink" href="#spectacularAI.mapping.FrameSet.secondaryFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>The secondary camera</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="spectacularAI.mapping.KeyFrame">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spectacularAI.mapping.</span></span><span class="sig-name descname"><span class="pre">KeyFrame</span></span><a class="headerlink" href="#spectacularAI.mapping.KeyFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>A SLAM KeyFrame</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.mapping.KeyFrame.frameSet">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">frameSet</span></span><a class="headerlink" href="#spectacularAI.mapping.KeyFrame.frameSet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cameras for this key frame</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.mapping.KeyFrame.id">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#spectacularAI.mapping.KeyFrame.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unique identifier for this key frame</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.mapping.KeyFrame.pointCloud">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pointCloud</span></span><a class="headerlink" href="#spectacularAI.mapping.KeyFrame.pointCloud" title="Permalink to this definition">¶</a></dt>
+<dd><p>Point cloud for this key frame in primary frame coordinates</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="spectacularAI.mapping.Map">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spectacularAI.mapping.</span></span><span class="sig-name descname"><span class="pre">Map</span></span><a class="headerlink" href="#spectacularAI.mapping.Map" title="Permalink to this definition">¶</a></dt>
+<dd><p>A map generated by SLAM</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.mapping.Map.keyFrames">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">keyFrames</span></span><a class="headerlink" href="#spectacularAI.mapping.Map.keyFrames" title="Permalink to this definition">¶</a></dt>
+<dd><p>All key frames belonging to this map. Contains the entire map from start to this moment.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="spectacularAI.mapping.MapperOutput">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spectacularAI.mapping.</span></span><span class="sig-name descname"><span class="pre">MapperOutput</span></span><a class="headerlink" href="#spectacularAI.mapping.MapperOutput" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main mapping output structure</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.mapping.MapperOutput.finalMap">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">finalMap</span></span><a class="headerlink" href="#spectacularAI.mapping.MapperOutput.finalMap" title="Permalink to this definition">¶</a></dt>
+<dd><p>A boolean that indicates the map is now final and won’t be updated any longer. This is true the when the programm exits.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.mapping.MapperOutput.map">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">map</span></span><a class="headerlink" href="#spectacularAI.mapping.MapperOutput.map" title="Permalink to this definition">¶</a></dt>
+<dd><p>The current map</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.mapping.MapperOutput.mesh">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mesh</span></span><a class="headerlink" href="#spectacularAI.mapping.MapperOutput.mesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>(Optional) dense reconstruction of the map.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.mapping.MapperOutput.updatedKeyFrames">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">updatedKeyFrames</span></span><a class="headerlink" href="#spectacularAI.mapping.MapperOutput.updatedKeyFrames" title="Permalink to this definition">¶</a></dt>
+<dd><p>Key Frames that were updated (created, modified or deleted) since the last callback</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="spectacularAI.mapping.Mesh">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spectacularAI.mapping.</span></span><span class="sig-name descname"><span class="pre">Mesh</span></span><a class="headerlink" href="#spectacularAI.mapping.Mesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>A generic 3D mesh with a few optional properties (e.g., normals).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.mapping.Mesh.empty">
+<span class="sig-name descname"><span class="pre">empty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.mapping.Mesh" title="spectacularAI.mapping.Mesh"><span class="pre">spectacularAI.mapping.Mesh</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#spectacularAI.mapping.Mesh.empty" title="Permalink to this definition">¶</a></dt>
+<dd><p>True when mesh has no vertices</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.mapping.Mesh.faceCount">
+<span class="sig-name descname"><span class="pre">faceCount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.mapping.Mesh" title="spectacularAI.mapping.Mesh"><span class="pre">spectacularAI.mapping.Mesh</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#spectacularAI.mapping.Mesh.faceCount" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of faces (L)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.mapping.Mesh.getFaceNormals">
+<span class="sig-name descname"><span class="pre">getFaceNormals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.mapping.Mesh" title="spectacularAI.mapping.Mesh"><span class="pre">spectacularAI.mapping.Mesh</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.uint32</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#spectacularAI.mapping.Mesh.getFaceNormals" title="Permalink to this definition">¶</a></dt>
+<dd><p>A numpy array of size Lx3 that contains all face normals indices if they exist</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.mapping.Mesh.getFaceVertices">
+<span class="sig-name descname"><span class="pre">getFaceVertices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.mapping.Mesh" title="spectacularAI.mapping.Mesh"><span class="pre">spectacularAI.mapping.Mesh</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.uint32</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#spectacularAI.mapping.Mesh.getFaceVertices" title="Permalink to this definition">¶</a></dt>
+<dd><p>A numpy array of size Lx3 that contains all face vertex indices.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.mapping.Mesh.getNormalData">
+<span class="sig-name descname"><span class="pre">getNormalData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.mapping.Mesh" title="spectacularAI.mapping.Mesh"><span class="pre">spectacularAI.mapping.Mesh</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float32</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#spectacularAI.mapping.Mesh.getNormalData" title="Permalink to this definition">¶</a></dt>
+<dd><p>A numpy array of size Mx3 that contains all vertex normals if they exist</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.mapping.Mesh.getPositionData">
+<span class="sig-name descname"><span class="pre">getPositionData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.mapping.Mesh" title="spectacularAI.mapping.Mesh"><span class="pre">spectacularAI.mapping.Mesh</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float32</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#spectacularAI.mapping.Mesh.getPositionData" title="Permalink to this definition">¶</a></dt>
+<dd><p>A numpy array of size Nx3 that contains all vertex positions</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.mapping.Mesh.hasNormals">
+<span class="sig-name descname"><span class="pre">hasNormals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.mapping.Mesh" title="spectacularAI.mapping.Mesh"><span class="pre">spectacularAI.mapping.Mesh</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#spectacularAI.mapping.Mesh.hasNormals" title="Permalink to this definition">¶</a></dt>
+<dd><p>True when mesh has normal data</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.mapping.Mesh.normalCount">
+<span class="sig-name descname"><span class="pre">normalCount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.mapping.Mesh" title="spectacularAI.mapping.Mesh"><span class="pre">spectacularAI.mapping.Mesh</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#spectacularAI.mapping.Mesh.normalCount" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of normals (M)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.mapping.Mesh.vertexCount">
+<span class="sig-name descname"><span class="pre">vertexCount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.mapping.Mesh" title="spectacularAI.mapping.Mesh"><span class="pre">spectacularAI.mapping.Mesh</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#spectacularAI.mapping.Mesh.vertexCount" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of vertices (N)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="spectacularAI.mapping.PointCloud">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spectacularAI.mapping.</span></span><span class="sig-name descname"><span class="pre">PointCloud</span></span><a class="headerlink" href="#spectacularAI.mapping.PointCloud" title="Permalink to this definition">¶</a></dt>
+<dd><p>Point cloud with position, and optional point normal and color data</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.mapping.PointCloud.empty">
+<span class="sig-name descname"><span class="pre">empty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.mapping.PointCloud" title="spectacularAI.mapping.PointCloud"><span class="pre">spectacularAI.mapping.PointCloud</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#spectacularAI.mapping.PointCloud.empty" title="Permalink to this definition">¶</a></dt>
+<dd><p>True when point cloud has no points</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.mapping.PointCloud.getNormal">
+<span class="sig-name descname"><span class="pre">getNormal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.mapping.PointCloud" title="spectacularAI.mapping.PointCloud"><span class="pre">spectacularAI.mapping.PointCloud</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#spectacularAI.Vector3f" title="spectacularAI.Vector3f"><span class="pre">spectacularAI.Vector3f</span></a></span></span><a class="headerlink" href="#spectacularAI.mapping.PointCloud.getNormal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get normal of a single point. Check first that normal data exists for this point cloud</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.mapping.PointCloud.getNormalData">
+<span class="sig-name descname"><span class="pre">getNormalData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.mapping.PointCloud" title="spectacularAI.mapping.PointCloud"><span class="pre">spectacularAI.mapping.PointCloud</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float32</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#spectacularAI.mapping.PointCloud.getNormalData" title="Permalink to this definition">¶</a></dt>
+<dd><p>A numpy array of size Nx3 that contains all point normals if they exist</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.mapping.PointCloud.getPosition">
+<span class="sig-name descname"><span class="pre">getPosition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.mapping.PointCloud" title="spectacularAI.mapping.PointCloud"><span class="pre">spectacularAI.mapping.PointCloud</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#spectacularAI.Vector3f" title="spectacularAI.Vector3f"><span class="pre">spectacularAI.Vector3f</span></a></span></span><a class="headerlink" href="#spectacularAI.mapping.PointCloud.getPosition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get position of a single point</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.mapping.PointCloud.getPositionData">
+<span class="sig-name descname"><span class="pre">getPositionData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.mapping.PointCloud" title="spectacularAI.mapping.PointCloud"><span class="pre">spectacularAI.mapping.PointCloud</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float32</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#spectacularAI.mapping.PointCloud.getPositionData" title="Permalink to this definition">¶</a></dt>
+<dd><p>A numpy array of size Nx3 that contains all point positions</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.mapping.PointCloud.getRGB24">
+<span class="sig-name descname"><span class="pre">getRGB24</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.mapping.PointCloud" title="spectacularAI.mapping.PointCloud"><span class="pre">spectacularAI.mapping.PointCloud</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">3</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#spectacularAI.mapping.PointCloud.getRGB24" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get color of a single point. Check first that color data exists for this point cloud</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.mapping.PointCloud.getRGB24Data">
+<span class="sig-name descname"><span class="pre">getRGB24Data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.mapping.PointCloud" title="spectacularAI.mapping.PointCloud"><span class="pre">spectacularAI.mapping.PointCloud</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.uint8</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#spectacularAI.mapping.PointCloud.getRGB24Data" title="Permalink to this definition">¶</a></dt>
+<dd><p>A numpy array of size Nx3 that contains all point colors if they exist</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.mapping.PointCloud.hasColors">
+<span class="sig-name descname"><span class="pre">hasColors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.mapping.PointCloud" title="spectacularAI.mapping.PointCloud"><span class="pre">spectacularAI.mapping.PointCloud</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#spectacularAI.mapping.PointCloud.hasColors" title="Permalink to this definition">¶</a></dt>
+<dd><p>True when point cloud has color data</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.mapping.PointCloud.hasNormals">
+<span class="sig-name descname"><span class="pre">hasNormals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.mapping.PointCloud" title="spectacularAI.mapping.PointCloud"><span class="pre">spectacularAI.mapping.PointCloud</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#spectacularAI.mapping.PointCloud.hasNormals" title="Permalink to this definition">¶</a></dt>
+<dd><p>True when point cloud has normal data</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.mapping.PointCloud.size">
+<span class="sig-name descname"><span class="pre">size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.mapping.PointCloud" title="spectacularAI.mapping.PointCloud"><span class="pre">spectacularAI.mapping.PointCloud</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#spectacularAI.mapping.PointCloud.size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of points</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021 Spectacular AI Ltd.
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
