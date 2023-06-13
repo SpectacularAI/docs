@@ -3,6 +3,13 @@
 A static website hosting the documentation of the Spectacular AI SDK
 see also https://github.com/SpectacularAI/sdk-examples.
 
+## PDF guides
+
+ * [Calibration manual](https://spectacularai.github.io/docs/pdf/oak_fisheye_calibration_instructions.pdf)
+ * [AprilTag instructions](https://spectacularai.github.io/docs/pdf/april_tag_instructions.pdf)
+ * [OAK-D Fisheye calibration instructions](https://spectacularai.github.io/docs/pdf/oak_fisheye_calibration_instructions.pdf)
+ * [OAK-D + u-blox GNSS-VIO instructions](https://spectacularai.github.io/docs/pdf/GNSS-VIO_OAK-D_Python.pdf)
+
 ## Updating
 
 Run this script on a file that contains a new version of the Python plugin
