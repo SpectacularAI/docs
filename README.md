@@ -29,18 +29,10 @@ If there are changes, commit and push them.
 See https://github.com/SpectacularAI/sdk-examples for the example
 codes which were used to create these videos.
 
-### Installing the SDK
+### Demo GIFs
 
-![SDK install demo](gif/pip-install.gif)
-
-### Spatial AI
-
-![Spatial AI](gif/spatial-ai.gif)
-
-### Retro AR
-
-![Retro AR](gif/retro-ar.gif)
-
-### HybVIO
-
-![HybVIO EuRoC](gif/HybVIO.gif)
+ * [SDK install demo](gif/pip-install.gif)
+ * [Spatial AI](gif/spatial-ai.gif)
+ * [OAK-D fast NeRF](gif/oak-d-nerf.gif)
+ * [Retro AR](gif/retro-ar.gif)
+ * [HybVIO EuRoC](gif/HybVIO.gif)
