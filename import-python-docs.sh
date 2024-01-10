@@ -1,39 +1,38 @@
 #!/bin/bash
+# Usage
+#
+#  1. Activate a Python virtualenv where the correct spectacularAI
+#     Python package version has been installed
+#
+#  2. Run this script in the root folder of this repo (docs)
+#
+#   ./import-python-docs.sh MAJOR.MINOR
+#
+# where MAJOR.MINOR is the latest SDK version for which to generate
+# the docs, e.g. 1.26. Do not include the patch version or "v"
+#
+
 set -eux
-TARGET="$1"
-WORK=$(mktemp -d)
+
+SDK_VERSION="v$1"
+
+: "${SDK_PRIVATE_PATH:="../vio"}"
 CUR=`pwd`
-cp "$TARGET" "$WORK"
-cd "$WORK"
-unzip *.zip
+WORK=$(mktemp -d)
 
-MINOR_VERSION=$(
-  find wheels/ |
-  grep spectacularAI- |
-  head -n 1 |
-  awk 'BEGIN { FS = "-" }; { print $2; }' |
-  awk 'BEGIN { FS = "." }; { print $1 "." $2; }')
-
-cat > most_recent_version.py << 'EOF'
-import sys
-def version_to_num(s):
-    weight = 1.0
-    num = 0.0
-    for v in s.strip().replace('v', '').split('.'):
-        num += int(v) * weight
-        weight /= 1000.0
-    return num
-
-versions = sorted(sys.stdin.readlines(), key=version_to_num)
-print(versions[-1].strip())
-EOF
-
+cd "$SDK_PRIVATE_PATH"
+./scripts/docs/build_html.sh "$WORK"
 cd "$CUR"
-TARGET_DIR="sdk/python/v$MINOR_VERSION"
-rm -rf "$TARGET_DIR"
-cp -r "$WORK/docs" "$TARGET_DIR"
 
-MOST_RECENT=$(ls sdk/python | grep -v latest | python "$WORK/most_recent_version.py")
+languages=("python" "cpp")
+for l in $languages; do
+  rm -rf "$CUR/sdk/$l/latest"
+  mv "$WORK/$l/latest" "$CUR/sdk/$l/"
+  rm -rf "$CUR/sdk/$l/$SDK_VERSION"
+  cp -R "$CUR/sdk/$l/latest" "$CUR/sdk/$l/$SDK_VERSION"
+  rm -rf "$WORK/$l"
+done
+rm -rf "$WORK/_sources" "$WORK/objects.inv" "$WORK/genindex.html" "$WORK/py-modindex.html"
+cp -R "$WORK/"* "$CUR/sdk/"
+
 rm -rf "$WORK"
-rm -rf "sdk/python/latest"
-cp -r "sdk/python/$MOST_RECENT" "sdk/python/latest"

@@ -12,10 +12,11 @@ see also https://github.com/SpectacularAI/sdk-examples.
 
 ## Updating
 
-Run this script on a file that contains a new version of the Python plugin
+Run this script (see contents for more details)
 
-    ./import-python-docs.sh python-plugin.zip
+    ./import-python-docs.sh python-plugin.zip MAJOR.MINOR
 
+where MAJOR.MINOR is the new/latest SDK version without patch version or and "v".
 Then check
 
     git status
