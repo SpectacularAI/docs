@@ -1,0 +1,74 @@
+dl.property {
+  /* https://github.com/readthedocs/sphinx_rtd_theme/issues/1301 */
+  display: block !important;
+}
+
+/* ----------- Customize theme */
+
+.wy-side-nav-search {
+  background: none !important;
+}
+
+/* Hide certain elements in CSS */
+footer, .wy-breadcrumbs-aside {
+  display: none !important;
+}
+
+/* ----------- Uncollapse menu with CSS violence */
+.wy-menu-vertical li ul {
+  display: block !important;
+}
+
+.wy-menu-vertical li.toctree-l2 a {
+  color: #d9d9d9 !important;
+}
+
+.toctree-l1, .toctree-l2, .toctree-l1 > a, .toctree-l2 > a {
+  /*background: none !important; */
+  border: none !important;
+}
+
+.wy-menu-vertical li.current > a, .wy-menu-vertical li.current > ul > li > a {
+  /* color: #d9d9d9 !important; */
+  color: black !important;
+}
+
+li.toctree-l2 > a {
+  padding: .4045em 2.427em;
+}
+
+button.toctree-expand {
+  display: none !important;
+}
+
+.logo {
+  filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.5));
+}
+
+.wy-form {
+  opacity: 0.5;
+}
+
+.wy-nav-side, .wy-nav-top {
+  background-color: rgb(76, 76, 76);
+  background: url('https://spectacularai.github.io/docs/jpg/spectacular-menu-bg.jpg');
+  background-size: cover;
+}
+
+.wy-menu-vertical {
+  /*background-color: rgb(38, 38, 38);
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);*/
+  padding-top: 1em;
+  padding-bottom: 1em;
+  font-size: large;
+  color: white;
+}
+
+.wy-menu-vertical > ul > .toctree-l1 {
+  margin-bottom: 0.75em;
+}
+
+.wy-menu-vertical > ul > .toctree-l1 > a {
+  font-weight: bold;
+  color: white;
+}

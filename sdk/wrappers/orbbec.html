@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ORBBEC &mdash; spectacularAI  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=8e72557d" />
+
+  
+    <link rel="shortcut icon" href="https://www.spectacularai.com/favicon/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Azure Kinect" href="k4a.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="https://spectacularai.github.io/docs/png/SpectacularAI-name-logo-small-white-transparent.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python/latest/index.html">Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cpp/latest/index.html">C++</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../core.html">Core SDK</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tracking.html">Tracking API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mapping.html">Mapping API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../replay.html">Replay API</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../wrappers.html">Wrappers</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="oak.html">OAK-D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="realsense.html">RealSense</a></li>
+<li class="toctree-l2"><a class="reference internal" href="k4a.html">Azure Kinect</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">ORBBEC</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">spectacularAI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../wrappers.html">Wrappers</a></li>
+      <li class="breadcrumb-item active">ORBBEC</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/wrappers/orbbec.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="orbbec">
+<h1>ORBBEC<a class="headerlink" href="#orbbec" title="Permalink to this heading"></a></h1>
+<p><strong>Spectacular AI C++ plugin for ORBBEC cameras</strong>. Supported devices:</p>
+<ul class="simple">
+<li><p>Femto Mega</p></li>
+<li><p>Astra 2</p></li>
+</ul>
+<section id="api-reference">
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading"></a></h2>
+<section id="configuration">
+<h3>Configuration<a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h3>
+<p>Defined in <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;spectacularAI/orbbec/configuration.hpp&gt;</span></code></p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv413spectacularAI">
+<span id="_CPPv313spectacularAI"></span><span id="_CPPv213spectacularAI"></span><span id="spectacularAI"></span><span class="target" id="namespacespectacularAI"></span><span class="k"><span class="pre">namespace</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">spectacularAI</span></span></span><br /></dt>
+<dd><dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPluginE">
+<span id="_CPPv3N13spectacularAI12orbbecPluginE"></span><span id="_CPPv2N13spectacularAI12orbbecPluginE"></span><span id="spectacularAI::orbbecPlugin"></span><span class="target" id="namespacespectacularAI_1_1orbbecPlugin"></span><span class="k"><span class="pre">namespace</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">orbbecPlugin</span></span></span><br /></dt>
+<dd><dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin13ConfigurationE">
+<span id="_CPPv3N13spectacularAI12orbbecPlugin13ConfigurationE"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin13ConfigurationE"></span><span id="spectacularAI::orbbecPlugin::Configuration"></span><span class="target" id="structspectacularAI_1_1orbbecPlugin_1_1Configuration"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Configuration</span></span></span><br /></dt>
+<dd><p>Plugin and Spectacular AI SDK configuration variables. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin13Configuration13ConfigurationEv">
+<span id="_CPPv3N13spectacularAI12orbbecPlugin13Configuration13ConfigurationEv"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin13Configuration13ConfigurationEv"></span><span id="spectacularAI::orbbecPlugin::Configuration::Configuration"></span><span class="target" id="structspectacularAI_1_1orbbecPlugin_1_1Configuration_1a761391a1c08611e64105c18087c6893c"></span><span class="sig-name descname"><span class="n"><span class="pre">Configuration</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin13Configuration13ConfigurationERN2ob8PipelineE">
+<span id="_CPPv3N13spectacularAI12orbbecPlugin13Configuration13ConfigurationERN2ob8PipelineE"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin13Configuration13ConfigurationERN2ob8PipelineE"></span><span id="spectacularAI::orbbecPlugin::Configuration::Configuration__ob::PipelineR"></span><span class="target" id="structspectacularAI_1_1orbbecPlugin_1_1Configuration_1aba08e3ad0629d63875cf9775a4176626"></span><span class="sig-name descname"><span class="n"><span class="pre">Configuration</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">ob</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Pipeline</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">obPipeline</span></span><span class="sig-paren">)</span><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin13Configuration7useSlamE">
+<span id="_CPPv3N13spectacularAI12orbbecPlugin13Configuration7useSlamE"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin13Configuration7useSlamE"></span><span id="spectacularAI::orbbecPlugin::Configuration::useSlam__b"></span><span class="target" id="structspectacularAI_1_1orbbecPlugin_1_1Configuration_1ab8c3ca53f369c503c98e715d77a7c259"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">useSlam</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin13Configuration7fastVioE">
+<span id="_CPPv3N13spectacularAI12orbbecPlugin13Configuration7fastVioE"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin13Configuration7fastVioE"></span><span id="spectacularAI::orbbecPlugin::Configuration::fastVio__b"></span><span class="target" id="structspectacularAI_1_1orbbecPlugin_1_1Configuration_1ada7d6db1ea60e723f14ea652f296b6a1"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fastVio</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin13Configuration12alignedDepthE">
+<span id="_CPPv3N13spectacularAI12orbbecPlugin13Configuration12alignedDepthE"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin13Configuration12alignedDepthE"></span><span id="spectacularAI::orbbecPlugin::Configuration::alignedDepth__b"></span><span class="target" id="structspectacularAI_1_1orbbecPlugin_1_1Configuration_1aa06f3611457bd0bb0d89e9f92c75d064"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">alignedDepth</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin13Configuration15recordingFolderE">
+<span id="_CPPv3N13spectacularAI12orbbecPlugin13Configuration15recordingFolderE"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin13Configuration15recordingFolderE"></span><span id="spectacularAI::orbbecPlugin::Configuration::recordingFolder__ss"></span><span class="target" id="structspectacularAI_1_1orbbecPlugin_1_1Configuration_1ae5ee03cf4003541460ca777882955f8d"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">recordingFolder</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;&quot;</span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin13Configuration13recordingOnlyE">
+<span id="_CPPv3N13spectacularAI12orbbecPlugin13Configuration13recordingOnlyE"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin13Configuration13recordingOnlyE"></span><span id="spectacularAI::orbbecPlugin::Configuration::recordingOnly__b"></span><span class="target" id="structspectacularAI_1_1orbbecPlugin_1_1Configuration_1ac96d9428cca321283523f1f7c3ec2b6a"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">recordingOnly</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin13Configuration19postProcessFinalMapE">
+<span id="_CPPv3N13spectacularAI12orbbecPlugin13Configuration19postProcessFinalMapE"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin13Configuration19postProcessFinalMapE"></span><span id="spectacularAI::orbbecPlugin::Configuration::postProcessFinalMap__b"></span><span class="target" id="structspectacularAI_1_1orbbecPlugin_1_1Configuration_1ad68f640ab6a8a31041410821d147cdf4"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">postProcessFinalMap</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin13Configuration12aprilTagPathE">
+<span id="_CPPv3N13spectacularAI12orbbecPlugin13Configuration12aprilTagPathE"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin13Configuration12aprilTagPathE"></span><span id="spectacularAI::orbbecPlugin::Configuration::aprilTagPath__ss"></span><span class="target" id="structspectacularAI_1_1orbbecPlugin_1_1Configuration_1abb6585a51fccca79ffa7d476fde695a0"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">aprilTagPath</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;&quot;</span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin13Configuration13rgbResolutionE">
+<span id="_CPPv3N13spectacularAI12orbbecPlugin13Configuration13rgbResolutionE"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin13Configuration13rgbResolutionE"></span><span id="spectacularAI::orbbecPlugin::Configuration::rgbResolution__std::pair:i.i:"></span><span class="target" id="structspectacularAI_1_1orbbecPlugin_1_1Configuration_1a2926415658c85f824be4d43bc9a105d6"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">pair</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">int</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rgbResolution</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">make_pair</span></span><span class="p"><span class="pre">(</span></span><span class="m"><span class="pre">1280</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">720</span></span><span class="p"><span class="pre">)</span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin13Configuration15depthResolutionE">
+<span id="_CPPv3N13spectacularAI12orbbecPlugin13Configuration15depthResolutionE"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin13Configuration15depthResolutionE"></span><span id="spectacularAI::orbbecPlugin::Configuration::depthResolution__std::pair:i.i:"></span><span class="target" id="structspectacularAI_1_1orbbecPlugin_1_1Configuration_1ac459a5223ffda236185e831dfa9786e1"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">pair</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">int</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">depthResolution</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">make_pair</span></span><span class="p"><span class="pre">(</span></span><span class="m"><span class="pre">512</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">512</span></span><span class="p"><span class="pre">)</span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin13Configuration9cameraFpsE">
+<span id="_CPPv3N13spectacularAI12orbbecPlugin13Configuration9cameraFpsE"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin13Configuration9cameraFpsE"></span><span id="spectacularAI::orbbecPlugin::Configuration::cameraFps__i"></span><span class="target" id="structspectacularAI_1_1orbbecPlugin_1_1Configuration_1aec87c51e305ce0f727848a1bf650b3d0"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cameraFps</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">30</span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin13Configuration14accFrequencyHzE">
+<span id="_CPPv3N13spectacularAI12orbbecPlugin13Configuration14accFrequencyHzE"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin13Configuration14accFrequencyHzE"></span><span id="spectacularAI::orbbecPlugin::Configuration::accFrequencyHz__OBAccelSampleRate"></span><span class="target" id="structspectacularAI_1_1orbbecPlugin_1_1Configuration_1a07172ed7c3b15cbb55b8078144cc00b4"></span><span class="n"><span class="pre">OBAccelSampleRate</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">accFrequencyHz</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">OBAccelSampleRate</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">OB_SAMPLE_RATE_1_KHZ</span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin13Configuration15gyroFrequencyHzE">
+<span id="_CPPv3N13spectacularAI12orbbecPlugin13Configuration15gyroFrequencyHzE"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin13Configuration15gyroFrequencyHzE"></span><span id="spectacularAI::orbbecPlugin::Configuration::gyroFrequencyHz__OBGyroSampleRate"></span><span class="target" id="structspectacularAI_1_1orbbecPlugin_1_1Configuration_1a32f8a1b635ada82c3a522087208994a7"></span><span class="n"><span class="pre">OBGyroSampleRate</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">gyroFrequencyHz</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">OBGyroSampleRate</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">OB_SAMPLE_RATE_1_KHZ</span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin13Configuration8accRangeE">
+<span id="_CPPv3N13spectacularAI12orbbecPlugin13Configuration8accRangeE"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin13Configuration8accRangeE"></span><span id="spectacularAI::orbbecPlugin::Configuration::accRange__OBAccelFullScaleRange"></span><span class="target" id="structspectacularAI_1_1orbbecPlugin_1_1Configuration_1a757dff27556a62f4f46d565e1af38971"></span><span class="n"><span class="pre">OBAccelFullScaleRange</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">accRange</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">OBAccelFullScaleRange</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">OB_ACCEL_FS_4g</span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin13Configuration9gyroRangeE">
+<span id="_CPPv3N13spectacularAI12orbbecPlugin13Configuration9gyroRangeE"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin13Configuration9gyroRangeE"></span><span id="spectacularAI::orbbecPlugin::Configuration::gyroRange__OBGyroFullScaleRange"></span><span class="target" id="structspectacularAI_1_1orbbecPlugin_1_1Configuration_1abe2498a23388a788608ea98493587bb8"></span><span class="n"><span class="pre">OBGyroFullScaleRange</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">gyroRange</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">OBGyroFullScaleRange</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">OB_GYRO_FS_1000dps</span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin13Configuration18internalParametersE">
+<span id="_CPPv3N13spectacularAI12orbbecPlugin13Configuration18internalParametersE"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin13Configuration18internalParametersE"></span><span id="spectacularAI::orbbecPlugin::Configuration::internalParameters__std::map:ss.ss:"></span><span class="target" id="structspectacularAI_1_1orbbecPlugin_1_1Configuration_1a8792388bbf5cc9a6e3fc2d9131a4682f"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">internalParameters</span></span></span><br /></dt>
+<dd><p>Internal SDK parameter overrides (key-value pairs). Not safe for unsanitized user input. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="pipeline">
+<h3>Pipeline<a class="headerlink" href="#pipeline" title="Permalink to this heading"></a></h3>
+<p>Defined in <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;spectacularAI/orbbec/pipeline.hpp&gt;</span></code></p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp">
+<span class="target" id="namespacespectacularAI"></span><span class="k"><span class="pre">namespace</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">spectacularAI</span></span></span><br /></dt>
+<dd><dl class="cpp type">
+<dt class="sig sig-object cpp">
+<span class="target" id="namespacespectacularAI_1_1orbbecPlugin"></span><span class="k"><span class="pre">namespace</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">orbbecPlugin</span></span></span><br /></dt>
+<dd><dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin8PipelineE">
+<span id="_CPPv3N13spectacularAI12orbbecPlugin8PipelineE"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin8PipelineE"></span><span id="spectacularAI::orbbecPlugin::Pipeline"></span><span class="target" id="classspectacularAI_1_1orbbecPlugin_1_1Pipeline"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Pipeline</span></span></span><br /></dt>
+<dd><p>The <a class="reference internal" href="#classspectacularAI_1_1orbbecPlugin_1_1Pipeline"><span class="std std-ref">Pipeline</span></a> object stores information about the device and also sets the default configuration, e.g., enables and configures necessary Orbbec streams and sensors. The actual VIO reading is started with startSession. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin8Pipeline8PipelineERN2ob8PipelineE">
+<span id="_CPPv3N13spectacularAI12orbbecPlugin8Pipeline8PipelineERN2ob8PipelineE"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin8Pipeline8PipelineERN2ob8PipelineE"></span><span id="spectacularAI::orbbecPlugin::Pipeline::Pipeline__ob::PipelineR"></span><span class="target" id="classspectacularAI_1_1orbbecPlugin_1_1Pipeline_1aed5a6d8c719bf3e2ccd38a139e290fc2"></span><span class="sig-name descname"><span class="n"><span class="pre">Pipeline</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">ob</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Pipeline</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">obPipeline</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Create a pipeline with the default configuration. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin8Pipeline8PipelineERN2ob8PipelineERK13Configuration">
+<span id="_CPPv3N13spectacularAI12orbbecPlugin8Pipeline8PipelineERN2ob8PipelineERK13Configuration"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin8Pipeline8PipelineERN2ob8PipelineERK13Configuration"></span><span id="spectacularAI::orbbecPlugin::Pipeline::Pipeline__ob::PipelineR.ConfigurationCR"></span><span class="target" id="classspectacularAI_1_1orbbecPlugin_1_1Pipeline_1a9bbc0dba4db12f227ff499a7a6d7926e"></span><span class="sig-name descname"><span class="n"><span class="pre">Pipeline</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">ob</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Pipeline</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">obPipeline</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="../cpp/latest/index.html#_CPPv4N13spectacularAI12orbbecPlugin13ConfigurationE" title="spectacularAI::orbbecPlugin::Configuration"><span class="n"><span class="pre">Configuration</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">config</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Create a pipeline with custom configuration </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin8Pipeline8PipelineERN2ob8PipelineERK13ConfigurationNSt8functionIFvN7mapping15MapperOutputPtrEEEE">
+<span id="_CPPv3N13spectacularAI12orbbecPlugin8Pipeline8PipelineERN2ob8PipelineERK13ConfigurationNSt8functionIFvN7mapping15MapperOutputPtrEEEE"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin8Pipeline8PipelineERN2ob8PipelineERK13ConfigurationNSt8functionIFvN7mapping15MapperOutputPtrEEEE"></span><span class="target" id="classspectacularAI_1_1orbbecPlugin_1_1Pipeline_1a8a03319a6601aafed5c23e53bc0980cb"></span><span class="sig-name descname"><span class="n"><span class="pre">Pipeline</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">ob</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Pipeline</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">obPipeline</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="../cpp/latest/index.html#_CPPv4N13spectacularAI12orbbecPlugin13ConfigurationE" title="spectacularAI::orbbecPlugin::Configuration"><span class="n"><span class="pre">Configuration</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">config</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="../cpp/latest/index.html#_CPPv4N13spectacularAI7mappingE" title="spectacularAI::mapping"><span class="n"><span class="pre">mapping</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../cpp/latest/index.html#_CPPv4N13spectacularAI7mapping15MapperOutputPtrE" title="spectacularAI::mapping::MapperOutputPtr"><span class="n"><span class="pre">MapperOutputPtr</span></span></a><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">onMapperOutput</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Create a pipeline with custom configuration with Mapping API enabled </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin8Pipeline12startSessionEv">
+<span id="_CPPv3N13spectacularAI12orbbecPlugin8Pipeline12startSessionEv"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin8Pipeline12startSessionEv"></span><span id="spectacularAI::orbbecPlugin::Pipeline::startSession"></span><span class="target" id="classspectacularAI_1_1orbbecPlugin_1_1Pipeline_1a3d4914bcc975f66f55b4f643642313f4"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../cpp/latest/index.html#_CPPv4N13spectacularAI12orbbecPlugin7SessionE" title="spectacularAI::orbbecPlugin::Session"><span class="n"><span class="pre">Session</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">startSession</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Start a new VIO session on the background. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin8PipelineD0Ev">
+<span id="_CPPv3N13spectacularAI12orbbecPlugin8PipelineD0Ev"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin8PipelineD0Ev"></span><span id="spectacularAI::orbbecPlugin::Pipeline::~Pipeline"></span><span class="target" id="classspectacularAI_1_1orbbecPlugin_1_1Pipeline_1a49f2bad59855634e0c82f6081a33e523"></span><span class="sig-name descname"><span class="n"><span class="pre">~Pipeline</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin8Pipeline5pimplE">
+<span id="_CPPv3N13spectacularAI12orbbecPlugin8Pipeline5pimplE"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin8Pipeline5pimplE"></span><span id="spectacularAI::orbbecPlugin::Pipeline::pimpl__std::unique_ptr:impl:"></span><span class="target" id="classspectacularAI_1_1orbbecPlugin_1_1Pipeline_1abec7d5c890c0cf92fb45dacf0f39ae0d"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">impl</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pimpl</span></span></span><a class="headerlink" href="#_CPPv4N13spectacularAI12orbbecPlugin8Pipeline5pimplE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="session">
+<h3>Session<a class="headerlink" href="#session" title="Permalink to this heading"></a></h3>
+<p>Defined in <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;spectacularAI/orbbec/session.hpp&gt;</span></code></p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp">
+<span class="target" id="namespacespectacularAI"></span><span class="k"><span class="pre">namespace</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">spectacularAI</span></span></span><br /></dt>
+<dd><dl class="cpp type">
+<dt class="sig sig-object cpp">
+<span class="target" id="namespacespectacularAI_1_1orbbecPlugin"></span><span class="k"><span class="pre">namespace</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">orbbecPlugin</span></span></span><br /></dt>
+<dd><dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin7SessionE">
+<span id="_CPPv3N13spectacularAI12orbbecPlugin7SessionE"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin7SessionE"></span><span id="spectacularAI::orbbecPlugin::Session"></span><span class="target" id="structspectacularAI_1_1orbbecPlugin_1_1Session"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Session</span></span></span><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK13spectacularAI12orbbecPlugin7Session9hasOutputEv">
+<span id="_CPPv3NK13spectacularAI12orbbecPlugin7Session9hasOutputEv"></span><span id="_CPPv2NK13spectacularAI12orbbecPlugin7Session9hasOutputEv"></span><span id="spectacularAI::orbbecPlugin::Session::hasOutputC"></span><span class="target" id="structspectacularAI_1_1orbbecPlugin_1_1Session_1ac0aa32aaec272148ba121e41db285702"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hasOutput</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Check if new output is available. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin7Session9getOutputEv">
+<span id="_CPPv3N13spectacularAI12orbbecPlugin7Session9getOutputEv"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin7Session9getOutputEv"></span><span id="spectacularAI::orbbecPlugin::Session::getOutput"></span><span class="target" id="structspectacularAI_1_1orbbecPlugin_1_1Session_1a1ef1f9724b9163a450d18b9602803deb"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="../cpp/latest/index.html#_CPPv4N13spectacularAI9VioOutputE" title="spectacularAI::VioOutput"><span class="n"><span class="pre">VioOutput</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getOutput</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Get output from the queue, if available. If not returns {}. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin7Session13waitForOutputEv">
+<span id="_CPPv3N13spectacularAI12orbbecPlugin7Session13waitForOutputEv"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin7Session13waitForOutputEv"></span><span id="spectacularAI::orbbecPlugin::Session::waitForOutput"></span><span class="target" id="structspectacularAI_1_1orbbecPlugin_1_1Session_1ac8e78c224136b1c8ac14f4173781623e"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="../cpp/latest/index.html#_CPPv4N13spectacularAI9VioOutputE" title="spectacularAI::VioOutput"><span class="n"><span class="pre">VioOutput</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">waitForOutput</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Wait until new output is available and then return it. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin7Session13ignoreOutputsEb">
+<span id="_CPPv3N13spectacularAI12orbbecPlugin7Session13ignoreOutputsEb"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin7Session13ignoreOutputsEb"></span><span id="spectacularAI::orbbecPlugin::Session::ignoreOutputs__b"></span><span class="target" id="structspectacularAI_1_1orbbecPlugin_1_1Session_1a8f12925d3bb67d874aedbe1e11e1d390"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ignoreOutputs</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ignore</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Set whether new outputs are added to the queue. Useful when the user is not interested in VIO outputs: e.g. when using mapping API or recording.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ignore</strong> – If true, new outputs are not added to the queue. Otherwise, the user has make sure the outputs are pulled from the queue. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin7Session10addTriggerEdi">
+<span id="_CPPv3N13spectacularAI12orbbecPlugin7Session10addTriggerEdi"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin7Session10addTriggerEdi"></span><span id="spectacularAI::orbbecPlugin::Session::addTrigger__double.i"></span><span class="target" id="structspectacularAI_1_1orbbecPlugin_1_1Session_1a1a488d6ba9966309e57aff166e666e02"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">addTrigger</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">t</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">tag</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Add an external trigger input. Causes additional output corresponding to a certain timestamp to be generated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t</strong> – timestamp, monotonic float seconds </p></li>
+<li><p><strong>tag</strong> – additonal tag to indentify this particular trigger event. The default outputs corresponding to input camera frames have a tag 0. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin7SessionD0Ev">
+<span id="_CPPv3N13spectacularAI12orbbecPlugin7SessionD0Ev"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin7SessionD0Ev"></span><span id="spectacularAI::orbbecPlugin::Session::~Session"></span><span class="target" id="structspectacularAI_1_1orbbecPlugin_1_1Session_1a0fa431b464b783346756645901373a6c"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~Session</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="k4a.html" class="btn btn-neutral float-left" title="Azure Kinect" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023 Spectacular AI Ltd.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

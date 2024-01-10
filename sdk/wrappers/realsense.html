@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RealSense &mdash; spectacularAI  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=8e72557d" />
+
+  
+    <link rel="shortcut icon" href="https://www.spectacularai.com/favicon/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Azure Kinect" href="k4a.html" />
+    <link rel="prev" title="OAK-D" href="oak.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="https://spectacularai.github.io/docs/png/SpectacularAI-name-logo-small-white-transparent.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python/latest/index.html">Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cpp/latest/index.html">C++</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../core.html">Core SDK</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tracking.html">Tracking API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mapping.html">Mapping API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../replay.html">Replay API</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../wrappers.html">Wrappers</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="oak.html">OAK-D</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">RealSense</a></li>
+<li class="toctree-l2"><a class="reference internal" href="k4a.html">Azure Kinect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="orbbec.html">ORBBEC</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">spectacularAI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../wrappers.html">Wrappers</a></li>
+      <li class="breadcrumb-item active">RealSense</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/wrappers/realsense.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="realsense">
+<h1>RealSense<a class="headerlink" href="#realsense" title="Permalink to this heading"></a></h1>
+<p>Spectacular AI C++ plugin for RealSense D455 and D435i cameras.</p>
+<section id="api-reference">
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading"></a></h2>
+<section id="configuration">
+<h3>Configuration<a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h3>
+<p>Defined in <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;spectacularAI/realsense/configuration.hpp&gt;</span></code></p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv413spectacularAI">
+<span id="_CPPv313spectacularAI"></span><span id="_CPPv213spectacularAI"></span><span id="spectacularAI"></span><span class="target" id="namespacespectacularAI"></span><span class="k"><span class="pre">namespace</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">spectacularAI</span></span></span><br /></dt>
+<dd><dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI8rsPluginE">
+<span id="_CPPv3N13spectacularAI8rsPluginE"></span><span id="_CPPv2N13spectacularAI8rsPluginE"></span><span id="spectacularAI::rsPlugin"></span><span class="target" id="namespacespectacularAI_1_1rsPlugin"></span><span class="k"><span class="pre">namespace</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rsPlugin</span></span></span><br /></dt>
+<dd><dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI8rsPlugin13ConfigurationE">
+<span id="_CPPv3N13spectacularAI8rsPlugin13ConfigurationE"></span><span id="_CPPv2N13spectacularAI8rsPlugin13ConfigurationE"></span><span id="spectacularAI::rsPlugin::Configuration"></span><span class="target" id="structspectacularAI_1_1rsPlugin_1_1Configuration"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Configuration</span></span></span><br /></dt>
+<dd><p>Plugin and Spectacular AI VIO SDK configuration variables. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI8rsPlugin13Configuration9useStereoE">
+<span id="_CPPv3N13spectacularAI8rsPlugin13Configuration9useStereoE"></span><span id="_CPPv2N13spectacularAI8rsPlugin13Configuration9useStereoE"></span><span id="spectacularAI::rsPlugin::Configuration::useStereo__b"></span><span class="target" id="structspectacularAI_1_1rsPlugin_1_1Configuration_1a03c5179f5f641ca4a122247ab6d1b87a"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">useStereo</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI8rsPlugin13Configuration6useRgbE">
+<span id="_CPPv3N13spectacularAI8rsPlugin13Configuration6useRgbE"></span><span id="_CPPv2N13spectacularAI8rsPlugin13Configuration6useRgbE"></span><span id="spectacularAI::rsPlugin::Configuration::useRgb__b"></span><span class="target" id="structspectacularAI_1_1rsPlugin_1_1Configuration_1a3a4d54d9058e0f71874d0e924f75d286"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">useRgb</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI8rsPlugin13Configuration7fastVioE">
+<span id="_CPPv3N13spectacularAI8rsPlugin13Configuration7fastVioE"></span><span id="_CPPv2N13spectacularAI8rsPlugin13Configuration7fastVioE"></span><span id="spectacularAI::rsPlugin::Configuration::fastVio__b"></span><span class="target" id="structspectacularAI_1_1rsPlugin_1_1Configuration_1aaa31b766eb651105e99306937b4b335e"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fastVio</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI8rsPlugin13Configuration12alignedDepthE">
+<span id="_CPPv3N13spectacularAI8rsPlugin13Configuration12alignedDepthE"></span><span id="_CPPv2N13spectacularAI8rsPlugin13Configuration12alignedDepthE"></span><span id="spectacularAI::rsPlugin::Configuration::alignedDepth__b"></span><span class="target" id="structspectacularAI_1_1rsPlugin_1_1Configuration_1a74d33c82af40ee0f6980f05928b8aa77"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">alignedDepth</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI8rsPlugin13Configuration7useSlamE">
+<span id="_CPPv3N13spectacularAI8rsPlugin13Configuration7useSlamE"></span><span id="_CPPv2N13spectacularAI8rsPlugin13Configuration7useSlamE"></span><span id="spectacularAI::rsPlugin::Configuration::useSlam__b"></span><span class="target" id="structspectacularAI_1_1rsPlugin_1_1Configuration_1a65b2041fae50c2136271bf756aa60a57"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">useSlam</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI8rsPlugin13Configuration6useIcpE">
+<span id="_CPPv3N13spectacularAI8rsPlugin13Configuration6useIcpE"></span><span id="_CPPv2N13spectacularAI8rsPlugin13Configuration6useIcpE"></span><span id="spectacularAI::rsPlugin::Configuration::useIcp__b"></span><span class="target" id="structspectacularAI_1_1rsPlugin_1_1Configuration_1a1a7ad92c51721aec65d57cb66e02c217"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">useIcp</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI8rsPlugin13Configuration15inputResolutionE">
+<span id="_CPPv3N13spectacularAI8rsPlugin13Configuration15inputResolutionE"></span><span id="_CPPv2N13spectacularAI8rsPlugin13Configuration15inputResolutionE"></span><span id="spectacularAI::rsPlugin::Configuration::inputResolution__ss"></span><span class="target" id="structspectacularAI_1_1rsPlugin_1_1Configuration_1ab32da33dfc96b54b6dc40af3263961a1"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">inputResolution</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;400p&quot;</span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI8rsPlugin13Configuration11mapSavePathE">
+<span id="_CPPv3N13spectacularAI8rsPlugin13Configuration11mapSavePathE"></span><span id="_CPPv2N13spectacularAI8rsPlugin13Configuration11mapSavePathE"></span><span id="spectacularAI::rsPlugin::Configuration::mapSavePath__ss"></span><span class="target" id="structspectacularAI_1_1rsPlugin_1_1Configuration_1a782379ca5cd34760f96bb8a0d31f5b03"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mapSavePath</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;&quot;</span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI8rsPlugin13Configuration11mapLoadPathE">
+<span id="_CPPv3N13spectacularAI8rsPlugin13Configuration11mapLoadPathE"></span><span id="_CPPv2N13spectacularAI8rsPlugin13Configuration11mapLoadPathE"></span><span id="spectacularAI::rsPlugin::Configuration::mapLoadPath__ss"></span><span class="target" id="structspectacularAI_1_1rsPlugin_1_1Configuration_1abf75de8f6779694aada2cac47370cb5d"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mapLoadPath</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;&quot;</span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI8rsPlugin13Configuration12aprilTagPathE">
+<span id="_CPPv3N13spectacularAI8rsPlugin13Configuration12aprilTagPathE"></span><span id="_CPPv2N13spectacularAI8rsPlugin13Configuration12aprilTagPathE"></span><span id="spectacularAI::rsPlugin::Configuration::aprilTagPath__ss"></span><span class="target" id="structspectacularAI_1_1rsPlugin_1_1Configuration_1a9e770cb94f42dec6dc4890203c652acf"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">aprilTagPath</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;&quot;</span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI8rsPlugin13Configuration15recordingFolderE">
+<span id="_CPPv3N13spectacularAI8rsPlugin13Configuration15recordingFolderE"></span><span id="_CPPv2N13spectacularAI8rsPlugin13Configuration15recordingFolderE"></span><span id="spectacularAI::rsPlugin::Configuration::recordingFolder__ss"></span><span class="target" id="structspectacularAI_1_1rsPlugin_1_1Configuration_1a6feea9267229ac1023659b5ef235cf21"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">recordingFolder</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;&quot;</span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI8rsPlugin13Configuration13recordingOnlyE">
+<span id="_CPPv3N13spectacularAI8rsPlugin13Configuration13recordingOnlyE"></span><span id="_CPPv2N13spectacularAI8rsPlugin13Configuration13recordingOnlyE"></span><span id="spectacularAI::rsPlugin::Configuration::recordingOnly__b"></span><span class="target" id="structspectacularAI_1_1rsPlugin_1_1Configuration_1aba2c2e05e3f9e4293f4c8b958c09d5c0"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">recordingOnly</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI8rsPlugin13Configuration19postProcessFinalMapE">
+<span id="_CPPv3N13spectacularAI8rsPlugin13Configuration19postProcessFinalMapE"></span><span id="_CPPv2N13spectacularAI8rsPlugin13Configuration19postProcessFinalMapE"></span><span id="spectacularAI::rsPlugin::Configuration::postProcessFinalMap__b"></span><span class="target" id="structspectacularAI_1_1rsPlugin_1_1Configuration_1a2d9abb9759e07f8d741c4bf34f418f15"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">postProcessFinalMap</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI8rsPlugin13Configuration18internalParametersE">
+<span id="_CPPv3N13spectacularAI8rsPlugin13Configuration18internalParametersE"></span><span id="_CPPv2N13spectacularAI8rsPlugin13Configuration18internalParametersE"></span><span id="spectacularAI::rsPlugin::Configuration::internalParameters__std::map:ss.ss:"></span><span class="target" id="structspectacularAI_1_1rsPlugin_1_1Configuration_1ae79da71e57b93d7f76758c8987736d01"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">internalParameters</span></span></span><br /></dt>
+<dd><p>Internal SDK parameter overrides (key-value pairs). Not safe for unsanitized user input. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="pipeline">
+<h3>Pipeline<a class="headerlink" href="#pipeline" title="Permalink to this heading"></a></h3>
+<p>Defined in <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;spectacularAI/realsense/pipeline.hpp&gt;</span></code></p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv43rs2">
+<span id="_CPPv33rs2"></span><span id="_CPPv23rs2"></span><span id="rs2"></span><span class="target" id="namespacers2"></span><span class="k"><span class="pre">namespace</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rs2</span></span></span><a class="headerlink" href="#_CPPv43rs2" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp">
+<span class="target" id="namespacespectacularAI"></span><span class="k"><span class="pre">namespace</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">spectacularAI</span></span></span><br /></dt>
+<dd><dl class="cpp type">
+<dt class="sig sig-object cpp">
+<span class="target" id="namespacespectacularAI_1_1rsPlugin"></span><span class="k"><span class="pre">namespace</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rsPlugin</span></span></span><br /></dt>
+<dd><dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI8rsPlugin8PipelineE">
+<span id="_CPPv3N13spectacularAI8rsPlugin8PipelineE"></span><span id="_CPPv2N13spectacularAI8rsPlugin8PipelineE"></span><span id="spectacularAI::rsPlugin::Pipeline"></span><span class="target" id="classspectacularAI_1_1rsPlugin_1_1Pipeline"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Pipeline</span></span></span><br /></dt>
+<dd><p>The <a class="reference internal" href="#classspectacularAI_1_1rsPlugin_1_1Pipeline"><span class="std std-ref">Pipeline</span></a> object stores information about the device and also sets the default configuration, e.g., enables and configures necessary RealSense streams and sensors. The actual VIO reading is started with startSession. It is possible to change the RealSense configuration between calling configureX and startSession, but the VIO tracking is not guaranteed to be compatible with such customized configurations. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI8rsPlugin8Pipeline8PipelineEv">
+<span id="_CPPv3N13spectacularAI8rsPlugin8Pipeline8PipelineEv"></span><span id="_CPPv2N13spectacularAI8rsPlugin8Pipeline8PipelineEv"></span><span id="spectacularAI::rsPlugin::Pipeline::Pipeline"></span><span class="target" id="classspectacularAI_1_1rsPlugin_1_1Pipeline_1a39497b9df39cc18a7dd9c01722ce8f10"></span><span class="sig-name descname"><span class="n"><span class="pre">Pipeline</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Create a pipeline with the default configuration. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI8rsPlugin8Pipeline8PipelineERK13Configuration">
+<span id="_CPPv3N13spectacularAI8rsPlugin8Pipeline8PipelineERK13Configuration"></span><span id="_CPPv2N13spectacularAI8rsPlugin8Pipeline8PipelineERK13Configuration"></span><span id="spectacularAI::rsPlugin::Pipeline::Pipeline__ConfigurationCR"></span><span class="target" id="classspectacularAI_1_1rsPlugin_1_1Pipeline_1a018e71b1cc64fb6c481e6545b3405126"></span><span class="sig-name descname"><span class="n"><span class="pre">Pipeline</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="../cpp/latest/index.html#_CPPv4N13spectacularAI8rsPlugin13ConfigurationE" title="spectacularAI::rsPlugin::Configuration"><span class="n"><span class="pre">Configuration</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">config</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Create a pipeline with custom configuration </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI8rsPlugin8Pipeline15configureDeviceERN3rs26deviceE">
+<span id="_CPPv3N13spectacularAI8rsPlugin8Pipeline15configureDeviceERN3rs26deviceE"></span><span id="_CPPv2N13spectacularAI8rsPlugin8Pipeline15configureDeviceERN3rs26deviceE"></span><span id="spectacularAI::rsPlugin::Pipeline::configureDevice__rs2::deviceR"></span><span class="target" id="classspectacularAI_1_1rsPlugin_1_1Pipeline_1ae570729575d091b227e544a6d72f15aa"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">configureDevice</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv43rs2" title="rs2"><span class="n"><span class="pre">rs2</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">device</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">device</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Configure the RealSense device for VIO </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI8rsPlugin8Pipeline16configureStreamsERN3rs26configE">
+<span id="_CPPv3N13spectacularAI8rsPlugin8Pipeline16configureStreamsERN3rs26configE"></span><span id="_CPPv2N13spectacularAI8rsPlugin8Pipeline16configureStreamsERN3rs26configE"></span><span id="spectacularAI::rsPlugin::Pipeline::configureStreams__rs2::configR"></span><span class="target" id="classspectacularAI_1_1rsPlugin_1_1Pipeline_1a9099f59f76fa8fd72063348c7cc34eb2"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">configureStreams</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv43rs2" title="rs2"><span class="n"><span class="pre">rs2</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">config</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">config</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Set up the RealSense config for VIO </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI8rsPlugin8Pipeline17setMapperCallbackERKNSt8functionIFvN13spectacularAI7mapping15MapperOutputPtrEEEE">
+<span id="_CPPv3N13spectacularAI8rsPlugin8Pipeline17setMapperCallbackERKNSt8functionIFvN13spectacularAI7mapping15MapperOutputPtrEEEE"></span><span id="_CPPv2N13spectacularAI8rsPlugin8Pipeline17setMapperCallbackERKNSt8functionIFvN13spectacularAI7mapping15MapperOutputPtrEEEE"></span><span class="target" id="classspectacularAI_1_1rsPlugin_1_1Pipeline_1aeac760c28bd3e9c75d3a472307e42566"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setMapperCallback</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="../cpp/latest/index.html#_CPPv413spectacularAI" title="spectacularAI"><span class="n"><span class="pre">spectacularAI</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../cpp/latest/index.html#_CPPv4N13spectacularAI7mappingE" title="spectacularAI::mapping"><span class="n"><span class="pre">mapping</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../cpp/latest/index.html#_CPPv4N13spectacularAI7mapping15MapperOutputPtrE" title="spectacularAI::mapping::MapperOutputPtr"><span class="n"><span class="pre">MapperOutputPtr</span></span></a><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">onMapperOutput</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Set a mapping callback </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI8rsPlugin8Pipeline12startSessionERN3rs26configE">
+<span id="_CPPv3N13spectacularAI8rsPlugin8Pipeline12startSessionERN3rs26configE"></span><span id="_CPPv2N13spectacularAI8rsPlugin8Pipeline12startSessionERN3rs26configE"></span><span id="spectacularAI::rsPlugin::Pipeline::startSession__rs2::configR"></span><span class="target" id="classspectacularAI_1_1rsPlugin_1_1Pipeline_1a652560ff1c2e0082f3cb8107511a087d"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../cpp/latest/index.html#_CPPv4N13spectacularAI8rsPlugin7SessionE" title="spectacularAI::rsPlugin::Session"><span class="n"><span class="pre">Session</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">startSession</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv43rs2" title="rs2"><span class="n"><span class="pre">rs2</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">config</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">config</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Start a new VIO session on the background. Internally creates an rs2::pipeline and starts it. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI8rsPlugin8Pipeline12startSessionERN3rs26configERKNSt8functionIFvRKN3rs25frameEEEE">
+<span id="_CPPv3N13spectacularAI8rsPlugin8Pipeline12startSessionERN3rs26configERKNSt8functionIFvRKN3rs25frameEEEE"></span><span id="_CPPv2N13spectacularAI8rsPlugin8Pipeline12startSessionERN3rs26configERKNSt8functionIFvRKN3rs25frameEEEE"></span><span class="target" id="classspectacularAI_1_1rsPlugin_1_1Pipeline_1a00406905814fb1fb9f5df08ad3e5b0d2"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../cpp/latest/index.html#_CPPv4N13spectacularAI8rsPlugin7SessionE" title="spectacularAI::rsPlugin::Session"><span class="n"><span class="pre">Session</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">startSession</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv43rs2" title="rs2"><span class="n"><span class="pre">rs2</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">config</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">config</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv43rs2" title="rs2"><span class="n"><span class="pre">rs2</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">frame</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n"><span class="pre">frame</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Start a new VIO session on the background. Also invoke the given callback on each rs2::frame. Performing heavy computations directly in the callback is not recommended. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI8rsPlugin8PipelineD0Ev">
+<span id="_CPPv3N13spectacularAI8rsPlugin8PipelineD0Ev"></span><span id="_CPPv2N13spectacularAI8rsPlugin8PipelineD0Ev"></span><span id="spectacularAI::rsPlugin::Pipeline::~Pipeline"></span><span class="target" id="classspectacularAI_1_1rsPlugin_1_1Pipeline_1a1598b2d95e7b2485054e32f69db0a5e6"></span><span class="sig-name descname"><span class="n"><span class="pre">~Pipeline</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI8rsPlugin8Pipeline5pimplE">
+<span id="_CPPv3N13spectacularAI8rsPlugin8Pipeline5pimplE"></span><span id="_CPPv2N13spectacularAI8rsPlugin8Pipeline5pimplE"></span><span id="spectacularAI::rsPlugin::Pipeline::pimpl__std::unique_ptr:impl:"></span><span class="target" id="classspectacularAI_1_1rsPlugin_1_1Pipeline_1a660fcfd5ff018dae79a4b8f1249427a5"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">impl</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pimpl</span></span></span><a class="headerlink" href="#_CPPv4N13spectacularAI8rsPlugin8Pipeline5pimplE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="session">
+<h3>Session<a class="headerlink" href="#session" title="Permalink to this heading"></a></h3>
+<p>Defined in <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;spectacularAI/realsense/session.hpp&gt;</span></code></p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp">
+<span class="target" id="namespacespectacularAI"></span><span class="k"><span class="pre">namespace</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">spectacularAI</span></span></span><br /></dt>
+<dd><dl class="cpp type">
+<dt class="sig sig-object cpp">
+<span class="target" id="namespacespectacularAI_1_1rsPlugin"></span><span class="k"><span class="pre">namespace</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rsPlugin</span></span></span><br /></dt>
+<dd><dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI8rsPlugin7SessionE">
+<span id="_CPPv3N13spectacularAI8rsPlugin7SessionE"></span><span id="_CPPv2N13spectacularAI8rsPlugin7SessionE"></span><span id="spectacularAI::rsPlugin::Session"></span><span class="target" id="structspectacularAI_1_1rsPlugin_1_1Session"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Session</span></span></span><br /></dt>
+<dd><p>VIO session. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK13spectacularAI8rsPlugin7Session9hasOutputEv">
+<span id="_CPPv3NK13spectacularAI8rsPlugin7Session9hasOutputEv"></span><span id="_CPPv2NK13spectacularAI8rsPlugin7Session9hasOutputEv"></span><span id="spectacularAI::rsPlugin::Session::hasOutputC"></span><span class="target" id="structspectacularAI_1_1rsPlugin_1_1Session_1af568aa25c72e3327e769fe5946b45730"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hasOutput</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Check if new output is available </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI8rsPlugin7Session9getOutputEv">
+<span id="_CPPv3N13spectacularAI8rsPlugin7Session9getOutputEv"></span><span id="_CPPv2N13spectacularAI8rsPlugin7Session9getOutputEv"></span><span id="spectacularAI::rsPlugin::Session::getOutput"></span><span class="target" id="structspectacularAI_1_1rsPlugin_1_1Session_1ae348857ede2c6c670e23578ae92cb028"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="../cpp/latest/index.html#_CPPv4N13spectacularAI9VioOutputE" title="spectacularAI::VioOutput"><span class="n"><span class="pre">VioOutput</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getOutput</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Get output from the queue, if available. If not, returns {} </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI8rsPlugin7Session13waitForOutputEv">
+<span id="_CPPv3N13spectacularAI8rsPlugin7Session13waitForOutputEv"></span><span id="_CPPv2N13spectacularAI8rsPlugin7Session13waitForOutputEv"></span><span id="spectacularAI::rsPlugin::Session::waitForOutput"></span><span class="target" id="structspectacularAI_1_1rsPlugin_1_1Session_1a66cbe2d9e98e54531c4ba0c771c85dae"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="../cpp/latest/index.html#_CPPv4N13spectacularAI9VioOutputE" title="spectacularAI::VioOutput"><span class="n"><span class="pre">VioOutput</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">waitForOutput</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Wait until new output is available and then return it. Do not use with useReaderThread=false. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI8rsPlugin7Session10addTriggerEdi">
+<span id="_CPPv3N13spectacularAI8rsPlugin7Session10addTriggerEdi"></span><span id="_CPPv2N13spectacularAI8rsPlugin7Session10addTriggerEdi"></span><span id="spectacularAI::rsPlugin::Session::addTrigger__double.i"></span><span class="target" id="structspectacularAI_1_1rsPlugin_1_1Session_1aeeb0d8284eac42f82386a1922716fc4b"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">addTrigger</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">t</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">tag</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Add an external trigger input. Causes additional output corresponding to a certain timestamp to be generated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t</strong> – timestamp, monotonic float seconds </p></li>
+<li><p><strong>tag</strong> – additonal tag to indentify this particular trigger event. The default outputs corresponding to input camera frames have a tag 0. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI8rsPlugin7SessionD0Ev">
+<span id="_CPPv3N13spectacularAI8rsPlugin7SessionD0Ev"></span><span id="_CPPv2N13spectacularAI8rsPlugin7SessionD0Ev"></span><span id="spectacularAI::rsPlugin::Session::~Session"></span><span class="target" id="structspectacularAI_1_1rsPlugin_1_1Session_1acbbd766a6da612b8f0073ce63948b0b6"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~Session</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="oak.html" class="btn btn-neutral float-left" title="OAK-D" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="k4a.html" class="btn btn-neutral float-right" title="Azure Kinect" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023 Spectacular AI Ltd.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

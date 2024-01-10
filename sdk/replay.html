@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Replay API &mdash; spectacularAI  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=8e72557d" />
+
+  
+    <link rel="shortcut icon" href="https://www.spectacularai.com/favicon/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/tabs.js?v=3030b3cb"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Wrappers" href="wrappers.html" />
+    <link rel="prev" title="Mapping API" href="mapping.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="https://spectacularai.github.io/docs/png/SpectacularAI-name-logo-small-white-transparent.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="python/latest/index.html">Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cpp/latest/index.html">C++</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="core.html">Core SDK</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="tracking.html">Tracking API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mapping.html">Mapping API</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Replay API</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="wrappers.html">Wrappers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="wrappers/oak.html">OAK-D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wrappers/realsense.html">RealSense</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wrappers/k4a.html">Azure Kinect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wrappers/orbbec.html">ORBBEC</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">spectacularAI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="core.html">Core SDK</a></li>
+      <li class="breadcrumb-item active">Replay API</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/replay.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="replay-api">
+<span id="id1"></span><h1>Replay API<a class="headerlink" href="#replay-api" title="Permalink to this heading"></a></h1>
+<p>The <em>Replay API</em> allows simulating real-time SDK behavior with previously recorded data,
+or rerunning recorded sequences with high-quality postprocessing settings, which is
+especially useful when used together with the <a class="reference internal" href="mapping.html#mapping-api"><span class="std std-ref">Mapping API</span></a>.</p>
+<p>The replay API can be used with data recorded from any of the devices supported by the SDK.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-UHl0aG9u" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-0-UHl0aG9u" name="UHl0aG9u" role="tab" tabindex="0">Python</button><button aria-controls="panel-0-Qysr" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-0-Qysr" name="Qysr" role="tab" tabindex="-1">C++</button></div><div aria-labelledby="tab-0-UHl0aG9u" class="sphinx-tabs-panel group-tab" id="panel-0-UHl0aG9u" name="UHl0aG9u" role="tabpanel" tabindex="0"><dl class="py class">
+<dt class="sig sig-object py" id="spectacularAI.Replay">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spectacularAI.</span></span><span class="sig-name descname"><span class="pre">Replay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spectacularAI.Replay" title="Permalink to this definition"></a></dt>
+<dd><p>Replay previously recorded data</p>
+<p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>__init__(self: spectacularAI.Replay, folder: str, <a href="#id2"><span class="problematic" id="id3">*</span></a>, mapperCallback: Callable[[spectacularAI::mapping::MapperOutput], None] = None, configuration: dict = {}) -&gt; None</p></li>
+</ol>
+<p>Build a replay from a given folder containing the dataset</p>
+<ol class="arabic simple" start="2">
+<li><p>__init__(self: spectacularAI.Replay, folder: str, mapperCallback: Callable[[spectacularAI::mapping::MapperOutput], None], <a href="#id4"><span class="problematic" id="id5">*</span></a>, configuration: dict = {}) -&gt; None</p></li>
+</ol>
+<p>Build a replay from a given folder containing the dataset with a mapping callback</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.Replay.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.Replay" title="spectacularAI.Replay"><span class="pre">spectacularAI.Replay</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#spectacularAI.Replay.close" title="Permalink to this definition"></a></dt>
+<dd><p>Closes replay.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.Replay.runReplay">
+<span class="sig-name descname"><span class="pre">runReplay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.Replay" title="spectacularAI.Replay"><span class="pre">spectacularAI.Replay</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#spectacularAI.Replay.runReplay" title="Permalink to this definition"></a></dt>
+<dd><p>Starts replaying the data and blocks until close() is called or the entire session has played out</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.Replay.setExtendedOutputCallback">
+<span class="sig-name descname"><span class="pre">setExtendedOutputCallback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.Replay" title="spectacularAI.Replay"><span class="pre">spectacularAI.Replay</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="tracking.html#spectacularAI.VioOutput" title="spectacularAI.VioOutput"><span class="pre">spectacularAI.VioOutput</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="tracking.html#spectacularAI.Frame" title="spectacularAI.Frame"><span class="pre">spectacularAI.Frame</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#spectacularAI.Replay.setExtendedOutputCallback" title="Permalink to this definition"></a></dt>
+<dd><p>Set a callback that’s called for new output</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.Replay.setOutputCallback">
+<span class="sig-name descname"><span class="pre">setOutputCallback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.Replay" title="spectacularAI.Replay"><span class="pre">spectacularAI.Replay</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="tracking.html#spectacularAI.VioOutput" title="spectacularAI.VioOutput"><span class="pre">spectacularAI.VioOutput</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#spectacularAI.Replay.setOutputCallback" title="Permalink to this definition"></a></dt>
+<dd><p>Set a callback that’s called for new output</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.Replay.setPlaybackSpeed">
+<span class="sig-name descname"><span class="pre">setPlaybackSpeed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.Replay" title="spectacularAI.Replay"><span class="pre">spectacularAI.Replay</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#spectacularAI.Replay.setPlaybackSpeed" title="Permalink to this definition"></a></dt>
+<dd><p>Sets playbacks speed, 1.0 == real time, 2.0 == fast forward 2x, 0.5 == at half speed, -1.0 == unlimited. Defaults to 1.0.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.Replay.startReplay">
+<span class="sig-name descname"><span class="pre">startReplay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.Replay" title="spectacularAI.Replay"><span class="pre">spectacularAI.Replay</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#spectacularAI.Replay.startReplay" title="Permalink to this definition"></a></dt>
+<dd><p>Starts replaying the data in the background until close() is called or entire session has been played.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div><div aria-labelledby="tab-0-Qysr" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-Qysr" name="Qysr" role="tabpanel" tabindex="0"><p>Defined in <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;spectacularAI/replay.hpp&gt;</span></code></p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp">
+<span class="k"><span class="pre">namespace</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">spectacularAI</span></span></span><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp">
+<span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FrameSet</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI5FrameE" title="spectacularAI::Frame"><span class="n"><span class="pre">Frame</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><br /></dt>
+<dd></dd></dl>
+
+</div>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp">
+<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Frame</span></span></span><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">index</span></span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI10CameraPoseE" title="spectacularAI::CameraPose"><span class="n"><span class="pre">CameraPose</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cameraPose</span></span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI6BitmapE" title="spectacularAI::Bitmap"><span class="n"><span class="pre">Bitmap</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">image</span></span></span><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp">
+<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Replay</span></span></span><br /></dt>
+<dd><p>Visual-Inertial Odometry API <a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1Replay"><span class="std std-ref">Replay</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~Replay</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Destructor. Stops nay worker threads and frees other resources </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">startReplay</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Starts replaying data in the background until replay is closed or entire session has been played. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">runReplay</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Starts replaying data and blocks until replay is closed or entire session has been played. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">replayOneLine</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Plays a single line of data and returns false when there is no more data. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setPlaybackSpeed</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">speed</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Sets playbacks speed, 1.0 == real time, 2.0 == fast forward 2x, 0.5 == at half speed, -1.0 == unlimited. Defaults to 1.0. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setDryRun</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">isDryRun</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>If enabled, read and parse recorded data, but do not feed it to the algorithm. This is useful for performance measurements: a dry run can be used to estimate the data parsing time which does not happen in the real-time use case. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setOutputCallback</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI12VioOutputPtrE" title="spectacularAI::VioOutputPtr"><span class="n"><span class="pre">VioOutputPtr</span></span></a><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">onOutput</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Set output callback, called whenever new output is available.</p>
+<p>The output remains valid as long as the shared pointer is alive. Can be passed to different threads and the last reference can be destructed in another thread. However, these should not be stored long term to avoid memory leaks.</p>
+<p>Will be called fromt the same thread where gyroscope samples are added. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setExtendedOutputCallback</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI12VioOutputPtrE" title="spectacularAI::VioOutputPtr"><span class="n"><span class="pre">VioOutputPtr</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8FrameSetE" title="spectacularAI::FrameSet"><span class="n"><span class="pre">FrameSet</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">onOutput</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Experimental! </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">close</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Do not use this! </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="k"><span class="pre">static</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI6Replay7BuilderE" title="spectacularAI::Replay::Builder"><span class="n"><span class="pre">Builder</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">builder</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">dataFolder</span></span>, <span class="n"><span class="pre">Vio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Builder</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">vioBuilder</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Setup a <a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1Replay"><span class="std std-ref">Replay</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataFolder</strong> – Path to folder containing sensor data, and optionally calibration and VIO configuration. </p></li>
+<li><p><strong>vioBuilder</strong> – Vio builder. If Vio sets a calibration path, it will replace any calibration <a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1Replay"><span class="std std-ref">Replay</span></a> reads from the data folder. If Vio sets a configuration, it will be appended to configuration <a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1Replay"><span class="std std-ref">Replay</span></a> reads from the data folder, if any. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp">
+<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Builder</span></span></span><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI6Replay7BuilderE" title="spectacularAI::Replay::Builder"><span class="n"><span class="pre">Builder</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setFfmpeg</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">enabled</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Optional. Set whether to use ffmpeg to read file or not. Default is true. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI6ReplayE" title="spectacularAI::Replay"><span class="n"><span class="pre">Replay</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">build</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Construct <a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1Replay"><span class="std std-ref">Replay</span></a> implementation with the settings configured in this <a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1Replay_1_1Builder"><span class="std std-ref">Builder</span></a></p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI6Replay7Builder4DataE" title="spectacularAI::Replay::Builder::Data"><span class="n"><span class="pre">Data</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">_data</span></span></span><br /></dt>
+<dd></dd></dl>
+
+</div>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp">
+<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Data</span></span></span><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~Data</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+</div></div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="mapping.html" class="btn btn-neutral float-left" title="Mapping API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="wrappers.html" class="btn btn-neutral float-right" title="Wrappers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023 Spectacular AI Ltd.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
