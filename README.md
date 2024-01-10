@@ -14,7 +14,7 @@ see also https://github.com/SpectacularAI/sdk-examples.
 
 Run this script (see contents for more details)
 
-    ./import-python-docs.sh python-plugin.zip MAJOR.MINOR
+    ./import-python-docs.sh MAJOR.MINOR
 
 where MAJOR.MINOR is the new/latest SDK version without patch version or and "v".
 Then check
