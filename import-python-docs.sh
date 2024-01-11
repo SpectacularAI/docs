@@ -14,7 +14,7 @@
 
 set -eux
 
-SDK_VERSION="v$1"
+export SDK_VERSION="v$1"
 
 : "${SDK_PRIVATE_PATH:="../vio"}"
 CUR=`pwd`
