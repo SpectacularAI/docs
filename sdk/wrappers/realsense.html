@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
@@ -8,7 +8,7 @@
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
-      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=8e72557d" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=3a41478c" />
 
   
     <link rel="shortcut icon" href="https://www.spectacularai.com/favicon/favicon.ico"/>
@@ -18,9 +18,10 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/tabs.js?v=3030b3cb"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -57,7 +58,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../core.html">Core SDK</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../tracking.html">Tracking API</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../mapping.html">Mapping API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../recording.html">Recording</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../replay.html">Replay API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../custom-hardware.html">Custom hardware</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="../wrappers.html">Wrappers</a><ul class="current">
@@ -65,6 +68,13 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">RealSense</a></li>
 <li class="toctree-l2"><a class="reference internal" href="k4a.html">Azure Kinect</a></li>
 <li class="toctree-l2"><a class="reference internal" href="orbbec.html">ORBBEC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mobile.html">iOS &amp; Android</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ros.html">ROS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tools.html">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tools/nerf.html">Gaussian Splatting &amp; NeRFs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/calibration.html">Calibration</a></li>
 </ul>
 </li>
 </ul>
@@ -81,26 +91,126 @@
       <div class="wy-nav-content">
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../wrappers.html">Wrappers</a></li>
-      <li class="breadcrumb-item active">RealSense</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/wrappers/realsense.md.txt" rel="nofollow"> View page source</a>
-      </li>
-  </ul>
-  <hr/>
-</div>
+    <ul class="wy-breadcrumbs">
+        <li><a href="../index.html" aria-label="Home">Spectacular AI SDK documentation</a></li>
+            <li class="breadcrumb-item"><a href="../wrappers.html">Wrappers</a></li>
+        <li class="breadcrumb-item active">RealSense</li>
+    <li class="wy-breadcrumbs-aside version">
+        v1.26
+    </li>
+    </ul>
+
+    <hr/>
+  </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
   <section id="realsense">
-<h1>RealSense<a class="headerlink" href="#realsense" title="Permalink to this heading"></a></h1>
-<p>Spectacular AI C++ plugin for RealSense D455 and D435i cameras.</p>
+<h1>RealSense<a class="headerlink" href="#realsense" title="Link to this heading"></a></h1>
+<p>Spectacular AI C++ plugin for Intel
+<a class="reference external" href="https://www.intelrealsense.com/depth-camera-d455/">RealSense D455</a>
+and <a class="reference external" href="https://www.intelrealsense.com/depth-camera-d435i/">D435i</a> cameras (note: D435 without the “i” does <em>not</em> work).</p>
+<section id="quick-start">
+<h2>Quick start<a class="headerlink" href="#quick-start" title="Link to this heading"></a></h2>
+<p>First, download and unpack the <code class="docutils literal notranslate"><span class="pre">spectacularAI_realsensePlugin_cpp_non-commercial_*</span></code> archive from the <a class="reference external" href="https://github.com/SpectacularAI/sdk/releases">SDK releases</a> page.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-TGludXg=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-0-TGludXg=" name="TGludXg=" role="tab" tabindex="0">Linux</button><button aria-controls="panel-0-V2luZG93cw==" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-0-V2luZG93cw==" name="V2luZG93cw==" role="tab" tabindex="-1">Windows</button></div><div aria-labelledby="tab-0-TGludXg=" class="sphinx-tabs-panel group-tab" id="panel-0-TGludXg=" name="TGludXg=" role="tabpanel" tabindex="0"><ol class="arabic">
+<li><p>If you have not used the RealSense device before, you will need to setup udev rules, run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="nb">bin</span><span class="o">/</span><span class="mi">3</span><span class="n">rdparty</span><span class="o">/</span><span class="n">librealsense</span><span class="o">/</span><span class="n">setup_udev_rules</span><span class="o">.</span><span class="n">sh</span>
+
+<span class="c1"># or run from the librealsense GitHub repository</span>
+<span class="o">./</span><span class="n">scripts</span><span class="o">/</span><span class="n">setup_udev_rules</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+</li>
+<li><p>Attach your RealSense D4XX or D3XX device to a USB3 port, using a USB3 cable</p></li>
+<li><p>In the extracted directory for your platform, run the pre-compiled example binary:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="nb">bin</span>
+<span class="o">./</span><span class="n">vio_jsonl</span>
+<span class="c1"># Now you should see rapidly flowing JSONL text</span>
+<span class="c1"># press Ctrl+C to exit</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div><div aria-labelledby="tab-0-V2luZG93cw==" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-V2luZG93cw==" name="V2luZG93cw==" role="tabpanel" tabindex="0"><ol class="arabic">
+<li><p>Attach your RealSense device to a USB3 port, using a USB3 cable</p></li>
+<li><p>(optional smoke test) Run the JSONL example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="nb">bin</span>
+<span class="o">./</span><span class="n">vio_jsonl</span><span class="o">.</span><span class="n">exe</span>
+<span class="c1"># Now you should see rapidly flowing JSONL text</span>
+<span class="c1"># press Ctrl+C to exit</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div></div>
+</section>
+<section id="recording-data">
+<h2>Recording data<a class="headerlink" href="#recording-data" title="Link to this heading"></a></h2>
+<p>RealSense data can be recorded using the <code class="docutils literal notranslate"><span class="pre">sai-record-realsense</span></code> tool included in the SDK package.
+You can either run it directly from the <code class="docutils literal notranslate"><span class="pre">bin</span></code> directory, or install it as a system-wide command
+following the <em>Using as a library</em> instructions below.</p>
+<p>First connect a RealSense device over USB3, then run (add <code class="docutils literal notranslate"><span class="pre">.exe</span></code> on Windows):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sai</span><span class="o">-</span><span class="n">record</span><span class="o">-</span><span class="n">realsense</span> <span class="o">--</span><span class="n">output</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">output</span><span class="o">/</span><span class="n">folder</span>
+</pre></div>
+</div>
+<p>The source code of recording tool is also available at <a class="reference external" href="https://github.com/SpectacularAI/sdk/blob/main/cpp/realsense/record.cpp">https://github.com/SpectacularAI/sdk/blob/main/cpp/realsense/record.cpp</a>
+which allows customizing the recording tool, if necessary.</p>
+</section>
+<section id="using-as-a-library">
+<h2>Using as a library<a class="headerlink" href="#using-as-a-library" title="Link to this heading"></a></h2>
+<p>The following instructions show how to compile and run the <a class="reference external" href="https://github.com/SpectacularAI/sdk-examples/tree/main/cpp/realsense">Spectacular AI RealSense SDK examples</a>.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-TGludXg=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-1-TGludXg=" name="TGludXg=" role="tab" tabindex="0">Linux</button><button aria-controls="panel-1-V2luZG93cw==" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-1-V2luZG93cw==" name="V2luZG93cw==" role="tab" tabindex="-1">Windows</button></div><div aria-labelledby="tab-1-TGludXg=" class="sphinx-tabs-panel group-tab" id="panel-1-TGludXg=" name="TGludXg=" role="tabpanel" tabindex="0"><ol class="arabic">
+<li><p>Select where you want the library installed, e.g.,:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">MY_INSTALL_PREFIX</span><span class="o">=~/.</span><span class="n">local</span>
+</pre></div>
+</div>
+</li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">PREFIX=$MY_INSTALL_PREFIX</span> <span class="pre">install</span></code> (or <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">make</span> <span class="pre">install</span></code>)</p></li>
+<li><p>Install <code class="docutils literal notranslate"><span class="pre">librealsense</span></code>: <a class="reference external" href="https://github.com/IntelRealSense/librealsense">https://github.com/IntelRealSense/librealsense</a></p></li>
+<li><p>Ensure you have CMake</p></li>
+<li><p>Build the <code class="docutils literal notranslate"><span class="pre">vio_jsonl</span></code> example using CMake:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">MY_INSTALL_PREFIX</span><span class="o">=~/.</span><span class="n">local</span> <span class="n">example</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div><div aria-labelledby="tab-1-V2luZG93cw==" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-1-V2luZG93cw==" name="V2luZG93cw==" role="tabpanel" tabindex="0"><p>First install the <a class="reference external" href="../index.html#development-dependencies">development dependencies</a>.</p>
+<p>Use Git Bash or similar for next steps.</p>
+<p>Install librealsense from sources:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">examples</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">IntelRealSense</span><span class="o">/</span><span class="n">librealsense</span>
+<span class="n">mkdir</span> <span class="n">librealsense</span><span class="o">/</span><span class="n">target</span>
+<span class="n">cd</span> <span class="n">librealsense</span><span class="o">/</span><span class="n">target</span>
+<span class="n">cmake</span> <span class="o">-</span><span class="n">G</span> <span class="s2">&quot;Visual Studio 16 2019&quot;</span> <span class="o">-</span><span class="n">A</span> <span class="n">x64</span> <span class="o">-</span><span class="n">DCMAKE_INSTALL_PREFIX</span><span class="o">=./</span><span class="n">install</span> <span class="o">-</span><span class="n">DBUILD_EXAMPLES</span><span class="o">=</span><span class="n">OFF</span> <span class="o">-</span><span class="n">DBUILD_GRAPHICAL_EXAMPLES</span><span class="o">=</span><span class="n">OFF</span> <span class="o">..</span>
+<span class="n">cmake</span> <span class="o">--</span><span class="n">build</span> <span class="o">.</span> <span class="o">--</span><span class="n">config</span> <span class="n">Release</span> <span class="o">--</span><span class="n">target</span> <span class="n">install</span>
+<span class="n">cd</span> <span class="o">../..</span>
+</pre></div>
+</div>
+<p>Now you are all set to use the VIO plugin. Let’s compile the example to see it works:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">target</span>
+<span class="n">cd</span> <span class="n">target</span>
+<span class="n">cmake</span> <span class="o">-</span><span class="n">G</span> <span class="s2">&quot;Visual Studio 16 2019&quot;</span> <span class="o">-</span><span class="n">A</span> <span class="n">x64</span> <span class="o">-</span><span class="n">DBUILD_MAPPER</span><span class="o">=</span><span class="n">OFF</span> <span class="o">-</span><span class="n">DspectacularAI_realsensePlugin_DIR</span><span class="o">=../</span><span class="n">lib</span><span class="o">/</span><span class="n">cmake</span><span class="o">/</span><span class="n">spectacularAI</span> <span class="o">-</span><span class="n">Drealsense2_DIR</span><span class="o">=./</span><span class="n">librealsense</span><span class="o">/</span><span class="n">target</span><span class="o">/</span><span class="n">install</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">cmake</span><span class="o">/</span><span class="n">realsense2</span> <span class="o">..</span>
+<span class="n">cmake</span> <span class="o">--</span><span class="n">build</span> <span class="o">.</span> <span class="o">--</span><span class="n">config</span> <span class="n">Release</span> <span class="o">--</span> <span class="o">-</span><span class="n">m</span>
+</pre></div>
+</div>
+<p>Finally running the vio_jsonl.exe should give you the pose of the RealSense device in real time:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">Release</span><span class="o">/</span><span class="n">vio_jsonl</span><span class="o">.</span><span class="n">exe</span>
+</pre></div>
+</div>
+<p>Example output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;orientation&quot;</span><span class="p">:{</span><span class="s2">&quot;w&quot;</span><span class="p">:</span><span class="mf">0.7068698348716513</span><span class="p">,</span><span class="s2">&quot;x&quot;</span><span class="p">:</span><span class="mf">0.02283470213352065</span><span class="p">,</span><span class="s2">&quot;y&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">0.011350438374188287</span><span class="p">,</span><span class="s2">&quot;z&quot;</span><span class="p">:</span><span class="mf">0.7068838521820336</span><span class="p">},</span><span class="s2">&quot;position&quot;</span><span class="p">:{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">0.016812673347013137</span><span class="p">,</span><span class="s2">&quot;y&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">0.0231306465130168</span><span class="p">,</span><span class="s2">&quot;z&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">0.0013136235444364183</span><span class="p">},</span><span class="s2">&quot;time&quot;</span><span class="p">:</span><span class="mf">61088.131537828</span><span class="p">,</span><span class="s2">&quot;velocity&quot;</span><span class="p">:{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">3.936320861854323e-06</span><span class="p">,</span><span class="s2">&quot;y&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">1.8569468854259723e-06</span><span class="p">,</span><span class="s2">&quot;z&quot;</span><span class="p">:</span><span class="mf">0.00031940298071614516</span><span class="p">}}</span>
+</pre></div>
+</div>
+</div></div>
+</section>
 <section id="api-reference">
-<h2>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading"></a></h2>
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading"></a></h2>
+<p>The classes specific to the RealSense plugin are documented below. For the main output classes, refer to the C++ documentation in <a class="reference internal" href="../core.html#core-sdk"><span class="std std-ref">Core SDK</span></a>.</p>
 <section id="configuration">
-<h3>Configuration<a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h3>
+<h3>Configuration<a class="headerlink" href="#configuration" title="Link to this heading"></a></h3>
 <p>Defined in <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;spectacularAI/realsense/configuration.hpp&gt;</span></code></p>
 <dl class="cpp type">
 <dt class="sig sig-object cpp" id="_CPPv413spectacularAI">
@@ -194,11 +304,11 @@
 
 </section>
 <section id="pipeline">
-<h3>Pipeline<a class="headerlink" href="#pipeline" title="Permalink to this heading"></a></h3>
+<h3>Pipeline<a class="headerlink" href="#pipeline" title="Link to this heading"></a></h3>
 <p>Defined in <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;spectacularAI/realsense/pipeline.hpp&gt;</span></code></p>
 <dl class="cpp type">
 <dt class="sig sig-object cpp" id="_CPPv43rs2">
-<span id="_CPPv33rs2"></span><span id="_CPPv23rs2"></span><span id="rs2"></span><span class="target" id="namespacers2"></span><span class="k"><span class="pre">namespace</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rs2</span></span></span><a class="headerlink" href="#_CPPv43rs2" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv33rs2"></span><span id="_CPPv23rs2"></span><span id="rs2"></span><span class="target" id="namespacers2"></span><span class="k"><span class="pre">namespace</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rs2</span></span></span><a class="headerlink" href="#_CPPv43rs2" title="Link to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp type">
@@ -265,7 +375,7 @@
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI8rsPlugin8Pipeline5pimplE">
-<span id="_CPPv3N13spectacularAI8rsPlugin8Pipeline5pimplE"></span><span id="_CPPv2N13spectacularAI8rsPlugin8Pipeline5pimplE"></span><span id="spectacularAI::rsPlugin::Pipeline::pimpl__std::unique_ptr:impl:"></span><span class="target" id="classspectacularAI_1_1rsPlugin_1_1Pipeline_1a660fcfd5ff018dae79a4b8f1249427a5"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">impl</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pimpl</span></span></span><a class="headerlink" href="#_CPPv4N13spectacularAI8rsPlugin8Pipeline5pimplE" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3N13spectacularAI8rsPlugin8Pipeline5pimplE"></span><span id="_CPPv2N13spectacularAI8rsPlugin8Pipeline5pimplE"></span><span id="spectacularAI::rsPlugin::Pipeline::pimpl__std::unique_ptr:impl:"></span><span class="target" id="classspectacularAI_1_1rsPlugin_1_1Pipeline_1a660fcfd5ff018dae79a4b8f1249427a5"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">impl</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pimpl</span></span></span><a class="headerlink" href="#_CPPv4N13spectacularAI8rsPlugin8Pipeline5pimplE" title="Link to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 </div>
@@ -277,7 +387,7 @@
 
 </section>
 <section id="session">
-<h3>Session<a class="headerlink" href="#session" title="Permalink to this heading"></a></h3>
+<h3>Session<a class="headerlink" href="#session" title="Link to this heading"></a></h3>
 <p>Defined in <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;spectacularAI/realsense/session.hpp&gt;</span></code></p>
 <dl class="cpp type">
 <dt class="sig sig-object cpp">
@@ -342,22 +452,12 @@
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="oak.html" class="btn btn-neutral float-left" title="OAK-D" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="k4a.html" class="btn btn-neutral float-right" title="Azure Kinect" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer>
+    <div role="contentinfo">
+        <hr/>
+        <p>The publicly available Spectacular AI SDK versions are free for non-commercial use.</p>
+        <p>&#169; 2024 Spectacular AI Ltd</p>
     </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright 2023 Spectacular AI Ltd.</p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
 </footer>
         </div>
       </div>

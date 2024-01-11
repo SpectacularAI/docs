@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
@@ -8,7 +8,7 @@
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
-      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=8e72557d" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=3a41478c" />
 
   
     <link rel="shortcut icon" href="https://www.spectacularai.com/favicon/favicon.ico"/>
@@ -18,9 +18,10 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/tabs.js?v=3030b3cb"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -57,7 +58,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../core.html">Core SDK</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../tracking.html">Tracking API</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../mapping.html">Mapping API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../recording.html">Recording</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../replay.html">Replay API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../custom-hardware.html">Custom hardware</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="../wrappers.html">Wrappers</a><ul class="current">
@@ -65,6 +68,13 @@
 <li class="toctree-l2"><a class="reference internal" href="realsense.html">RealSense</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Azure Kinect</a></li>
 <li class="toctree-l2"><a class="reference internal" href="orbbec.html">ORBBEC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mobile.html">iOS &amp; Android</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ros.html">ROS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tools.html">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tools/nerf.html">Gaussian Splatting &amp; NeRFs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/calibration.html">Calibration</a></li>
 </ul>
 </li>
 </ul>
@@ -81,26 +91,176 @@
       <div class="wy-nav-content">
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../wrappers.html">Wrappers</a></li>
-      <li class="breadcrumb-item active">Azure Kinect</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/wrappers/k4a.md.txt" rel="nofollow"> View page source</a>
-      </li>
-  </ul>
-  <hr/>
-</div>
+    <ul class="wy-breadcrumbs">
+        <li><a href="../index.html" aria-label="Home">Spectacular AI SDK documentation</a></li>
+            <li class="breadcrumb-item"><a href="../wrappers.html">Wrappers</a></li>
+        <li class="breadcrumb-item active">Azure Kinect</li>
+    <li class="wy-breadcrumbs-aside version">
+        v1.26
+    </li>
+    </ul>
+
+    <hr/>
+  </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
   <section id="azure-kinect">
-<h1>Azure Kinect<a class="headerlink" href="#azure-kinect" title="Permalink to this heading"></a></h1>
-<p>Spectacular AI C++ plugin for Azure Kinect DK.</p>
+<h1>Azure Kinect<a class="headerlink" href="#azure-kinect" title="Link to this heading"></a></h1>
+<p>Spectacular AI C++ plugin for Microsoft Azure Kinect DK.</p>
+<p><em>Note</em>: The Azure Kinect has been discontinued, but nearly equivalent device,
+ORBBEC Femto is now available and uses the same depth sensing technology, which
+ORBBEC has licensed from Microsoft.</p>
+<p>ORBBEC cameras are supported by their Spectacular AI SDK wrapper. See <a class="reference external" href="orbbec.html">here</a>.</p>
+<section id="quick-start">
+<h2>Quick start<a class="headerlink" href="#quick-start" title="Link to this heading"></a></h2>
+<p>First, download and unpack <a class="reference external" href="https://github.com/SpectacularAI/sdk/releases/download/v1.24.0/spectacularAI_k4aPlugin_cpp_non-commercial_1.24.0.zip">spectacularAI_k4aPlugin_cpp_non-commercial</a> package (only available for SDK version 1.24)</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-TGludXg=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-0-TGludXg=" name="TGludXg=" role="tab" tabindex="0">Linux</button><button aria-controls="panel-0-V2luZG93cw==" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-0-V2luZG93cw==" name="V2luZG93cw==" role="tab" tabindex="-1">Windows</button></div><div aria-labelledby="tab-0-TGludXg=" class="sphinx-tabs-panel group-tab" id="panel-0-TGludXg=" name="TGludXg=" role="tabpanel" tabindex="0"><ol class="arabic">
+<li><p>If you have not used the Azure Kinect device before, you will need to setup udev rules, run the following script (or follow the instructions in <a class="reference external" href="https://github.com/microsoft/Azure-Kinect-Sensor-SDK/blob/develop/docs/usage.md#linux-device-setup">Azure Kinect SDK</a>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="nb">bin</span><span class="o">/</span><span class="mi">3</span><span class="n">rdparty</span><span class="o">/</span><span class="n">k4a</span><span class="o">/</span><span class="n">setup_udev_rules</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+</li>
+<li><p>Attach your Azure Kinect device to a USB3 port</p></li>
+<li><p>Run the JSONL example (smoke test):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="nb">bin</span>
+<span class="o">./</span><span class="n">vio_jsonl</span>
+<span class="c1"># Now you should see rapidly flowing JSONL text</span>
+<span class="c1"># press Ctrl+C to exit</span>
+</pre></div>
+</div>
+</li>
+<li><p>Run the Python example (in the <code class="docutils literal notranslate"><span class="pre">bin</span></code> directory)</p>
+<blockquote>
+<div><p>pip install matplotlib # install dependencies
+python vio_visu.py</p>
+</div></blockquote>
+</li>
+</ol>
+</div><div aria-labelledby="tab-0-V2luZG93cw==" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-V2luZG93cw==" name="V2luZG93cw==" role="tabpanel" tabindex="0"><ol class="arabic">
+<li><p>Attach your Azure Kinect device to a USB3 port</p></li>
+<li><p>Run the JSONL example (smoke test):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="nb">bin</span>
+<span class="o">./</span><span class="n">vio_jsonl</span><span class="o">.</span><span class="n">exe</span>
+<span class="c1"># Now you should see rapidly flowing JSONL text</span>
+<span class="c1"># press Ctrl+C to exit</span>
+</pre></div>
+</div>
+</li>
+<li><p>Run the Python example (in the <code class="docutils literal notranslate"><span class="pre">bin</span></code> directory):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">matplotlib</span> <span class="c1"># install dependencies</span>
+<span class="n">python</span> <span class="n">vio_visu</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div></div>
+</section>
+<section id="installation-as-a-library">
+<h2>Installation as a library<a class="headerlink" href="#installation-as-a-library" title="Link to this heading"></a></h2>
+<p>First verify that you have installed <a class="reference external" href="https://github.com/microsoft/Azure-Kinect-Sensor-SDK/">Azure Kinect SDK</a>,
+e.g. check that open <cite>k4aviewer</cite>.</p>
+<p>The following commands should be run in the folder where you have unpacked the SDK release package <a class="reference external" href="https://github.com/SpectacularAI/sdk/releases/download/v1.24.0/spectacularAI_k4aPlugin_cpp_non-commercial_1.24.0.zip">spectacularAI_k4aPlugin_cpp_non-commercial</a>.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-TGludXg=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-1-TGludXg=" name="TGludXg=" role="tab" tabindex="0">Linux</button><button aria-controls="panel-1-V2luZG93cw==" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-1-V2luZG93cw==" name="V2luZG93cw==" role="tab" tabindex="-1">Windows</button></div><div aria-labelledby="tab-1-TGludXg=" class="sphinx-tabs-panel group-tab" id="panel-1-TGludXg=" name="TGludXg=" role="tabpanel" tabindex="0"><ol class="arabic">
+<li><p>Select where you want the library installed, e.g.,:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">MY_INSTALL_PREFIX</span><span class="o">=~/.</span><span class="n">local</span>
+<span class="c1"># or: export MY_INSTALL_PREFIX=`pwd`/installed</span>
+</pre></div>
+</div>
+</li>
+<li><p>Run <cite>make PREFIX=$MY_INSTALL_PREFIX install</cite> (or <cite>sudo make install</cite>) in the folder of the ext</p></li>
+<li><p>Make sure you have CMake (<cite>sudo apt install cmake</cite>) and Git</p></li>
+<li><p>Build the vio_jsonl example using CMake:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>make PREFIX=$MY_INSTALL_PREFIX examples
+</pre></div>
+</div>
+</li>
+<li><p>Run the <code class="docutils literal notranslate"><span class="pre">vio_jsonl</span></code> binary as a smoke test.</p></li>
+</ol>
+</div><div aria-labelledby="tab-1-V2luZG93cw==" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-1-V2luZG93cw==" name="V2luZG93cw==" role="tabpanel" tabindex="0"><ol class="arabic">
+<li><p>Install the <a class="reference external" href="../index.html#development-dependencies">development dependencies</a>.</p></li>
+<li><p>Build vio_jsonl example using CMake. The process is a bit involved so the commands are collected in <code class="docutils literal notranslate"><span class="pre">./examples/build_windows.sh</span></code>. In PowerShell:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cd examples
+$env:BUILD_MAPPING_VISU=&quot;OFF&quot;; sh ./build_windows.sh ..\lib\cmake\spectacularAI
+</pre></div>
+</div>
+</li>
+<li><p>Finally running <code class="docutils literal notranslate"><span class="pre">vio_jsonl.exe</span></code> should give you the pose of the Azure Kinect device in real time (smoke test):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">target</span><span class="o">/</span><span class="n">Release</span>
+<span class="o">./</span><span class="n">vio_jsonl</span><span class="o">.</span><span class="n">exe</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div></div>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<p>The following instructions show how to compile and run the <a class="reference external" href="https://github.com/SpectacularAI/sdk-examples/tree/main/cpp/k4a">Spectacular AI K4A SDK examples</a>.</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>First, install the SDK as a library (see above).</p></li>
+<li><p>Clone the SDK examples repository:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="o">--</span><span class="n">recursive</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">SpectacularAI</span><span class="o">/</span><span class="n">sdk</span><span class="o">-</span><span class="n">examples</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div></blockquote>
+<p>Run the following commands in the <code class="docutils literal notranslate"><span class="pre">sdk-examples/cpp/k4a</span></code> directory.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-2-TGludXg=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-2-TGludXg=" name="TGludXg=" role="tab" tabindex="0">Linux</button><button aria-controls="panel-2-V2luZG93cw==" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-2-V2luZG93cw==" name="V2luZG93cw==" role="tab" tabindex="-1">Windows</button></div><div aria-labelledby="tab-2-TGludXg=" class="sphinx-tabs-panel group-tab" id="panel-2-TGludXg=" name="TGludXg=" role="tabpanel" tabindex="0"><p>Build the targets using CMake:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">target</span>
+<span class="n">cd</span> <span class="n">target</span>
+<span class="n">cmake</span> <span class="o">-</span><span class="n">DspectacularAI_k4aPlugin_DIR</span><span class="o">=&lt;</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">spectacularAI_k4aPlugin</span><span class="o">/</span><span class="n">install</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">cmake</span><span class="o">/</span><span class="n">spectacularAI</span><span class="o">/&gt;</span> <span class="o">..</span>
+<span class="n">make</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">-DspectacularAI_k4aPlugin_DIR</span></code> option is not needed is you have used <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">make</span> <span class="pre">install</span></code> for the SDK.</p>
+</div><div aria-labelledby="tab-2-V2luZG93cw==" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-2-V2luZG93cw==" name="V2luZG93cw==" role="tabpanel" tabindex="0"><p>Build the <code class="docutils literal notranslate"><span class="pre">vio_jsonl</span></code> example using CMake. The process is a bit involved so the commands are collected in <code class="docutils literal notranslate"><span class="pre">./build_windows.sh</span></code>. In PowerShell:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sh</span> <span class="o">./</span><span class="n">build_windows</span><span class="o">.</span><span class="n">sh</span> <span class="o">&lt;</span><span class="n">path</span>\<span class="n">to</span>\<span class="n">spectacularAI_k4aPlugin_1</span><span class="mf">.23.1</span><span class="n">_windows</span>\<span class="n">lib</span>\<span class="n">cmake</span>\<span class="n">spectacularAI</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="mapping-visualization">
+<h2>Mapping visualization<a class="headerlink" href="#mapping-visualization" title="Link to this heading"></a></h2>
+<p>You can either use the pre-built <code class="docutils literal notranslate"><span class="pre">./bin/mapping_visu</span></code> binary build it as instructed in the Examples section. You will also a working Python installation to run the visualizer.</p>
+<p>This script uses an Azure Kinect device with <a class="reference internal" href="../mapping.html#mapping-api"><span class="std std-ref">Mapping API</span></a> and serializes the output in custom format that can be sent to Python for visualization.</p>
+<p>First create a file or pipe as instructed below</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-3-TGludXg=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-3-TGludXg=" name="TGludXg=" role="tab" tabindex="0">Linux</button><button aria-controls="panel-3-V2luZG93cw==" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-3-V2luZG93cw==" name="V2luZG93cw==" role="tab" tabindex="-1">Windows</button></div><div aria-labelledby="tab-3-TGludXg=" class="sphinx-tabs-panel group-tab" id="panel-3-TGludXg=" name="TGludXg=" role="tabpanel" tabindex="0"><p>Create a new pipe with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkfifo</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">my_pipe</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-3-V2luZG93cw==" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-3-V2luZG93cw==" name="V2luZG93cw==" role="tabpanel" tabindex="0"><p>Create a new file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span> <span class="n">NUL</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">my_pipe</span>
+</pre></div>
+</div>
+</div></div>
+<p>Launch this example file with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">mapping_visu</span> <span class="o">-</span><span class="n">o</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">my_pipe</span>
+</pre></div>
+</div>
+<p>Open another command prompt, go to <code class="docutils literal notranslate"><span class="pre">./sdk-examples/python/oak/</span></code> and launch Python visualization and leave it running with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">mapping_visu</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">file</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">my_pipe</span>
+</pre></div>
+</div>
+<p>Ideally, you would start both programs around the same time (~10 seconds), so that not too much outputs get queued in the file.
+You should now the visualization running in the Python window.</p>
+<p>You can add -r recording folder to additionally record the session:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">mapping_visu</span> <span class="o">-</span><span class="n">o</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">my_pipe</span> <span class="o">-</span><span class="n">r</span> <span class="o">&lt;</span><span class="n">recording_folder</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Also, you can adjust all the Python visualization options, see <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">mapping_visu.py</span> <span class="pre">-h</span></code></p>
+</section>
 <section id="api-reference">
-<h2>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading"></a></h2>
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading"></a></h2>
+<p>The classes specific to Azure Kinect are documented below. For the main output classes, refer to the C++ documentation in <a class="reference internal" href="../core.html#core-sdk"><span class="std std-ref">Core SDK</span></a>.</p>
 <section id="configuration">
-<h3>Configuration<a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h3>
+<h3>Configuration<a class="headerlink" href="#configuration" title="Link to this heading"></a></h3>
 <p>Defined in <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;spectacularAI/k4a/configuration.hpp&gt;</span></code></p>
 <dl class="cpp type">
 <dt class="sig sig-object cpp" id="_CPPv413spectacularAI">
@@ -192,7 +352,7 @@
 
 </section>
 <section id="pipeline">
-<h3>Pipeline<a class="headerlink" href="#pipeline" title="Permalink to this heading"></a></h3>
+<h3>Pipeline<a class="headerlink" href="#pipeline" title="Link to this heading"></a></h3>
 <p>Defined in <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;spectacularAI/k4a/pipeline.hpp&gt;</span></code></p>
 <dl class="cpp type">
 <dt class="sig sig-object cpp">
@@ -246,7 +406,7 @@
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI9k4aPlugin8Pipeline5pimplE">
-<span id="_CPPv3N13spectacularAI9k4aPlugin8Pipeline5pimplE"></span><span id="_CPPv2N13spectacularAI9k4aPlugin8Pipeline5pimplE"></span><span id="spectacularAI::k4aPlugin::Pipeline::pimpl__std::unique_ptr:impl:"></span><span class="target" id="classspectacularAI_1_1k4aPlugin_1_1Pipeline_1a87736065f84f89d8ad558bafc911c9ea"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">impl</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pimpl</span></span></span><a class="headerlink" href="#_CPPv4N13spectacularAI9k4aPlugin8Pipeline5pimplE" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3N13spectacularAI9k4aPlugin8Pipeline5pimplE"></span><span id="_CPPv2N13spectacularAI9k4aPlugin8Pipeline5pimplE"></span><span id="spectacularAI::k4aPlugin::Pipeline::pimpl__std::unique_ptr:impl:"></span><span class="target" id="classspectacularAI_1_1k4aPlugin_1_1Pipeline_1a87736065f84f89d8ad558bafc911c9ea"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">impl</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pimpl</span></span></span><a class="headerlink" href="#_CPPv4N13spectacularAI9k4aPlugin8Pipeline5pimplE" title="Link to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 </div>
@@ -258,7 +418,7 @@
 
 </section>
 <section id="session">
-<h3>Session<a class="headerlink" href="#session" title="Permalink to this heading"></a></h3>
+<h3>Session<a class="headerlink" href="#session" title="Link to this heading"></a></h3>
 <p>Defined in <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;spectacularAI/k4a/session.hpp&gt;</span></code></p>
 <dl class="cpp type">
 <dt class="sig sig-object cpp">
@@ -333,22 +493,12 @@
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="realsense.html" class="btn btn-neutral float-left" title="RealSense" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="orbbec.html" class="btn btn-neutral float-right" title="ORBBEC" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer>
+    <div role="contentinfo">
+        <hr/>
+        <p>The publicly available Spectacular AI SDK versions are free for non-commercial use.</p>
+        <p>&#169; 2024 Spectacular AI Ltd</p>
     </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright 2023 Spectacular AI Ltd.</p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
 </footer>
         </div>
       </div>

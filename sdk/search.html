@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,7 +7,7 @@
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
-      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=8e72557d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=3a41478c" />
 
   
     <link rel="shortcut icon" href="https://www.spectacularai.com/favicon/favicon.ico"/>
@@ -18,9 +18,9 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="_static/tabs.js?v=3030b3cb"></script>
     <script src="_static/js/theme.js"></script>
     <script src="_static/searchtools.js"></script>
@@ -58,7 +58,9 @@
 <li class="toctree-l1"><a class="reference internal" href="core.html">Core SDK</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="tracking.html">Tracking API</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mapping.html">Mapping API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recording.html">Recording</a></li>
 <li class="toctree-l2"><a class="reference internal" href="replay.html">Replay API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom-hardware.html">Custom hardware</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="wrappers.html">Wrappers</a><ul>
@@ -66,6 +68,13 @@
 <li class="toctree-l2"><a class="reference internal" href="wrappers/realsense.html">RealSense</a></li>
 <li class="toctree-l2"><a class="reference internal" href="wrappers/k4a.html">Azure Kinect</a></li>
 <li class="toctree-l2"><a class="reference internal" href="wrappers/orbbec.html">ORBBEC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wrappers/mobile.html">iOS &amp; Android</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wrappers/ros.html">ROS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools/nerf.html">Gaussian Splatting &amp; NeRFs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/calibration.html">Calibration</a></li>
 </ul>
 </li>
 </ul>
@@ -82,14 +91,16 @@
       <div class="wy-nav-content">
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Search</li>
-      <li class="wy-breadcrumbs-aside">
-      </li>
-  </ul>
-  <hr/>
-</div>
+    <ul class="wy-breadcrumbs">
+        <li><a href="index.html" aria-label="Home">Spectacular AI SDK documentation</a></li>
+        <li class="breadcrumb-item active">Search</li>
+    <li class="wy-breadcrumbs-aside version">
+        v1.26
+    </li>
+    </ul>
+
+    <hr/>
+  </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
@@ -109,18 +120,11 @@
            </div>
           </div>
           <footer>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright 2023 Spectacular AI Ltd.</p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
+    <div role="contentinfo">
+        <hr/>
+        <p>The publicly available Spectacular AI SDK versions are free for non-commercial use.</p>
+        <p>&#169; 2024 Spectacular AI Ltd</p>
+    </div>
 </footer>
         </div>
       </div>

@@ -9,11 +9,6 @@ dl.property {
   background: none !important;
 }
 
-/* Hide certain elements in CSS */
-footer, .wy-breadcrumbs-aside {
-  display: none !important;
-}
-
 /* ----------- Uncollapse menu with CSS violence */
 .wy-menu-vertical li ul {
   display: block !important;
@@ -71,4 +66,14 @@ button.toctree-expand {
 .wy-menu-vertical > ul > .toctree-l1 > a {
   font-weight: bold;
   color: white;
+}
+
+footer {
+  margin-top: 1em;
+  text-align: center;
+}
+
+li.version {
+  font-weight: bold;
+  color: black;
 }
