@@ -12,6 +12,10 @@ see also https://github.com/SpectacularAI/sdk-examples.
 
 ## Updating
 
+Install requirements:
+
+    pip install -r requirements.txt
+
 Run this script (see contents for more details)
 
     ./import-python-docs.sh MAJOR.MINOR
