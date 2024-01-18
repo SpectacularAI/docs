@@ -96,7 +96,7 @@
             <li class="breadcrumb-item"><a href="../wrappers.html">Wrappers</a></li>
         <li class="breadcrumb-item active">ORBBEC</li>
     <li class="wy-breadcrumbs-aside version">
-        v1.26
+        v1.27
     </li>
     </ul>
 
@@ -120,7 +120,7 @@
 <div class="sphinx-tabs docutils container">
 <div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-TGludXg=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-0-TGludXg=" name="TGludXg=" role="tab" tabindex="0">Linux</button><button aria-controls="panel-0-V2luZG93cw==" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-0-V2luZG93cw==" name="V2luZG93cw==" role="tab" tabindex="-1">Windows</button></div><div aria-labelledby="tab-0-TGludXg=" class="sphinx-tabs-panel group-tab" id="panel-0-TGludXg=" name="TGludXg=" role="tabpanel" tabindex="0"><ol class="arabic">
 <li><p>If you have not used the Orbbec device before, you will need to setup udev rules, run the following script (or follow the instructions in <a class="reference external" href="https://github.com/orbbec/OrbbecSDK?tab=readme-ov-file#environment-setup">OrbbecSDK</a>):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="nb">bin</span><span class="o">/</span><span class="mi">3</span><span class="n">rdparty</span><span class="o">/</span><span class="n">k4a</span><span class="o">/</span><span class="n">setup_udev_rules</span><span class="o">.</span><span class="n">sh</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="nb">bin</span><span class="o">/</span><span class="mi">3</span><span class="n">rdparty</span><span class="o">/</span><span class="n">OrbbecSDK</span><span class="o">/</span><span class="n">install_udev_rules</span><span class="o">.</span><span class="n">sh</span>
 </pre></div>
 </div>
 </li>
@@ -133,25 +133,24 @@
 </pre></div>
 </div>
 </li>
-<li><p>Run the Python example (in the <code class="docutils literal notranslate"><span class="pre">bin</span></code> directory)</p>
-<blockquote>
-<div><p>pip install matplotlib # install dependencies
-python vio_visu.py</p>
-</div></blockquote>
+<li><p>Run the Python example (in the <code class="docutils literal notranslate"><span class="pre">bin</span></code> directory):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">matplotlib</span> <span class="c1"># install dependencies</span>
+<span class="n">python</span> <span class="n">vio_visu</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
 </li>
 </ol>
-</div><div aria-labelledby="tab-0-V2luZG93cw==" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-V2luZG93cw==" name="V2luZG93cw==" role="tabpanel" tabindex="0"><ol class="arabic simple">
+</div><div aria-labelledby="tab-0-V2luZG93cw==" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-V2luZG93cw==" name="V2luZG93cw==" role="tabpanel" tabindex="0"><ol class="arabic">
 <li><p>If you have not used the Orbbec device before, you will need to setup timestamp registration. Please follow the official instructions in <a class="reference external" href="https://github.com/orbbec/OrbbecSDK?tab=readme-ov-file#environment-setup">OrbbecSDK</a>.</p></li>
-</ol>
-<p>2. Attach your Azure Kinect device to a USB3 port
-2. Run the JSONL example (smoke test):</p>
+<li><p>Attach your Azure Kinect device to a USB3 port</p></li>
+<li><p>Run the JSONL example (smoke test):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="nb">bin</span>
 <span class="o">./</span><span class="n">vio_jsonl</span><span class="o">.</span><span class="n">exe</span>
 <span class="c1"># Now you should see rapidly flowing JSONL text</span>
 <span class="c1"># press Ctrl+C to exit</span>
 </pre></div>
 </div>
-<ol class="arabic" start="3">
+</li>
 <li><p>Run the Python example (in the <code class="docutils literal notranslate"><span class="pre">bin</span></code> directory):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">matplotlib</span> <span class="c1"># install dependencies</span>
 <span class="n">python</span> <span class="n">vio_visu</span><span class="o">.</span><span class="n">py</span>
@@ -163,10 +162,8 @@ python vio_visu.py</p>
 </section>
 <section id="recording-data">
 <h2>Recording data<a class="headerlink" href="#recording-data" title="Link to this heading"></a></h2>
-<p>Orbbec data can be recorded using the <code class="docutils literal notranslate"><span class="pre">sai-record-orbbec</span></code> tool included in the SDK package.
-You can either run it directly from the <code class="docutils literal notranslate"><span class="pre">bin</span></code> directory, or install it as a system-wide command
-following the <em>Using as a library</em> instructions below.</p>
-<p>First connect an Orbbec device over USB3, then run (add <code class="docutils literal notranslate"><span class="pre">.exe</span></code> on Windows):</p>
+<p>Orbbec data can be recorded using the <code class="docutils literal notranslate"><span class="pre">sai-record-orbbec</span></code> tool included in the SDK package (in the <code class="docutils literal notranslate"><span class="pre">bin</span></code> directory).
+First connect an Orbbec device over USB3, then run (add <code class="docutils literal notranslate"><span class="pre">.exe</span></code> on Windows):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sai</span><span class="o">-</span><span class="n">record</span><span class="o">-</span><span class="n">orbbec</span> <span class="o">--</span><span class="n">output</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">output</span><span class="o">/</span><span class="n">folder</span>
 </pre></div>
 </div>
@@ -175,7 +172,7 @@ which allows customizing the recording tool, if necessary.</p>
 </section>
 <section id="installation-as-a-library">
 <h2>Installation as a library<a class="headerlink" href="#installation-as-a-library" title="Link to this heading"></a></h2>
-<p>First, install the <a class="reference external" href="https://github.com/orbbec/OrbbecSDK">OrbbecSDK</a></p>
+<p>First, download the <a class="reference external" href="https://github.com/orbbec/OrbbecSDK">OrbbecSDK</a></p>
 <p>The following commands should be run in the folder where you have unpacked the SDK release package.</p>
 <div class="sphinx-tabs docutils container">
 <div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-TGludXg=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-1-TGludXg=" name="TGludXg=" role="tab" tabindex="0">Linux</button><button aria-controls="panel-1-V2luZG93cw==" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-1-V2luZG93cw==" name="V2luZG93cw==" role="tab" tabindex="-1">Windows</button></div><div aria-labelledby="tab-1-TGludXg=" class="sphinx-tabs-panel group-tab" id="panel-1-TGludXg=" name="TGludXg=" role="tabpanel" tabindex="0"><ol class="arabic">
@@ -185,10 +182,10 @@ which allows customizing the recording tool, if necessary.</p>
 </pre></div>
 </div>
 </li>
-<li><p>Run <cite>make PREFIX=$MY_INSTALL_PREFIX install</cite> (or <cite>sudo make install</cite>) in the folder of the ext</p></li>
-<li><p>Make sure you have CMake (<cite>sudo apt install cmake</cite>) and Git</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">PREFIX=$MY_INSTALL_PREFIX</span> <span class="pre">install</span></code> (or <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">make</span> <span class="pre">install</span></code>)</p></li>
+<li><p>Make sure you have CMake (<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">cmake</span></code>) and Git</p></li>
 <li><p>Build the vio_jsonl example using CMake:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>make PREFIX=$MY_INSTALL_PREFIX examples
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>make PREFIX=$MY_INSTALL_PREFIX ORBBEC_DIR=&lt;path/to/OrbbecSDK&gt; example
 </pre></div>
 </div>
 </li>
@@ -224,7 +221,7 @@ $env:BUILD_MAPPING_VISU=&quot;OFF&quot;; sh ./build_windows.sh ..\lib\cmake\spec
 </li>
 </ol>
 </div></blockquote>
-<p>Run the following commands in the <code class="docutils literal notranslate"><span class="pre">sdk-examples/cpp/k4a</span></code> directory.</p>
+<p>Run the following commands in the <code class="docutils literal notranslate"><span class="pre">sdk-examples/cpp/orbbec</span></code> directory.</p>
 <div class="sphinx-tabs docutils container">
 <div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-2-TGludXg=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-2-TGludXg=" name="TGludXg=" role="tab" tabindex="0">Linux</button><button aria-controls="panel-2-V2luZG93cw==" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-2-V2luZG93cw==" name="V2luZG93cw==" role="tab" tabindex="-1">Windows</button></div><div aria-labelledby="tab-2-TGludXg=" class="sphinx-tabs-panel group-tab" id="panel-2-TGludXg=" name="TGludXg=" role="tabpanel" tabindex="0"><p>Build the targets using CMake:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">target</span>
@@ -242,9 +239,9 @@ $env:BUILD_MAPPING_VISU=&quot;OFF&quot;; sh ./build_windows.sh ..\lib\cmake\spec
 </section>
 <section id="mapping-visualization">
 <h2>Mapping visualization<a class="headerlink" href="#mapping-visualization" title="Link to this heading"></a></h2>
-<p>You can either use the pre-built <code class="docutils literal notranslate"><span class="pre">./bin/mapping_visu</span></code> binary build it as instructed in the Examples section. You will also a working Python installation to run the visualizer.</p>
 <p>This example uses Orbbec device with Mapping API and serializes the output in custom format that can be sent to Python for visualization.
-First create a file or pipe as instructed below</p>
+You can either use the pre-built <code class="docutils literal notranslate"><span class="pre">./bin/mapping_visu</span></code> binary, or build it from source as instructed in the Examples section.
+A working Python installation is needed to run the visualizer.</p>
 <p><strong>Dependencies</strong>: Install Python visualization dependencies:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">spectacularAI</span><span class="p">[</span><span class="n">full</span><span class="p">]</span>
 </pre></div>
@@ -255,7 +252,7 @@ First create a file or pipe as instructed below</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkfifo</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">my_pipe</span>
 </pre></div>
 </div>
-</div><div aria-labelledby="tab-3-V2luZG93cw==" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-3-V2luZG93cw==" name="V2luZG93cw==" role="tabpanel" tabindex="0"><p>Create a new file:</p>
+</div><div aria-labelledby="tab-3-V2luZG93cw==" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-3-V2luZG93cw==" name="V2luZG93cw==" role="tabpanel" tabindex="0"><p>Create a new file with:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span> <span class="n">NUL</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">my_pipe</span>
 </pre></div>
 </div>
@@ -264,13 +261,13 @@ First create a file or pipe as instructed below</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">mapping_visu</span> <span class="o">-</span><span class="n">o</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">my_pipe</span>
 </pre></div>
 </div>
-<p>Open another command prompt, go to <code class="docutils literal notranslate"><span class="pre">./sdk-examples/python/oak/</span></code> and launch Python visualization and leave it running with:</p>
+<p>Open another command prompt and launch Python visualization either from <code class="docutils literal notranslate"><span class="pre">./bin</span></code> directory, or <code class="docutils literal notranslate"><span class="pre">./sdk-examples/python/oak/</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">mapping_visu</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">file</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">my_pipe</span>
 </pre></div>
 </div>
 <p>Ideally, you would start both programs around the same time (~10 seconds), so that not too much outputs get queued in the file.
-You should now the visualization running in the Python window.</p>
-<p>You can add -r recording folder to additionally record the session:</p>
+You should now see the visualization running in the Python window.</p>
+<p>You can add <code class="docutils literal notranslate"><span class="pre">-r</span> <span class="pre">&lt;recording_folder&gt;</span></code> to record the session:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">mapping_visu</span> <span class="o">-</span><span class="n">o</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">my_pipe</span> <span class="o">-</span><span class="n">r</span> <span class="o">&lt;</span><span class="n">recording_folder</span><span class="o">&gt;</span>
 </pre></div>
 </div>
