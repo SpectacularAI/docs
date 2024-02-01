@@ -96,7 +96,7 @@
             <li class="breadcrumb-item"><a href="../wrappers.html">Wrappers</a></li>
         <li class="breadcrumb-item active">Azure Kinect</li>
     <li class="wy-breadcrumbs-aside version">
-        v1.27
+        v1.28
     </li>
     </ul>
 
@@ -131,11 +131,11 @@ ORBBEC has licensed from Microsoft.</p>
 </pre></div>
 </div>
 </li>
-<li><p>Run the Python example (in the <code class="docutils literal notranslate"><span class="pre">bin</span></code> directory)</p>
-<blockquote>
-<div><p>pip install matplotlib # install dependencies
-python vio_visu.py</p>
-</div></blockquote>
+<li><p>Run the Python example (in the <code class="docutils literal notranslate"><span class="pre">bin</span></code> directory):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">matplotlib</span> <span class="c1"># install dependencies</span>
+<span class="n">python</span> <span class="n">vio_visu</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
 </li>
 </ol>
 </div><div aria-labelledby="tab-0-V2luZG93cw==" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-V2luZG93cw==" name="V2luZG93cw==" role="tabpanel" tabindex="0"><ol class="arabic">
@@ -156,6 +156,19 @@ python vio_visu.py</p>
 </li>
 </ol>
 </div></div>
+<section id="recording-data">
+<h3>Recording data<a class="headerlink" href="#recording-data" title="Link to this heading"></a></h3>
+<p>Azure Kinect data can be recorded using the <code class="docutils literal notranslate"><span class="pre">sai-record-k4a</span></code> tool included in the SDK package (in the <code class="docutils literal notranslate"><span class="pre">bin</span></code> directory).
+First connect Azure Kinect over USB3, then run (add <code class="docutils literal notranslate"><span class="pre">.exe</span></code> on Windows):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">sai</span><span class="o">-</span><span class="n">record</span><span class="o">-</span><span class="n">k4a</span> <span class="c1"># Record with visualization</span>
+<span class="o">./</span><span class="n">sai</span><span class="o">-</span><span class="n">record</span><span class="o">-</span><span class="n">k4a</span> <span class="o">--</span><span class="n">recording_only</span> <span class="o">--</span><span class="n">no_preview</span> <span class="c1"># More lightweight</span>
+<span class="o">./</span><span class="n">sai</span><span class="o">-</span><span class="n">record</span><span class="o">-</span><span class="n">k4a</span> <span class="o">--</span><span class="n">output</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">output</span><span class="o">/</span><span class="n">folder</span> <span class="c1"># Set recording directory</span>
+<span class="o">./</span><span class="n">sai</span><span class="o">-</span><span class="n">record</span><span class="o">-</span><span class="n">k4a</span> <span class="o">-</span><span class="n">h</span> <span class="c1"># See all options</span>
+</pre></div>
+</div>
+<p>The source code of recording tool is also available at <a class="reference external" href="https://github.com/SpectacularAI/sdk/tree/main/cpp/k4a">https://github.com/SpectacularAI/sdk/tree/main/cpp/k4a</a>
+which allows customizing the recording tool, if necessary.</p>
+</section>
 </section>
 <section id="installation-as-a-library">
 <h2>Installation as a library<a class="headerlink" href="#installation-as-a-library" title="Link to this heading"></a></h2>
@@ -164,16 +177,16 @@ e.g. check that open <cite>k4aviewer</cite>.</p>
 <p>The following commands should be run in the folder where you have unpacked the SDK release package <a class="reference external" href="https://github.com/SpectacularAI/sdk/releases/download/v1.24.0/spectacularAI_k4aPlugin_cpp_non-commercial_1.24.0.zip">spectacularAI_k4aPlugin_cpp_non-commercial</a>.</p>
 <div class="sphinx-tabs docutils container">
 <div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-TGludXg=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-1-TGludXg=" name="TGludXg=" role="tab" tabindex="0">Linux</button><button aria-controls="panel-1-V2luZG93cw==" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-1-V2luZG93cw==" name="V2luZG93cw==" role="tab" tabindex="-1">Windows</button></div><div aria-labelledby="tab-1-TGludXg=" class="sphinx-tabs-panel group-tab" id="panel-1-TGludXg=" name="TGludXg=" role="tabpanel" tabindex="0"><ol class="arabic">
+<li><p>First install the <a class="reference external" href="../index.html#development-dependencies">development dependencies</a>.</p></li>
 <li><p>Select where you want the library installed, e.g.,:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">MY_INSTALL_PREFIX</span><span class="o">=~/.</span><span class="n">local</span>
 <span class="c1"># or: export MY_INSTALL_PREFIX=`pwd`/installed</span>
 </pre></div>
 </div>
 </li>
-<li><p>Run <cite>make PREFIX=$MY_INSTALL_PREFIX install</cite> (or <cite>sudo make install</cite>) in the folder of the ext</p></li>
-<li><p>Make sure you have CMake (<cite>sudo apt install cmake</cite>) and Git</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">PREFIX=$MY_INSTALL_PREFIX</span> <span class="pre">install</span></code> (or <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">make</span> <span class="pre">install</span></code>)</p></li>
 <li><p>Build the vio_jsonl example using CMake:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>make PREFIX=$MY_INSTALL_PREFIX examples
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>make PREFIX=$MY_INSTALL_PREFIX example
 </pre></div>
 </div>
 </li>
@@ -182,8 +195,8 @@ e.g. check that open <cite>k4aviewer</cite>.</p>
 </div><div aria-labelledby="tab-1-V2luZG93cw==" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-1-V2luZG93cw==" name="V2luZG93cw==" role="tabpanel" tabindex="0"><ol class="arabic">
 <li><p>Install the <a class="reference external" href="../index.html#development-dependencies">development dependencies</a>.</p></li>
 <li><p>Build vio_jsonl example using CMake. The process is a bit involved so the commands are collected in <code class="docutils literal notranslate"><span class="pre">./examples/build_windows.sh</span></code>. In PowerShell:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cd examples
-$env:BUILD_MAPPING_VISU=&quot;OFF&quot;; sh ./build_windows.sh ..\lib\cmake\spectacularAI
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">examples</span>
+<span class="n">sh</span> <span class="o">./</span><span class="n">build_windows</span><span class="o">.</span><span class="n">sh</span> <span class="o">..</span>\<span class="n">lib</span>\<span class="n">cmake</span>\<span class="n">spectacularAI</span>
 </pre></div>
 </div>
 </li>
@@ -201,7 +214,7 @@ $env:BUILD_MAPPING_VISU=&quot;OFF&quot;; sh ./build_windows.sh ..\lib\cmake\spec
 <p>The following instructions show how to compile and run the <a class="reference external" href="https://github.com/SpectacularAI/sdk-examples/tree/main/cpp/k4a">Spectacular AI K4A SDK examples</a>.</p>
 <blockquote>
 <div><ol class="arabic">
-<li><p>First, install the SDK as a library (see above).</p></li>
+<li><p>(Optional) Install the SDK as a library (see above).</p></li>
 <li><p>Clone the SDK examples repository:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="o">--</span><span class="n">recursive</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">SpectacularAI</span><span class="o">/</span><span class="n">sdk</span><span class="o">-</span><span class="n">examples</span><span class="o">.</span><span class="n">git</span>
 </pre></div>
@@ -220,47 +233,14 @@ $env:BUILD_MAPPING_VISU=&quot;OFF&quot;; sh ./build_windows.sh ..\lib\cmake\spec
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">-DspectacularAI_k4aPlugin_DIR</span></code> option is not needed is you have used <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">make</span> <span class="pre">install</span></code> for the SDK.</p>
 </div><div aria-labelledby="tab-2-V2luZG93cw==" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-2-V2luZG93cw==" name="V2luZG93cw==" role="tabpanel" tabindex="0"><p>Build the <code class="docutils literal notranslate"><span class="pre">vio_jsonl</span></code> example using CMake. The process is a bit involved so the commands are collected in <code class="docutils literal notranslate"><span class="pre">./build_windows.sh</span></code>. In PowerShell:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sh</span> <span class="o">./</span><span class="n">build_windows</span><span class="o">.</span><span class="n">sh</span> <span class="o">&lt;</span><span class="n">path</span>\<span class="n">to</span>\<span class="n">spectacularAI_k4aPlugin_1</span><span class="mf">.23.1</span><span class="n">_windows</span>\<span class="n">lib</span>\<span class="n">cmake</span>\<span class="n">spectacularAI</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sh</span> <span class="o">./</span><span class="n">build_windows</span><span class="o">.</span><span class="n">sh</span> <span class="o">&lt;</span><span class="n">path</span>\<span class="n">to</span>\<span class="n">spectacularAI_k4aPlugin</span>\<span class="n">lib</span>\<span class="n">cmake</span>\<span class="n">spectacularAI</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 </div></div>
-</section>
-<section id="mapping-visualization">
-<h2>Mapping visualization<a class="headerlink" href="#mapping-visualization" title="Link to this heading"></a></h2>
-<p>You can either use the pre-built <code class="docutils literal notranslate"><span class="pre">./bin/mapping_visu</span></code> binary build it as instructed in the Examples section. You will also a working Python installation to run the visualizer.</p>
-<p>This script uses an Azure Kinect device with <a class="reference internal" href="../mapping.html#mapping-api"><span class="std std-ref">Mapping API</span></a> and serializes the output in custom format that can be sent to Python for visualization.</p>
-<p>First create a file or pipe as instructed below</p>
-<div class="sphinx-tabs docutils container">
-<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-3-TGludXg=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-3-TGludXg=" name="TGludXg=" role="tab" tabindex="0">Linux</button><button aria-controls="panel-3-V2luZG93cw==" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-3-V2luZG93cw==" name="V2luZG93cw==" role="tab" tabindex="-1">Windows</button></div><div aria-labelledby="tab-3-TGludXg=" class="sphinx-tabs-panel group-tab" id="panel-3-TGludXg=" name="TGludXg=" role="tabpanel" tabindex="0"><p>Create a new pipe with:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkfifo</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">my_pipe</span>
-</pre></div>
-</div>
-</div><div aria-labelledby="tab-3-V2luZG93cw==" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-3-V2luZG93cw==" name="V2luZG93cw==" role="tabpanel" tabindex="0"><p>Create a new file:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span> <span class="n">NUL</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">my_pipe</span>
-</pre></div>
-</div>
-</div></div>
-<p>Launch this example file with:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">mapping_visu</span> <span class="o">-</span><span class="n">o</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">my_pipe</span>
-</pre></div>
-</div>
-<p>Open another command prompt, go to <code class="docutils literal notranslate"><span class="pre">./sdk-examples/python/oak/</span></code> and launch Python visualization and leave it running with:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">mapping_visu</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">file</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">my_pipe</span>
-</pre></div>
-</div>
-<p>Ideally, you would start both programs around the same time (~10 seconds), so that not too much outputs get queued in the file.
-You should now the visualization running in the Python window.</p>
-<p>You can add -r recording folder to additionally record the session:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">mapping_visu</span> <span class="o">-</span><span class="n">o</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">my_pipe</span> <span class="o">-</span><span class="n">r</span> <span class="o">&lt;</span><span class="n">recording_folder</span><span class="o">&gt;</span>
-</pre></div>
-</div>
-<p>Also, you can adjust all the Python visualization options, see <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">mapping_visu.py</span> <span class="pre">-h</span></code></p>
 </section>
 <section id="api-reference">
 <h2>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading"></a></h2>
 <p>The classes specific to Azure Kinect are documented below. For the main output classes, refer to the C++ documentation in <a class="reference internal" href="../core.html#core-sdk"><span class="std std-ref">Core SDK</span></a>.</p>
-<section id="configuration">
-<h3>Configuration<a class="headerlink" href="#configuration" title="Link to this heading"></a></h3>
 <p>Defined in <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;spectacularAI/k4a/configuration.hpp&gt;</span></code></p>
 <dl class="cpp type">
 <dt class="sig sig-object cpp" id="_CPPv413spectacularAI">
@@ -324,7 +304,7 @@ You should now the visualization running in the Python window.</p>
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI9k4aPlugin13Configuration19postProcessFinalMapE">
-<span id="_CPPv3N13spectacularAI9k4aPlugin13Configuration19postProcessFinalMapE"></span><span id="_CPPv2N13spectacularAI9k4aPlugin13Configuration19postProcessFinalMapE"></span><span id="spectacularAI::k4aPlugin::Configuration::postProcessFinalMap__b"></span><span class="target" id="structspectacularAI_1_1k4aPlugin_1_1Configuration_1a2ba2febc14e5e351e8923ce13a329ea9"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">postProcessFinalMap</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><br /></dt>
+<span id="_CPPv3N13spectacularAI9k4aPlugin13Configuration19postProcessFinalMapE"></span><span id="_CPPv2N13spectacularAI9k4aPlugin13Configuration19postProcessFinalMapE"></span><span id="spectacularAI::k4aPlugin::Configuration::postProcessFinalMap__b"></span><span class="target" id="structspectacularAI_1_1k4aPlugin_1_1Configuration_1a2ba2febc14e5e351e8923ce13a329ea9"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">postProcessFinalMap</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp var">
@@ -350,9 +330,6 @@ You should now the visualization running in the Python window.</p>
 
 </dd></dl>
 
-</section>
-<section id="pipeline">
-<h3>Pipeline<a class="headerlink" href="#pipeline" title="Link to this heading"></a></h3>
 <p>Defined in <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;spectacularAI/k4a/pipeline.hpp&gt;</span></code></p>
 <dl class="cpp type">
 <dt class="sig sig-object cpp">
@@ -416,9 +393,6 @@ You should now the visualization running in the Python window.</p>
 
 </dd></dl>
 
-</section>
-<section id="session">
-<h3>Session<a class="headerlink" href="#session" title="Link to this heading"></a></h3>
 <p>Defined in <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;spectacularAI/k4a/session.hpp&gt;</span></code></p>
 <dl class="cpp type">
 <dt class="sig sig-object cpp">
@@ -486,7 +460,6 @@ You should now the visualization running in the Python window.</p>
 
 </dd></dl>
 
-</section>
 </section>
 </section>
 

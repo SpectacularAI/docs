@@ -96,7 +96,7 @@
             <li class="breadcrumb-item"><a href="../wrappers.html">Wrappers</a></li>
         <li class="breadcrumb-item active">ORBBEC</li>
     <li class="wy-breadcrumbs-aside version">
-        v1.27
+        v1.28
     </li>
     </ul>
 
@@ -107,13 +107,18 @@
              
   <section id="orbbec">
 <h1>ORBBEC<a class="headerlink" href="#orbbec" title="Link to this heading"></a></h1>
-<p><strong>Spectacular AI C++ plugin for ORBBEC cameras</strong>. Supported devices:</p>
+<p><strong>Spectacular AI C++ plugin for ORBBEC cameras</strong></p>
+<section id="supported-devices">
+<span id="supported-devices-label"></span><h2>Supported devices<a class="headerlink" href="#supported-devices" title="Link to this heading"></a></h2>
+<p>The SDK has been verified to work with these devices:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>Femto Mega</p></li>
-<li><p>Astra 2</p></li>
+<li><p><a class="reference external" href="https://www.orbbec.com/products/tof-camera/femto-mega/">Femto Mega</a></p></li>
+<li><p><a class="reference external" href="https://www.orbbec.com/products/structured-light-camera/astra-2/">Astra 2</a></p></li>
 </ul>
 </div></blockquote>
+<p>Other devices should work with minimal changes. Please see the <a class="reference internal" href="#unsupported-devices-label"><span class="std std-ref">unsupported devices</span></a> section.</p>
+</section>
 <section id="quick-start">
 <h2>Quick start<a class="headerlink" href="#quick-start" title="Link to this heading"></a></h2>
 <p>First, download and unpack the relevant package on the <a class="reference external" href="https://github.com/SpectacularAI/sdk/releases">SDK releases</a> page.</p>
@@ -142,7 +147,7 @@
 </ol>
 </div><div aria-labelledby="tab-0-V2luZG93cw==" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-V2luZG93cw==" name="V2luZG93cw==" role="tabpanel" tabindex="0"><ol class="arabic">
 <li><p>If you have not used the Orbbec device before, you will need to setup timestamp registration. Please follow the official instructions in <a class="reference external" href="https://github.com/orbbec/OrbbecSDK?tab=readme-ov-file#environment-setup">OrbbecSDK</a>.</p></li>
-<li><p>Attach your Azure Kinect device to a USB3 port</p></li>
+<li><p>Attach your Orbbec device to a USB3 port</p></li>
 <li><p>Run the JSONL example (smoke test):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="nb">bin</span>
 <span class="o">./</span><span class="n">vio_jsonl</span><span class="o">.</span><span class="n">exe</span>
@@ -164,18 +169,39 @@
 <h2>Recording data<a class="headerlink" href="#recording-data" title="Link to this heading"></a></h2>
 <p>Orbbec data can be recorded using the <code class="docutils literal notranslate"><span class="pre">sai-record-orbbec</span></code> tool included in the SDK package (in the <code class="docutils literal notranslate"><span class="pre">bin</span></code> directory).
 First connect an Orbbec device over USB3, then run (add <code class="docutils literal notranslate"><span class="pre">.exe</span></code> on Windows):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sai</span><span class="o">-</span><span class="n">record</span><span class="o">-</span><span class="n">orbbec</span> <span class="o">--</span><span class="n">output</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">output</span><span class="o">/</span><span class="n">folder</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">sai</span><span class="o">-</span><span class="n">record</span><span class="o">-</span><span class="n">orbbec</span> <span class="c1"># Record with visualization</span>
+<span class="o">./</span><span class="n">sai</span><span class="o">-</span><span class="n">record</span><span class="o">-</span><span class="n">orbbec</span> <span class="o">--</span><span class="n">recording_only</span> <span class="o">--</span><span class="n">no_preview</span> <span class="c1"># More lightweight</span>
+<span class="o">./</span><span class="n">sai</span><span class="o">-</span><span class="n">record</span><span class="o">-</span><span class="n">orbbec</span> <span class="o">--</span><span class="n">output</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">output</span><span class="o">/</span><span class="n">folder</span> <span class="c1"># Set recording directory</span>
+<span class="o">./</span><span class="n">sai</span><span class="o">-</span><span class="n">record</span><span class="o">-</span><span class="n">orbbec</span> <span class="o">-</span><span class="n">h</span> <span class="c1"># See all options</span>
 </pre></div>
 </div>
 <p>The source code of recording tool is also available at <a class="reference external" href="https://github.com/SpectacularAI/sdk/tree/main/cpp/orbbec">https://github.com/SpectacularAI/sdk/tree/main/cpp/orbbec</a>
 which allows customizing the recording tool, if necessary.</p>
+<section id="unsupported-devices">
+<span id="unsupported-devices-label"></span><h3>Unsupported devices<a class="headerlink" href="#unsupported-devices" title="Link to this heading"></a></h3>
+<p>The SDK should work on most Orbbec devices, but has only been tested with devices listed <a class="reference internal" href="#supported-devices-label"><span class="std std-ref">here</span></a>.
+Other devices require setting certain parameters manually. Namely, the IMU-to-camera matrix needs to be set if the device model was not recognized by the SDK.
+For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">Create</span> <span class="n">Spectacular</span> <span class="n">AI</span> <span class="n">orbbec</span> <span class="n">plugin</span> <span class="n">configuration</span> <span class="p">(</span><span class="n">depends</span> <span class="n">on</span> <span class="n">device</span> <span class="nb">type</span><span class="p">)</span><span class="o">.</span>
+<span class="n">std</span><span class="p">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ob</span><span class="p">::</span><span class="n">Pipeline</span><span class="o">&gt;</span> <span class="n">obPipeline</span><span class="p">;</span>
+<span class="n">spectacularAI</span><span class="p">::</span><span class="n">orbbecPlugin</span><span class="p">::</span><span class="n">Configuration</span> <span class="n">config</span><span class="p">(</span><span class="o">*</span><span class="n">obPipeline</span><span class="p">);</span>
+<span class="n">config</span><span class="o">.</span><span class="n">imuToCameraRgb</span> <span class="o">=</span> <span class="p">{{</span>
+   <span class="p">{</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span> <span class="p">},</span>
+   <span class="p">{</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span> <span class="p">},</span>
+   <span class="p">{</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span> <span class="p">},</span>
+   <span class="p">{</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span> <span class="p">}</span>
+<span class="p">}};</span>
+</pre></div>
+</div>
+</section>
 </section>
 <section id="installation-as-a-library">
 <h2>Installation as a library<a class="headerlink" href="#installation-as-a-library" title="Link to this heading"></a></h2>
-<p>First, download the <a class="reference external" href="https://github.com/orbbec/OrbbecSDK">OrbbecSDK</a></p>
 <p>The following commands should be run in the folder where you have unpacked the SDK release package.</p>
 <div class="sphinx-tabs docutils container">
 <div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-TGludXg=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-1-TGludXg=" name="TGludXg=" role="tab" tabindex="0">Linux</button><button aria-controls="panel-1-V2luZG93cw==" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-1-V2luZG93cw==" name="V2luZG93cw==" role="tab" tabindex="-1">Windows</button></div><div aria-labelledby="tab-1-TGludXg=" class="sphinx-tabs-panel group-tab" id="panel-1-TGludXg=" name="TGludXg=" role="tabpanel" tabindex="0"><ol class="arabic">
+<li><p>First install the <a class="reference external" href="../index.html#development-dependencies">development dependencies</a>.</p></li>
+<li><p>Download the <a class="reference external" href="https://github.com/orbbec/OrbbecSDK">OrbbecSDK</a></p></li>
 <li><p>Select where you want the library installed, e.g.,:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">MY_INSTALL_PREFIX</span><span class="o">=~/.</span><span class="n">local</span>
 <span class="c1"># or: export MY_INSTALL_PREFIX=`pwd`/installed</span>
@@ -183,7 +209,6 @@ which allows customizing the recording tool, if necessary.</p>
 </div>
 </li>
 <li><p>Run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">PREFIX=$MY_INSTALL_PREFIX</span> <span class="pre">install</span></code> (or <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">make</span> <span class="pre">install</span></code>)</p></li>
-<li><p>Make sure you have CMake (<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">cmake</span></code>) and Git</p></li>
 <li><p>Build the vio_jsonl example using CMake:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>make PREFIX=$MY_INSTALL_PREFIX ORBBEC_DIR=&lt;path/to/OrbbecSDK&gt; example
 </pre></div>
@@ -193,9 +218,10 @@ which allows customizing the recording tool, if necessary.</p>
 </ol>
 </div><div aria-labelledby="tab-1-V2luZG93cw==" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-1-V2luZG93cw==" name="V2luZG93cw==" role="tabpanel" tabindex="0"><ol class="arabic">
 <li><p>First install the <a class="reference external" href="../index.html#development-dependencies">development dependencies</a>.</p></li>
+<li><p>Download the <a class="reference external" href="https://github.com/orbbec/OrbbecSDK">OrbbecSDK</a></p></li>
 <li><p>Build vio_jsonl example using CMake. The process is a bit involved so the commands are collected in <code class="docutils literal notranslate"><span class="pre">./examples/build_windows.sh</span></code>. In PowerShell:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cd examples
-$env:BUILD_MAPPING_VISU=&quot;OFF&quot;; sh ./build_windows.sh ..\lib\cmake\spectacularAI &lt;path\to\OrbbecSDK&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">examples</span>
+<span class="n">sh</span> <span class="o">./</span><span class="n">build_windows</span><span class="o">.</span><span class="n">sh</span> <span class="o">..</span>\<span class="n">lib</span>\<span class="n">cmake</span>\<span class="n">spectacularAI</span> <span class="o">&lt;</span><span class="n">path</span>\<span class="n">to</span>\<span class="n">OrbbecSDK</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 </li>
@@ -213,7 +239,7 @@ $env:BUILD_MAPPING_VISU=&quot;OFF&quot;; sh ./build_windows.sh ..\lib\cmake\spec
 <p>The following instructions show how to compile and run the <a class="reference external" href="https://github.com/SpectacularAI/sdk-examples/tree/main/cpp/orbbec/">Spectacular AI ORBBEC SDK examples</a>.</p>
 <blockquote>
 <div><ol class="arabic">
-<li><p>First, install the SDK as a library (see above).</p></li>
+<li><p>(Optional) install the SDK as a library (see above).</p></li>
 <li><p>Clone the SDK examples repository:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="o">--</span><span class="n">recursive</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">SpectacularAI</span><span class="o">/</span><span class="n">sdk</span><span class="o">-</span><span class="n">examples</span><span class="o">.</span><span class="n">git</span>
 </pre></div>
@@ -223,61 +249,23 @@ $env:BUILD_MAPPING_VISU=&quot;OFF&quot;; sh ./build_windows.sh ..\lib\cmake\spec
 </div></blockquote>
 <p>Run the following commands in the <code class="docutils literal notranslate"><span class="pre">sdk-examples/cpp/orbbec</span></code> directory.</p>
 <div class="sphinx-tabs docutils container">
-<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-2-TGludXg=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-2-TGludXg=" name="TGludXg=" role="tab" tabindex="0">Linux</button><button aria-controls="panel-2-V2luZG93cw==" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-2-V2luZG93cw==" name="V2luZG93cw==" role="tab" tabindex="-1">Windows</button></div><div aria-labelledby="tab-2-TGludXg=" class="sphinx-tabs-panel group-tab" id="panel-2-TGludXg=" name="TGludXg=" role="tabpanel" tabindex="0"><p>Build the targets using CMake:</p>
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-2-TGludXg=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-2-TGludXg=" name="TGludXg=" role="tab" tabindex="0">Linux</button><button aria-controls="panel-2-V2luZG93cw==" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-2-V2luZG93cw==" name="V2luZG93cw==" role="tab" tabindex="-1">Windows</button></div><div aria-labelledby="tab-2-TGludXg=" class="sphinx-tabs-panel group-tab" id="panel-2-TGludXg=" name="TGludXg=" role="tabpanel" tabindex="0"><p>Build the examples using CMake:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">target</span>
 <span class="n">cd</span> <span class="n">target</span>
-<span class="n">cmake</span> <span class="o">-</span><span class="n">DspectacularAI_orbbecPlugin_DIR</span><span class="o">=&lt;</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">spectacularAI_orbbecPlugin</span><span class="o">/</span><span class="n">install</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">cmake</span><span class="o">/</span><span class="n">spectacularAI</span><span class="o">/&gt;</span> <span class="o">-</span><span class="n">DOrbbecSDK_DIR</span><span class="o">=&lt;</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">OrbbecSDK</span><span class="o">&gt;</span> <span class="o">..</span>
+<span class="n">cmake</span> <span class="o">-</span><span class="n">DspectacularAI_orbbecPlugin_DIR</span><span class="o">=&lt;</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">spectacularAI_orbbecPlugin</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">cmake</span><span class="o">/</span><span class="n">spectacularAI</span><span class="o">/&gt;</span> <span class="o">-</span><span class="n">DOrbbecSDK_DIR</span><span class="o">=&lt;</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">OrbbecSDK</span><span class="o">&gt;</span> <span class="o">..</span>
 <span class="n">make</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">-DspectacularAI_orbbecPlugin_DIR</span></code> option is not needed is you have used <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">make</span> <span class="pre">install</span></code> for the SDK.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">-DspectacularAI_orbbecPlugin_DIR</span></code> option is not needed if you have used <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">make</span> <span class="pre">install</span></code> for the SDK.</p>
 </div><div aria-labelledby="tab-2-V2luZG93cw==" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-2-V2luZG93cw==" name="V2luZG93cw==" role="tabpanel" tabindex="0"><p>Build the <code class="docutils literal notranslate"><span class="pre">vio_jsonl</span></code> example using CMake. The process is a bit involved so the commands are collected in <code class="docutils literal notranslate"><span class="pre">./build_windows.sh</span></code>. In PowerShell:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sh</span> <span class="o">./</span><span class="n">build_windows</span><span class="o">.</span><span class="n">sh</span> <span class="o">&lt;</span><span class="n">path</span>\<span class="n">to</span>\<span class="n">spectacularAI_orbbecPlugin_1</span><span class="mf">.26.0</span><span class="n">_windows</span>\<span class="n">lib</span>\<span class="n">cmake</span>\<span class="n">spectacularAI</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">path</span>\<span class="n">to</span>\<span class="n">OrbbecSDK</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sh</span> <span class="o">./</span><span class="n">build_windows</span><span class="o">.</span><span class="n">sh</span> <span class="o">&lt;</span><span class="n">path</span>\<span class="n">to</span>\<span class="n">spectacularAI_orbbecPlugin</span>\<span class="n">lib</span>\<span class="n">cmake</span>\<span class="n">spectacularAI</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">path</span>\<span class="n">to</span>\<span class="n">OrbbecSDK</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 </div></div>
-</section>
-<section id="mapping-visualization">
-<h2>Mapping visualization<a class="headerlink" href="#mapping-visualization" title="Link to this heading"></a></h2>
-<p>This example uses Orbbec device with Mapping API and serializes the output in custom format that can be sent to Python for visualization.
-You can either use the pre-built <code class="docutils literal notranslate"><span class="pre">./bin/mapping_visu</span></code> binary, or build it from source as instructed in the Examples section.
-A working Python installation is needed to run the visualizer.</p>
-<p><strong>Dependencies</strong>: Install Python visualization dependencies:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">spectacularAI</span><span class="p">[</span><span class="n">full</span><span class="p">]</span>
-</pre></div>
-</div>
-<p>First create a file or pipe as instructed below</p>
-<div class="sphinx-tabs docutils container">
-<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-3-TGludXg=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-3-TGludXg=" name="TGludXg=" role="tab" tabindex="0">Linux</button><button aria-controls="panel-3-V2luZG93cw==" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-3-V2luZG93cw==" name="V2luZG93cw==" role="tab" tabindex="-1">Windows</button></div><div aria-labelledby="tab-3-TGludXg=" class="sphinx-tabs-panel group-tab" id="panel-3-TGludXg=" name="TGludXg=" role="tabpanel" tabindex="0"><p>Create a new pipe with:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkfifo</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">my_pipe</span>
-</pre></div>
-</div>
-</div><div aria-labelledby="tab-3-V2luZG93cw==" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-3-V2luZG93cw==" name="V2luZG93cw==" role="tabpanel" tabindex="0"><p>Create a new file with:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span> <span class="n">NUL</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">my_pipe</span>
-</pre></div>
-</div>
-</div></div>
-<p>Launch this example file with:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">mapping_visu</span> <span class="o">-</span><span class="n">o</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">my_pipe</span>
-</pre></div>
-</div>
-<p>Open another command prompt and launch Python visualization either from <code class="docutils literal notranslate"><span class="pre">./bin</span></code> directory, or <code class="docutils literal notranslate"><span class="pre">./sdk-examples/python/oak/</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">mapping_visu</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">file</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">my_pipe</span>
-</pre></div>
-</div>
-<p>Ideally, you would start both programs around the same time (~10 seconds), so that not too much outputs get queued in the file.
-You should now see the visualization running in the Python window.</p>
-<p>You can add <code class="docutils literal notranslate"><span class="pre">-r</span> <span class="pre">&lt;recording_folder&gt;</span></code> to record the session:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">mapping_visu</span> <span class="o">-</span><span class="n">o</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">my_pipe</span> <span class="o">-</span><span class="n">r</span> <span class="o">&lt;</span><span class="n">recording_folder</span><span class="o">&gt;</span>
-</pre></div>
-</div>
-<p>Also, you can adjust all the Python visualization options, see <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">mapping_visu.py</span> <span class="pre">-h</span></code></p>
 </section>
 <section id="api-reference">
 <h2>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading"></a></h2>
 <p>The classes specific to the Spectacular AI ORBBEC Wrapper are documented below. For the main output classes, refer to the C++ documentation in <a class="reference internal" href="../core.html#core-sdk"><span class="std std-ref">Core SDK</span></a>.</p>
-<section id="configuration">
-<h3>Configuration<a class="headerlink" href="#configuration" title="Link to this heading"></a></h3>
 <p>Defined in <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;spectacularAI/orbbec/configuration.hpp&gt;</span></code></p>
 <dl class="cpp type">
 <dt class="sig sig-object cpp" id="_CPPv413spectacularAI">
@@ -331,7 +319,7 @@ You should now see the visualization running in the Python window.</p>
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin13Configuration19postProcessFinalMapE">
-<span id="_CPPv3N13spectacularAI12orbbecPlugin13Configuration19postProcessFinalMapE"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin13Configuration19postProcessFinalMapE"></span><span id="spectacularAI::orbbecPlugin::Configuration::postProcessFinalMap__b"></span><span class="target" id="structspectacularAI_1_1orbbecPlugin_1_1Configuration_1ad68f640ab6a8a31041410821d147cdf4"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">postProcessFinalMap</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><br /></dt>
+<span id="_CPPv3N13spectacularAI12orbbecPlugin13Configuration19postProcessFinalMapE"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin13Configuration19postProcessFinalMapE"></span><span id="spectacularAI::orbbecPlugin::Configuration::postProcessFinalMap__b"></span><span class="target" id="structspectacularAI_1_1orbbecPlugin_1_1Configuration_1ad68f640ab6a8a31041410821d147cdf4"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">postProcessFinalMap</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp var">
@@ -375,6 +363,11 @@ You should now see the visualization running in the Python window.</p>
 <dd></dd></dl>
 
 <dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin13Configuration14imuToCameraRgbE">
+<span id="_CPPv3N13spectacularAI12orbbecPlugin13Configuration14imuToCameraRgbE"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin13Configuration14imuToCameraRgbE"></span><span id="spectacularAI::orbbecPlugin::Configuration::imuToCameraRgb__Matrix4d"></span><span class="target" id="structspectacularAI_1_1orbbecPlugin_1_1Configuration_1aeb7ce5ef3eb55fb8b80bc560bf0e661e"></span><a class="reference internal" href="../cpp/latest/index.html#_CPPv4N13spectacularAI8Matrix4dE" title="spectacularAI::Matrix4d"><span class="n"><span class="pre">Matrix4d</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">imuToCameraRgb</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin13Configuration18internalParametersE">
 <span id="_CPPv3N13spectacularAI12orbbecPlugin13Configuration18internalParametersE"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin13Configuration18internalParametersE"></span><span id="spectacularAI::orbbecPlugin::Configuration::internalParameters__std::map:ss.ss:"></span><span class="target" id="structspectacularAI_1_1orbbecPlugin_1_1Configuration_1a8792388bbf5cc9a6e3fc2d9131a4682f"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">internalParameters</span></span></span><br /></dt>
 <dd><p>Internal SDK parameter overrides (key-value pairs). Not safe for unsanitized user input. </p>
@@ -387,9 +380,6 @@ You should now see the visualization running in the Python window.</p>
 
 </dd></dl>
 
-</section>
-<section id="pipeline">
-<h3>Pipeline<a class="headerlink" href="#pipeline" title="Link to this heading"></a></h3>
 <p>Defined in <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;spectacularAI/orbbec/pipeline.hpp&gt;</span></code></p>
 <dl class="cpp type">
 <dt class="sig sig-object cpp">
@@ -447,9 +437,6 @@ You should now see the visualization running in the Python window.</p>
 
 </dd></dl>
 
-</section>
-<section id="session">
-<h3>Session<a class="headerlink" href="#session" title="Link to this heading"></a></h3>
 <p>Defined in <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;spectacularAI/orbbec/session.hpp&gt;</span></code></p>
 <dl class="cpp type">
 <dt class="sig sig-object cpp">
@@ -517,7 +504,6 @@ You should now see the visualization running in the Python window.</p>
 
 </dd></dl>
 
-</section>
 </section>
 </section>
 

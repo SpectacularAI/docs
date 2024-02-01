@@ -96,7 +96,7 @@
             <li class="breadcrumb-item"><a href="../wrappers.html">Wrappers</a></li>
         <li class="breadcrumb-item active">RealSense</li>
     <li class="wy-breadcrumbs-aside version">
-        v1.27
+        v1.28
     </li>
     </ul>
 
@@ -148,11 +148,12 @@ and <a class="reference external" href="https://www.intelrealsense.com/depth-cam
 </section>
 <section id="recording-data">
 <h2>Recording data<a class="headerlink" href="#recording-data" title="Link to this heading"></a></h2>
-<p>RealSense data can be recorded using the <code class="docutils literal notranslate"><span class="pre">sai-record-realsense</span></code> tool included in the SDK package.
-You can either run it directly from the <code class="docutils literal notranslate"><span class="pre">bin</span></code> directory, or install it as a system-wide command
-following the <em>Using as a library</em> instructions below.</p>
-<p>First connect a RealSense device over USB3, then run (add <code class="docutils literal notranslate"><span class="pre">.exe</span></code> on Windows):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sai</span><span class="o">-</span><span class="n">record</span><span class="o">-</span><span class="n">realsense</span> <span class="o">--</span><span class="n">output</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">output</span><span class="o">/</span><span class="n">folder</span>
+<p>RealSense data can be recorded using the <code class="docutils literal notranslate"><span class="pre">sai-record-realsense</span></code> tool included in the SDK package (in the <code class="docutils literal notranslate"><span class="pre">bin</span></code> directory).
+First connect a RealSense device over USB3, then run (add <code class="docutils literal notranslate"><span class="pre">.exe</span></code> on Windows):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">sai</span><span class="o">-</span><span class="n">record</span><span class="o">-</span><span class="n">realsense</span> <span class="c1"># Record with visualization</span>
+<span class="o">./</span><span class="n">sai</span><span class="o">-</span><span class="n">record</span><span class="o">-</span><span class="n">realsense</span> <span class="o">--</span><span class="n">recording_only</span> <span class="o">--</span><span class="n">no_preview</span> <span class="c1"># More lightweight</span>
+<span class="o">./</span><span class="n">sai</span><span class="o">-</span><span class="n">record</span><span class="o">-</span><span class="n">realsense</span> <span class="o">--</span><span class="n">output</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">output</span><span class="o">/</span><span class="n">folder</span> <span class="c1"># Set recording directory</span>
+<span class="o">./</span><span class="n">sai</span><span class="o">-</span><span class="n">record</span><span class="o">-</span><span class="n">realsense</span> <span class="o">-</span><span class="n">h</span> <span class="c1"># See all options</span>
 </pre></div>
 </div>
 <p>The source code of recording tool is also available at <a class="reference external" href="https://github.com/SpectacularAI/sdk/blob/main/cpp/realsense/record.cpp">https://github.com/SpectacularAI/sdk/blob/main/cpp/realsense/record.cpp</a>
@@ -160,9 +161,10 @@ which allows customizing the recording tool, if necessary.</p>
 </section>
 <section id="using-as-a-library">
 <h2>Using as a library<a class="headerlink" href="#using-as-a-library" title="Link to this heading"></a></h2>
-<p>The following instructions show how to compile and run the <a class="reference external" href="https://github.com/SpectacularAI/sdk-examples/tree/main/cpp/realsense">Spectacular AI RealSense SDK examples</a>.</p>
+<p>The following commands should be run in the folder where you have unpacked the SDK release package.</p>
 <div class="sphinx-tabs docutils container">
 <div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-TGludXg=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-1-TGludXg=" name="TGludXg=" role="tab" tabindex="0">Linux</button><button aria-controls="panel-1-V2luZG93cw==" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-1-V2luZG93cw==" name="V2luZG93cw==" role="tab" tabindex="-1">Windows</button></div><div aria-labelledby="tab-1-TGludXg=" class="sphinx-tabs-panel group-tab" id="panel-1-TGludXg=" name="TGludXg=" role="tabpanel" tabindex="0"><ol class="arabic">
+<li><p>Install the <a class="reference external" href="../index.html#development-dependencies">development dependencies</a>.</p></li>
 <li><p>Select where you want the library installed, e.g.,:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">MY_INSTALL_PREFIX</span><span class="o">=~/.</span><span class="n">local</span>
 </pre></div>
@@ -170,16 +172,16 @@ which allows customizing the recording tool, if necessary.</p>
 </li>
 <li><p>Run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">PREFIX=$MY_INSTALL_PREFIX</span> <span class="pre">install</span></code> (or <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">make</span> <span class="pre">install</span></code>)</p></li>
 <li><p>Install <code class="docutils literal notranslate"><span class="pre">librealsense</span></code>: <a class="reference external" href="https://github.com/IntelRealSense/librealsense">https://github.com/IntelRealSense/librealsense</a></p></li>
-<li><p>Ensure you have CMake</p></li>
 <li><p>Build the <code class="docutils literal notranslate"><span class="pre">vio_jsonl</span></code> example using CMake:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">MY_INSTALL_PREFIX</span><span class="o">=~/.</span><span class="n">local</span> <span class="n">example</span>
 </pre></div>
 </div>
 </li>
 </ol>
-</div><div aria-labelledby="tab-1-V2luZG93cw==" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-1-V2luZG93cw==" name="V2luZG93cw==" role="tabpanel" tabindex="0"><p>First install the <a class="reference external" href="../index.html#development-dependencies">development dependencies</a>.</p>
-<p>Use Git Bash or similar for next steps.</p>
-<p>Install librealsense from sources:</p>
+</div><div aria-labelledby="tab-1-V2luZG93cw==" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-1-V2luZG93cw==" name="V2luZG93cw==" role="tabpanel" tabindex="0"><p>Use Git Bash or similar for next steps.</p>
+<ol class="arabic">
+<li><p>First install the <a class="reference external" href="../index.html#development-dependencies">development dependencies</a>.</p></li>
+<li><p>Install librealsense from sources:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">examples</span>
 <span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">IntelRealSense</span><span class="o">/</span><span class="n">librealsense</span>
 <span class="n">mkdir</span> <span class="n">librealsense</span><span class="o">/</span><span class="n">target</span>
@@ -189,19 +191,55 @@ which allows customizing the recording tool, if necessary.</p>
 <span class="n">cd</span> <span class="o">../..</span>
 </pre></div>
 </div>
-<p>Now you are all set to use the VIO plugin. Let’s compile the example to see it works:</p>
+</li>
+<li><p>Now you are all set to use the VIO plugin. Let’s compile the example to see it works:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">target</span>
 <span class="n">cd</span> <span class="n">target</span>
 <span class="n">cmake</span> <span class="o">-</span><span class="n">G</span> <span class="s2">&quot;Visual Studio 16 2019&quot;</span> <span class="o">-</span><span class="n">A</span> <span class="n">x64</span> <span class="o">-</span><span class="n">DBUILD_MAPPER</span><span class="o">=</span><span class="n">OFF</span> <span class="o">-</span><span class="n">DspectacularAI_realsensePlugin_DIR</span><span class="o">=../</span><span class="n">lib</span><span class="o">/</span><span class="n">cmake</span><span class="o">/</span><span class="n">spectacularAI</span> <span class="o">-</span><span class="n">Drealsense2_DIR</span><span class="o">=./</span><span class="n">librealsense</span><span class="o">/</span><span class="n">target</span><span class="o">/</span><span class="n">install</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">cmake</span><span class="o">/</span><span class="n">realsense2</span> <span class="o">..</span>
 <span class="n">cmake</span> <span class="o">--</span><span class="n">build</span> <span class="o">.</span> <span class="o">--</span><span class="n">config</span> <span class="n">Release</span> <span class="o">--</span> <span class="o">-</span><span class="n">m</span>
 </pre></div>
 </div>
-<p>Finally running the vio_jsonl.exe should give you the pose of the RealSense device in real time:</p>
+</li>
+<li><p>Finally running the vio_jsonl.exe should give you the pose of the RealSense device in real time:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">Release</span><span class="o">/</span><span class="n">vio_jsonl</span><span class="o">.</span><span class="n">exe</span>
 </pre></div>
 </div>
+</li>
+</ol>
 <p>Example output:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;orientation&quot;</span><span class="p">:{</span><span class="s2">&quot;w&quot;</span><span class="p">:</span><span class="mf">0.7068698348716513</span><span class="p">,</span><span class="s2">&quot;x&quot;</span><span class="p">:</span><span class="mf">0.02283470213352065</span><span class="p">,</span><span class="s2">&quot;y&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">0.011350438374188287</span><span class="p">,</span><span class="s2">&quot;z&quot;</span><span class="p">:</span><span class="mf">0.7068838521820336</span><span class="p">},</span><span class="s2">&quot;position&quot;</span><span class="p">:{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">0.016812673347013137</span><span class="p">,</span><span class="s2">&quot;y&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">0.0231306465130168</span><span class="p">,</span><span class="s2">&quot;z&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">0.0013136235444364183</span><span class="p">},</span><span class="s2">&quot;time&quot;</span><span class="p">:</span><span class="mf">61088.131537828</span><span class="p">,</span><span class="s2">&quot;velocity&quot;</span><span class="p">:{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">3.936320861854323e-06</span><span class="p">,</span><span class="s2">&quot;y&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">1.8569468854259723e-06</span><span class="p">,</span><span class="s2">&quot;z&quot;</span><span class="p">:</span><span class="mf">0.00031940298071614516</span><span class="p">}}</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<p>The following instructions show how to compile and run the <a class="reference external" href="https://github.com/SpectacularAI/sdk-examples/tree/main/cpp/realsense">Spectacular AI RealSense SDK examples</a>.</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>(Optional) install the SDK as a library (see above).</p></li>
+<li><p>Clone the SDK examples repository:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="o">--</span><span class="n">recursive</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">SpectacularAI</span><span class="o">/</span><span class="n">sdk</span><span class="o">-</span><span class="n">examples</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div></blockquote>
+<p>Run the following commands in the <code class="docutils literal notranslate"><span class="pre">sdk-examples/cpp/realsense</span></code> directory.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-2-TGludXg=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-2-TGludXg=" name="TGludXg=" role="tab" tabindex="0">Linux</button><button aria-controls="panel-2-V2luZG93cw==" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-2-V2luZG93cw==" name="V2luZG93cw==" role="tab" tabindex="-1">Windows</button></div><div aria-labelledby="tab-2-TGludXg=" class="sphinx-tabs-panel group-tab" id="panel-2-TGludXg=" name="TGludXg=" role="tabpanel" tabindex="0"><p>Build the examples using CMake:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">target</span>
+<span class="n">cd</span> <span class="n">target</span>
+<span class="n">cmake</span> <span class="o">-</span><span class="n">DBUILD_MAPPER</span><span class="o">=</span><span class="n">OFF</span> <span class="o">-</span><span class="n">DspectacularAI_realsensePlugin_DIR</span><span class="o">=&lt;</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">spectacularAI_realsensePlugin</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">cmake</span><span class="o">/</span><span class="n">spectacularAI</span><span class="o">/&gt;</span> <span class="o">..</span>
+<span class="n">make</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">-DspectacularAI_realsensePlugin_DIR</span></code> option is not needed if you have used <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">make</span> <span class="pre">install</span></code> for the SDK.</p>
+</div><div aria-labelledby="tab-2-V2luZG93cw==" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-2-V2luZG93cw==" name="V2luZG93cw==" role="tabpanel" tabindex="0"><p>Build examples using CMake. In Git Bash:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">target</span>
+<span class="n">cd</span> <span class="n">target</span>
+<span class="n">cmake</span> <span class="o">-</span><span class="n">G</span> <span class="s2">&quot;Visual Studio 16 2019&quot;</span> <span class="o">-</span><span class="n">A</span> <span class="n">x64</span> <span class="o">-</span><span class="n">DBUILD_MAPPER</span><span class="o">=</span><span class="n">OFF</span> <span class="o">-</span><span class="n">DspectacularAI_realsensePlugin_DIR</span><span class="o">=&lt;</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">spectacularAI_realsensePlugin</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">cmake</span><span class="o">/</span><span class="n">spectacularAI</span><span class="o">/&gt;</span> <span class="o">-</span><span class="n">Drealsense2_DIR</span><span class="o">=&lt;</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">librealsense</span><span class="o">/</span><span class="n">target</span><span class="o">/</span><span class="n">install</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">cmake</span><span class="o">/</span><span class="n">realsense2</span><span class="o">&gt;</span> <span class="o">..</span>
+<span class="n">cmake</span> <span class="o">--</span><span class="n">build</span> <span class="o">.</span> <span class="o">--</span><span class="n">config</span> <span class="n">Release</span> <span class="o">--</span> <span class="o">-</span><span class="n">m</span>
 </pre></div>
 </div>
 </div></div>
@@ -286,7 +324,7 @@ which allows customizing the recording tool, if necessary.</p>
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI8rsPlugin13Configuration19postProcessFinalMapE">
-<span id="_CPPv3N13spectacularAI8rsPlugin13Configuration19postProcessFinalMapE"></span><span id="_CPPv2N13spectacularAI8rsPlugin13Configuration19postProcessFinalMapE"></span><span id="spectacularAI::rsPlugin::Configuration::postProcessFinalMap__b"></span><span class="target" id="structspectacularAI_1_1rsPlugin_1_1Configuration_1a2d9abb9759e07f8d741c4bf34f418f15"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">postProcessFinalMap</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><br /></dt>
+<span id="_CPPv3N13spectacularAI8rsPlugin13Configuration19postProcessFinalMapE"></span><span id="_CPPv2N13spectacularAI8rsPlugin13Configuration19postProcessFinalMapE"></span><span id="spectacularAI::rsPlugin::Configuration::postProcessFinalMap__b"></span><span class="target" id="structspectacularAI_1_1rsPlugin_1_1Configuration_1a2d9abb9759e07f8d741c4bf34f418f15"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">postProcessFinalMap</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp var">
@@ -336,6 +374,12 @@ which allows customizing the recording tool, if necessary.</p>
 </dd></dl>
 
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI8rsPlugin8Pipeline8PipelineERK13ConfigurationNSt8functionIFvN7mapping15MapperOutputPtrEEEE">
+<span id="_CPPv3N13spectacularAI8rsPlugin8Pipeline8PipelineERK13ConfigurationNSt8functionIFvN7mapping15MapperOutputPtrEEEE"></span><span id="_CPPv2N13spectacularAI8rsPlugin8Pipeline8PipelineERK13ConfigurationNSt8functionIFvN7mapping15MapperOutputPtrEEEE"></span><span class="target" id="classspectacularAI_1_1rsPlugin_1_1Pipeline_1af31b3eba2af6122acc4cb7538884c996"></span><span class="sig-name descname"><span class="n"><span class="pre">Pipeline</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="../cpp/latest/index.html#_CPPv4N13spectacularAI8rsPlugin13ConfigurationE" title="spectacularAI::rsPlugin::Configuration"><span class="n"><span class="pre">Configuration</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">config</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="../cpp/latest/index.html#_CPPv4N13spectacularAI7mappingE" title="spectacularAI::mapping"><span class="n"><span class="pre">mapping</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../cpp/latest/index.html#_CPPv4N13spectacularAI7mapping15MapperOutputPtrE" title="spectacularAI::mapping::MapperOutputPtr"><span class="n"><span class="pre">MapperOutputPtr</span></span></a><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">onMapperOutput</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Create a pipeline with custom configuration with Mapping API enabled </p>
+</dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI8rsPlugin8Pipeline15configureDeviceERN3rs26deviceE">
 <span id="_CPPv3N13spectacularAI8rsPlugin8Pipeline15configureDeviceERN3rs26deviceE"></span><span id="_CPPv2N13spectacularAI8rsPlugin8Pipeline15configureDeviceERN3rs26deviceE"></span><span id="spectacularAI::rsPlugin::Pipeline::configureDevice__rs2::deviceR"></span><span class="target" id="classspectacularAI_1_1rsPlugin_1_1Pipeline_1ae570729575d091b227e544a6d72f15aa"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">configureDevice</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv43rs2" title="rs2"><span class="n"><span class="pre">rs2</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">device</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">device</span></span><span class="sig-paren">)</span><br /></dt>
 <dd><p>Configure the RealSense device for VIO </p>
@@ -350,7 +394,7 @@ which allows customizing the recording tool, if necessary.</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI8rsPlugin8Pipeline17setMapperCallbackERKNSt8functionIFvN13spectacularAI7mapping15MapperOutputPtrEEEE">
 <span id="_CPPv3N13spectacularAI8rsPlugin8Pipeline17setMapperCallbackERKNSt8functionIFvN13spectacularAI7mapping15MapperOutputPtrEEEE"></span><span id="_CPPv2N13spectacularAI8rsPlugin8Pipeline17setMapperCallbackERKNSt8functionIFvN13spectacularAI7mapping15MapperOutputPtrEEEE"></span><span class="target" id="classspectacularAI_1_1rsPlugin_1_1Pipeline_1aeac760c28bd3e9c75d3a472307e42566"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setMapperCallback</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="../cpp/latest/index.html#_CPPv413spectacularAI" title="spectacularAI"><span class="n"><span class="pre">spectacularAI</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../cpp/latest/index.html#_CPPv4N13spectacularAI7mappingE" title="spectacularAI::mapping"><span class="n"><span class="pre">mapping</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../cpp/latest/index.html#_CPPv4N13spectacularAI7mapping15MapperOutputPtrE" title="spectacularAI::mapping::MapperOutputPtr"><span class="n"><span class="pre">MapperOutputPtr</span></span></a><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">onMapperOutput</span></span><span class="sig-paren">)</span><br /></dt>
-<dd><p>Set a mapping callback </p>
+<dd><p>DEPRECATED: set the callback in <a class="reference internal" href="#classspectacularAI_1_1rsPlugin_1_1Pipeline"><span class="std std-ref">Pipeline</span></a> constructor instead. </p>
 </dd></dl>
 
 <dl class="cpp function">
