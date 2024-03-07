@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tracking API &mdash; spectacularAI  documentation</title>
@@ -96,7 +96,7 @@
             <li class="breadcrumb-item"><a href="core.html">Core SDK</a></li>
         <li class="breadcrumb-item active">Tracking API</li>
     <li class="wy-breadcrumbs-aside version">
-        v1.29
+        v1.30
     </li>
     </ul>
 
@@ -181,6 +181,12 @@ To get the pose for another camera, use either <a class="reference internal" hre
 <dd><p>latest <a class="reference internal" href="#spectacularAI.Pose" title="spectacularAI.Pose"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pose</span></code></a></p>
 </dd></dl>
 
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.CameraPose.velocity">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">velocity</span></span><a class="headerlink" href="#spectacularAI.CameraPose.velocity" title="Link to this definition"></a></dt>
+<dd><p><a class="reference internal" href="#spectacularAI.Vector3d" title="spectacularAI.Vector3d"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vector3d</span></code></a> instantaneous velocity vector (xyz) of the camera center in m/s</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
@@ -260,6 +266,12 @@ To get the pose for another camera, use either <a class="reference internal" hre
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spectacularAI.</span></span><span class="sig-name descname"><span class="pre">GnssVioOutput</span></span><a class="headerlink" href="#spectacularAI.GnssVioOutput" title="Link to this definition"></a></dt>
 <dd><p>GNSS-VIO output</p>
 <dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.GnssVioOutput.angularVelocity">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">angularVelocity</span></span><a class="headerlink" href="#spectacularAI.GnssVioOutput.angularVelocity" title="Link to this definition"></a></dt>
+<dd><p>current <a class="reference internal" href="#spectacularAI.Vector3d" title="spectacularAI.Vector3d"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vector3d</span></code></a> instantaneous angular velocity in ENU coordinates</p>
+</dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="spectacularAI.GnssVioOutput.coordinates">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">coordinates</span></span><a class="headerlink" href="#spectacularAI.GnssVioOutput.coordinates" title="Link to this definition"></a></dt>
 <dd><p>current <a class="reference internal" href="#spectacularAI.WgsCoordinates" title="spectacularAI.WgsCoordinates"><code class="xref py py-class docutils literal notranslate"><span class="pre">WgsCoordinates</span></code></a></p>
@@ -286,7 +298,7 @@ To get the pose for another camera, use either <a class="reference internal" hre
 <dl class="py property">
 <dt class="sig sig-object py" id="spectacularAI.GnssVioOutput.velocity">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">velocity</span></span><a class="headerlink" href="#spectacularAI.GnssVioOutput.velocity" title="Link to this definition"></a></dt>
-<dd><p>current <a class="reference internal" href="#spectacularAI.Vector3d" title="spectacularAI.Vector3d"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vector3d</span></code></a></p>
+<dd><p>current <a class="reference internal" href="#spectacularAI.Vector3d" title="spectacularAI.Vector3d"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vector3d</span></code></a> instantaneous velocity in ENU coordinates</p>
 </dd></dl>
 
 <dl class="py property">
@@ -309,63 +321,6 @@ To get the pose for another camera, use either <a class="reference internal" hre
 <dd></dd></dl>
 
 </div>
-<dl class="cpp struct">
-<dt class="sig sig-object cpp">
-<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">AutoExposureOutput</span></span></span><br /></dt>
-<dd><p>Auto exposure output structure. Each auto exposure output corresponds to a specific image with timestamp and (optional) tag. Contains exposure information that can be used to implement different auto exposure control algorithms, depending on the device. </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">deltaBrightness</span></span></span><br /></dt>
-<dd><p>Determines how much brightness should be changed (±0-255) </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">brightness</span></span></span><br /></dt>
-<dd><p>Approx. image brightness (0-255) </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">minExposureTime</span></span></span><br /></dt>
-<dd><p>Minimum exposure time for auto exposure (microseconds) </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">maxExposureTime</span></span></span><br /></dt>
-<dd><p>Maximum exposure time for auto exposure (microseconds) </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">minGain</span></span></span><br /></dt>
-<dd><p>Minimum auto exposure gain (ISO) </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">maxGain</span></span></span><br /></dt>
-<dd><p>Maximum auto exposure gain (ISO) </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">timestamp</span></span></span><br /></dt>
-<dd><p>Image timestamp (seconds) </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">tag</span></span></span><br /></dt>
-<dd><p>Input frame tag (optional) </p>
-</dd></dl>
-
-</div>
-</dd></dl>
-
 <dl class="cpp struct">
 <dt class="sig sig-object cpp">
 <span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Camera</span></span></span><br /></dt>
@@ -516,69 +471,14 @@ To get the pose for another camera, use either <a class="reference internal" hre
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp">
+<a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Vector3dE" title="spectacularAI::Vector3d"><span class="n"><span class="pre">Vector3d</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">velocity</span></span></span><br /></dt>
+<dd><p>Velocity vector (xyz) of the camera center in m/s </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
 <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI6CameraE" title="spectacularAI::Camera"><span class="n"><span class="pre">Camera</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">camera</span></span></span><br /></dt>
 <dd><p><a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1Camera"><span class="std std-ref">Camera</span></a> intrinsic transformations </p>
-</dd></dl>
-
-</div>
-</dd></dl>
-
-<dl class="cpp struct">
-<dt class="sig sig-object cpp">
-<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">GnssVioOutput</span></span></span><br /></dt>
-<dd><div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
-<dl class="cpp function">
-<dt class="sig sig-object cpp">
-<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI10CameraPoseE" title="spectacularAI::CameraPose"><span class="n"><span class="pre">CameraPose</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getEnuCameraPose</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">cameraId</span></span>, <a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI14WgsCoordinatesE" title="spectacularAI::WgsCoordinates"><span class="n"><span class="pre">WgsCoordinates</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">enuOrigin</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
-<dd><p>Get the global pose of a particular camera. The “world” coordinate system of the camera pose is an East-North-Up system, whose origin is at the given WGS84 coordinates.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>cameraId</strong> – index of the camera whose pose is returned </p></li>
-<li><p><strong>enuOrigin</strong> – the origin of the ENU coordinate system </p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp">
-<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~GnssVioOutput</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><br /></dt>
-<dd></dd></dl>
-
-</div>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI14WgsCoordinatesE" title="spectacularAI::WgsCoordinates"><span class="n"><span class="pre">WgsCoordinates</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">coordinates</span></span></span><br /></dt>
-<dd><p>Position in global coordinates in WGS84 (mean) </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI10QuaternionE" title="spectacularAI::Quaternion"><span class="n"><span class="pre">Quaternion</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">orientation</span></span></span><br /></dt>
-<dd><p>Orientation of the device as quaternion representing camera-to-ENU transformation, i.e., a camera-to-world where the world coordinates are defined in an East-North-Up coordinate system. Note that the origin of the ENU coordinates system does not matter in this context.</p>
-<p>See the helper methods for obtaining the Euler angles. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Vector3dE" title="spectacularAI::Vector3d"><span class="n"><span class="pre">Vector3d</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">velocity</span></span></span><br /></dt>
-<dd><p>Velocity in ENU coordinates (m/s) </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Matrix3dE" title="spectacularAI::Matrix3d"><span class="n"><span class="pre">Matrix3d</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">enuPositionCovariance</span></span></span><br /></dt>
-<dd><p>Uncertainty of the estimate as a covariance in an East-North Up (ENU) coordiante system. See the helper methods for obtaining a single vertical and horizontal number. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Matrix3dE" title="spectacularAI::Matrix3d"><span class="n"><span class="pre">Matrix3d</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">velocityCovariance</span></span></span><br /></dt>
-<dd><p>Uncertainty of velocity as a 3x3 covariance matrix (in ENU coordinates) </p>
 </dd></dl>
 
 </div>
@@ -679,6 +579,130 @@ To get the pose for another camera, use either <a class="reference internal" hre
 <dt class="sig sig-object cpp">
 <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI13GnssVioOutputE" title="spectacularAI::GnssVioOutput"><span class="n"><span class="pre">GnssVioOutput</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">globalPose</span></span></span><br /></dt>
 <dd><p>GNSS-VIO output if available, otherwise {} (nullptr) </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp">
+<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">GnssVioOutput</span></span></span><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI10CameraPoseE" title="spectacularAI::CameraPose"><span class="n"><span class="pre">CameraPose</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getEnuCameraPose</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">cameraId</span></span>, <a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI14WgsCoordinatesE" title="spectacularAI::WgsCoordinates"><span class="n"><span class="pre">WgsCoordinates</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">enuOrigin</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Get the global pose of a particular camera. The “world” coordinate system of the camera pose is an East-North-Up system, whose origin is at the given WGS84 coordinates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cameraId</strong> – index of the camera whose pose is returned </p></li>
+<li><p><strong>enuOrigin</strong> – the origin of the ENU coordinate system </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~GnssVioOutput</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI14WgsCoordinatesE" title="spectacularAI::WgsCoordinates"><span class="n"><span class="pre">WgsCoordinates</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">coordinates</span></span></span><br /></dt>
+<dd><p>Position in global coordinates in WGS84 (mean) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI10QuaternionE" title="spectacularAI::Quaternion"><span class="n"><span class="pre">Quaternion</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">orientation</span></span></span><br /></dt>
+<dd><p>Orientation of the device as quaternion representing camera-to-ENU transformation, i.e., a camera-to-world where the world coordinates are defined in an East-North-Up coordinate system. Note that the origin of the ENU coordinates system does not matter in this context.</p>
+<p>See the helper methods for obtaining the Euler angles. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Vector3dE" title="spectacularAI::Vector3d"><span class="n"><span class="pre">Vector3d</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">velocity</span></span></span><br /></dt>
+<dd><p>Velocity in ENU coordinates (m/s) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Vector3dE" title="spectacularAI::Vector3d"><span class="n"><span class="pre">Vector3d</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">angularVelocity</span></span></span><br /></dt>
+<dd><p>Angular velocity in ENU coordinates </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Matrix3dE" title="spectacularAI::Matrix3d"><span class="n"><span class="pre">Matrix3d</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">enuPositionCovariance</span></span></span><br /></dt>
+<dd><p>Uncertainty of the estimate as a covariance in an East-North Up (ENU) coordiante system. See the helper methods for obtaining a single vertical and horizontal number. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Matrix3dE" title="spectacularAI::Matrix3d"><span class="n"><span class="pre">Matrix3d</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">velocityCovariance</span></span></span><br /></dt>
+<dd><p>Uncertainty of velocity as a 3x3 covariance matrix (in ENU coordinates) </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp">
+<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">AutoExposureOutput</span></span></span><br /></dt>
+<dd><p>Auto exposure output structure. Each auto exposure output corresponds to a specific image with timestamp and (optional) tag. Contains exposure information that can be used to implement different auto exposure control algorithms, depending on the device. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">deltaBrightness</span></span></span><br /></dt>
+<dd><p>Determines how much brightness should be changed (±0-255) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">brightness</span></span></span><br /></dt>
+<dd><p>Approx. image brightness (0-255) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">minExposureTime</span></span></span><br /></dt>
+<dd><p>Minimum exposure time for auto exposure (microseconds) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">maxExposureTime</span></span></span><br /></dt>
+<dd><p>Maximum exposure time for auto exposure (microseconds) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">minGain</span></span></span><br /></dt>
+<dd><p>Minimum auto exposure gain (ISO) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">maxGain</span></span></span><br /></dt>
+<dd><p>Maximum auto exposure gain (ISO) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">timestamp</span></span></span><br /></dt>
+<dd><p>Image timestamp (seconds) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">tag</span></span></span><br /></dt>
+<dd><p>Input frame tag (optional) </p>
 </dd></dl>
 
 </div>
@@ -1086,6 +1110,208 @@ To get the pose for another camera, use either <a class="reference internal" hre
 </div>
 <dl class="cpp struct">
 <dt class="sig sig-object cpp">
+<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PixelCoordinates</span></span></span><br /></dt>
+<dd><p>Coordinates of an image pixel, subpixel accuracy </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">x</span></span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">y</span></span></span><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp">
+<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Vector3d</span></span></span><br /></dt>
+<dd><p>Vector in R^3, can represent, e.g., velocity, position or angular velocity </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">x</span></span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">y</span></span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">z</span></span></span><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp">
+<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Vector3f</span></span></span><br /></dt>
+<dd><p>Vector in R^3 (single precision) </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">x</span></span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">y</span></span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">z</span></span></span><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp">
+<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Quaternion</span></span></span><br /></dt>
+<dd><p><a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1Quaternion"><span class="std std-ref">Quaternion</span></a> representation of a rotation. Hamilton convention. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">x</span></span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">y</span></span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">z</span></span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">w</span></span></span><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp">
+<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Pose</span></span></span><br /></dt>
+<dd><p>Represents the pose (position &amp; orientation) of a device at a given time </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Matrix4dE" title="spectacularAI::Matrix4d"><span class="n"><span class="pre">Matrix4d</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">asMatrix</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><br /></dt>
+<dd><p>Matrix that converts homogeneous local coordinates to homogeneous world coordinates </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">time</span></span></span><br /></dt>
+<dd><p>Timestamp in seconds. Monotonically increasing </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Vector3dE" title="spectacularAI::Vector3d"><span class="n"><span class="pre">Vector3d</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">position</span></span></span><br /></dt>
+<dd><p>3D position in a right-handed metric coordinate system where the z-axis points up </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI10QuaternionE" title="spectacularAI::Quaternion"><span class="n"><span class="pre">Quaternion</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">orientation</span></span></span><br /></dt>
+<dd><p>Orientation quaternion in the same coordinate system as position </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="k"><span class="pre">static</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI4PoseE" title="spectacularAI::Pose"><span class="n"><span class="pre">Pose</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fromMatrix</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">t</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Matrix4dE" title="spectacularAI::Matrix4d"><span class="n"><span class="pre">Matrix4d</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">localToWorld</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Create a pose from a timestamp and local-to-world matrix </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp">
+<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">WgsCoordinates</span></span></span><br /></dt>
+<dd><p>Global coordinates, WGS-84 </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">latitude</span></span></span><br /></dt>
+<dd><p>Latitude in degrees </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">longitude</span></span></span><br /></dt>
+<dd><p>Longitude in degrees </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">altitude</span></span></span><br /></dt>
+<dd><p>Altitude in meters </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp">
+<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FeaturePoint</span></span></span><br /></dt>
+<dd><p>Sparse 3D feature point observed from a certain camera frame. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">id</span></span></span><br /></dt>
+<dd><p>An integer ID to identify same points in different revisions of the point cloud, e.g., the same point observed from a different camera frame. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI16PixelCoordinatesE" title="spectacularAI::PixelCoordinates"><span class="n"><span class="pre">PixelCoordinates</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pixelCoordinates</span></span></span><br /></dt>
+<dd><p>Pixel coordinates of the observation in the camera frame. If the pixel coordinates are not available, set to { -1, -1 }.</p>
+<p>The coordinates are not available in case of trigger outputs that do not correspond to any camera frame. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Vector3dE" title="spectacularAI::Vector3d"><span class="n"><span class="pre">Vector3d</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">position</span></span></span><br /></dt>
+<dd><p>Global position of the feature point </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">status</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Implementation-defined status/type </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp">
 <span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Bitmap</span></span></span><br /></dt>
 <dd><p>Simple wrapper for a bitmap in RAM (not GPU RAM). </p>
 <div class="breathe-sectiondef docutils container">
@@ -1169,208 +1395,6 @@ To get the pose for another camera, use either <a class="reference internal" hre
 <dt class="sig sig-object cpp">
 <a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Vector3dE" title="spectacularAI::Vector3d"><span class="n"><span class="pre">Vector3d</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">point</span></span></span><br /></dt>
 <dd></dd></dl>
-
-</div>
-</dd></dl>
-
-<dl class="cpp struct">
-<dt class="sig sig-object cpp">
-<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FeaturePoint</span></span></span><br /></dt>
-<dd><p>Sparse 3D feature point observed from a certain camera frame. </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">id</span></span></span><br /></dt>
-<dd><p>An integer ID to identify same points in different revisions of the point cloud, e.g., the same point observed from a different camera frame. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI16PixelCoordinatesE" title="spectacularAI::PixelCoordinates"><span class="n"><span class="pre">PixelCoordinates</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pixelCoordinates</span></span></span><br /></dt>
-<dd><p>Pixel coordinates of the observation in the camera frame. If the pixel coordinates are not available, set to { -1, -1 }.</p>
-<p>The coordinates are not available in case of trigger outputs that do not correspond to any camera frame. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Vector3dE" title="spectacularAI::Vector3d"><span class="n"><span class="pre">Vector3d</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">position</span></span></span><br /></dt>
-<dd><p>Global position of the feature point </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">status</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
-<dd><p>Implementation-defined status/type </p>
-</dd></dl>
-
-</div>
-</dd></dl>
-
-<dl class="cpp struct">
-<dt class="sig sig-object cpp">
-<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PixelCoordinates</span></span></span><br /></dt>
-<dd><p>Coordinates of an image pixel, subpixel accuracy </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">x</span></span></span><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">y</span></span></span><br /></dt>
-<dd></dd></dl>
-
-</div>
-</dd></dl>
-
-<dl class="cpp struct">
-<dt class="sig sig-object cpp">
-<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Pose</span></span></span><br /></dt>
-<dd><p>Represents the pose (position &amp; orientation) of a device at a given time </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
-<dl class="cpp function">
-<dt class="sig sig-object cpp">
-<a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Matrix4dE" title="spectacularAI::Matrix4d"><span class="n"><span class="pre">Matrix4d</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">asMatrix</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><br /></dt>
-<dd><p>Matrix that converts homogeneous local coordinates to homogeneous world coordinates </p>
-</dd></dl>
-
-</div>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">time</span></span></span><br /></dt>
-<dd><p>Timestamp in seconds. Monotonically increasing </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Vector3dE" title="spectacularAI::Vector3d"><span class="n"><span class="pre">Vector3d</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">position</span></span></span><br /></dt>
-<dd><p>3D position in a right-handed metric coordinate system where the z-axis points up </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI10QuaternionE" title="spectacularAI::Quaternion"><span class="n"><span class="pre">Quaternion</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">orientation</span></span></span><br /></dt>
-<dd><p>Orientation quaternion in the same coordinate system as position </p>
-</dd></dl>
-
-</div>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
-<dl class="cpp function">
-<dt class="sig sig-object cpp">
-<span class="k"><span class="pre">static</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI4PoseE" title="spectacularAI::Pose"><span class="n"><span class="pre">Pose</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fromMatrix</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">t</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Matrix4dE" title="spectacularAI::Matrix4d"><span class="n"><span class="pre">Matrix4d</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">localToWorld</span></span><span class="sig-paren">)</span><br /></dt>
-<dd><p>Create a pose from a timestamp and local-to-world matrix </p>
-</dd></dl>
-
-</div>
-</dd></dl>
-
-<dl class="cpp struct">
-<dt class="sig sig-object cpp">
-<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Quaternion</span></span></span><br /></dt>
-<dd><p><a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1Quaternion"><span class="std std-ref">Quaternion</span></a> representation of a rotation. Hamilton convention. </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">x</span></span></span><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">y</span></span></span><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">z</span></span></span><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">w</span></span></span><br /></dt>
-<dd></dd></dl>
-
-</div>
-</dd></dl>
-
-<dl class="cpp struct">
-<dt class="sig sig-object cpp">
-<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Vector3d</span></span></span><br /></dt>
-<dd><p>Vector in R^3, can represent, e.g., velocity, position or angular velocity </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">x</span></span></span><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">y</span></span></span><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">z</span></span></span><br /></dt>
-<dd></dd></dl>
-
-</div>
-</dd></dl>
-
-<dl class="cpp struct">
-<dt class="sig sig-object cpp">
-<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Vector3f</span></span></span><br /></dt>
-<dd><p>Vector in R^3 (single precision) </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">x</span></span></span><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">y</span></span></span><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">z</span></span></span><br /></dt>
-<dd></dd></dl>
-
-</div>
-</dd></dl>
-
-<dl class="cpp struct">
-<dt class="sig sig-object cpp">
-<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">WgsCoordinates</span></span></span><br /></dt>
-<dd><p>Global coordinates, WGS-84 </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">latitude</span></span></span><br /></dt>
-<dd><p>Latitude in degrees </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">longitude</span></span></span><br /></dt>
-<dd><p>Longitude in degrees </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">altitude</span></span></span><br /></dt>
-<dd><p>Altitude in meters </p>
-</dd></dl>
 
 </div>
 </dd></dl>
