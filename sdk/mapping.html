@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mapping API &mdash; spectacularAI  documentation</title>
@@ -96,7 +96,7 @@
             <li class="breadcrumb-item"><a href="core.html">Core SDK</a></li>
         <li class="breadcrumb-item active">Mapping API</li>
     <li class="wy-breadcrumbs-aside version">
-        v1.30
+        v1.31
     </li>
     </ul>
 
@@ -497,74 +497,90 @@ to other tools such as Nerfstudio.</p>
 
 <dl class="cpp struct">
 <dt class="sig sig-object cpp">
-<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PointCloud</span></span></span><br /></dt>
-<dd><p>Container for point clouds, where the points may have optional properties such as colors and normals. </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
-<dl class="cpp function">
+<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">KeyFrame</span></span></span><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
 <dt class="sig sig-object cpp">
-<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
-<dd><p>Returns the number of points in the point cloud. </p>
+<span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">id</span></span></span><br /></dt>
+<dd><p>Unique ID for this keyframe. Monotonically increasing. </p>
 </dd></dl>
 
-<dl class="cpp function">
+<dl class="cpp var">
 <dt class="sig sig-object cpp">
-<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">empty</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
-<dd><p>Returns true if the point cloud has 0 points. </p>
+<span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI7mapping8FrameSetE" title="spectacularAI::mapping::FrameSet"><span class="n"><span class="pre">FrameSet</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">frameSet</span></span></span><br /></dt>
+<dd><p>Set of frames available for this keyframe. </p>
 </dd></dl>
 
-<dl class="cpp function">
+<dl class="cpp var">
 <dt class="sig sig-object cpp">
-<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hasNormals</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
-<dd><p>Returns true if the point cloud has optional normal data. </p>
+<span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI7mapping10PointCloudE" title="spectacularAI::mapping::PointCloud"><span class="n"><span class="pre">PointCloud</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pointCloud</span></span></span><br /></dt>
+<dd><p>(Optional) Dense point cloud for this keyframe in primary frame coordinates. </p>
 </dd></dl>
 
-<dl class="cpp function">
+<dl class="cpp var">
 <dt class="sig sig-object cpp">
-<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hasColors</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
-<dd><p>Returns true if the the point cloud has optional color data. </p>
+<a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Vector3dE" title="spectacularAI::Vector3d"><span class="n"><span class="pre">Vector3d</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">angularVelocity</span></span></span><br /></dt>
+<dd><p>Angular velocity vector in SI units (rad/s) </p>
 </dd></dl>
 
-<dl class="cpp function">
-<dt class="sig sig-object cpp">
-<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Vector3fE" title="spectacularAI::Vector3f"><span class="n"><span class="pre">Vector3f</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getPosition</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">index</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
-<dd><p>Helper function to get a single point position vector, yields an error if index &gt;= <a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1mapping_1_1PointCloud_1a7d8927ae58bd34e696975f6c7b7eb042"><span class="std std-ref">size()</span></a>. </p>
+</div>
 </dd></dl>
 
-<dl class="cpp function">
+<dl class="cpp struct">
 <dt class="sig sig-object cpp">
-<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Vector3fE" title="spectacularAI::Vector3f"><span class="n"><span class="pre">Vector3f</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getNormal</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">index</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
-<dd><p>Helper function to get a single point normal vector, yields an error if <a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1mapping_1_1PointCloud_1a2257da17e2dc0744ca7baa87638a80a4"><span class="std std-ref">hasNormals()</span></a> is false or index &gt;= <a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1mapping_1_1PointCloud_1a7d8927ae58bd34e696975f6c7b7eb042"><span class="std std-ref">size()</span></a>. </p>
+<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Map</span></span></span><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">int64_t</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI7mapping8KeyFrameE" title="spectacularAI::mapping::KeyFrame"><span class="n"><span class="pre">KeyFrame</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">keyFrames</span></span></span><br /></dt>
+<dd><p>ID to <a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1mapping_1_1KeyFrame"><span class="std std-ref">KeyFrame</span></a> map. The shared_ptr objects are always non-empty. May be changed to a similar associative container in the future, do not rely on this being std::map. </p>
 </dd></dl>
 
-<dl class="cpp function">
+<dl class="cpp var">
 <dt class="sig sig-object cpp">
-<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">array</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">uint8_t</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">3</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getRGB24</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">index</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
-<dd><p>Helper function to get a single point color array, yields an error if <a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1mapping_1_1PointCloud_1ad9210c787bc9f5913065bca6dafde61a"><span class="std std-ref">hasColors()</span></a> is false or index &gt;= <a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1mapping_1_1PointCloud_1a7d8927ae58bd34e696975f6c7b7eb042"><span class="std std-ref">size()</span></a>. </p>
+<span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">int64_t</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv413spectacularAI" title="spectacularAI"><span class="n"><span class="pre">spectacularAI</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Vector3dE" title="spectacularAI::Vector3d"><span class="n"><span class="pre">Vector3d</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mapPoints</span></span></span><br /></dt>
+<dd><p>List of sparse 3D map points (a.k.a. landmarks). These are observed from one or more KeyFrames, where the corresponding 2D pixel coordinates are stored in the sparseFeatures fields. </p>
 </dd></dl>
 
-<dl class="cpp function">
-<dt class="sig sig-object cpp">
-<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Vector3fE" title="spectacularAI::Vector3f"><span class="n"><span class="pre">Vector3f</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">getPositionData</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
-<dd><p>Efficient way to get all point positions, returns nullptr if the point cloud is empty. </p>
+</div>
 </dd></dl>
 
-<dl class="cpp function">
+<dl class="cpp struct">
 <dt class="sig sig-object cpp">
-<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Vector3fE" title="spectacularAI::Vector3f"><span class="n"><span class="pre">Vector3f</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">getNormalData</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
-<dd><p>Efficient way to get all point normals, returns nullptr if the point cloud is empty or <a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1mapping_1_1PointCloud_1a2257da17e2dc0744ca7baa87638a80a4"><span class="std std-ref">hasNormals()</span></a> is false. </p>
+<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MapperOutput</span></span></span><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI7mapping3MapE" title="spectacularAI::mapping::Map"><span class="n"><span class="pre">Map</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">map</span></span></span><br /></dt>
+<dd><p>Up to date map. Always non-empty </p>
 </dd></dl>
 
-<dl class="cpp function">
+<dl class="cpp var">
 <dt class="sig sig-object cpp">
-<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">getRGB24Data</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
-<dd><p>Efficient way to get all point colors, returns nullptr if the point cloud is empty or <a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1mapping_1_1PointCloud_1ad9210c787bc9f5913065bca6dafde61a"><span class="std std-ref">hasColors()</span></a> is false. </p>
+<span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">int64_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">updatedKeyFrames</span></span></span><br /></dt>
+<dd><p>List of keyframes that were modified or deleted. Ordered from oldest to newest </p>
 </dd></dl>
 
-<dl class="cpp function">
+<dl class="cpp var">
 <dt class="sig sig-object cpp">
-<span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~PointCloud</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><br /></dt>
-<dd></dd></dl>
+<span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">int64_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">updatedMapPoints</span></span></span><br /></dt>
+<dd><p>List of sparse map points that were modified, added or deleted. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI7mapping4MeshE" title="spectacularAI::mapping::Mesh"><span class="n"><span class="pre">Mesh</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mesh</span></span></span><br /></dt>
+<dd><p>(Optional) dense reconstruction of the map. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">finalMap</span></span></span><br /></dt>
+<dd><p>True for the last update before program exit </p>
+</dd></dl>
 
 </div>
 </dd></dl>
@@ -682,90 +698,74 @@ to other tools such as Nerfstudio.</p>
 
 <dl class="cpp struct">
 <dt class="sig sig-object cpp">
-<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">KeyFrame</span></span></span><br /></dt>
-<dd><div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
-<dl class="cpp var">
+<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PointCloud</span></span></span><br /></dt>
+<dd><p>Container for point clouds, where the points may have optional properties such as colors and normals. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">id</span></span></span><br /></dt>
-<dd><p>Unique ID for this keyframe. Monotonically increasing. </p>
+<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Returns the number of points in the point cloud. </p>
 </dd></dl>
 
-<dl class="cpp var">
+<dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI7mapping8FrameSetE" title="spectacularAI::mapping::FrameSet"><span class="n"><span class="pre">FrameSet</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">frameSet</span></span></span><br /></dt>
-<dd><p>Set of frames available for this keyframe. </p>
+<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">empty</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Returns true if the point cloud has 0 points. </p>
 </dd></dl>
 
-<dl class="cpp var">
+<dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI7mapping10PointCloudE" title="spectacularAI::mapping::PointCloud"><span class="n"><span class="pre">PointCloud</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pointCloud</span></span></span><br /></dt>
-<dd><p>(Optional) Dense point cloud for this keyframe in primary frame coordinates. </p>
+<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hasNormals</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Returns true if the point cloud has optional normal data. </p>
 </dd></dl>
 
-<dl class="cpp var">
+<dl class="cpp function">
 <dt class="sig sig-object cpp">
-<a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Vector3dE" title="spectacularAI::Vector3d"><span class="n"><span class="pre">Vector3d</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">angularVelocity</span></span></span><br /></dt>
-<dd><p>Angular velocity vector in SI units (rad/s) </p>
+<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hasColors</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Returns true if the the point cloud has optional color data. </p>
 </dd></dl>
 
-</div>
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Vector3fE" title="spectacularAI::Vector3f"><span class="n"><span class="pre">Vector3f</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getPosition</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">index</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Helper function to get a single point position vector, yields an error if index &gt;= <a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1mapping_1_1PointCloud_1a7d8927ae58bd34e696975f6c7b7eb042"><span class="std std-ref">size()</span></a>. </p>
 </dd></dl>
 
-<dl class="cpp struct">
+<dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Map</span></span></span><br /></dt>
-<dd><div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">int64_t</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI7mapping8KeyFrameE" title="spectacularAI::mapping::KeyFrame"><span class="n"><span class="pre">KeyFrame</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">keyFrames</span></span></span><br /></dt>
-<dd><p>ID to <a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1mapping_1_1KeyFrame"><span class="std std-ref">KeyFrame</span></a> map. The shared_ptr objects are always non-empty. May be changed to a similar associative container in the future, do not rely on this being std::map. </p>
+<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Vector3fE" title="spectacularAI::Vector3f"><span class="n"><span class="pre">Vector3f</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getNormal</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">index</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Helper function to get a single point normal vector, yields an error if <a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1mapping_1_1PointCloud_1a2257da17e2dc0744ca7baa87638a80a4"><span class="std std-ref">hasNormals()</span></a> is false or index &gt;= <a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1mapping_1_1PointCloud_1a7d8927ae58bd34e696975f6c7b7eb042"><span class="std std-ref">size()</span></a>. </p>
 </dd></dl>
 
-<dl class="cpp var">
+<dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">int64_t</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv413spectacularAI" title="spectacularAI"><span class="n"><span class="pre">spectacularAI</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Vector3dE" title="spectacularAI::Vector3d"><span class="n"><span class="pre">Vector3d</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mapPoints</span></span></span><br /></dt>
-<dd><p>List of sparse 3D map points (a.k.a. landmarks). These are observed from one or more KeyFrames, where the corresponding 2D pixel coordinates are stored in the sparseFeatures fields. </p>
+<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">array</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">uint8_t</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">3</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getRGB24</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">index</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Helper function to get a single point color array, yields an error if <a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1mapping_1_1PointCloud_1ad9210c787bc9f5913065bca6dafde61a"><span class="std std-ref">hasColors()</span></a> is false or index &gt;= <a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1mapping_1_1PointCloud_1a7d8927ae58bd34e696975f6c7b7eb042"><span class="std std-ref">size()</span></a>. </p>
 </dd></dl>
 
-</div>
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Vector3fE" title="spectacularAI::Vector3f"><span class="n"><span class="pre">Vector3f</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">getPositionData</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Efficient way to get all point positions, returns nullptr if the point cloud is empty. </p>
 </dd></dl>
 
-<dl class="cpp struct">
+<dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MapperOutput</span></span></span><br /></dt>
-<dd><div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI7mapping3MapE" title="spectacularAI::mapping::Map"><span class="n"><span class="pre">Map</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">map</span></span></span><br /></dt>
-<dd><p>Up to date map. Always non-empty </p>
+<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Vector3fE" title="spectacularAI::Vector3f"><span class="n"><span class="pre">Vector3f</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">getNormalData</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Efficient way to get all point normals, returns nullptr if the point cloud is empty or <a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1mapping_1_1PointCloud_1a2257da17e2dc0744ca7baa87638a80a4"><span class="std std-ref">hasNormals()</span></a> is false. </p>
 </dd></dl>
 
-<dl class="cpp var">
+<dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">int64_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">updatedKeyFrames</span></span></span><br /></dt>
-<dd><p>List of keyframes that were modified or deleted. Ordered from oldest to newest </p>
+<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">getRGB24Data</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Efficient way to get all point colors, returns nullptr if the point cloud is empty or <a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1mapping_1_1PointCloud_1ad9210c787bc9f5913065bca6dafde61a"><span class="std std-ref">hasColors()</span></a> is false. </p>
 </dd></dl>
 
-<dl class="cpp var">
+<dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">int64_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">updatedMapPoints</span></span></span><br /></dt>
-<dd><p>List of sparse map points that were modified, added or deleted. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI7mapping4MeshE" title="spectacularAI::mapping::Mesh"><span class="n"><span class="pre">Mesh</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mesh</span></span></span><br /></dt>
-<dd><p>(Optional) dense reconstruction of the map. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">finalMap</span></span></span><br /></dt>
-<dd><p>True for the last update before program exit </p>
-</dd></dl>
+<span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~PointCloud</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><br /></dt>
+<dd></dd></dl>
 
 </div>
 </dd></dl>
