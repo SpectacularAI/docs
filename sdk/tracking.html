@@ -96,7 +96,7 @@
             <li class="breadcrumb-item"><a href="core.html">Core SDK</a></li>
         <li class="breadcrumb-item active">Tracking API</li>
     <li class="wy-breadcrumbs-aside version">
-        v1.31
+        v1.32
     </li>
     </ul>
 
@@ -131,8 +131,9 @@ To get the pose for another camera, use either <a class="reference internal" hre
 <div class="sphinx-tabs docutils container">
 <div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-UHl0aG9u" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-0-UHl0aG9u" name="UHl0aG9u" role="tab" tabindex="0">Python</button><button aria-controls="panel-0-Qysr" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-0-Qysr" name="Qysr" role="tab" tabindex="-1">C++</button></div><div aria-labelledby="tab-0-UHl0aG9u" class="sphinx-tabs-panel group-tab" id="panel-0-UHl0aG9u" name="UHl0aG9u" role="tabpanel" tabindex="0"><dl class="py class">
 <dt class="sig sig-object py" id="spectacularAI.Camera">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spectacularAI.</span></span><span class="sig-name descname"><span class="pre">Camera</span></span><a class="headerlink" href="#spectacularAI.Camera" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spectacularAI.</span></span><span class="sig-name descname"><span class="pre">Camera</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.Camera" title="spectacularAI.Camera"><span class="pre">spectacularAI.Camera</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">3</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">3</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spectacularAI.Camera" title="Link to this definition"></a></dt>
 <dd><p>Represents the intrinsic parameters of a particular camera. If the input image is distorted, the camera and projection matrices correspond to the undistorted / rectified image.</p>
+<p>Build a pinhole camera</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="spectacularAI.Camera.getIntrinsicMatrix">
 <span class="sig-name descname"><span class="pre">getIntrinsicMatrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.Camera" title="spectacularAI.Camera"><span class="pre">spectacularAI.Camera</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#spectacularAI.Camera.getIntrinsicMatrix" title="Link to this definition"></a></dt>
@@ -143,6 +144,30 @@ To get the pose for another camera, use either <a class="reference internal" hre
 <dt class="sig sig-object py" id="spectacularAI.Camera.getProjectionMatrixOpenGL">
 <span class="sig-name descname"><span class="pre">getProjectionMatrixOpenGL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.Camera" title="spectacularAI.Camera"><span class="pre">spectacularAI.Camera</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#spectacularAI.Camera.getProjectionMatrixOpenGL" title="Link to this definition"></a></dt>
 <dd><p>4x4 projection matrix for OpenGL (undistorted)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.Camera.pixelToRay">
+<span class="sig-name descname"><span class="pre">pixelToRay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.Camera" title="spectacularAI.Camera"><span class="pre">spectacularAI.Camera</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.PixelCoordinates" title="spectacularAI.PixelCoordinates"><span class="pre">spectacularAI.PixelCoordinates</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">object</span></span></span><a class="headerlink" href="#spectacularAI.Camera.pixelToRay" title="Link to this definition"></a></dt>
+<dd><p>Convert pixel coordinates to camera coordinates</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><p>arg0 <a class="reference internal" href="#spectacularAI.PixelCoordinates" title="spectacularAI.PixelCoordinates"><code class="xref py py-class docutils literal notranslate"><span class="pre">PixelCoordinates</span></code></a>: pixel coordinates.</p>
+</dd>
+<dt>Returns:</dt><dd><p><a class="reference internal" href="#spectacularAI.Vector3d" title="spectacularAI.Vector3d"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vector3d</span></code></a> ray in camera coordinates on succesful conversion. None otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.Camera.rayToPixel">
+<span class="sig-name descname"><span class="pre">rayToPixel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.Camera" title="spectacularAI.Camera"><span class="pre">spectacularAI.Camera</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.Vector3d" title="spectacularAI.Vector3d"><span class="pre">spectacularAI.Vector3d</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">object</span></span></span><a class="headerlink" href="#spectacularAI.Camera.rayToPixel" title="Link to this definition"></a></dt>
+<dd><p>Convert camera coordinates to pixel coordinates</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><p>arg0 <a class="reference internal" href="#spectacularAI.Vector3d" title="spectacularAI.Vector3d"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vector3d</span></code></a>: ray in camera coordinates.</p>
+</dd>
+<dt>Returns:</dt><dd><p><a class="reference internal" href="#spectacularAI.PixelCoordinates" title="spectacularAI.PixelCoordinates"><code class="xref py py-class docutils literal notranslate"><span class="pre">PixelCoordinates</span></code></a> pixel coordinates on succesful conversion (note that the pixel can be outside image boundaries). None otherwise.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -175,6 +200,18 @@ To get the pose for another camera, use either <a class="reference internal" hre
 <dd><p>4x4 homogeneous world-to-camera matrix</p>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.CameraPose.pixelToWorld">
+<span class="sig-name descname"><span class="pre">pixelToWorld</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.CameraPose" title="spectacularAI.CameraPose"><span class="pre">spectacularAI.CameraPose</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.PixelCoordinates" title="spectacularAI.PixelCoordinates"><span class="pre">spectacularAI.PixelCoordinates</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">object</span></span></span><a class="headerlink" href="#spectacularAI.CameraPose.pixelToWorld" title="Link to this definition"></a></dt>
+<dd><p>Convert pixel coordinates to rays in world coordinates</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><p>arg0 <a class="reference internal" href="#spectacularAI.PixelCoordinates" title="spectacularAI.PixelCoordinates"><code class="xref py py-class docutils literal notranslate"><span class="pre">PixelCoordinates</span></code></a>: pixel coordinates to convert.</p>
+</dd>
+<dt>Returns:</dt><dd><p>A tuple with <a class="reference internal" href="#spectacularAI.Vector3d" title="spectacularAI.Vector3d"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vector3d</span></code></a> origin of the ray in world coordinates, <a class="reference internal" href="#spectacularAI.Vector3d" title="spectacularAI.Vector3d"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vector3d</span></code></a> direction of ray from the origin on succesful conversion. None otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="spectacularAI.CameraPose.pose">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pose</span></span><a class="headerlink" href="#spectacularAI.CameraPose.pose" title="Link to this definition"></a></dt>
@@ -185,6 +222,18 @@ To get the pose for another camera, use either <a class="reference internal" hre
 <dt class="sig sig-object py" id="spectacularAI.CameraPose.velocity">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">velocity</span></span><a class="headerlink" href="#spectacularAI.CameraPose.velocity" title="Link to this definition"></a></dt>
 <dd><p><a class="reference internal" href="#spectacularAI.Vector3d" title="spectacularAI.Vector3d"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vector3d</span></code></a> instantaneous velocity vector (xyz) of the camera center in m/s</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spectacularAI.CameraPose.worldToPixel">
+<span class="sig-name descname"><span class="pre">worldToPixel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.CameraPose" title="spectacularAI.CameraPose"><span class="pre">spectacularAI.CameraPose</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.Vector3d" title="spectacularAI.Vector3d"><span class="pre">spectacularAI.Vector3d</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">object</span></span></span><a class="headerlink" href="#spectacularAI.CameraPose.worldToPixel" title="Link to this definition"></a></dt>
+<dd><p>Convert world coordinates to pixel coordinates</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><p>arg0 <a class="reference internal" href="#spectacularAI.Vector3d" title="spectacularAI.Vector3d"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vector3d</span></code></a>: point in world coordinates coordinates.</p>
+</dd>
+<dt>Returns:</dt><dd><p><a class="reference internal" href="#spectacularAI.PixelCoordinates" title="spectacularAI.PixelCoordinates"><code class="xref py py-class docutils literal notranslate"><span class="pre">PixelCoordinates</span></code></a> pixel coordinates on succesful conversion (note that the pixel can be outside image boundaries). None otherwise.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -981,6 +1030,51 @@ To get the pose for another camera, use either <a class="reference internal" hre
 <dt class="sig sig-object py" id="spectacularAI.WgsCoordinates.longitude">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">longitude</span></span><a class="headerlink" href="#spectacularAI.WgsCoordinates.longitude" title="Link to this definition"></a></dt>
 <dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="spectacularAI.PixelCoordinates">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spectacularAI.</span></span><span class="sig-name descname"><span class="pre">PixelCoordinates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spectacularAI.PixelCoordinates" title="Link to this definition"></a></dt>
+<dd><p>Coordinates of an image pixel (x, y), subpixel accuracy (<code class="docutils literal notranslate"><span class="pre">float</span></code>).</p>
+<p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>__init__(self: spectacularAI.PixelCoordinates) -&gt; None</p></li>
+<li><p>__init__(self: spectacularAI.PixelCoordinates, arg0: float, arg1: float) -&gt; None</p></li>
+</ol>
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.PixelCoordinates.x">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">x</span></span><a class="headerlink" href="#spectacularAI.PixelCoordinates.x" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.PixelCoordinates.y">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">y</span></span><a class="headerlink" href="#spectacularAI.PixelCoordinates.y" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="spectacularAI.FeaturePoint">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spectacularAI.</span></span><span class="sig-name descname"><span class="pre">FeaturePoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#spectacularAI.FeaturePoint" title="spectacularAI.FeaturePoint"><span class="pre">spectacularAI.FeaturePoint</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spectacularAI.FeaturePoint" title="Link to this definition"></a></dt>
+<dd><p>Sparse 3D feature point observed from a certain camera frame.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.FeaturePoint.id">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#spectacularAI.FeaturePoint.id" title="Link to this definition"></a></dt>
+<dd><p>An integer ID to identify same points in different frames.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.FeaturePoint.pixelCoordinates">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pixelCoordinates</span></span><a class="headerlink" href="#spectacularAI.FeaturePoint.pixelCoordinates" title="Link to this definition"></a></dt>
+<dd><p><a class="reference internal" href="#spectacularAI.PixelCoordinates" title="spectacularAI.PixelCoordinates"><code class="xref py py-class docutils literal notranslate"><span class="pre">PixelCoordinates</span></code></a> of the observation in the camera frame.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.FeaturePoint.position">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">position</span></span><a class="headerlink" href="#spectacularAI.FeaturePoint.position" title="Link to this definition"></a></dt>
+<dd><p><a class="reference internal" href="#spectacularAI.Vector3d" title="spectacularAI.Vector3d"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vector3d</span></code></a> global position of the feature point.</p>
+</dd></dl>
 
 </dd></dl>
 

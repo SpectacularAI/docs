@@ -96,7 +96,7 @@
             <li class="breadcrumb-item"><a href="../wrappers.html">Wrappers</a></li>
         <li class="breadcrumb-item active">OAK-D</li>
     <li class="wy-breadcrumbs-aside version">
-        v1.31
+        v1.32
     </li>
     </ul>
 
@@ -528,6 +528,12 @@ the minimum required steps.</p>
 </dd></dl>
 
 <dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Configuration.lowLatency">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lowLatency</span></span><a class="headerlink" href="#spectacularAI.depthai.Configuration.lowLatency" title="Link to this definition"></a></dt>
+<dd><p>When enabled, outputs pose at very low latency on every IMU sample instead of camera frame</p>
+</dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="spectacularAI.depthai.Configuration.mapLoadPath">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mapLoadPath</span></span><a class="headerlink" href="#spectacularAI.depthai.Configuration.mapLoadPath" title="Link to this definition"></a></dt>
 <dd><p>Load existing SLAM map (.bin format required)</p>
@@ -549,6 +555,12 @@ the minimum required steps.</p>
 <dt class="sig sig-object py" id="spectacularAI.depthai.Configuration.monoQueueSize">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">monoQueueSize</span></span><a class="headerlink" href="#spectacularAI.depthai.Configuration.monoQueueSize" title="Link to this definition"></a></dt>
 <dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.depthai.Configuration.parameterSets">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parameterSets</span></span><a class="headerlink" href="#spectacularAI.depthai.Configuration.parameterSets" title="Link to this definition"></a></dt>
+<dd><p>Parameter sets used, use append unless you really know what you are doing</p>
+</dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spectacularAI.depthai.Configuration.recordingFolder">
@@ -659,6 +671,11 @@ the minimum required steps.</p>
 <dl class="cpp var">
 <dt class="sig sig-object cpp">
 <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fastVio</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lowLatency</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp var">
@@ -804,6 +821,11 @@ the minimum required steps.</p>
 <dl class="cpp var">
 <dt class="sig sig-object cpp">
 <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../cpp/latest/index.html#_CPPv4N13spectacularAI8Vector3dE" title="spectacularAI::Vector3d"><span class="n"><span class="pre">Vector3d</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">imuToGnss</span></span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">parameterSets</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="s"><span class="pre">&quot;wrapper-base&quot;</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;oak-d&quot;</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;live&quot;</span></span><span class="p"><span class="pre">}</span></span><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp var">

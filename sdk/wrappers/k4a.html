@@ -96,7 +96,7 @@
             <li class="breadcrumb-item"><a href="../wrappers.html">Wrappers</a></li>
         <li class="breadcrumb-item active">Azure Kinect</li>
     <li class="wy-breadcrumbs-aside version">
-        v1.31
+        v1.32
     </li>
     </ul>
 
@@ -270,27 +270,27 @@ e.g. check that open <cite>k4aviewer</cite>.</p>
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI9k4aPlugin13Configuration9useStereoE">
 <span id="_CPPv3N13spectacularAI9k4aPlugin13Configuration9useStereoE"></span><span id="_CPPv2N13spectacularAI9k4aPlugin13Configuration9useStereoE"></span><span id="spectacularAI::k4aPlugin::Configuration::useStereo__b"></span><span class="target" id="structspectacularAI_1_1k4aPlugin_1_1Configuration_1a70623003a93ce768ce4a0067b9ef31fd"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">useStereo</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><br /></dt>
-<dd></dd></dl>
+<dd><p>Set true to use RGB-D mode, false for mono (RGB camera only). </p>
+</dd></dl>
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI9k4aPlugin13Configuration7useSlamE">
 <span id="_CPPv3N13spectacularAI9k4aPlugin13Configuration7useSlamE"></span><span id="_CPPv2N13spectacularAI9k4aPlugin13Configuration7useSlamE"></span><span id="spectacularAI::k4aPlugin::Configuration::useSlam__b"></span><span class="target" id="structspectacularAI_1_1k4aPlugin_1_1Configuration_1ae4451740c741b2c7b1eaa32bd0abfcea"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">useSlam</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><br /></dt>
-<dd></dd></dl>
+<dd><p>Enable SLAM, required for ICP </p>
+</dd></dl>
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI9k4aPlugin13Configuration7fastVioE">
 <span id="_CPPv3N13spectacularAI9k4aPlugin13Configuration7fastVioE"></span><span id="_CPPv2N13spectacularAI9k4aPlugin13Configuration7fastVioE"></span><span id="spectacularAI::k4aPlugin::Configuration::fastVio__b"></span><span class="target" id="structspectacularAI_1_1k4aPlugin_1_1Configuration_1a27ca112101d2d378b046543e8db9d4f2"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fastVio</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><br /></dt>
-<dd></dd></dl>
+<dd><p>Enable more lightweight VIO parameters </p>
+</dd></dl>
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI9k4aPlugin13Configuration12alignedDepthE">
 <span id="_CPPv3N13spectacularAI9k4aPlugin13Configuration12alignedDepthE"></span><span id="_CPPv2N13spectacularAI9k4aPlugin13Configuration12alignedDepthE"></span><span id="spectacularAI::k4aPlugin::Configuration::alignedDepth__b"></span><span class="target" id="structspectacularAI_1_1k4aPlugin_1_1Configuration_1a96cfe31ec68e3566f05fd9e423e876f4"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">alignedDepth</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI9k4aPlugin13Configuration17distortionEnabledE">
-<span id="_CPPv3N13spectacularAI9k4aPlugin13Configuration17distortionEnabledE"></span><span id="_CPPv2N13spectacularAI9k4aPlugin13Configuration17distortionEnabledE"></span><span id="spectacularAI::k4aPlugin::Configuration::distortionEnabled__b"></span><span class="target" id="structspectacularAI_1_1k4aPlugin_1_1Configuration_1a4236912205762f7bbbffe7fc7d2f44bc"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">distortionEnabled</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><br /></dt>
-<dd></dd></dl>
+<dd><p>Align depth images to color images using Azure Kinect SDK.</p>
+<p>Note that this affects ICP performance since the depth image has larger field of view than the color camera. </p>
+</dd></dl>
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI9k4aPlugin13Configuration15recordingFolderE">
@@ -305,17 +305,26 @@ e.g. check that open <cite>k4aviewer</cite>.</p>
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI9k4aPlugin13Configuration19postProcessFinalMapE">
 <span id="_CPPv3N13spectacularAI9k4aPlugin13Configuration19postProcessFinalMapE"></span><span id="_CPPv2N13spectacularAI9k4aPlugin13Configuration19postProcessFinalMapE"></span><span id="spectacularAI::k4aPlugin::Configuration::postProcessFinalMap__b"></span><span class="target" id="structspectacularAI_1_1k4aPlugin_1_1Configuration_1a2ba2febc14e5e351e8923ce13a329ea9"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">postProcessFinalMap</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><br /></dt>
-<dd></dd></dl>
+<dd><p>If true, final mapping API output is refined using post processing. </p>
+</dd></dl>
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI9k4aPlugin13Configuration12aprilTagPathE">
 <span id="_CPPv3N13spectacularAI9k4aPlugin13Configuration12aprilTagPathE"></span><span id="_CPPv2N13spectacularAI9k4aPlugin13Configuration12aprilTagPathE"></span><span id="spectacularAI::k4aPlugin::Configuration::aprilTagPath__ss"></span><span class="target" id="structspectacularAI_1_1k4aPlugin_1_1Configuration_1abcf60bc6c43e0112e82a601194678dbd"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">aprilTagPath</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;&quot;</span></span><br /></dt>
-<dd></dd></dl>
+<dd><p>Path to .json file with AprilTag information. AprilTag detection is enabled when not empty. For the file format see: <a class="reference external" href="https://github.com/SpectacularAI/docs/blob/main/pdf/april_tag_instructions.pdf">https://github.com/SpectacularAI/docs/blob/main/pdf/april_tag_instructions.pdf</a> Note: sets useSlam=true </p>
+</dd></dl>
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI9k4aPlugin13Configuration9k4aConfigE">
 <span id="_CPPv3N13spectacularAI9k4aPlugin13Configuration9k4aConfigE"></span><span id="_CPPv2N13spectacularAI9k4aPlugin13Configuration9k4aConfigE"></span><span id="spectacularAI::k4aPlugin::Configuration::k4aConfig__k4a_device_configuration_t"></span><span class="target" id="structspectacularAI_1_1k4aPlugin_1_1Configuration_1a1ce87163ebf5d2993fb9880d519713c2"></span><span class="n"><span class="pre">k4a_device_configuration_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">k4aConfig</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="../cpp/latest/index.html#_CPPv4N13spectacularAI9k4aPlugin19getK4AConfigurationERKNSt6stringEiib" title="spectacularAI::k4aPlugin::getK4AConfiguration"><span class="n"><span class="pre">getK4AConfiguration</span></span></a><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><br /></dt>
-<dd></dd></dl>
+<dd><p><a class="reference internal" href="#structspectacularAI_1_1k4aPlugin_1_1Configuration"><span class="std std-ref">Configuration</span></a> for the k4a device. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI9k4aPlugin13Configuration13ignoreOutputsE">
+<span id="_CPPv3N13spectacularAI9k4aPlugin13Configuration13ignoreOutputsE"></span><span id="_CPPv2N13spectacularAI9k4aPlugin13Configuration13ignoreOutputsE"></span><span id="spectacularAI::k4aPlugin::Configuration::ignoreOutputs__b"></span><span class="target" id="structspectacularAI_1_1k4aPlugin_1_1Configuration_1abadc8bfd1a3f70974427ec5ffafd5ec5"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ignoreOutputs</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><br /></dt>
+<dd><p>If false, user should read vio outputs from the <a class="reference internal" href="#structspectacularAI_1_1k4aPlugin_1_1Session"><span class="std std-ref">Session</span></a>. If true, the SDK discards vio outputs. Useful when VIO outputs are not needed: e.g. when using mapping API or recording. </p>
+</dd></dl>
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI9k4aPlugin13Configuration18internalParametersE">
