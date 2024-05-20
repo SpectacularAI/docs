@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mapping API &mdash; spectacularAI  documentation</title>
@@ -96,7 +96,7 @@
             <li class="breadcrumb-item"><a href="core.html">Core SDK</a></li>
         <li class="breadcrumb-item active">Mapping API</li>
     <li class="wy-breadcrumbs-aside version">
-        v1.32
+        v1.33
     </li>
     </ul>
 
@@ -121,25 +121,31 @@ to other tools such as Nerfstudio.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="spectacularAI.mapping.Frame.cameraPose">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cameraPose</span></span><a class="headerlink" href="#spectacularAI.mapping.Frame.cameraPose" title="Link to this definition"></a></dt>
-<dd><p>Camera pose information</p>
+<dd><p><a class="reference internal" href="tracking.html#spectacularAI.CameraPose" title="spectacularAI.CameraPose"><code class="xref py py-class docutils literal notranslate"><span class="pre">CameraPose</span></code></a> for this frame</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spectacularAI.mapping.Frame.depthScale">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">depthScale</span></span><a class="headerlink" href="#spectacularAI.mapping.Frame.depthScale" title="Link to this definition"></a></dt>
-<dd><p>Scale of depth image, for non-depth images this is -1.0</p>
+<dd><p><code class="docutils literal notranslate"><span class="pre">float</span></code> Scale of depth image, for non-depth images this is -1.0</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spectacularAI.mapping.Frame.image">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">image</span></span><a class="headerlink" href="#spectacularAI.mapping.Frame.image" title="Link to this definition"></a></dt>
-<dd><p>Image data if it exists</p>
+<dd><p><a class="reference internal" href="tracking.html#spectacularAI.Bitmap" title="spectacularAI.Bitmap"><code class="xref py py-class docutils literal notranslate"><span class="pre">Bitmap</span></code></a> Image data if it exists</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spectacularAI.mapping.Frame.sparseFeatures">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sparseFeatures</span></span><a class="headerlink" href="#spectacularAI.mapping.Frame.sparseFeatures" title="Link to this definition"></a></dt>
-<dd><p>2D-to-3D sparse feature matches in this frame. Empty if not available for this frame type, e.g., depth frames.</p>
+<dd><p>List of <a class="reference internal" href="tracking.html#spectacularAI.FeaturePoint" title="spectacularAI.FeaturePoint"><code class="xref py py-class docutils literal notranslate"><span class="pre">FeaturePoint</span></code></a>. 2D-to-3D sparse feature matches in this frame. Empty if not available for this frame type, e.g., depth frames.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.mapping.Frame.visualMarkers">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">visualMarkers</span></span><a class="headerlink" href="#spectacularAI.mapping.Frame.visualMarkers" title="Link to this definition"></a></dt>
+<dd><p>List of <a class="reference internal" href="#spectacularAI.mapping.VisualMarker" title="spectacularAI.mapping.VisualMarker"><code class="xref py py-class docutils literal notranslate"><span class="pre">VisualMarker</span></code></a>. Visual Markers detected in this frame. Only April Tags are supported currently. Always empty if April Tag detection is not enabled.</p>
 </dd></dl>
 
 </dd></dl>
@@ -151,7 +157,7 @@ to other tools such as Nerfstudio.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="spectacularAI.mapping.FrameSet.depthFrame">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">depthFrame</span></span><a class="headerlink" href="#spectacularAI.mapping.FrameSet.depthFrame" title="Link to this definition"></a></dt>
-<dd><p>The depth camera</p>
+<dd><p><a class="reference internal" href="#spectacularAI.mapping.Frame" title="spectacularAI.mapping.Frame"><code class="xref py py-class docutils literal notranslate"><span class="pre">Frame</span></code></a> The depth camera</p>
 </dd></dl>
 
 <dl class="py method">
@@ -169,19 +175,19 @@ to other tools such as Nerfstudio.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="spectacularAI.mapping.FrameSet.primaryFrame">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">primaryFrame</span></span><a class="headerlink" href="#spectacularAI.mapping.FrameSet.primaryFrame" title="Link to this definition"></a></dt>
-<dd><p>The primary camera</p>
+<dd><p><a class="reference internal" href="#spectacularAI.mapping.Frame" title="spectacularAI.mapping.Frame"><code class="xref py py-class docutils literal notranslate"><span class="pre">Frame</span></code></a> The primary camera</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spectacularAI.mapping.FrameSet.rgbFrame">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rgbFrame</span></span><a class="headerlink" href="#spectacularAI.mapping.FrameSet.rgbFrame" title="Link to this definition"></a></dt>
-<dd><p>The RGB camera</p>
+<dd><p><a class="reference internal" href="#spectacularAI.mapping.Frame" title="spectacularAI.mapping.Frame"><code class="xref py py-class docutils literal notranslate"><span class="pre">Frame</span></code></a> The RGB camera</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spectacularAI.mapping.FrameSet.secondaryFrame">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">secondaryFrame</span></span><a class="headerlink" href="#spectacularAI.mapping.FrameSet.secondaryFrame" title="Link to this definition"></a></dt>
-<dd><p>The secondary camera</p>
+<dd><p><a class="reference internal" href="#spectacularAI.mapping.Frame" title="spectacularAI.mapping.Frame"><code class="xref py py-class docutils literal notranslate"><span class="pre">Frame</span></code></a> The secondary camera</p>
 </dd></dl>
 
 </dd></dl>
@@ -193,25 +199,25 @@ to other tools such as Nerfstudio.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="spectacularAI.mapping.KeyFrame.angularVelocity">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">angularVelocity</span></span><a class="headerlink" href="#spectacularAI.mapping.KeyFrame.angularVelocity" title="Link to this definition"></a></dt>
-<dd><p><a class="reference internal" href="tracking.html#spectacularAI.Vector3d" title="spectacularAI.Vector3d"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vector3d</span></code></a> instantaneous angular velocity vector in SI units (rad/s)</p>
+<dd><p><a class="reference internal" href="tracking.html#spectacularAI.Vector3d" title="spectacularAI.Vector3d"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vector3d</span></code></a> Instantaneous angular velocity vector in SI units (rad/s)</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spectacularAI.mapping.KeyFrame.frameSet">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">frameSet</span></span><a class="headerlink" href="#spectacularAI.mapping.KeyFrame.frameSet" title="Link to this definition"></a></dt>
-<dd><p>Cameras for this key frame</p>
+<dd><p><a class="reference internal" href="#spectacularAI.mapping.FrameSet" title="spectacularAI.mapping.FrameSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">FrameSet</span></code></a> Cameras for this key frame</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spectacularAI.mapping.KeyFrame.id">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#spectacularAI.mapping.KeyFrame.id" title="Link to this definition"></a></dt>
-<dd><p>Unique identifier for this key frame</p>
+<dd><p><code class="docutils literal notranslate"><span class="pre">int</span></code> Unique identifier for this key frame</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spectacularAI.mapping.KeyFrame.pointCloud">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pointCloud</span></span><a class="headerlink" href="#spectacularAI.mapping.KeyFrame.pointCloud" title="Link to this definition"></a></dt>
-<dd><p>Point cloud for this key frame in primary frame coordinates</p>
+<dd><p><a class="reference internal" href="#spectacularAI.mapping.PointCloud" title="spectacularAI.mapping.PointCloud"><code class="xref py py-class docutils literal notranslate"><span class="pre">PointCloud</span></code></a> Point cloud for this key frame in primary frame coordinates</p>
 </dd></dl>
 
 </dd></dl>
@@ -223,13 +229,13 @@ to other tools such as Nerfstudio.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="spectacularAI.mapping.Map.keyFrames">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">keyFrames</span></span><a class="headerlink" href="#spectacularAI.mapping.Map.keyFrames" title="Link to this definition"></a></dt>
-<dd><p>All key frames belonging to this map. Contains the entire map from start to this moment.</p>
+<dd><p>Dictionary where key is key frame id (<code class="docutils literal notranslate"><span class="pre">int</span></code>) and value is <a class="reference internal" href="#spectacularAI.mapping.KeyFrame" title="spectacularAI.mapping.KeyFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">KeyFrame</span></code></a>. All key frames belonging to this map. Contains the entire map from start to this moment.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spectacularAI.mapping.Map.mapPoints">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mapPoints</span></span><a class="headerlink" href="#spectacularAI.mapping.Map.mapPoints" title="Link to this definition"></a></dt>
-<dd><p>All sparse map points currently in the map.</p>
+<dd><p>Dictionary where key is map point id (<code class="docutils literal notranslate"><span class="pre">int</span></code>) and value is <a class="reference internal" href="tracking.html#spectacularAI.Vector3d" title="spectacularAI.Vector3d"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vector3d</span></code></a>. All sparse map points currently in the map.</p>
 </dd></dl>
 
 </dd></dl>
@@ -241,31 +247,31 @@ to other tools such as Nerfstudio.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="spectacularAI.mapping.MapperOutput.finalMap">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">finalMap</span></span><a class="headerlink" href="#spectacularAI.mapping.MapperOutput.finalMap" title="Link to this definition"></a></dt>
-<dd><p>A boolean that indicates the map is now final and won’t be updated any longer. This is true the when the programm exits.</p>
+<dd><p>A <code class="docutils literal notranslate"><span class="pre">bool</span></code> that indicates the map is now final and won’t be updated any longer. This is true the when the program exits.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spectacularAI.mapping.MapperOutput.map">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">map</span></span><a class="headerlink" href="#spectacularAI.mapping.MapperOutput.map" title="Link to this definition"></a></dt>
-<dd><p>The current map</p>
+<dd><p>The current <a class="reference internal" href="#spectacularAI.mapping.Map" title="spectacularAI.mapping.Map"><code class="xref py py-class docutils literal notranslate"><span class="pre">Map</span></code></a></p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spectacularAI.mapping.MapperOutput.mesh">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mesh</span></span><a class="headerlink" href="#spectacularAI.mapping.MapperOutput.mesh" title="Link to this definition"></a></dt>
-<dd><p>(Optional) dense reconstruction of the map.</p>
+<dd><p><a class="reference internal" href="#spectacularAI.mapping.Mesh" title="spectacularAI.mapping.Mesh"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mesh</span></code></a> (Optional) dense reconstruction of the map.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spectacularAI.mapping.MapperOutput.updatedKeyFrames">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">updatedKeyFrames</span></span><a class="headerlink" href="#spectacularAI.mapping.MapperOutput.updatedKeyFrames" title="Link to this definition"></a></dt>
-<dd><p>Key Frames that were updated (created, modified or deleted) since the last callback</p>
+<dd><p>List of <code class="docutils literal notranslate"><span class="pre">int</span></code>. Key frame ids that were updated (created, modified or deleted) since the last callback</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spectacularAI.mapping.MapperOutput.updatedMapPoints">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">updatedMapPoints</span></span><a class="headerlink" href="#spectacularAI.mapping.MapperOutput.updatedMapPoints" title="Link to this definition"></a></dt>
-<dd><p>Map points that were updated (created, modified or deleted) since the last callback</p>
+<dd><p>List of <code class="docutils literal notranslate"><span class="pre">int</span></code>. Map points ids that were updated (created, modified or deleted) since the last callback</p>
 </dd></dl>
 
 </dd></dl>
@@ -396,6 +402,48 @@ to other tools such as Nerfstudio.</p>
 
 </dd></dl>
 
+<dl class="py class">
+<dt class="sig sig-object py" id="spectacularAI.mapping.VisualMarker">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spectacularAI.mapping.</span></span><span class="sig-name descname"><span class="pre">VisualMarker</span></span><a class="headerlink" href="#spectacularAI.mapping.VisualMarker" title="Link to this definition"></a></dt>
+<dd><p>A visual marker observation in a frame. Only April Tags are supported currently. To enable April Tag detection in the SDK, see <a class="reference external" href="https://github.com/SpectacularAI/docs/blob/main/pdf/april_tag_instructions.pdf">https://github.com/SpectacularAI/docs/blob/main/pdf/april_tag_instructions.pdf</a></p>
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.mapping.VisualMarker.center">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">center</span></span><a class="headerlink" href="#spectacularAI.mapping.VisualMarker.center" title="Link to this definition"></a></dt>
+<dd><p><a class="reference internal" href="tracking.html#spectacularAI.PixelCoordinates" title="spectacularAI.PixelCoordinates"><code class="xref py py-class docutils literal notranslate"><span class="pre">PixelCoordinates</span></code></a> Center of the visual marker in image pixel coordinates</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.mapping.VisualMarker.corners">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">corners</span></span><a class="headerlink" href="#spectacularAI.mapping.VisualMarker.corners" title="Link to this definition"></a></dt>
+<dd><p>List of <a class="reference internal" href="tracking.html#spectacularAI.PixelCoordinates" title="spectacularAI.PixelCoordinates"><code class="xref py py-class docutils literal notranslate"><span class="pre">PixelCoordinates</span></code></a>. Corners of the visual marker in image pixel coordinates. In visual marker coordinate frame: index 0=bottom-left, 1=bottom-right, 2=top-right, 3=top-left</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.mapping.VisualMarker.hasPose">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">hasPose</span></span><a class="headerlink" href="#spectacularAI.mapping.VisualMarker.hasPose" title="Link to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">bool</span></code> Flag that indicates if marker has pose information. Currently markers with unknown size don’t have pose estimate.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.mapping.VisualMarker.id">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#spectacularAI.mapping.VisualMarker.id" title="Link to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">int</span></code> Visual marker ID</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.mapping.VisualMarker.pose">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pose</span></span><a class="headerlink" href="#spectacularAI.mapping.VisualMarker.pose" title="Link to this definition"></a></dt>
+<dd><p><a class="reference internal" href="tracking.html#spectacularAI.Pose" title="spectacularAI.Pose"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pose</span></code></a> Camera to visual marker transformation (note: identity if size is not available). The visual marker’s coordinate frame is centered at the center of the marker, with x-axis to the right, y-axis down, and z-axis into the tag.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spectacularAI.mapping.VisualMarker.size">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">size</span></span><a class="headerlink" href="#spectacularAI.mapping.VisualMarker.size" title="Link to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">float</span></code> Visual marker size in meters (note: 0 if not available)</p>
+</dd></dl>
+
+</dd></dl>
+
 </div><div aria-labelledby="tab-0-Qysr" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-Qysr" name="Qysr" role="tabpanel" tabindex="0"><p>Defined in <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;spectacularAI/mapping.hpp&gt;</span></code></p>
 <dl class="cpp type">
 <dt class="sig sig-object cpp">
@@ -411,6 +459,51 @@ to other tools such as Nerfstudio.</p>
 <dd></dd></dl>
 
 </div>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp">
+<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">VisualMarker</span></span></span><br /></dt>
+<dd><p>A visual marker observation in a frame. Only April Tags are supported currently. To enable April Tag detection in the SDK, see <a class="reference external" href="https://github.com/SpectacularAI/docs/blob/main/pdf/april_tag_instructions.pdf">https://github.com/SpectacularAI/docs/blob/main/pdf/april_tag_instructions.pdf</a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">id</span></span></span><br /></dt>
+<dd><p>Visual marker ID </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">size</span></span></span><br /></dt>
+<dd><p>Visual marker size in meters (note: 0 if not available). </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI16PixelCoordinatesE" title="spectacularAI::PixelCoordinates"><span class="n"><span class="pre">PixelCoordinates</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">center</span></span></span><br /></dt>
+<dd><p>Center of the visual marker in image pixel coordinates </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">array</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI16PixelCoordinatesE" title="spectacularAI::PixelCoordinates"><span class="n"><span class="pre">PixelCoordinates</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">4</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">corners</span></span></span><br /></dt>
+<dd><p>Corners of the visual marker in image pixel coordinates. In visual marker coordinate frame: index 0=bottom-left, 1=bottom-right, 2=top-right, 3=top-left </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hasPose</span></span></span><br /></dt>
+<dd><p>Flag that indicates if marker has pose information. Currently markers with unknown size don’t have pose estimate. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI4PoseE" title="spectacularAI::Pose"><span class="n"><span class="pre">Pose</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pose</span></span></span><br /></dt>
+<dd><p><a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1Camera"><span class="std std-ref">Camera</span></a> to visual marker transformation (note: identity if size is not available). The visual marker’s coordinate frame is centered at the center of the marker, with x-axis to the right, y-axis down, and z-axis into the tag. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
 <dl class="cpp struct">
 <dt class="sig sig-object cpp">
 <span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Frame</span></span></span><br /></dt>
@@ -438,6 +531,13 @@ to other tools such as Nerfstudio.</p>
 <dt class="sig sig-object cpp">
 <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI12FeaturePointE" title="spectacularAI::FeaturePoint"><span class="n"><span class="pre">FeaturePoint</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sparseFeatures</span></span></span><br /></dt>
 <dd><p>2D-to-3D sparse feature matches in this frame. Empty if not available for this frame type, e.g., depth frames. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI7mapping12VisualMarkerE" title="spectacularAI::mapping::VisualMarker"><span class="n"><span class="pre">VisualMarker</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">visualMarkers</span></span></span><br /></dt>
+<dd><p>Visual Markers detected in this frame.</p>
+<p>Only April Tags are supported currently. Always empty if April Tag detection is not enabled. </p>
 </dd></dl>
 
 </div>
@@ -497,90 +597,74 @@ to other tools such as Nerfstudio.</p>
 
 <dl class="cpp struct">
 <dt class="sig sig-object cpp">
-<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">KeyFrame</span></span></span><br /></dt>
-<dd><div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
-<dl class="cpp var">
+<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PointCloud</span></span></span><br /></dt>
+<dd><p>Container for point clouds, where the points may have optional properties such as colors and normals. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">id</span></span></span><br /></dt>
-<dd><p>Unique ID for this keyframe. Monotonically increasing. </p>
+<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Returns the number of points in the point cloud. </p>
 </dd></dl>
 
-<dl class="cpp var">
+<dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI7mapping8FrameSetE" title="spectacularAI::mapping::FrameSet"><span class="n"><span class="pre">FrameSet</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">frameSet</span></span></span><br /></dt>
-<dd><p>Set of frames available for this keyframe. </p>
+<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">empty</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Returns true if the point cloud has 0 points. </p>
 </dd></dl>
 
-<dl class="cpp var">
+<dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI7mapping10PointCloudE" title="spectacularAI::mapping::PointCloud"><span class="n"><span class="pre">PointCloud</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pointCloud</span></span></span><br /></dt>
-<dd><p>(Optional) Dense point cloud for this keyframe in primary frame coordinates. </p>
+<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hasNormals</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Returns true if the point cloud has optional normal data. </p>
 </dd></dl>
 
-<dl class="cpp var">
+<dl class="cpp function">
 <dt class="sig sig-object cpp">
-<a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Vector3dE" title="spectacularAI::Vector3d"><span class="n"><span class="pre">Vector3d</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">angularVelocity</span></span></span><br /></dt>
-<dd><p>Angular velocity vector in SI units (rad/s) </p>
+<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hasColors</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Returns true if the the point cloud has optional color data. </p>
 </dd></dl>
 
-</div>
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Vector3fE" title="spectacularAI::Vector3f"><span class="n"><span class="pre">Vector3f</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getPosition</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">index</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Helper function to get a single point position vector, yields an error if index &gt;= <a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1mapping_1_1PointCloud_1a7d8927ae58bd34e696975f6c7b7eb042"><span class="std std-ref">size()</span></a>. </p>
 </dd></dl>
 
-<dl class="cpp struct">
+<dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Map</span></span></span><br /></dt>
-<dd><div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">int64_t</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI7mapping8KeyFrameE" title="spectacularAI::mapping::KeyFrame"><span class="n"><span class="pre">KeyFrame</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">keyFrames</span></span></span><br /></dt>
-<dd><p>ID to <a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1mapping_1_1KeyFrame"><span class="std std-ref">KeyFrame</span></a> map. The shared_ptr objects are always non-empty. May be changed to a similar associative container in the future, do not rely on this being std::map. </p>
+<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Vector3fE" title="spectacularAI::Vector3f"><span class="n"><span class="pre">Vector3f</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getNormal</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">index</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Helper function to get a single point normal vector, yields an error if <a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1mapping_1_1PointCloud_1a2257da17e2dc0744ca7baa87638a80a4"><span class="std std-ref">hasNormals()</span></a> is false or index &gt;= <a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1mapping_1_1PointCloud_1a7d8927ae58bd34e696975f6c7b7eb042"><span class="std std-ref">size()</span></a>. </p>
 </dd></dl>
 
-<dl class="cpp var">
+<dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">int64_t</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv413spectacularAI" title="spectacularAI"><span class="n"><span class="pre">spectacularAI</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Vector3dE" title="spectacularAI::Vector3d"><span class="n"><span class="pre">Vector3d</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mapPoints</span></span></span><br /></dt>
-<dd><p>List of sparse 3D map points (a.k.a. landmarks). These are observed from one or more KeyFrames, where the corresponding 2D pixel coordinates are stored in the sparseFeatures fields. </p>
+<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">array</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">uint8_t</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">3</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getRGB24</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">index</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Helper function to get a single point color array, yields an error if <a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1mapping_1_1PointCloud_1ad9210c787bc9f5913065bca6dafde61a"><span class="std std-ref">hasColors()</span></a> is false or index &gt;= <a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1mapping_1_1PointCloud_1a7d8927ae58bd34e696975f6c7b7eb042"><span class="std std-ref">size()</span></a>. </p>
 </dd></dl>
 
-</div>
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Vector3fE" title="spectacularAI::Vector3f"><span class="n"><span class="pre">Vector3f</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">getPositionData</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Efficient way to get all point positions, returns nullptr if the point cloud is empty. </p>
 </dd></dl>
 
-<dl class="cpp struct">
+<dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MapperOutput</span></span></span><br /></dt>
-<dd><div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI7mapping3MapE" title="spectacularAI::mapping::Map"><span class="n"><span class="pre">Map</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">map</span></span></span><br /></dt>
-<dd><p>Up to date map. Always non-empty </p>
+<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Vector3fE" title="spectacularAI::Vector3f"><span class="n"><span class="pre">Vector3f</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">getNormalData</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Efficient way to get all point normals, returns nullptr if the point cloud is empty or <a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1mapping_1_1PointCloud_1a2257da17e2dc0744ca7baa87638a80a4"><span class="std std-ref">hasNormals()</span></a> is false. </p>
 </dd></dl>
 
-<dl class="cpp var">
+<dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">int64_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">updatedKeyFrames</span></span></span><br /></dt>
-<dd><p>List of keyframes that were modified or deleted. Ordered from oldest to newest </p>
+<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">getRGB24Data</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Efficient way to get all point colors, returns nullptr if the point cloud is empty or <a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1mapping_1_1PointCloud_1ad9210c787bc9f5913065bca6dafde61a"><span class="std std-ref">hasColors()</span></a> is false. </p>
 </dd></dl>
 
-<dl class="cpp var">
+<dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">int64_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">updatedMapPoints</span></span></span><br /></dt>
-<dd><p>List of sparse map points that were modified, added or deleted. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI7mapping4MeshE" title="spectacularAI::mapping::Mesh"><span class="n"><span class="pre">Mesh</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mesh</span></span></span><br /></dt>
-<dd><p>(Optional) dense reconstruction of the map. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">finalMap</span></span></span><br /></dt>
-<dd><p>True for the last update before program exit </p>
-</dd></dl>
+<span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~PointCloud</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><br /></dt>
+<dd></dd></dl>
 
 </div>
 </dd></dl>
@@ -698,74 +782,90 @@ to other tools such as Nerfstudio.</p>
 
 <dl class="cpp struct">
 <dt class="sig sig-object cpp">
-<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PointCloud</span></span></span><br /></dt>
-<dd><p>Container for point clouds, where the points may have optional properties such as colors and normals. </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
-<dl class="cpp function">
+<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">KeyFrame</span></span></span><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
 <dt class="sig sig-object cpp">
-<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
-<dd><p>Returns the number of points in the point cloud. </p>
+<span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">id</span></span></span><br /></dt>
+<dd><p>Unique ID for this keyframe. Monotonically increasing. </p>
 </dd></dl>
 
-<dl class="cpp function">
+<dl class="cpp var">
 <dt class="sig sig-object cpp">
-<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">empty</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
-<dd><p>Returns true if the point cloud has 0 points. </p>
+<span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI7mapping8FrameSetE" title="spectacularAI::mapping::FrameSet"><span class="n"><span class="pre">FrameSet</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">frameSet</span></span></span><br /></dt>
+<dd><p>Set of frames available for this keyframe. </p>
 </dd></dl>
 
-<dl class="cpp function">
+<dl class="cpp var">
 <dt class="sig sig-object cpp">
-<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hasNormals</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
-<dd><p>Returns true if the point cloud has optional normal data. </p>
+<span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI7mapping10PointCloudE" title="spectacularAI::mapping::PointCloud"><span class="n"><span class="pre">PointCloud</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pointCloud</span></span></span><br /></dt>
+<dd><p>(Optional) Dense point cloud for this keyframe in primary frame coordinates. </p>
 </dd></dl>
 
-<dl class="cpp function">
+<dl class="cpp var">
 <dt class="sig sig-object cpp">
-<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hasColors</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
-<dd><p>Returns true if the the point cloud has optional color data. </p>
+<a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Vector3dE" title="spectacularAI::Vector3d"><span class="n"><span class="pre">Vector3d</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">angularVelocity</span></span></span><br /></dt>
+<dd><p>Angular velocity vector in SI units (rad/s) </p>
 </dd></dl>
 
-<dl class="cpp function">
-<dt class="sig sig-object cpp">
-<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Vector3fE" title="spectacularAI::Vector3f"><span class="n"><span class="pre">Vector3f</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getPosition</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">index</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
-<dd><p>Helper function to get a single point position vector, yields an error if index &gt;= <a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1mapping_1_1PointCloud_1a7d8927ae58bd34e696975f6c7b7eb042"><span class="std std-ref">size()</span></a>. </p>
+</div>
 </dd></dl>
 
-<dl class="cpp function">
+<dl class="cpp struct">
 <dt class="sig sig-object cpp">
-<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Vector3fE" title="spectacularAI::Vector3f"><span class="n"><span class="pre">Vector3f</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getNormal</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">index</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
-<dd><p>Helper function to get a single point normal vector, yields an error if <a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1mapping_1_1PointCloud_1a2257da17e2dc0744ca7baa87638a80a4"><span class="std std-ref">hasNormals()</span></a> is false or index &gt;= <a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1mapping_1_1PointCloud_1a7d8927ae58bd34e696975f6c7b7eb042"><span class="std std-ref">size()</span></a>. </p>
+<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Map</span></span></span><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">int64_t</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI7mapping8KeyFrameE" title="spectacularAI::mapping::KeyFrame"><span class="n"><span class="pre">KeyFrame</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">keyFrames</span></span></span><br /></dt>
+<dd><p>ID to <a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1mapping_1_1KeyFrame"><span class="std std-ref">KeyFrame</span></a> map. The shared_ptr objects are always non-empty. May be changed to a similar associative container in the future, do not rely on this being std::map. </p>
 </dd></dl>
 
-<dl class="cpp function">
+<dl class="cpp var">
 <dt class="sig sig-object cpp">
-<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">array</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">uint8_t</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">3</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getRGB24</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">index</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
-<dd><p>Helper function to get a single point color array, yields an error if <a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1mapping_1_1PointCloud_1ad9210c787bc9f5913065bca6dafde61a"><span class="std std-ref">hasColors()</span></a> is false or index &gt;= <a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1mapping_1_1PointCloud_1a7d8927ae58bd34e696975f6c7b7eb042"><span class="std std-ref">size()</span></a>. </p>
+<span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">int64_t</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv413spectacularAI" title="spectacularAI"><span class="n"><span class="pre">spectacularAI</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Vector3dE" title="spectacularAI::Vector3d"><span class="n"><span class="pre">Vector3d</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mapPoints</span></span></span><br /></dt>
+<dd><p>List of sparse 3D map points (a.k.a. landmarks). These are observed from one or more KeyFrames, where the corresponding 2D pixel coordinates are stored in the sparseFeatures fields. </p>
 </dd></dl>
 
-<dl class="cpp function">
-<dt class="sig sig-object cpp">
-<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Vector3fE" title="spectacularAI::Vector3f"><span class="n"><span class="pre">Vector3f</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">getPositionData</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
-<dd><p>Efficient way to get all point positions, returns nullptr if the point cloud is empty. </p>
+</div>
 </dd></dl>
 
-<dl class="cpp function">
+<dl class="cpp struct">
 <dt class="sig sig-object cpp">
-<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI8Vector3fE" title="spectacularAI::Vector3f"><span class="n"><span class="pre">Vector3f</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">getNormalData</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
-<dd><p>Efficient way to get all point normals, returns nullptr if the point cloud is empty or <a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1mapping_1_1PointCloud_1a2257da17e2dc0744ca7baa87638a80a4"><span class="std std-ref">hasNormals()</span></a> is false. </p>
+<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MapperOutput</span></span></span><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI7mapping3MapE" title="spectacularAI::mapping::Map"><span class="n"><span class="pre">Map</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">map</span></span></span><br /></dt>
+<dd><p>Up to date map. Always non-empty </p>
 </dd></dl>
 
-<dl class="cpp function">
+<dl class="cpp var">
 <dt class="sig sig-object cpp">
-<span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">getRGB24Data</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
-<dd><p>Efficient way to get all point colors, returns nullptr if the point cloud is empty or <a class="reference internal" href="cpp/latest/index.html#structspectacularAI_1_1mapping_1_1PointCloud_1ad9210c787bc9f5913065bca6dafde61a"><span class="std std-ref">hasColors()</span></a> is false. </p>
+<span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">int64_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">updatedKeyFrames</span></span></span><br /></dt>
+<dd><p>List of keyframes that were modified or deleted. Ordered from oldest to newest </p>
 </dd></dl>
 
-<dl class="cpp function">
+<dl class="cpp var">
 <dt class="sig sig-object cpp">
-<span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~PointCloud</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><br /></dt>
-<dd></dd></dl>
+<span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">int64_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">updatedMapPoints</span></span></span><br /></dt>
+<dd><p>List of sparse map points that were modified, added or deleted. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI7mapping4MeshE" title="spectacularAI::mapping::Mesh"><span class="n"><span class="pre">Mesh</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mesh</span></span></span><br /></dt>
+<dd><p>(Optional) dense reconstruction of the map. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">finalMap</span></span></span><br /></dt>
+<dd><p>True for the last update before program exit </p>
+</dd></dl>
 
 </div>
 </dd></dl>
