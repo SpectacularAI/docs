@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Replay API &mdash; spectacularAI  documentation</title>
@@ -96,7 +96,7 @@
             <li class="breadcrumb-item"><a href="core.html">Core SDK</a></li>
         <li class="breadcrumb-item active">Replay API</li>
     <li class="wy-breadcrumbs-aside version">
-        v1.34
+        v1.35
     </li>
     </ul>
 
@@ -118,11 +118,11 @@ especially useful when used together with the <a class="reference internal" href
 <dd><p>Replay previously recorded data</p>
 <p>Overloaded function.</p>
 <ol class="arabic simple">
-<li><p>__init__(self: spectacularAI.Replay, folder: str, <a href="#id2"><span class="problematic" id="id3">*</span></a>, mapperCallback: Callable[[spectacularAI::mapping::MapperOutput], None] = None, configuration: dict = {}, ignoreFolderConfiguration: bool = False) -&gt; None</p></li>
+<li><p>__init__(self: spectacularAI.Replay, folder: str, <a href="#id2"><span class="problematic" id="id3">*</span></a>, mapperCallback: Callable[[spectacularAI::mapping::MapperOutput], None] = None, configuration: dict = {}, ignoreFolderConfiguration: bool = False, startTime: object = None, stopTime: object = None) -&gt; None</p></li>
 </ol>
 <p>Build a replay from a given folder containing the dataset</p>
 <ol class="arabic simple" start="2">
-<li><p>__init__(self: spectacularAI.Replay, folder: str, mapperCallback: Callable[[spectacularAI::mapping::MapperOutput], None], <a href="#id4"><span class="problematic" id="id5">*</span></a>, configuration: dict = {}, ignoreFolderConfiguration: bool = False) -&gt; None</p></li>
+<li><p>__init__(self: spectacularAI.Replay, folder: str, mapperCallback: Callable[[spectacularAI::mapping::MapperOutput], None], <a href="#id4"><span class="problematic" id="id5">*</span></a>, configuration: dict = {}, ignoreFolderConfiguration: bool = False, startTime: object = None, stopTime: object = None) -&gt; None</p></li>
 </ol>
 <p>Build a replay from a given folder containing the dataset with a mapping callback</p>
 <dl class="py method">
@@ -293,6 +293,18 @@ especially useful when used together with the <a class="reference internal" href
 <dt class="sig sig-object cpp">
 <a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI6Replay7BuilderE" title="spectacularAI::Replay::Builder"><span class="n"><span class="pre">Builder</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setIgnoreFolderConfiguration</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ignore</span></span><span class="sig-paren">)</span><br /></dt>
 <dd><p>Optional. Set whether to ignore vio_config.yaml in recording folder. Default is false. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI6Replay7BuilderE" title="spectacularAI::Replay::Builder"><span class="n"><span class="pre">Builder</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setStartTime</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">time</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Start replay at this time, relative to the first frame timestamp. If not set, processing starts at the first input (which may be before the first frame). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI6Replay7BuilderE" title="spectacularAI::Replay::Builder"><span class="n"><span class="pre">Builder</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setStopTime</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">time</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>If set, stop replay at this time, relative to the first frame timestamp. </p>
 </dd></dl>
 
 <dl class="cpp function">

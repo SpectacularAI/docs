@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Recording &mdash; spectacularAI  documentation</title>
@@ -95,7 +95,7 @@
             <li class="breadcrumb-item"><a href="core.html">Core SDK</a></li>
         <li class="breadcrumb-item active">Recording</li>
     <li class="wy-breadcrumbs-aside version">
-        v1.34
+        v1.35
     </li>
     </ul>
 
@@ -125,6 +125,17 @@ The data created using the recorder can used for</p>
 <li><p>IMU, synchronized with the camera frames</p></li>
 <li><p>Other sensors, e.g., barometer or GPS</p></li>
 </ul>
+</section>
+<section id="recording-settings">
+<h2>Recording settings<a class="headerlink" href="#recording-settings" title="Link to this heading"></a></h2>
+<p>It is possible to control FFmpeg encoding parameters using the <code class="docutils literal notranslate"><span class="pre">--ffmpeg_codec</span></code> command line option (for recording tools) or the <code class="docutils literal notranslate"><span class="pre">ffmpegVideoCodec</span></code> parameter in <code class="docutils literal notranslate"><span class="pre">vio_config.yaml</span></code>. For example, the following option disables all encoding and writes raw video, which minmizes the CPU consumption overhead caused by enabling rrecording (on the other hand, this requires a lot of disk space and decent write speed)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ffmpegVideoCodec: rawvideo
+</pre></div>
+</div>
+<p>The parameter can also be used to enable platform-specific codecs. The following enables hardware-accelerated video recording on the Nvidia Jetson Xavier platform (but not on Orin):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ffmpegVideoCodec: &quot;h264_nvenc -b:v 16M&quot;
+</pre></div>
+</div>
 </section>
 </section>
 
