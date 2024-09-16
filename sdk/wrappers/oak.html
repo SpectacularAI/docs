@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>OAK-D &mdash; spectacularAI  documentation</title>
@@ -96,7 +96,7 @@
             <li class="breadcrumb-item"><a href="../wrappers.html">Wrappers</a></li>
         <li class="breadcrumb-item active">OAK-D</li>
     <li class="wy-breadcrumbs-aside version">
-        v1.35
+        v1.36
     </li>
     </ul>
 
@@ -536,13 +536,13 @@ the minimum required steps.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="spectacularAI.depthai.Configuration.mapLoadPath">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mapLoadPath</span></span><a class="headerlink" href="#spectacularAI.depthai.Configuration.mapLoadPath" title="Link to this definition"></a></dt>
-<dd><p>Load existing SLAM map (.bin format required)</p>
+<dd><p>Load existing SLAM map (.bin format required), enables relocalizatin mode. NOTE: requires useSlam=true.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spectacularAI.depthai.Configuration.mapSavePath">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mapSavePath</span></span><a class="headerlink" href="#spectacularAI.depthai.Configuration.mapSavePath" title="Link to this definition"></a></dt>
-<dd><p>Output filename. Supported outputs types: .ply, .csv and .pcd (point cloud), and .bin (Spectacular AI SLAM map).</p>
+<dd><p>SLAM map is serialized to this path. Supported outputs types: .ply, .csv and .pcd (point cloud), and .bin (Spectacular AI SLAM map). NOTE: requires useSlam=true.</p>
 </dd></dl>
 
 <dl class="py property">
@@ -660,7 +660,7 @@ the minimum required steps.</p>
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp">
-<span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">useSlam</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><br /></dt>
+<span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">useSlam</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp var">
