@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Custom hardware &mdash; spectacularAI  documentation</title>
@@ -18,9 +18,9 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -95,7 +95,7 @@
             <li class="breadcrumb-item"><a href="core.html">Core SDK</a></li>
         <li class="breadcrumb-item active">Custom hardware</li>
     <li class="wy-breadcrumbs-aside version">
-        v1.37
+        v1.38
     </li>
     </ul>
 
@@ -105,9 +105,9 @@
            <div itemprop="articleBody">
              
   <section id="custom-hardware">
-<h1>Custom hardware<a class="headerlink" href="#custom-hardware" title="Permalink to this heading"></a></h1>
+<h1>Custom hardware<a class="headerlink" href="#custom-hardware" title="Link to this heading"></a></h1>
 <section id="hardware-requirements">
-<h2>Hardware requirements<a class="headerlink" href="#hardware-requirements" title="Permalink to this heading"></a></h2>
+<h2>Hardware requirements<a class="headerlink" href="#hardware-requirements" title="Link to this heading"></a></h2>
 <p>The core SDK can be integrated on any device with adequate sensors and processing capabilities. The minimum requirement is one camera and a consumer-grade MEMS IMU. The recommended sensor configuration depends on the use case. For example, inside-out tracking should use a stereo or multi-camera fisheye global shutter camera setup, and aerial use cases greatly benefit from a barometer sensor.</p>
 <p>As a rule of thumb, CPU resources equivalent to approximately one ARM Cortex A72 core (e.g., one core in Raspberry Pi 4) are required.
 The exact requirements depend on a number of factors such as the number of cameras, resolution, frame rate, and the available computer vision accelerators in the platform.</p>
@@ -116,7 +116,7 @@ This requires low-level hardware support and generally does not work out-of-the-
 <p><a class="reference external" href="https://www.spectacularai.com/#contact">Contact us</a> for more information.</p>
 </section>
 <section id="input-api">
-<h2>Input API<a class="headerlink" href="#input-api" title="Permalink to this heading"></a></h2>
+<h2>Input API<a class="headerlink" href="#input-api" title="Link to this heading"></a></h2>
 <p>Custom hardware can is supported through the <em>Input API</em> where the camera images (or accelerated features and descriptors) and IMU data are manually fed into the SDK. <a class="reference external" href="https://spectacularai.github.io/docs/pdf/calibration_manual.pdf">Camera calibration</a> also needs to be manually handled.</p>
 <p>The <em>Input API</em> is available with a commercial license. <a class="reference external" href="https://www.spectacularai.com/#contact">Contact us</a> for more information.</p>
 </section>

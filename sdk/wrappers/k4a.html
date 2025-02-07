@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Azure Kinect &mdash; spectacularAI  documentation</title>
@@ -18,9 +18,9 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/tabs.js?v=3030b3cb"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -96,7 +96,7 @@
             <li class="breadcrumb-item"><a href="../wrappers.html">Wrappers</a></li>
         <li class="breadcrumb-item active">Azure Kinect</li>
     <li class="wy-breadcrumbs-aside version">
-        v1.37
+        v1.38
     </li>
     </ul>
 
@@ -106,14 +106,14 @@
            <div itemprop="articleBody">
              
   <section id="azure-kinect">
-<h1>Azure Kinect<a class="headerlink" href="#azure-kinect" title="Permalink to this heading"></a></h1>
+<h1>Azure Kinect<a class="headerlink" href="#azure-kinect" title="Link to this heading"></a></h1>
 <p>Spectacular AI C++ plugin for Microsoft Azure Kinect DK.</p>
 <p><em>Note</em>: The Azure Kinect has been discontinued, but nearly equivalent device,
 ORBBEC Femto is now available and uses the same depth sensing technology, which
 ORBBEC has licensed from Microsoft.</p>
 <p>ORBBEC cameras are supported by their Spectacular AI SDK wrapper. See <a class="reference external" href="orbbec.html">here</a>.</p>
 <section id="quick-start">
-<h2>Quick start<a class="headerlink" href="#quick-start" title="Permalink to this heading"></a></h2>
+<h2>Quick start<a class="headerlink" href="#quick-start" title="Link to this heading"></a></h2>
 <p>First, download and unpack <a class="reference external" href="https://github.com/SpectacularAI/sdk/releases/download/v1.28.0/spectacularAI_k4aPlugin_cpp_non-commercial_1.28.0.tar.gz">spectacularAI_k4aPlugin_cpp_non-commercial</a> package (only available for SDK version 1.28)</p>
 <div class="sphinx-tabs docutils container">
 <div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-TGludXg=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-0-TGludXg=" name="TGludXg=" role="tab" tabindex="0">Linux</button><button aria-controls="panel-0-V2luZG93cw==" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-0-V2luZG93cw==" name="V2luZG93cw==" role="tab" tabindex="-1">Windows</button></div><div aria-labelledby="tab-0-TGludXg=" class="sphinx-tabs-panel group-tab" id="panel-0-TGludXg=" name="TGludXg=" role="tabpanel" tabindex="0"><ol class="arabic">
@@ -157,7 +157,7 @@ ORBBEC has licensed from Microsoft.</p>
 </ol>
 </div></div>
 <section id="recording-data">
-<h3>Recording data<a class="headerlink" href="#recording-data" title="Permalink to this heading"></a></h3>
+<h3>Recording data<a class="headerlink" href="#recording-data" title="Link to this heading"></a></h3>
 <p>Azure Kinect data can be recorded using the <code class="docutils literal notranslate"><span class="pre">sai-record-k4a</span></code> tool included in the SDK package (in the <code class="docutils literal notranslate"><span class="pre">bin</span></code> directory).
 First connect Azure Kinect over USB3, then run (add <code class="docutils literal notranslate"><span class="pre">.exe</span></code> on Windows):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">sai</span><span class="o">-</span><span class="n">record</span><span class="o">-</span><span class="n">k4a</span> <span class="c1"># Record with visualization, requires pip install spectacularAI[full]</span>
@@ -171,7 +171,7 @@ which allows customizing the recording tool, if necessary.</p>
 </section>
 </section>
 <section id="installation-as-a-library">
-<h2>Installation as a library<a class="headerlink" href="#installation-as-a-library" title="Permalink to this heading"></a></h2>
+<h2>Installation as a library<a class="headerlink" href="#installation-as-a-library" title="Link to this heading"></a></h2>
 <p>First verify that you have installed <a class="reference external" href="https://github.com/microsoft/Azure-Kinect-Sensor-SDK/">Azure Kinect SDK</a>,
 e.g. check that open <cite>k4aviewer</cite>.</p>
 <p>The following commands should be run in the folder where you have unpacked the SDK release package <a class="reference external" href="https://github.com/SpectacularAI/sdk/releases/download/v1.28.0/spectacularAI_k4aPlugin_cpp_non-commercial_1.28.0.tar.gz">spectacularAI_k4aPlugin_cpp_non-commercial</a>.</p>
@@ -210,7 +210,7 @@ e.g. check that open <cite>k4aviewer</cite>.</p>
 </div></div>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
 <p>The following instructions show how to compile and run the <a class="reference external" href="https://github.com/SpectacularAI/sdk-examples/tree/main/cpp/k4a">Spectacular AI K4A SDK examples</a>.</p>
 <blockquote>
 <div><ol class="arabic">
@@ -239,7 +239,7 @@ e.g. check that open <cite>k4aviewer</cite>.</p>
 </div></div>
 </section>
 <section id="api-reference">
-<h2>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading"></a></h2>
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading"></a></h2>
 <p>The classes specific to Azure Kinect are documented below. For the main output classes, refer to the C++ documentation in <a class="reference internal" href="../core.html#core-sdk"><span class="std std-ref">Core SDK</span></a>.</p>
 <p>Defined in <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;spectacularAI/k4a/configuration.hpp&gt;</span></code></p>
 <dl class="cpp type">
@@ -392,7 +392,7 @@ e.g. check that open <cite>k4aviewer</cite>.</p>
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI9k4aPlugin8Pipeline5pimplE">
-<span id="_CPPv3N13spectacularAI9k4aPlugin8Pipeline5pimplE"></span><span id="_CPPv2N13spectacularAI9k4aPlugin8Pipeline5pimplE"></span><span id="spectacularAI::k4aPlugin::Pipeline::pimpl__std::unique_ptr:impl:"></span><span class="target" id="classspectacularAI_1_1k4aPlugin_1_1Pipeline_1a87736065f84f89d8ad558bafc911c9ea"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">impl</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pimpl</span></span></span><a class="headerlink" href="#_CPPv4N13spectacularAI9k4aPlugin8Pipeline5pimplE" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3N13spectacularAI9k4aPlugin8Pipeline5pimplE"></span><span id="_CPPv2N13spectacularAI9k4aPlugin8Pipeline5pimplE"></span><span id="spectacularAI::k4aPlugin::Pipeline::pimpl__std::unique_ptr:impl:"></span><span class="target" id="classspectacularAI_1_1k4aPlugin_1_1Pipeline_1a87736065f84f89d8ad558bafc911c9ea"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">impl</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pimpl</span></span></span><a class="headerlink" href="#_CPPv4N13spectacularAI9k4aPlugin8Pipeline5pimplE" title="Link to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 </div>
