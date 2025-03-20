@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>OAK-D &mdash; spectacularAI  documentation</title>
@@ -96,7 +96,7 @@
             <li class="breadcrumb-item"><a href="../wrappers.html">Wrappers</a></li>
         <li class="breadcrumb-item active">OAK-D</li>
     <li class="wy-breadcrumbs-aside version">
-        v1.38
+        v1.39
     </li>
     </ul>
 
@@ -118,7 +118,6 @@
 <li><p>OAK-D (Pro) W</p></li>
 <li><p>OAK-D LR</p></li>
 <li><p>OAK-D PoE</p></li>
-<li><p>rae (available soon)</p></li>
 </ul>
 </div></blockquote>
 <p>OAK-D Lite or OAK-1 are not supported due to the lack of IMU (not because of monocularity).
@@ -130,11 +129,13 @@ out of the device fast enough.</p>
 <blockquote>
 <div><ol class="arabic simple">
 <li><p>First install <a class="reference external" href="../index.html#development-dependencies">development dependencies</a>.</p></li>
-<li><p>Linux only: set up <a class="reference external" href="https://docs.luxonis.com/en/latest/pages/troubleshooting/#udev-rules-on-linux">OAK-D udev rules</a>.</p></li>
+<li><p>Linux only: set up <a class="reference external" href="https://docs.luxonis.com/hardware/platform/deploy/usb-deployment-guide/#USB%20deployment%20guide-Initial%20Connection-Debugging-Linux%20udev%20rules">OAK-D udev rules</a>.</p></li>
 <li><p>For data recording also <a class="reference external" href="../index.html#ffmpeg">install FFmpeg</a>.</p></li>
 </ol>
 </div></blockquote>
-<p>Note: On Linux, you may also need to <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">python3-tk</span></code> to run the Matplotlib-based visualizations</p>
+<p>Note: On Linux, you may also need to <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">python3-tk</span></code> to run the Matplotlib-based visualizations, and
+<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">libusb-1.0-0-dev</span></code> (see <a class="reference external" href="https://docs.luxonis.com/software/depthai/manual-install#Manual%20DepthAI%20installation-Installing%20dependencies-Ubuntu%2FDebian">Luxonis documentation</a>
+for more information)</p>
 <div class="sphinx-tabs docutils container">
 <div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-UHl0aG9u" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-0-UHl0aG9u" name="UHl0aG9u" role="tab" tabindex="0">Python</button><button aria-controls="panel-0-Qysr" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-0-Qysr" name="Qysr" role="tab" tabindex="-1">C++</button></div><div aria-labelledby="tab-0-UHl0aG9u" class="sphinx-tabs-panel group-tab" id="panel-0-UHl0aG9u" name="UHl0aG9u" role="tabpanel" tabindex="0"><p>Install from Pip:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">spectacularAI</span><span class="p">[</span><span class="n">full</span><span class="p">]</span>
@@ -421,7 +422,7 @@ the minimum required steps.</p>
 <p>Overloaded function.</p>
 <ol class="arabic simple">
 <li><p>__init__(self: spectacularAI.depthai.Configuration) -&gt; None</p></li>
-<li><p>__init__(self: spectacularAI.depthai.Configuration, <a href="#id4"><span class="problematic" id="id5">**</span></a>kwargs) -&gt; None</p></li>
+<li><p>__init__(self: spectacularAI.depthai.Configuration, <a href="#id5"><span class="problematic" id="id6">**</span></a>kwargs) -&gt; None</p></li>
 </ol>
 <dl class="py property">
 <dt class="sig sig-object py" id="spectacularAI.depthai.Configuration.accFrequencyHz">
@@ -862,7 +863,7 @@ the minimum required steps.</p>
 </ol>
 <p>Initialize with a <code class="docutils literal notranslate"><span class="pre">depthai.Pipeline</span></code> and custom <a class="reference internal" href="#spectacularAI.depthai.Configuration" title="spectacularAI.depthai.Configuration"><code class="xref py py-class docutils literal notranslate"><span class="pre">Configuration</span></code></a> with a mapper callback function</p>
 <ol class="arabic simple" start="4">
-<li><p>__init__(self: spectacularAI.depthai.Pipeline, arg0: object, <a href="#id6"><span class="problematic" id="id7">**</span></a>kwargs) -&gt; None</p></li>
+<li><p>__init__(self: spectacularAI.depthai.Pipeline, arg0: object, <a href="#id7"><span class="problematic" id="id8">**</span></a>kwargs) -&gt; None</p></li>
 </ol>
 <p>Initialize with a <code class="docutils literal notranslate"><span class="pre">depthai.Pipeline</span></code> and custom kwargs (see <a class="reference internal" href="#spectacularAI.depthai.Configuration" title="spectacularAI.depthai.Configuration"><code class="xref py py-class docutils literal notranslate"><span class="pre">Configuration</span></code></a>)</p>
 <dl class="py property">
