@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" data-content_root="../">
+<html class="writer-html5" lang="en">
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Calibration &mdash; spectacularAI  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=3a41478c" />
@@ -18,9 +18,9 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -104,10 +104,91 @@
            <div itemprop="articleBody">
              
   <section id="calibration">
-<h1>Calibration<a class="headerlink" href="#calibration" title="Link to this heading"></a></h1>
-<p>Data recorded in the Spectacular AI format can also be used for monocular or stereo camera extrinsic and intrinsic calibration.</p>
-<p>For step-by-step instructions, see the separate <a class="reference external" href="https://github.com/SpectacularAI/calibration-scripts#calibration-scripts">Calibration Scripts repository</a>.</p>
-<p>There also exists a more detailed <a class="reference external" href="https://spectacularai.github.io/docs/pdf/calibration_manual.pdf">Calibration Manual</a> that documents the camera models and conventions used by the SDK. Note that this is not generally required for any out-of-the-box supported devices listed on the <a class="reference internal" href="../wrappers.html"><span class="doc std std-doc">wrappers</span></a> page, but is relevant for custom hardware integrations.</p>
+<h1>Calibration<a class="headerlink" href="#calibration" title="Permalink to this heading"></a></h1>
+<p>The Spectacular AI SDK includes a tool to easily calibrate camera setups. It computes camera intrinsics for several supported distortion models, and also stereo and camera-IMU extrinsics. Note that calibration is not generally required for any out-of-the-box supported devices listed on the <a class="reference internal" href="../wrappers.html"><span class="doc std std-doc">wrappers</span></a> page, but is relevant for custom hardware integrations.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/N2ae_cJvmgM?si=RFs1ZnG057t9yQJu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<section id="full-calibration-required-by-most-spectacular-ai-sdk-features">
+<h2>Full calibration (required by most Spectacular AI SDK features)<a class="headerlink" href="#full-calibration-required-by-most-spectacular-ai-sdk-features" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Setup the <a class="reference external" href="https://spectacularai.github.io/docs/other/calibration_target.html">6x6 Aprilgrid</a> pattern on a computer monitor as large as possible. <a class="reference external" href="https://github.com/SpectacularAI/oak-d-capture/blob/master/measuring_calibration_target.jpg">Measure</a> the target.</p></li>
+<li><p>Create a Spectacular AI SDK recording of the target:</p></li>
+</ol>
+<ul class="simple">
+<li><p>See <a class="reference internal" href="../recording.html"><span class="doc std std-doc">Recording</span></a> for how to record. If using the SDK API directly, input any valid placeholder <code class="docutils literal notranslate"><span class="pre">calibration.json</span></code>.</p></li>
+<li><p>Refer to the tutorial video to make sure you include all required movements.</p></li>
+<li><p>The calibration target must be stationary and the device moved around it.</p></li>
+</ul>
+<ol class="arabic simple" start="3">
+<li><p><a class="reference external" href="https://spectacularai.github.io/docs/sdk/index.html#ffmpeg">Install FFmpeg</a>.</p></li>
+<li><p>Install and run the Spectacular AI calibration tool on the recording directory (here <code class="docutils literal notranslate"><span class="pre">path/to/recording</span></code>):</p></li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;spectacularAI[full]&quot;</span>
+sai-cli<span class="w"> </span>calibrate<span class="w"> </span>path/to/recording<span class="w"> </span>--tag_size<span class="w"> </span><span class="m">0</span>.03209876<span class="w"> </span>--output_html<span class="w"> </span>report.html<span class="w"> </span>--output<span class="w"> </span>calibration.json
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">--tag_size</span></code> gives in meters the value you got from measuring the target and dividing by 8.1.</p>
+<ol class="arabic simple" start="5">
+<li><p>Open the generated <code class="docutils literal notranslate"><span class="pre">report.html</span></code> file in a web browser. The report shows whether the calibration was successful, and if not, indicates likely cause of failure.</p></li>
+<li><p>Input the generated <code class="docutils literal notranslate"><span class="pre">calibration.json</span></code> in the Spectacular AI SDK APIs.</p></li>
+</ol>
+</section>
+<section id="intrinsics-calibration-basic">
+<h2>Intrinsics calibration (basic)<a class="headerlink" href="#intrinsics-calibration-basic" title="Permalink to this heading"></a></h2>
+<p>You can also calibrate a single camera without an IMU from any video file:</p>
+<ol class="arabic simple">
+<li><p>Setup the <a class="reference external" href="https://spectacularai.github.io/docs/other/calibration_target.html">6x6 Aprilgrid</a> pattern on a computer monitor as large as possible.</p></li>
+<li><p>Record a video of the target by moving the device around the stationary target. Refer to the tutorial video to make sure you include all required movements.</p></li>
+<li><p><a class="reference external" href="https://spectacularai.github.io/docs/sdk/index.html#ffmpeg">Install FFmpeg</a>.</p></li>
+<li><p>Install and run the Spectacular AI calibration tool on the video file (here <code class="docutils literal notranslate"><span class="pre">video.mp4</span></code>):</p></li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;spectacularAI[full]&quot;</span>
+sai-cli<span class="w"> </span>calibrate<span class="w"> </span>video.mp4
+</pre></div>
+</div>
+<p>Example output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Enabling</span> <span class="n">visual</span><span class="o">-</span><span class="n">only</span> <span class="n">calibration</span> <span class="n">mode</span><span class="o">.</span>
+
+<span class="o">---</span> <span class="n">Camera</span> <span class="n">calibration</span> <span class="n">phase</span>
+<span class="n">Corner</span> <span class="n">detection</span> <span class="n">progress</span> <span class="mi">100</span><span class="o">%</span>
+<span class="n">Failed</span> <span class="n">detections</span> <span class="mi">385</span><span class="o">/</span><span class="mf">1429.</span>
+<span class="n">Removed</span> <span class="mi">385</span><span class="o">/</span><span class="mi">1429</span> <span class="n">invalid</span> <span class="n">poses</span><span class="o">.</span>
+
+<span class="n">Estimating</span> <span class="n">initial</span> <span class="n">extrinsics</span><span class="o">.</span>
+
+<span class="n">Initialized</span> <span class="n">optimization</span><span class="o">.</span>
+<span class="n">Iteration</span> <span class="mi">30</span><span class="o">/</span><span class="mf">70.</span> <span class="n">Mean</span> <span class="n">reprojection</span> <span class="n">error</span><span class="p">:</span> <span class="mf">0.17661550</span>
+<span class="n">Skipping</span> <span class="n">IMU</span><span class="o">-</span><span class="n">camera</span> <span class="n">extrinsics</span> <span class="n">calibration</span><span class="o">.</span>
+
+<span class="n">Calibration</span> <span class="n">result</span><span class="p">:</span>
+<span class="p">{</span>
+    <span class="s2">&quot;cameras&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;distortionCoefficients&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="mf">1.7928108031038417</span><span class="p">,</span> <span class="mf">0.4750649683947041</span><span class="p">,</span> <span class="mf">1.0520005629849567e-05</span><span class="p">,</span> <span class="mf">7.304509697616892e-06</span><span class="p">,</span> <span class="mf">0.009304462386450309</span><span class="p">,</span> <span class="mf">2.148028322920538</span><span class="p">,</span> <span class="mf">1.0030979033407466</span><span class="p">,</span> <span class="mf">0.07366554523759501</span> <span class="p">],</span>
+            <span class="s2">&quot;focalLengthX&quot;</span><span class="p">:</span> <span class="mf">596.3194856012566</span><span class="p">,</span>
+            <span class="s2">&quot;focalLengthY&quot;</span><span class="p">:</span> <span class="mf">596.8101085057813</span><span class="p">,</span>
+            <span class="s2">&quot;imageHeight&quot;</span><span class="p">:</span> <span class="mi">800</span><span class="p">,</span>
+            <span class="s2">&quot;imageWidth&quot;</span><span class="p">:</span> <span class="mi">1280</span><span class="p">,</span>
+            <span class="s2">&quot;imuToCamera&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">[</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span> <span class="p">],</span>
+                <span class="p">[</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span> <span class="p">],</span>
+                <span class="p">[</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span> <span class="p">],</span>
+                <span class="p">[</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span> <span class="p">]</span>
+            <span class="p">],</span>
+            <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;brown-conrady&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;principalPointX&quot;</span><span class="p">:</span> <span class="mf">610.3153299232023</span><span class="p">,</span>
+            <span class="s2">&quot;principalPointY&quot;</span><span class="p">:</span> <span class="mf">416.25375348502</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If you wish to verify quality of the generated calibration, see the full calibration instructions above on how to use the <code class="docutils literal notranslate"><span class="pre">--output_html</span></code> option.</p>
+</section>
+<section id="additional-information">
+<h2>Additional information<a class="headerlink" href="#additional-information" title="Permalink to this heading"></a></h2>
+<p>To get full list of available options, run <code class="docutils literal notranslate"><span class="pre">sai-cli</span> <span class="pre">calibrate</span> <span class="pre">--help</span></code>.</p>
+<p>There also exists a more detailed <a class="reference external" href="https://spectacularai.github.io/docs/pdf/calibration_manual.pdf">Calibration Manual</a> that documents the camera models and conventions used by the SDK.</p>
+</section>
 </section>
 
 

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" data-content_root="../">
+<html class="writer-html5" lang="en">
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ORBBEC &mdash; spectacularAI  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=3a41478c" />
@@ -18,9 +18,9 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="../_static/tabs.js?v=3030b3cb"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -106,10 +106,10 @@
            <div itemprop="articleBody">
              
   <section id="orbbec">
-<h1>ORBBEC<a class="headerlink" href="#orbbec" title="Link to this heading"></a></h1>
+<h1>ORBBEC<a class="headerlink" href="#orbbec" title="Permalink to this heading"></a></h1>
 <p><strong>Spectacular AI C++ plugin for ORBBEC cameras</strong></p>
 <section id="supported-devices">
-<span id="supported-devices-label"></span><h2>Supported devices<a class="headerlink" href="#supported-devices" title="Link to this heading"></a></h2>
+<span id="supported-devices-label"></span><h2>Supported devices<a class="headerlink" href="#supported-devices" title="Permalink to this heading"></a></h2>
 <p>The SDK has been verified to work with these devices:</p>
 <blockquote>
 <div><ul class="simple">
@@ -121,7 +121,7 @@
 <p>Other devices should work with minimal changes. Please see the <a class="reference internal" href="#unsupported-devices-label"><span class="std std-ref">unsupported devices</span></a> section.</p>
 </section>
 <section id="quick-start">
-<h2>Quick start<a class="headerlink" href="#quick-start" title="Link to this heading"></a></h2>
+<h2>Quick start<a class="headerlink" href="#quick-start" title="Permalink to this heading"></a></h2>
 <video width="100%" muted loop autoplay>
     <source src="https://spectacularai.github.io/docs/video/preview-orbbec.mp4" type="video/mp4">
     Your browser does not support the video tag.
@@ -170,7 +170,7 @@
 </div></div>
 </section>
 <section id="recording-data">
-<h2>Recording data<a class="headerlink" href="#recording-data" title="Link to this heading"></a></h2>
+<h2>Recording data<a class="headerlink" href="#recording-data" title="Permalink to this heading"></a></h2>
 <p>Orbbec data can be recorded using the <code class="docutils literal notranslate"><span class="pre">sai-record-orbbec</span></code> tool included in the SDK package (in the <code class="docutils literal notranslate"><span class="pre">bin</span></code> directory).
 First connect an Orbbec device over USB3, then run (add <code class="docutils literal notranslate"><span class="pre">.exe</span></code> on Windows):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">sai</span><span class="o">-</span><span class="n">record</span><span class="o">-</span><span class="n">orbbec</span> <span class="c1"># Record with visualization, requires pip install spectacularAI[full]</span>
@@ -182,7 +182,7 @@ First connect an Orbbec device over USB3, then run (add <code class="docutils li
 <p>The source code of recording tool is also available at <a class="reference external" href="https://github.com/SpectacularAI/sdk/tree/main/cpp/orbbec">https://github.com/SpectacularAI/sdk/tree/main/cpp/orbbec</a>
 which allows customizing the recording tool, if necessary.</p>
 <section id="unsupported-devices">
-<span id="unsupported-devices-label"></span><h3>Unsupported devices<a class="headerlink" href="#unsupported-devices" title="Link to this heading"></a></h3>
+<span id="unsupported-devices-label"></span><h3>Unsupported devices<a class="headerlink" href="#unsupported-devices" title="Permalink to this heading"></a></h3>
 <p>The SDK should work on most Orbbec devices, but has only been tested with devices listed <a class="reference internal" href="#supported-devices-label"><span class="std std-ref">here</span></a>.
 Other devices require setting certain parameters manually. Namely, the IMU-to-camera matrix needs to be set if the device model was not recognized by the SDK.
 For example:</p>
@@ -200,7 +200,7 @@ For example:</p>
 </section>
 </section>
 <section id="installation-as-a-library">
-<h2>Installation as a library<a class="headerlink" href="#installation-as-a-library" title="Link to this heading"></a></h2>
+<h2>Installation as a library<a class="headerlink" href="#installation-as-a-library" title="Permalink to this heading"></a></h2>
 <p>The following commands should be run in the folder where you have unpacked the SDK release package.</p>
 <div class="sphinx-tabs docutils container">
 <div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-TGludXg=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-1-TGludXg=" name="TGludXg=" role="tab" tabindex="0">Linux</button><button aria-controls="panel-1-V2luZG93cw==" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-1-V2luZG93cw==" name="V2luZG93cw==" role="tab" tabindex="-1">Windows</button></div><div aria-labelledby="tab-1-TGludXg=" class="sphinx-tabs-panel group-tab" id="panel-1-TGludXg=" name="TGludXg=" role="tabpanel" tabindex="0"><ol class="arabic">
@@ -239,7 +239,7 @@ For example:</p>
 </div></div>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
 <p>The following instructions show how to compile and run the <a class="reference external" href="https://github.com/SpectacularAI/sdk-examples/tree/main/cpp/orbbec/">Spectacular AI ORBBEC SDK examples</a>.</p>
 <blockquote>
 <div><ol class="arabic">
@@ -268,7 +268,7 @@ For example:</p>
 </div></div>
 </section>
 <section id="api-reference">
-<h2>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading"></a></h2>
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading"></a></h2>
 <p>The classes specific to the Spectacular AI ORBBEC Wrapper are documented below. For the main output classes, refer to the C++ documentation in <a class="reference internal" href="../core.html#core-sdk"><span class="std std-ref">Core SDK</span></a>.</p>
 <p>Defined in <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;spectacularAI/orbbec/configuration.hpp&gt;</span></code></p>
 <dl class="cpp type">
@@ -455,7 +455,7 @@ For example:</p>
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin8Pipeline5pimplE">
-<span id="_CPPv3N13spectacularAI12orbbecPlugin8Pipeline5pimplE"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin8Pipeline5pimplE"></span><span id="spectacularAI::orbbecPlugin::Pipeline::pimpl__std::unique_ptr:impl:"></span><span class="target" id="classspectacularAI_1_1orbbecPlugin_1_1Pipeline_1abec7d5c890c0cf92fb45dacf0f39ae0d"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">impl</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pimpl</span></span></span><a class="headerlink" href="#_CPPv4N13spectacularAI12orbbecPlugin8Pipeline5pimplE" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv3N13spectacularAI12orbbecPlugin8Pipeline5pimplE"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin8Pipeline5pimplE"></span><span id="spectacularAI::orbbecPlugin::Pipeline::pimpl__std::unique_ptr:impl:"></span><span class="target" id="classspectacularAI_1_1orbbecPlugin_1_1Pipeline_1abec7d5c890c0cf92fb45dacf0f39ae0d"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">impl</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pimpl</span></span></span><a class="headerlink" href="#_CPPv4N13spectacularAI12orbbecPlugin8Pipeline5pimplE" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 </div>
