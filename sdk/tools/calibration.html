@@ -107,8 +107,8 @@
 <h1>Calibration<a class="headerlink" href="#calibration" title="Permalink to this heading"></a></h1>
 <p>The Spectacular AI SDK includes a tool to easily calibrate camera setups. It computes camera intrinsics for several supported distortion models, and also stereo and camera-IMU extrinsics. Note that calibration is not generally required for any out-of-the-box supported devices listed on the <a class="reference internal" href="../wrappers.html"><span class="doc std std-doc">wrappers</span></a> page, but is relevant for custom hardware integrations.</p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/N2ae_cJvmgM?si=RFs1ZnG057t9yQJu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-<section id="full-calibration-required-by-most-spectacular-ai-sdk-features">
-<h2>Full calibration (required by most Spectacular AI SDK features)<a class="headerlink" href="#full-calibration-required-by-most-spectacular-ai-sdk-features" title="Permalink to this heading"></a></h2>
+<section id="monocular-camera-imu-calibration">
+<h2>Monocular camera-IMU calibration<a class="headerlink" href="#monocular-camera-imu-calibration" title="Permalink to this heading"></a></h2>
 <ol class="arabic simple">
 <li><p>Setup the <a class="reference external" href="https://spectacularai.github.io/docs/other/calibration_target.html">6x6 Aprilgrid</a> pattern on a computer monitor as large as possible. <a class="reference external" href="https://github.com/SpectacularAI/oak-d-capture/blob/master/measuring_calibration_target.jpg">Measure</a> the target.</p></li>
 <li><p>Create a Spectacular AI SDK recording of the target:</p></li>
@@ -132,8 +132,19 @@ sai-cli<span class="w"> </span>calibrate<span class="w"> </span>path/to/recordin
 <li><p>Input the generated <code class="docutils literal notranslate"><span class="pre">calibration.json</span></code> in the Spectacular AI SDK APIs.</p></li>
 </ol>
 </section>
-<section id="intrinsics-calibration-basic">
-<h2>Intrinsics calibration (basic)<a class="headerlink" href="#intrinsics-calibration-basic" title="Permalink to this heading"></a></h2>
+<section id="stereo-camera-imu-calibration">
+<h2>Stereo camera-IMU calibration<a class="headerlink" href="#stereo-camera-imu-calibration" title="Permalink to this heading"></a></h2>
+<p>Stereo camera calibration follows the same steps as monocular calibration, with the additional requirement of having enough video where both cameras see the calibration target simultaneously to accurately estimate stereo extrinsics.</p>
+<ul class="simple">
+<li><p>When recording, first perform the calibration motions individually for each camera. Then, move the camera up &amp; down and back &amp; forth while keeping the target visible to both cameras. All motions should be part of the same recording.</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">report.html</span></code> includes an extra section for stereo calibration, showing the coverage of the stereo overlap.</p>
+<p>Below is an example of footage with good stereo overlap, the target is fully visible in both cameras. This is typically not an issue unless the cameras have a large vergence angle and a small overlap area:</p>
+<p><img src="https://spectacularai.github.io/docs/jpg/stereo_overlap.jpg"></img></p>
+</section>
+<section id="camera-only-calibration">
+<h2>Camera-only calibration<a class="headerlink" href="#camera-only-calibration" title="Permalink to this heading"></a></h2>
+<p>Spectacular AI SDK requires IMU-camera calibration, so this mode is not sufficient to use most Spectacular AI features. However, it can be helpful if the camera calibration parameters are required for other purposes.</p>
 <p>You can also calibrate a single camera without an IMU from any video file:</p>
 <ol class="arabic simple">
 <li><p>Setup the <a class="reference external" href="https://spectacularai.github.io/docs/other/calibration_target.html">6x6 Aprilgrid</a> pattern on a computer monitor as large as possible.</p></li>
