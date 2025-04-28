@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Spectacular AI SDK documentation &mdash; spectacularAI  documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
       <link rel="stylesheet" type="text/css" href="_static/custom.css?v=3a41478c" />
@@ -18,9 +18,9 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -93,7 +93,7 @@
         <li><a href="#" aria-label="Home">Spectacular AI SDK documentation</a></li>
         <li class="breadcrumb-item active">Spectacular AI SDK documentation</li>
     <li class="wy-breadcrumbs-aside version">
-        v1.39
+        v1.40
     </li>
     </ul>
 
@@ -103,11 +103,11 @@
            <div itemprop="articleBody">
              
   <section id="spectacular-ai-sdk-documentation">
-<h1>Spectacular AI SDK documentation<a class="headerlink" href="#spectacular-ai-sdk-documentation" title="Permalink to this heading"></a></h1>
+<h1>Spectacular AI SDK documentation<a class="headerlink" href="#spectacular-ai-sdk-documentation" title="Link to this heading"></a></h1>
 <p>The <em>Spectacular AI SDK</em> fuses data from cameras, IMUs, and various optional sensors to track a device’s position, orientation, and velocity in real time. Its main use cases are drone (UAV) and ground-vehicle navigation in GPS-denied environments and inside-out tracking for AR/VR/XR headsets.</p>
 <p>In addition, the SDK can be applied to a wide range of other robotics, virtual reality, and computer vision research scenarios. It offers real-time 3D mapping capabilities (SLAM) and supports rapid prototyping with popular off-the-shelf devices (e.g., OAK-D). The core SDK is hardware-agnostic and can be integrated into any embedded platform with sufficient computing power and properly configured sensors.</p>
 <section id="sdk-architecture">
-<h2>SDK architecture<a class="headerlink" href="#sdk-architecture" title="Permalink to this heading"></a></h2>
+<h2>SDK architecture<a class="headerlink" href="#sdk-architecture" title="Link to this heading"></a></h2>
 <p>The main parts of the SDK are documented on their own pages:</p>
 <ul class="simple">
 <li><p><strong><a class="reference internal" href="core.html"><span class="doc std std-doc">Core SDK</span></a></strong>: device-independent APIs shared between all devices supported by the SDK.</p></li>
@@ -118,7 +118,7 @@
 </div>
 </section>
 <section id="operating-modes">
-<h2>Operating modes<a class="headerlink" href="#operating-modes" title="Permalink to this heading"></a></h2>
+<h2>Operating modes<a class="headerlink" href="#operating-modes" title="Link to this heading"></a></h2>
 <p><strong>VIO</strong>. Visual-Inertial Odometry (VIO) is relative positioning of the device based on camera and IMU data, and it accumulates drift error that is proportional to the traveled distance. VIO is the key enabled for all other operation modes. If not other components are in use, the SDK is in VIO-only mode.</p>
 <p><strong>VISLAM</strong> mode corrects the VIO drift with <em>loop closures</em>: the SDK builds a map of the environment in real-time and uses it to recognize previously visited locations. This SLAM map is available through the <a class="reference internal" href="mapping.html"><span class="doc std std-doc">Mapping API</span></a>. VISLAM mode is ideal for inside-out tracking of AR/VR/XR HMDs and other small-scale indoor use cases.</p>
 <p><strong>GNSS-VIO</strong>. In this mode, the SDK is occasionally given absolute position references from an external system such as GPS. When the external inputs stop, the positioning continues with VIO in global coordinates (see <a class="reference external" href="https://spectacularai.github.io/docs/sdk/tracking.html#spectacularAI.GnssVioOutput">GnssVioOutput</a>), but accumulates drift until the next external input. GNSS-VIO is suitable for ground vehicle positioning that is robust to natural GPS outages (as demonstrated <a class="reference external" href="https://youtu.be/DADQ3kaP6bA">here</a>). The SDK can also be used  as well as short-range UAV navigation in GPS-denied environments (as demonstrated <a class="reference external" href="https://youtu.be/1WRYu5WleNo">here</a>).</p>
@@ -126,7 +126,7 @@
 <p><strong>AprilTags</strong>. For indoor and robotics use cases, the SDK can also utilize AprilTag fiducial markers for a global map. See <a class="reference external" href="https://spectacularai.github.io/docs/pdf/april_tag_instructions.pdf">here</a> for more information.</p>
 </section>
 <section id="system-requirements">
-<h2>System requirements<a class="headerlink" href="#system-requirements" title="Permalink to this heading"></a></h2>
+<h2>System requirements<a class="headerlink" href="#system-requirements" title="Link to this heading"></a></h2>
 <p><strong>Operating system</strong>. Windows or Linux. For Linux, Ubuntu 18+ is recommended, but other distribution (e.g., Yocto) can be supported as well. If the binaries do not work out-of-the-box, <a class="reference external" href="https://www.spectacularai.com/#contact">contact us</a> for commercial support.</p>
 <p><strong>Architecture</strong> Binaries for x86-64 are available on the <a class="reference external" href="https://github.com/SpectacularAI/sdk/releases">SDK releases</a>. For Linux 64-bit ARM binaries are also available with a commercial license. <a class="reference external" href="https://www.spectacularai.com/#contact">Contact us</a> for more info.</p>
 <p><strong>CPU</strong>. The SDK is designed to work in real-time on Cortex-A57 type or better embedded processors. This includes NVidia Jetson Nano and Raspberry Pi 4 (A72). Slower processors, such as Cortex-A53 work under certain conditions or with reduced accuracy and functionality. At least two A5x or better cores are required.</p>
@@ -135,10 +135,10 @@
 However, <a class="reference internal" href="wrappers.html"><span class="doc std std-doc">Wrappers</span></a>, <a class="reference external" href="https://github.com/SpectacularAI/sdk-examples">SDK examples</a> and tools built on the SDK have additional dependencies, which are not all designed to work on embedded platforms (especially the Python-based 3D visualizations). See the relevant documentation sub-pages for more info.</p>
 </section>
 <section id="development-dependencies">
-<h2>Development dependencies<a class="headerlink" href="#development-dependencies" title="Permalink to this heading"></a></h2>
+<h2>Development dependencies<a class="headerlink" href="#development-dependencies" title="Link to this heading"></a></h2>
 <p>For development purposes, we recommend a relatively recent Linux or Windows laptop computer.</p>
 <section id="windows">
-<h3>Windows<a class="headerlink" href="#windows" title="Permalink to this heading"></a></h3>
+<h3>Windows<a class="headerlink" href="#windows" title="Link to this heading"></a></h3>
 <p>The following setup is recommended to run the SDK examples</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://git-scm.com">Git for Windows</a></p></li>
@@ -152,7 +152,7 @@ However, <a class="reference internal" href="wrappers.html"><span class="doc std
 </ul>
 </section>
 <section id="linux">
-<h3>Linux<a class="headerlink" href="#linux" title="Permalink to this heading"></a></h3>
+<h3>Linux<a class="headerlink" href="#linux" title="Link to this heading"></a></h3>
 <p>You need at least Git, and Python and Pip</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sudo apt update
 sudo apt install python-is-python3 python3-pip git
@@ -164,7 +164,7 @@ sudo apt install python-is-python3 python3-pip git
 </div>
 </section>
 <section id="ffmpeg">
-<h3>FFmpeg<a class="headerlink" href="#ffmpeg" title="Permalink to this heading"></a></h3>
+<h3>FFmpeg<a class="headerlink" href="#ffmpeg" title="Link to this heading"></a></h3>
 <p>To use the recoding, replay API or tools depending on these APIs, you need to install FFmpeg. Linux</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>apt install ffmpeg
 </pre></div>
