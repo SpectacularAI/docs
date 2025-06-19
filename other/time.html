@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Millisecond Clock</title>
+    <style>
+        /* Ensure HTML and Body fill the entire viewport */
+        html, body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden; /* Hide scrollbars if content slightly overflows */
+            font-family: sans-serif; /* Use Inter font as preferred */
+            background-color: #000; /* Black background color */
+            color: #FFF; /* White text color */
+        }
+
+        /* Center content using flexbox */
+        body {
+            display: flex;
+            align-items: center; /* Center vertically */
+            justify-content: center; /* Center horizontally */
+            width: 100%;
+        }
+
+        /* Responsive font size using viewport width and clamp for min/max */
+        #clock {
+            font-size: 12vw; /* Responsive font size: min 4rem, 15% of viewport width, max 15rem */
+            line-height: 1; /* Adjust line height for large text */
+            text-align: center; /* Center the text within its container */
+            font-weight: 700; /* Bold font weight */
+            /* Removed text-shadow for a simple look */
+            letter-spacing: -0.05em; /* Slightly tighter letter spacing */
+
+            /* Increased padding to prevent clipping on edges */
+            padding: 0 4vw; /* Increased to 4% of viewport width padding on left and right */
+            box-sizing: border-box; /* Ensure padding is included in the element's total width */
+        }
+    </style>
+</head>
+<body>
+    <!-- Clock display container -->
+    <div id="clock">
+        Loading...
+    </div>
+
+    <script>
+        // Get the clock element
+        const clockElement = document.getElementById('clock');
+
+        /**
+         * Updates the clock display with the current time including milliseconds.
+         */
+        function updateClock() {
+            const now = new Date(); // Get the current date and time
+
+            // Format hours, minutes, and seconds with leading zeros
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            // Format milliseconds with leading zeros (e.g., 001, 010, 100)
+            const milliseconds = String(now.getMilliseconds()).padStart(3, '0');
+
+            // Construct the time string
+            // Example: 14:35:01.234
+            const timeString = `${hours}:${minutes}:${seconds}.${milliseconds}`;
+
+            // Update the text content of the clock element
+            clockElement.textContent = timeString;
+
+            requestAnimationFrame(updateClock);
+        }
+
+        updateClock();
+    </script>
+</body>
+</html>
