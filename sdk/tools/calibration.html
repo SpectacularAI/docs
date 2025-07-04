@@ -1,26 +1,23 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Calibration &mdash; spectacularAI  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=3a41478c" />
 
   
     <link rel="shortcut icon" href="https://www.spectacularai.com/favicon/favicon.ico"/>
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -94,7 +91,7 @@
             <li class="breadcrumb-item"><a href="../tools.html">Tools</a></li>
         <li class="breadcrumb-item active">Calibration</li>
     <li class="wy-breadcrumbs-aside version">
-        v1.40
+        v1.41
     </li>
     </ul>
 
@@ -122,7 +119,7 @@
 <li><p><a class="reference external" href="https://spectacularai.github.io/docs/sdk/index.html#ffmpeg">Install FFmpeg</a>.</p></li>
 <li><p>Install and run the Spectacular AI calibration tool on the recording directory (here <code class="docutils literal notranslate"><span class="pre">path/to/recording</span></code>):</p></li>
 </ol>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;spectacularAI[full]&quot;</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;spectacularAI[cli]&quot;</span>
 sai-cli<span class="w"> </span>calibrate<span class="w"> </span>path/to/recording<span class="w"> </span>--tag_size<span class="w"> </span><span class="m">0</span>.03209876<span class="w"> </span>--output_html<span class="w"> </span>report.html<span class="w"> </span>--output<span class="w"> </span>calibration.json
 </pre></div>
 </div>
@@ -152,7 +149,7 @@ sai-cli<span class="w"> </span>calibrate<span class="w"> </span>path/to/recordin
 <li><p><a class="reference external" href="https://spectacularai.github.io/docs/sdk/index.html#ffmpeg">Install FFmpeg</a>.</p></li>
 <li><p>Install and run the Spectacular AI calibration tool on the video file (here <code class="docutils literal notranslate"><span class="pre">video.mp4</span></code>):</p></li>
 </ol>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;spectacularAI[full]&quot;</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;spectacularAI[cli]&quot;</span>
 sai-cli<span class="w"> </span>calibrate<span class="w"> </span>video.mp4
 </pre></div>
 </div>

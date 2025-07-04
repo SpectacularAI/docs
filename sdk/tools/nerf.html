@@ -1,26 +1,23 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gaussian Splatting &amp; NeRFs &mdash; spectacularAI  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=3a41478c" />
 
   
     <link rel="shortcut icon" href="https://www.spectacularai.com/favicon/favicon.ico"/>
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -95,7 +92,7 @@
             <li class="breadcrumb-item"><a href="../tools.html">Tools</a></li>
         <li class="breadcrumb-item active">Gaussian Splatting &amp; NeRFs</li>
     <li class="wy-breadcrumbs-aside version">
-        v1.40
+        v1.41
     </li>
     </ul>
 
@@ -133,22 +130,21 @@
 <details><summary><b>Android</b> (with or without ToF)</summary><p>
 <ol class="arabic simple">
 <li><p>Download <a class="reference external" href="https://play.google.com/store/apps/details?id=com.spectacularai.rec">Spectacular Rec</a> from Play Store.</p></li>
-<li><p>Use like the iPhone version (tutorial here <a class="reference external" href="https://youtu.be/d77u-E96VVw">here</a></p></li>
+<li><p>Use like the iPhone version (tutorial here <a class="reference external" href="https://youtu.be/d77u-E96VVw">here</a>)</p></li>
 </ol>
-<p>Note: the Android pipeline in the first app and <code class="docutils literal notranslate"><span class="pre">sai-cli</span></code> version is currently less stable than the iOS version and, the Gaussian Splatting accuracy is not as good as NeRFs. This will be improved in the near future.</p>
 </p></details>
 <details><summary><b>OAK-D</b></summary><p>
 <ol class="arabic simple">
 <li><p>Plug in the OAK-D to your laptop (or directly the computer with the heavy GPU)</p></li>
 <li><p>Run <code class="docutils literal notranslate"><span class="pre">sai-cli</span> <span class="pre">record</span> <span class="pre">oak</span> <span class="pre">--no_feature_tracker</span> <span class="pre">--resolution=800p</span></code>.</p></li>
 </ol>
-<p>If the above settings cause issues, try running <code class="docutils literal notranslate"><span class="pre">sai-cli</span> <span class="pre">record</span> <span class="pre">oak</span></code> instead. Coming soon: 🌈 colors.</p>
+<p>If the above settings cause issues, try running <code class="docutils literal notranslate"><span class="pre">sai-cli</span> <span class="pre">record</span> <span class="pre">oak</span></code> instead.</p>
 </p></details>
 <details><summary><b>RealSense D455/D435i</b></summary><p>
 See the <a href="https://spectacularai.github.io/docs/sdk/wrappers/realsense.html#recording-data">Recording data</a> section under the RealSense wrapper instructions
 </p></details>
 <details><summary><b>Azure Kinect DK</b></summary><p>
-<p>See the https://spectacularai.github.io/docs/sdk/wrappers/k4a.html for more information</p>
+<p>See the <a href="https://spectacularai.github.io/docs/sdk/wrappers/k4a.html">Kinect wrapper page</a> for more information</p>
 </p></details>
 <details><summary><b>Orbbec</b></summary><p>
 <p>See the <a href="https://spectacularai.github.io/docs/sdk/wrappers/orbbec.html#recording-data">Recording data</a> section under the Orbbec wrapper instructions</p>
@@ -192,18 +188,9 @@ Without the <code class="docutils literal notranslate"><span class="pre">--fast<
 using <a class="reference external" href="https://github.com/SpectacularAI/point-cloud-tools#gaussian-splatting">SpectacularAI/point-cloud-tools</a></p></li>
 <li><p>View or embed <code class="docutils literal notranslate"><span class="pre">.splat</span></code> to a web page using <a class="reference external" href="https://github.com/huggingface/gsplat.js">gsplat.js</a></p></li>
 </ul>
-</section>
-</section>
-<section id="export-mapping-api-data-to-other-tools">
-<h2>Export mapping API data to other tools<a class="headerlink" href="#export-mapping-api-data-to-other-tools" title="Link to this heading"></a></h2>
-<p>As an alternative to Nerfstudio, the pose and image data computed by the Spectacular AI Mapping API can also be exported to:</p>
-<ul class="simple">
-<li><p>Nvidia Instant NGP: see <a class="reference internal" href="#./replay_to_instant_ngp.py"><span class="xref myst">replay_to_instant_ngp.py</span></a></p></li>
-<li><p>https://github.com/wanmeihuali/taichi_3d_gaussian_splatting (use <code class="docutils literal notranslate"><span class="pre">sai-cli</span> <span class="pre">process</span> <span class="pre">--format=taichi</span> <span class="pre">...</span></code>)</p></li>
-<li><p>Other tools that use a similar COLMAP-like folder structure than Nerfstudio (<code class="docutils literal notranslate"><span class="pre">sai-cli</span> <span class="pre">process</span></code> default output format)</p></li>
-</ul>
 <p>The export process can also be customized by modifying the source code of <a class="reference external" href="https://github.com/SpectacularAI/sdk/blob/main/python/cli/process/process.py"><code class="docutils literal notranslate"><span class="pre">sai-cli</span> <span class="pre">process</span></code></a>
 which can also be used as a standalone Python script.</p>
+</section>
 </section>
 <section id="license-note">
 <h2>License note<a class="headerlink" href="#license-note" title="Link to this heading"></a></h2>

@@ -1,26 +1,23 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Recording &mdash; spectacularAI  documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/custom.css?v=3a41478c" />
 
   
     <link rel="shortcut icon" href="https://www.spectacularai.com/favicon/favicon.ico"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -95,7 +92,7 @@
             <li class="breadcrumb-item"><a href="core.html">Core SDK</a></li>
         <li class="breadcrumb-item active">Recording</li>
     <li class="wy-breadcrumbs-aside version">
-        v1.40
+        v1.41
     </li>
     </ul>
 
@@ -118,17 +115,25 @@ The data created using the recorder can used for</p>
 <p>In all cases, remember to first <a class="reference external" href="https://spectacularai.github.io/docs/sdk/index.html#ffmpeg">install FFmpeg</a>.</p>
 <section id="data-format">
 <h2>Data format<a class="headerlink" href="#data-format" title="Link to this heading"></a></h2>
-<p>The recording format created by the SDK and Spectacular Rec is <a class="reference external" href="https://github.com/SpectacularAI/vio_benchmark/blob/main/DATA_FORMAT.md">documented here</a>. It is based on encoded videos and JSONL, making it a convenient and effective choice for high-resolution, high-frequency multi-camera, multi-sensor data. In particular, we can efficiently and economically store</p>
+<p>The recording format created by the SDK and <em>Spectacular Rec</em> applications is <a class="reference external" href="https://github.com/SpectacularAI/docs/blob/main/other/DATA_FORMAT.md">documented here</a>. It is based on encoded videos and JSONL, making it a convenient and effective choice for high-resolution, high-frequency multi-camera, multi-sensor data. In particular, we can efficiently and economically store</p>
 <ul class="simple">
 <li><p>Multi-camera RGB or monochrome data</p></li>
 <li><p>Depth data (via PNGs or FFV1)</p></li>
 <li><p>IMU, synchronized with the camera frames</p></li>
 <li><p>Other sensors, e.g., barometer or GPS</p></li>
 </ul>
+<p>A Spectacular AI <em>SDK recording</em> is a folder (possibly compressed to a zip file) that contains the files:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">data.jsonl</span></code> for sensor data and frame metadata</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data.mkv</span></code> (or <code class="docutils literal notranslate"><span class="pre">mp4</span></code>) and possibly <code class="docutils literal notranslate"><span class="pre">data2.*</span></code>, <code class="docutils literal notranslate"><span class="pre">data3.*</span></code> in multi-camera cases</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">calibration.json</span></code> the current calibration file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">vio_config.yaml</span></code> the parameters used for the recording</p></li>
+<li><p>possibly other auxiliary files</p></li>
+</ul>
 </section>
 <section id="recording-settings">
 <h2>Recording settings<a class="headerlink" href="#recording-settings" title="Link to this heading"></a></h2>
-<p>It is possible to control FFmpeg encoding parameters using the <code class="docutils literal notranslate"><span class="pre">--ffmpeg_codec</span></code> command line option (for recording tools) or the <code class="docutils literal notranslate"><span class="pre">ffmpegVideoCodec</span></code> parameter in <code class="docutils literal notranslate"><span class="pre">vio_config.yaml</span></code>. For example, the following option disables all encoding and writes raw video, which minmizes the CPU consumption overhead caused by enabling rrecording (on the other hand, this requires a lot of disk space and decent write speed)</p>
+<p>It is possible to control FFmpeg encoding parameters using the <code class="docutils literal notranslate"><span class="pre">--ffmpeg_codec</span></code> command line option (for recording tools) or the <code class="docutils literal notranslate"><span class="pre">ffmpegVideoCodec</span></code> parameter in <code class="docutils literal notranslate"><span class="pre">vio_config.yaml</span></code>. For example, the following option disables all encoding and writes raw video, which minimizes the CPU consumption overhead caused by enabling recording (on the other hand, this requires a lot of disk space and decent write speed)</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ffmpegVideoCodec: rawvideo
 </pre></div>
 </div>

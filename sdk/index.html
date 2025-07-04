@@ -1,26 +1,24 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Spectacular AI SDK documentation &mdash; spectacularAI  documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/custom.css?v=3a41478c" />
 
   
     <link rel="shortcut icon" href="https://www.spectacularai.com/favicon/favicon.ico"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -93,7 +91,7 @@
         <li><a href="#" aria-label="Home">Spectacular AI SDK documentation</a></li>
         <li class="breadcrumb-item active">Spectacular AI SDK documentation</li>
     <li class="wy-breadcrumbs-aside version">
-        v1.40
+        v1.41
     </li>
     </ul>
 
@@ -119,9 +117,9 @@
 </section>
 <section id="operating-modes">
 <h2>Operating modes<a class="headerlink" href="#operating-modes" title="Link to this heading"></a></h2>
-<p><strong>VIO</strong>. Visual-Inertial Odometry (VIO) is relative positioning of the device based on camera and IMU data, and it accumulates drift error that is proportional to the traveled distance. VIO is the key enabled for all other operation modes. If not other components are in use, the SDK is in VIO-only mode.</p>
+<p><strong>VIO</strong>. Visual-Inertial Odometry (VIO) is relative positioning of the device based on camera and IMU data, and it accumulates drift error that is proportional to the traveled distance. VIO is the key enabler for all other operation modes. If no other components are in use, the SDK is in VIO-only mode.</p>
 <p><strong>VISLAM</strong> mode corrects the VIO drift with <em>loop closures</em>: the SDK builds a map of the environment in real-time and uses it to recognize previously visited locations. This SLAM map is available through the <a class="reference internal" href="mapping.html"><span class="doc std std-doc">Mapping API</span></a>. VISLAM mode is ideal for inside-out tracking of AR/VR/XR HMDs and other small-scale indoor use cases.</p>
-<p><strong>GNSS-VIO</strong>. In this mode, the SDK is occasionally given absolute position references from an external system such as GPS. When the external inputs stop, the positioning continues with VIO in global coordinates (see <a class="reference external" href="https://spectacularai.github.io/docs/sdk/tracking.html#spectacularAI.GnssVioOutput">GnssVioOutput</a>), but accumulates drift until the next external input. GNSS-VIO is suitable for ground vehicle positioning that is robust to natural GPS outages (as demonstrated <a class="reference external" href="https://youtu.be/DADQ3kaP6bA">here</a>). The SDK can also be used  as well as short-range UAV navigation in GPS-denied environments (as demonstrated <a class="reference external" href="https://youtu.be/1WRYu5WleNo">here</a>).</p>
+<p><strong>GNSS-VIO</strong>. In this mode, the SDK is occasionally given absolute position references from an external system such as GPS. When the external inputs stop, the positioning continues with VIO in global coordinates (see <a class="reference internal" href="cpp/latest/index.html#_CPPv4N13spectacularAI13GnssVioOutputE" title="spectacularAI::GnssVioOutput"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">GnssVioOutput</span></code></a>), but accumulates drift until the next external input. GNSS-VIO is suitable for ground vehicle positioning that is robust to natural GPS outages (as demonstrated <a class="reference external" href="https://youtu.be/DADQ3kaP6bA">here</a>). This mode can also be used for short-range UAV navigation in GPS-denied environments (as demonstrated <a class="reference external" href="https://youtu.be/1WRYu5WleNo">here</a>).</p>
 <p><strong>VIO+VPS</strong>. Visual Positioning System (VPS) uses a fixed visual map stored onboard the device as global reference, and is used to eliminate long-term drift. The SDK currently supports maps based on satellite imagery or aerial ortho-photos. The VIO+VPS system is ideal for long-range aerial navigation in GPS-denied environments (as demonstrated <a class="reference external" href="https://youtu.be/lxwd3pqbY6g">here</a>). In addition to Spectacular AI’s own VPS, the SDK supports integration with 3rd-party VPS systems.</p>
 <p><strong>AprilTags</strong>. For indoor and robotics use cases, the SDK can also utilize AprilTag fiducial markers for a global map. See <a class="reference external" href="https://spectacularai.github.io/docs/pdf/april_tag_instructions.pdf">here</a> for more information.</p>
 </section>
