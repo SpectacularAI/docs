@@ -4,7 +4,11 @@
 #  1. Activate a Python virtualenv where the correct spectacularAI
 #     Python package version has been installed
 #
-#  2. Run this script in the root folder of this repo (docs)
+#  2. Install additional tools:
+#
+#    pip install sphinx sphinx-tabs myst-parser breathe sphinx-rtd-theme
+#
+#  3. Run this script in the root folder of this repo (docs)
 #
 #   ./import-python-docs.sh MAJOR.MINOR
 #
