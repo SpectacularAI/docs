@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ROS &mdash; spectacularAI  documentation</title>
+  <title>&lt;no title&gt; &mdash; spectacularAI  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
@@ -23,9 +23,7 @@
         <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Tools" href="../tools.html" />
-    <link rel="prev" title="iOS &amp; Android" href="mobile.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -48,7 +46,7 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../python/latest/index.html">Python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../cpp/latest/index.html">C++</a></li>
@@ -62,19 +60,19 @@
 <li class="toctree-l2"><a class="reference internal" href="../custom-hardware.html">Custom hardware</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="../wrappers.html">Wrappers</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="oak.html">OAK-D</a></li>
-<li class="toctree-l2"><a class="reference internal" href="realsense.html">RealSense</a></li>
-<li class="toctree-l2"><a class="reference internal" href="k4a.html">Azure Kinect</a></li>
-<li class="toctree-l2"><a class="reference internal" href="orbbec.html">ORBBEC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mobile.html">iOS &amp; Android</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">ROS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wrappers.html">Wrappers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../wrappers/oak.html">OAK-D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../wrappers/realsense.html">RealSense</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../wrappers/k4a.html">Azure Kinect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../wrappers/orbbec.html">ORBBEC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../wrappers/mobile.html">iOS &amp; Android</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../wrappers/ros.html">ROS</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../tools.html">Tools</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../tools/nerf.html">Gaussian Splatting &amp; NeRFs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tools/calibration.html">Calibration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tools/diagnose.html">Diagnose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nerf.html">Gaussian Splatting &amp; NeRFs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="calibration.html">Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="diagnose.html">Diagnose</a></li>
 </ul>
 </li>
 </ul>
@@ -93,10 +91,9 @@
           <div role="navigation" aria-label="Page navigation">
     <ul class="wy-breadcrumbs">
         <li><a href="../index.html" aria-label="Home">Spectacular AI SDK documentation</a></li>
-            <li class="breadcrumb-item"><a href="../wrappers.html">Wrappers</a></li>
-        <li class="breadcrumb-item active">ROS</li>
+        <li class="breadcrumb-item active">&lt;no title&gt;</li>
     <li class="wy-breadcrumbs-aside version">
-        v1.43
+        vjerry-test
     </li>
     </ul>
 
@@ -105,13 +102,29 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="ros">
-<h1>ROS<a class="headerlink" href="#ros" title="Permalink to this heading"></a></h1>
-<p>Spectacular AI core SDK can also be used through ROS.</p>
-<p>For Luxonis devices, this can be tested with the publicly available SDK, see <a class="reference external" href="https://github.com/SpectacularAI/sdk-examples/tree/main/python/oak/ros2">OAK-D ROS2 example</a></p>
-<p>Other integrations generally require access to the <em>Input API</em> of core SDK,
-which requires a <a class="reference external" href="https://www.spectacularai.com/#contact">commercial license</a>.</p>
-</section>
+  <p>The Spectacular AI SDK includes a self-diagnostic tool to quickly diagnose any recording made with it for any potential issues. These include such common hardware and configuration issuse such as:</p>
+<ul class="simple">
+<li><p>Data gaps</p></li>
+<li><p>Wrong IMU units (e.g., DPS instead of rad/s)</p></li>
+<li><p>Intolerable mechanical noise levels</p></li>
+<li><p>Incorrect timestamps</p></li>
+</ul>
+<p>To use the tool, simply install it from PyPi and point it at your recording done with the SDK:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;spectacularAI[cli]&quot;</span>
+sai-cli<span class="w"> </span>diagnose<span class="w"> </span>session_2025-07-11_14-46-48/<span class="w"> </span>--output_html<span class="w"> </span>report.html
+</pre></div>
+</div>
+<p>To see more detailed options, you can run:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sai-cli<span class="w"> </span>diagnose<span class="w"> </span>--help
+</pre></div>
+</div>
+<p>An example report looks like this, see the <a class="reference external" href="https://spectacularai.github.io/docs/other/diagnose_report.html">full report here</a>:</p>
+<p><img src="https://spectacularai.github.io/docs/png/diagnose-report-example.png"></img></p>
+<p>In addition, the data from the SDK can be visualized and diagnosed using the following open source tools:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/SpectacularAI/calibration-scripts/blob/master/visualize.py"><code class="docutils literal notranslate"><span class="pre">visualize.py</span></code> script</a> for interactive IMU signal figures.</p></li>
+<li><p><a class="reference external" href="https://github.com/SpectacularAI/calibration-scripts/blob/master/sync-imu-video.py"><code class="docutils literal notranslate"><span class="pre">sync-imu-video.py</span></code> script</a> for assessing IMU-camera time sync. Note that this tool only works in cases where the input data has sufficiently good visual quality such as relatively short handheld tests with versatile (and not too fast) motion, in a feature-rich indoor environment.</p></li>
+</ul>
 
 
            </div>

@@ -1,26 +1,30 @@
-
-
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" data-content_root="../">
+<html class="writer-html5" lang="en">
 <head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Calibration &mdash; spectacularAI  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=3a41478c" />
 
   
     <link rel="shortcut icon" href="https://www.spectacularai.com/favicon/favicon.ico"/>
-      <script src="../_static/jquery.js?v=5d32c60e"></script>
-      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
-      <script src="../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Diagnose" href="diagnose.html" />
     <link rel="prev" title="Gaussian Splatting &amp; NeRFs" href="nerf.html" /> 
 </head>
 
@@ -70,6 +74,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../tools.html">Tools</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="nerf.html">Gaussian Splatting &amp; NeRFs</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="diagnose.html">Diagnose</a></li>
 </ul>
 </li>
 </ul>
@@ -91,7 +96,7 @@
             <li class="breadcrumb-item"><a href="../tools.html">Tools</a></li>
         <li class="breadcrumb-item active">Calibration</li>
     <li class="wy-breadcrumbs-aside version">
-        v1.42
+        v1.43
     </li>
     </ul>
 
@@ -101,11 +106,11 @@
            <div itemprop="articleBody">
              
   <section id="calibration">
-<h1>Calibration<a class="headerlink" href="#calibration" title="Link to this heading"></a></h1>
+<h1>Calibration<a class="headerlink" href="#calibration" title="Permalink to this heading"></a></h1>
 <p>The Spectacular AI SDK includes a tool to easily calibrate camera setups. It computes camera intrinsics for several supported distortion models, and also stereo and camera-IMU extrinsics. Note that calibration is not generally required for any out-of-the-box supported devices listed on the <a class="reference internal" href="../wrappers.html"><span class="doc std std-doc">wrappers</span></a> page, but is relevant for custom hardware integrations.</p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/N2ae_cJvmgM?si=RFs1ZnG057t9yQJu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 <section id="monocular-camera-imu-calibration">
-<h2>Monocular camera-IMU calibration<a class="headerlink" href="#monocular-camera-imu-calibration" title="Link to this heading"></a></h2>
+<h2>Monocular camera-IMU calibration<a class="headerlink" href="#monocular-camera-imu-calibration" title="Permalink to this heading"></a></h2>
 <ol class="arabic simple">
 <li><p>Setup the <a class="reference external" href="https://spectacularai.github.io/docs/other/calibration_target.html">6x6 Aprilgrid</a> pattern on a computer monitor as large as possible. <a class="reference external" href="https://github.com/SpectacularAI/oak-d-capture/blob/master/measuring_calibration_target.jpg">Measure</a> the target.</p></li>
 <li><p>Create a Spectacular AI SDK recording of the target:</p></li>
@@ -130,7 +135,7 @@ sai-cli<span class="w"> </span>calibrate<span class="w"> </span>path/to/recordin
 </ol>
 </section>
 <section id="stereo-camera-imu-calibration">
-<h2>Stereo camera-IMU calibration<a class="headerlink" href="#stereo-camera-imu-calibration" title="Link to this heading"></a></h2>
+<h2>Stereo camera-IMU calibration<a class="headerlink" href="#stereo-camera-imu-calibration" title="Permalink to this heading"></a></h2>
 <p>Stereo camera calibration follows the same steps as monocular calibration, with the additional requirement of having enough video where both cameras see the calibration target simultaneously to accurately estimate stereo extrinsics.</p>
 <ul class="simple">
 <li><p>When recording, first perform the calibration motions individually for each camera. Then, move the camera up &amp; down and back &amp; forth while keeping the target visible to both cameras. All motions should be part of the same recording.</p></li>
@@ -140,7 +145,7 @@ sai-cli<span class="w"> </span>calibrate<span class="w"> </span>path/to/recordin
 <p><img src="https://spectacularai.github.io/docs/jpg/stereo_overlap.jpg"></img></p>
 </section>
 <section id="camera-only-calibration">
-<h2>Camera-only calibration<a class="headerlink" href="#camera-only-calibration" title="Link to this heading"></a></h2>
+<h2>Camera-only calibration<a class="headerlink" href="#camera-only-calibration" title="Permalink to this heading"></a></h2>
 <p>Spectacular AI SDK requires IMU-camera calibration, so this mode is not sufficient to use most Spectacular AI features. However, it can be helpful if the camera calibration parameters are required for other purposes.</p>
 <p>You can also calibrate a single camera without an IMU from any video file:</p>
 <ol class="arabic simple">
@@ -193,7 +198,7 @@ sai-cli<span class="w"> </span>calibrate<span class="w"> </span>video.mp4
 <p>If you wish to verify quality of the generated calibration, see the full calibration instructions above on how to use the <code class="docutils literal notranslate"><span class="pre">--output_html</span></code> option.</p>
 </section>
 <section id="additional-information">
-<h2>Additional information<a class="headerlink" href="#additional-information" title="Link to this heading"></a></h2>
+<h2>Additional information<a class="headerlink" href="#additional-information" title="Permalink to this heading"></a></h2>
 <p>To get full list of available options, run <code class="docutils literal notranslate"><span class="pre">sai-cli</span> <span class="pre">calibrate</span> <span class="pre">--help</span></code>.</p>
 <p>There also exists a more detailed <a class="reference external" href="https://spectacularai.github.io/docs/pdf/calibration_manual.pdf">Calibration Manual</a> that documents the camera models and conventions used by the SDK.</p>
 </section>

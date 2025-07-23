@@ -1,23 +1,26 @@
-
-
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" data-content_root="./">
+<html class="writer-html5" lang="en">
 <head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Recording &mdash; spectacularAI  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
       <link rel="stylesheet" type="text/css" href="_static/custom.css?v=3a41478c" />
 
   
     <link rel="shortcut icon" href="https://www.spectacularai.com/favicon/favicon.ico"/>
-      <script src="_static/jquery.js?v=5d32c60e"></script>
-      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=5929fcd5"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -71,6 +74,7 @@
 <li class="toctree-l1"><a class="reference internal" href="tools.html">Tools</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="tools/nerf.html">Gaussian Splatting &amp; NeRFs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tools/calibration.html">Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/diagnose.html">Diagnose</a></li>
 </ul>
 </li>
 </ul>
@@ -92,7 +96,7 @@
             <li class="breadcrumb-item"><a href="core.html">Core SDK</a></li>
         <li class="breadcrumb-item active">Recording</li>
     <li class="wy-breadcrumbs-aside version">
-        v1.42
+        v1.43
     </li>
     </ul>
 
@@ -102,7 +106,7 @@
            <div itemprop="articleBody">
              
   <section id="recording">
-<h1>Recording<a class="headerlink" href="#recording" title="Link to this heading"></a></h1>
+<h1>Recording<a class="headerlink" href="#recording" title="Permalink to this heading"></a></h1>
 <p>The core SDK includes a built-in data recorder which leverages FFmpeg for video encoding.
 The data created using the recorder can used for</p>
 <ul class="simple">
@@ -114,7 +118,7 @@ The data created using the recorder can used for</p>
 <p>It can also be enabled in any software integrating the SDK by setting the <code class="docutils literal notranslate"><span class="pre">recordingFolder</span></code> in the device-specific <code class="docutils literal notranslate"><span class="pre">Configuration</span></code> class (or the VIO builder). Refer to the <a class="reference internal" href="wrappers.html"><span class="doc std std-doc">wrapper</span></a> pages for more details and examples.</p>
 <p>In all cases, remember to first <a class="reference external" href="https://spectacularai.github.io/docs/sdk/index.html#ffmpeg">install FFmpeg</a>.</p>
 <section id="data-format">
-<h2>Data format<a class="headerlink" href="#data-format" title="Link to this heading"></a></h2>
+<h2>Data format<a class="headerlink" href="#data-format" title="Permalink to this heading"></a></h2>
 <p>The recording format created by the SDK and <em>Spectacular Rec</em> applications is <a class="reference external" href="https://github.com/SpectacularAI/docs/blob/main/other/DATA_FORMAT.md">documented here</a>. It is based on encoded videos and JSONL, making it a convenient and effective choice for high-resolution, high-frequency multi-camera, multi-sensor data. In particular, we can efficiently and economically store</p>
 <ul class="simple">
 <li><p>Multi-camera RGB or monochrome data</p></li>
@@ -132,7 +136,7 @@ The data created using the recorder can used for</p>
 </ul>
 </section>
 <section id="recording-settings">
-<h2>Recording settings<a class="headerlink" href="#recording-settings" title="Link to this heading"></a></h2>
+<h2>Recording settings<a class="headerlink" href="#recording-settings" title="Permalink to this heading"></a></h2>
 <p>It is possible to control FFmpeg encoding parameters using the <code class="docutils literal notranslate"><span class="pre">--ffmpeg_codec</span></code> command line option (for recording tools) or the <code class="docutils literal notranslate"><span class="pre">ffmpegVideoCodec</span></code> parameter in <code class="docutils literal notranslate"><span class="pre">vio_config.yaml</span></code>. For example, the following option disables all encoding and writes raw video, which minimizes the CPU consumption overhead caused by enabling recording (on the other hand, this requires a lot of disk space and decent write speed)</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ffmpegVideoCodec: rawvideo
 </pre></div>

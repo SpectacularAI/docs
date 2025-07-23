@@ -1,23 +1,26 @@
-
-
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" data-content_root="../">
+<html class="writer-html5" lang="en">
 <head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gaussian Splatting &amp; NeRFs &mdash; spectacularAI  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=3a41478c" />
 
   
     <link rel="shortcut icon" href="https://www.spectacularai.com/favicon/favicon.ico"/>
-      <script src="../_static/jquery.js?v=5d32c60e"></script>
-      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
-      <script src="../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -71,6 +74,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../tools.html">Tools</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Gaussian Splatting &amp; NeRFs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="calibration.html">Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="diagnose.html">Diagnose</a></li>
 </ul>
 </li>
 </ul>
@@ -92,7 +96,7 @@
             <li class="breadcrumb-item"><a href="../tools.html">Tools</a></li>
         <li class="breadcrumb-item active">Gaussian Splatting &amp; NeRFs</li>
     <li class="wy-breadcrumbs-aside version">
-        v1.42
+        v1.43
     </li>
     </ul>
 
@@ -103,10 +107,10 @@
              
   <p><img alt="OAK-D NeRF" src="https://spectacularai.github.io/docs/gif/oak-d-nerf.gif" /></p>
 <section id="gaussian-splatting-nerfs">
-<h1>Gaussian Splatting &amp; NeRFs<a class="headerlink" href="#gaussian-splatting-nerfs" title="Link to this heading"></a></h1>
+<h1>Gaussian Splatting &amp; NeRFs<a class="headerlink" href="#gaussian-splatting-nerfs" title="Permalink to this heading"></a></h1>
 <p>This page has instructions for post-processing data recorded through the Spectacular AI SDK on supported devices, exporting to Nerfstudio, training NeRFs and 3DGS, and visualizing the process. The Spectacular AI mapping tool (<code class="docutils literal notranslate"><span class="pre">sai-cli</span> <span class="pre">process</span></code>) is powered by the Spectacular AI <a class="reference external" href="https://spectacularai.github.io/docs/sdk/mapping.html">Mapping API</a>.</p>
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
 <p>These instructions assume you want to train NeRFs or 3DGS using Nerfstudio. For other uses, Nerfstudio and CUDA are not required, but you simply need Python, <code class="docutils literal notranslate"><span class="pre">pip</span></code> and FFmpeg.</p>
 <ol class="arabic">
 <li><p><a class="reference external" href="https://github.com/nerfstudio-project/nerfstudio#1-installation-setup-the-environment">install Nerfstudio</a> (<strong>Requirement</strong>: a good NVidia GPU + CUDA).</p></li>
@@ -119,7 +123,7 @@
 </ol>
 </section>
 <section id="recording-data">
-<h2>Recording data<a class="headerlink" href="#recording-data" title="Link to this heading"></a></h2>
+<h2>Recording data<a class="headerlink" href="#recording-data" title="Permalink to this heading"></a></h2>
 <p>Choose your device below to see more detailed instructions for creating Spectacular AI recordings (folders or zip files):</p>
 <details><summary><b>iPhone</b> (with or without LiDAR)</summary><p>
 <ol class="arabic simple">
@@ -154,7 +158,7 @@ See the <a href="https://spectacularai.github.io/docs/sdk/wrappers/realsense.htm
 quite fast and accurately. Move slow while mapping and shoot from different angles to increase quality.</p>
 </section>
 <section id="nerfstudio-export-and-training">
-<h2>Nerfstudio export and training<a class="headerlink" href="#nerfstudio-export-and-training" title="Link to this heading"></a></h2>
+<h2>Nerfstudio export and training<a class="headerlink" href="#nerfstudio-export-and-training" title="Permalink to this heading"></a></h2>
 <p>First run our conversion script and then Nerstudio training as</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sai-cli process INPUT_PATH --preview3d --key_frame_distance=0.05 /example/output/path/my-nerf
 ns-train nerfacto --data /example/output/path/my-nerf
@@ -170,7 +174,7 @@ ns-train nerfacto --data /example/output/path/my-nerf
 <p>If the processing gets slow, you can also try adding a <code class="docutils literal notranslate"><span class="pre">--fast</span></code> flag to <code class="docutils literal notranslate"><span class="pre">sai-cli</span> <span class="pre">process</span></code> to trade off quality for speed.
 Without the <code class="docutils literal notranslate"><span class="pre">--fast</span></code> flag, the processing should take around 10 minutes tops.</p>
 <section id="gaussian-splatting">
-<h3>Gaussian Splatting<a class="headerlink" href="#gaussian-splatting" title="Link to this heading"></a></h3>
+<h3>Gaussian Splatting<a class="headerlink" href="#gaussian-splatting" title="Permalink to this heading"></a></h3>
 <p>Update Nerfstudio and train as</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ns-train gaussian-splatting --data /example/output/path/my-nerf
 </pre></div>
@@ -193,7 +197,7 @@ which can also be used as a standalone Python script.</p>
 </section>
 </section>
 <section id="license-note">
-<h2>License note<a class="headerlink" href="#license-note" title="Link to this heading"></a></h2>
+<h2>License note<a class="headerlink" href="#license-note" title="Permalink to this heading"></a></h2>
 <p>Spectacular AI SDK is free to use for non-commercial purposes. <a class="reference external" href="https://www.spectacularai.com/#contact">Contact us</a> for commercial licensing (e.g., running this in your own cloud service).
 Nerfstudio and FFMpeg are used under their own licenses.</p>
 </section>
