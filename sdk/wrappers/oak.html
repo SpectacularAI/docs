@@ -97,7 +97,7 @@
             <li class="breadcrumb-item"><a href="../wrappers.html">Wrappers</a></li>
         <li class="breadcrumb-item active">OAK-D</li>
     <li class="wy-breadcrumbs-aside version">
-        v1.43
+        v1.44
     </li>
     </ul>
 
@@ -265,19 +265,16 @@ in a loop where <a class="reference internal" href="#spectacularAI.depthai.Sessi
 
 <span class="n">pipeline</span> <span class="o">=</span> <span class="n">depthai</span><span class="o">.</span><span class="n">Pipeline</span><span class="p">()</span> <span class="c1"># -- 1 --</span>
 
-<span class="n">vio_pipeline</span> <span class="o">=</span> <span class="n">spectacularAI</span><span class="o">.</span><span class="n">depthai</span><span class="o">.</span><span class="n">Pipeline</span><span class="p">(</span><span class="n">pipeline</span><span class="p">)</span> <span class="c1"># -- 2 --</span>
-<span class="c1"># options, e.g.: spectacularAI.depthai.Pipeline(pipeline, useStereo=False)</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">spectacularAI</span><span class="o">.</span><span class="n">depthai</span><span class="o">.</span><span class="n">Configuration</span><span class="p">()</span> <span class="c1"># Optional configuration</span>
+<span class="c1"># config.useStereo = False</span>
+<span class="n">vio_pipeline</span> <span class="o">=</span> <span class="n">spectacularAI</span><span class="o">.</span><span class="n">depthai</span><span class="o">.</span><span class="n">Pipeline</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span> <span class="c1"># -- 2 --</span>
 
-<span class="k">with</span> <span class="n">depthai</span><span class="o">.</span><span class="n">Device</span><span class="p">(</span><span class="n">pipeline</span><span class="p">)</span> <span class="k">as</span> <span class="n">device</span><span class="p">:</span>
-    <span class="n">vio_session</span> <span class="o">=</span> <span class="n">vio_pipeline</span><span class="o">.</span><span class="n">startSession</span><span class="p">(</span><span class="n">device</span><span class="p">)</span> <span class="c1"># -- 3 --</span>
+<span class="k">with</span> <span class="n">depthai</span><span class="o">.</span><span class="n">Device</span><span class="p">(</span><span class="n">pipeline</span><span class="p">)</span> <span class="k">as</span> <span class="n">device</span><span class="p">,</span> \
+    <span class="n">vio_pipeline</span><span class="o">.</span><span class="n">startSession</span><span class="p">(</span><span class="n">device</span><span class="p">)</span> <span class="k">as</span> <span class="n">vio_session</span><span class="p">:</span> <span class="c1"># -- 3 --</span>
 
     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">vio_session</span><span class="o">.</span><span class="n">hasOutput</span><span class="p">():</span>
-            <span class="n">out</span> <span class="o">=</span> <span class="n">vio_session</span><span class="o">.</span><span class="n">getOutput</span><span class="p">()</span> <span class="c1"># -- 4 --</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">asJson</span><span class="p">())</span>           <span class="c1"># -- 5 --</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">vio_session</span><span class="o">.</span><span class="n">work</span><span class="p">():</span>
-                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.005</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">vio_session</span><span class="o">.</span><span class="n">waitForOutput</span><span class="p">()</span> <span class="c1"># -- 4 --</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">asJson</span><span class="p">())</span> <span class="c1"># -- 5 --</span>
 </pre></div>
 </div>
 </div><div aria-labelledby="tab-1-Qysr" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-Qysr" name="Qysr" role="tabpanel" tabindex="0"><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
