@@ -97,7 +97,7 @@
             <li class="breadcrumb-item"><a href="../../api.html">API Reference</a></li>
         <li class="breadcrumb-item active">C++</li>
     <li class="wy-breadcrumbs-aside version">
-        v1.46
+        v1.47
     </li>
     </ul>
 
@@ -662,6 +662,35 @@
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK13spectacularAI13GnssVioOutput9getCourseEv">
+<span id="_CPPv3NK13spectacularAI13GnssVioOutput9getCourseEv"></span><span id="_CPPv2NK13spectacularAI13GnssVioOutput9getCourseEv"></span><span id="spectacularAI::GnssVioOutput::getCourseC"></span><span class="target" id="structspectacularAI_1_1GnssVioOutput_1ac5dee31cc7b6b32248da5196e63ed319"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getCourse</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK13spectacularAI13GnssVioOutput9getCourseEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Course over ground computed from velocity. Clockwise from North in degrees [0, 360). 0 = North, 90 = East, 180 = South, 270 = West.</p>
+<p>This is the direction the device is moving, not direction it’s facing (heading/yaw). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK13spectacularAI13GnssVioOutput10getHeadingEv">
+<span id="_CPPv3NK13spectacularAI13GnssVioOutput10getHeadingEv"></span><span id="_CPPv2NK13spectacularAI13GnssVioOutput10getHeadingEv"></span><span id="spectacularAI::GnssVioOutput::getHeadingC"></span><span class="target" id="structspectacularAI_1_1GnssVioOutput_1a1682ca145cf5def46935075e0a9d96f1"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getHeading</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK13spectacularAI13GnssVioOutput10getHeadingEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Heading (Yaw) computed from orientation. Clockwise from North in degrees [0, 360). 0 = North, 90 = East, 180 = South, 270 = West.</p>
+<p>-1 if the imuForward vector is not defined in calibration.</p>
+<p>This is the direction the device is facing, not direction it’s moving (course). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK13spectacularAI13GnssVioOutput8getPitchEv">
+<span id="_CPPv3NK13spectacularAI13GnssVioOutput8getPitchEv"></span><span id="_CPPv2NK13spectacularAI13GnssVioOutput8getPitchEv"></span><span id="spectacularAI::GnssVioOutput::getPitchC"></span><span class="target" id="structspectacularAI_1_1GnssVioOutput_1ad0978686c9b010acbfd3b22bdb0d839e"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getPitch</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK13spectacularAI13GnssVioOutput8getPitchEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pitch (Tilt) computed from orientation. [-90, 90] -90 = nose pointing down, 0 = level, 90 = nose pointing up.</p>
+<p>-1 if the imuForward vector is not defined in calibration. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK13spectacularAI13GnssVioOutput7getRollEv">
+<span id="_CPPv3NK13spectacularAI13GnssVioOutput7getRollEv"></span><span id="_CPPv2NK13spectacularAI13GnssVioOutput7getRollEv"></span><span id="spectacularAI::GnssVioOutput::getRollC"></span><span class="target" id="structspectacularAI_1_1GnssVioOutput_1abc61771b1f76d9c39db2340e96aeb1ca"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getRoll</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK13spectacularAI13GnssVioOutput7getRollEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Roll (Bank) computed from orientation. [-180, 180]. -180 = upside down, -90 = right wing up, 0 = level, 90 = right wing down.</p>
+<p>The imuToOutput matrix in calibration must use IMU to FRD (Front-Right-Down) convention for the value to be correct. </p>
+</dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK13spectacularAI13GnssVioOutput16getEnuCameraPoseEi14WgsCoordinates">
 <span id="_CPPv3NK13spectacularAI13GnssVioOutput16getEnuCameraPoseEi14WgsCoordinates"></span><span id="_CPPv2NK13spectacularAI13GnssVioOutput16getEnuCameraPoseEi14WgsCoordinates"></span><span id="spectacularAI::GnssVioOutput::getEnuCameraPose__i.WgsCoordinatesC"></span><span class="target" id="structspectacularAI_1_1GnssVioOutput_1ade99361751fe8f380d3b0250fd15e066"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N13spectacularAI10CameraPoseE" title="spectacularAI::CameraPose"><span class="n"><span class="pre">CameraPose</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getEnuCameraPose</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">cameraId</span></span>, <a class="reference internal" href="#_CPPv4N13spectacularAI14WgsCoordinatesE" title="spectacularAI::WgsCoordinates"><span class="n"><span class="pre">WgsCoordinates</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">enuOrigin</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK13spectacularAI13GnssVioOutput16getEnuCameraPoseEi14WgsCoordinates" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Get the global pose of a particular camera. The “world” coordinate system of the camera pose is an East-North-Up system, whose origin is at the given WGS84 coordinates.</p>
@@ -693,7 +722,7 @@
 <dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI13GnssVioOutput11orientationE">
 <span id="_CPPv3N13spectacularAI13GnssVioOutput11orientationE"></span><span id="_CPPv2N13spectacularAI13GnssVioOutput11orientationE"></span><span id="spectacularAI::GnssVioOutput::orientation__Quaternion"></span><span class="target" id="structspectacularAI_1_1GnssVioOutput_1a1140566fdb228064fd8970d90e1aee9e"></span><a class="reference internal" href="#_CPPv4N13spectacularAI10QuaternionE" title="spectacularAI::Quaternion"><span class="n"><span class="pre">Quaternion</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">orientation</span></span></span><a class="headerlink" href="#_CPPv4N13spectacularAI13GnssVioOutput11orientationE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Orientation of the device as quaternion representing local-to-ENU transformation, i.e., a local-to-world where the world coordinates are defined in an East-North-Up coordinate system. Note that the origin of the ENU coordinates system does not matter in this context.</p>
-<p>See the helper methods for obtaining the Euler angles. </p>
+<p>See the <a class="reference internal" href="#structspectacularAI_1_1GnssVioOutput_1a1682ca145cf5def46935075e0a9d96f1"><span class="std std-ref">getHeading()</span></a>, <a class="reference internal" href="#structspectacularAI_1_1GnssVioOutput_1ad0978686c9b010acbfd3b22bdb0d839e"><span class="std std-ref">getPitch()</span></a>, <a class="reference internal" href="#structspectacularAI_1_1GnssVioOutput_1abc61771b1f76d9c39db2340e96aeb1ca"><span class="std std-ref">getRoll()</span></a> for obtaining the Euler angles. </p>
 </dd></dl>
 
 <dl class="cpp var">
