@@ -1,27 +1,25 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Azure Kinect &mdash; spectacularAI  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=3a41478c" />
 
   
     <link rel="shortcut icon" href="https://www.spectacularai.com/favicon/favicon.ico"/>
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
-        <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
-        <script src="../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/tabs.js?v=3030b3cb"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -107,18 +105,18 @@
            <div itemprop="articleBody">
              
   <section id="azure-kinect">
-<h1>Azure Kinect<a class="headerlink" href="#azure-kinect" title="Permalink to this heading"></a></h1>
+<h1>Azure Kinect<a class="headerlink" href="#azure-kinect" title="Link to this heading"></a></h1>
 <p>Spectacular AI C++ plugin for Microsoft Azure Kinect DK.</p>
-<p><em>Note</em>: The Azure Kinect has been discontinued, but nearly equivalent device,
-ORBBEC Femto is now available and uses the same depth sensing technology, which
-ORBBEC has licensed from Microsoft.</p>
-<p>ORBBEC cameras are supported by their Spectacular AI SDK wrapper. See <a class="reference external" href="orbbec.html">here</a>.</p>
+<p><em>Note</em>: The Azure Kinect has been discontinued, but a nearly equivalent device,
+the ORBBEC Femto, is now available and uses the same depth sensing technology,
+which ORBBEC has licensed from Microsoft.</p>
+<p>ORBBEC cameras are supported by the Spectacular AI SDK wrapper. See <a class="reference external" href="orbbec.html">this page</a>.</p>
 <section id="quick-start">
-<h2>Quick start<a class="headerlink" href="#quick-start" title="Permalink to this heading"></a></h2>
+<h2>Quick start<a class="headerlink" href="#quick-start" title="Link to this heading"></a></h2>
 <p>First, download and unpack <a class="reference external" href="https://github.com/SpectacularAI/sdk/releases/download/v1.28.0/spectacularAI_k4aPlugin_cpp_non-commercial_1.28.0.tar.gz">spectacularAI_k4aPlugin_cpp_non-commercial</a> package (only available for SDK version 1.28)</p>
 <div class="sphinx-tabs docutils container">
 <div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-TGludXg=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-0-TGludXg=" name="TGludXg=" role="tab" tabindex="0">Linux</button><button aria-controls="panel-0-V2luZG93cw==" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-0-V2luZG93cw==" name="V2luZG93cw==" role="tab" tabindex="-1">Windows</button></div><div aria-labelledby="tab-0-TGludXg=" class="sphinx-tabs-panel group-tab" id="panel-0-TGludXg=" name="TGludXg=" role="tabpanel" tabindex="0"><ol class="arabic">
-<li><p>If you have not used the Azure Kinect device before, you will need to setup udev rules, run the following script (or follow the instructions in <a class="reference external" href="https://github.com/microsoft/Azure-Kinect-Sensor-SDK/blob/develop/docs/usage.md#linux-device-setup">Azure Kinect SDK</a>):</p>
+<li><p>If you have not used the Azure Kinect device before, you will need to set up udev rules, run the following script (or follow the instructions in <a class="reference external" href="https://github.com/microsoft/Azure-Kinect-Sensor-SDK/blob/develop/docs/usage.md#linux-device-setup">Azure Kinect SDK</a>):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="nb">bin</span><span class="o">/</span><span class="mi">3</span><span class="n">rdparty</span><span class="o">/</span><span class="n">k4a</span><span class="o">/</span><span class="n">setup_udev_rules</span><span class="o">.</span><span class="n">sh</span>
 </pre></div>
 </div>
@@ -158,23 +156,23 @@ ORBBEC has licensed from Microsoft.</p>
 </ol>
 </div></div>
 <section id="recording-data">
-<h3>Recording data<a class="headerlink" href="#recording-data" title="Permalink to this heading"></a></h3>
+<h3>Recording data<a class="headerlink" href="#recording-data" title="Link to this heading"></a></h3>
 <p>Azure Kinect data can be recorded using the <code class="docutils literal notranslate"><span class="pre">sai-record-k4a</span></code> tool included in the SDK package (in the <code class="docutils literal notranslate"><span class="pre">bin</span></code> directory).
-First connect Azure Kinect over USB3, then run (add <code class="docutils literal notranslate"><span class="pre">.exe</span></code> on Windows):</p>
+First, connect Azure Kinect over USB 3.0, then run (add <code class="docutils literal notranslate"><span class="pre">.exe</span></code> on Windows):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">sai</span><span class="o">-</span><span class="n">record</span><span class="o">-</span><span class="n">k4a</span> <span class="c1"># Record with visualization, requires pip install spectacularAI[full]</span>
 <span class="o">./</span><span class="n">sai</span><span class="o">-</span><span class="n">record</span><span class="o">-</span><span class="n">k4a</span> <span class="o">--</span><span class="n">recording_only</span> <span class="o">--</span><span class="n">no_preview</span> <span class="c1"># More lightweight</span>
 <span class="o">./</span><span class="n">sai</span><span class="o">-</span><span class="n">record</span><span class="o">-</span><span class="n">k4a</span> <span class="o">--</span><span class="n">output</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">output</span><span class="o">/</span><span class="n">folder</span> <span class="c1"># Set recording directory</span>
 <span class="o">./</span><span class="n">sai</span><span class="o">-</span><span class="n">record</span><span class="o">-</span><span class="n">k4a</span> <span class="o">-</span><span class="n">h</span> <span class="c1"># See all options</span>
 </pre></div>
 </div>
-<p>The source code of recording tool is also available at <a class="reference external" href="https://github.com/SpectacularAI/sdk/tree/main/cpp/k4a">https://github.com/SpectacularAI/sdk/tree/main/cpp/k4a</a>
+<p>The source code of the recording tool is also available at <a class="reference external" href="https://github.com/SpectacularAI/sdk/tree/main/cpp/k4a">https://github.com/SpectacularAI/sdk/tree/main/cpp/k4a</a>,
 which allows customizing the recording tool, if necessary.</p>
 </section>
 </section>
 <section id="installation-as-a-library">
-<h2>Installation as a library<a class="headerlink" href="#installation-as-a-library" title="Permalink to this heading"></a></h2>
-<p>First verify that you have installed <a class="reference external" href="https://github.com/microsoft/Azure-Kinect-Sensor-SDK/">Azure Kinect SDK</a>,
-e.g. check that open <cite>k4aviewer</cite>.</p>
+<h2>Installation as a library<a class="headerlink" href="#installation-as-a-library" title="Link to this heading"></a></h2>
+<p>First, verify that you have installed <a class="reference external" href="https://github.com/microsoft/Azure-Kinect-Sensor-SDK/">Azure Kinect SDK</a>,
+e.g., check that <cite>k4aviewer</cite> opens.</p>
 <p>The following commands should be run in the folder where you have unpacked the SDK release package <a class="reference external" href="https://github.com/SpectacularAI/sdk/releases/download/v1.28.0/spectacularAI_k4aPlugin_cpp_non-commercial_1.28.0.tar.gz">spectacularAI_k4aPlugin_cpp_non-commercial</a>.</p>
 <div class="sphinx-tabs docutils container">
 <div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-TGludXg=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-1-TGludXg=" name="TGludXg=" role="tab" tabindex="0">Linux</button><button aria-controls="panel-1-V2luZG93cw==" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-1-V2luZG93cw==" name="V2luZG93cw==" role="tab" tabindex="-1">Windows</button></div><div aria-labelledby="tab-1-TGludXg=" class="sphinx-tabs-panel group-tab" id="panel-1-TGludXg=" name="TGludXg=" role="tabpanel" tabindex="0"><ol class="arabic">
@@ -195,7 +193,7 @@ e.g. check that open <cite>k4aviewer</cite>.</p>
 </ol>
 </div><div aria-labelledby="tab-1-V2luZG93cw==" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-1-V2luZG93cw==" name="V2luZG93cw==" role="tabpanel" tabindex="0"><ol class="arabic">
 <li><p>Install the <a class="reference external" href="../index.html#development-dependencies">development dependencies</a>.</p></li>
-<li><p>Build vio_jsonl example using CMake. The process is a bit involved so the commands are collected in <code class="docutils literal notranslate"><span class="pre">./examples/build_windows.sh</span></code>. In PowerShell:</p>
+<li><p>Build the <cite>vio_jsonl</cite> example using CMake. The process is a bit involved, so the commands are collected in <code class="docutils literal notranslate"><span class="pre">./examples/build_windows.sh</span></code>. In PowerShell:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">examples</span>
 <span class="n">sh</span> <span class="o">./</span><span class="n">build_windows</span><span class="o">.</span><span class="n">sh</span> <span class="o">..</span>\<span class="n">lib</span>\<span class="n">cmake</span>\<span class="n">spectacularAI</span>
 </pre></div>
@@ -211,7 +209,7 @@ e.g. check that open <cite>k4aviewer</cite>.</p>
 </div></div>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
 <p>The following instructions show how to compile and run the <a class="reference external" href="https://github.com/SpectacularAI/sdk-examples/tree/main/cpp/k4a">Spectacular AI K4A SDK examples</a>.</p>
 <blockquote>
 <div><ol class="arabic">
@@ -232,7 +230,7 @@ e.g. check that open <cite>k4aviewer</cite>.</p>
 <span class="n">make</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">-DspectacularAI_k4aPlugin_DIR</span></code> option is not needed is you have used <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">make</span> <span class="pre">install</span></code> for the SDK.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">-DspectacularAI_k4aPlugin_DIR</span></code> option is not needed if you have used <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">make</span> <span class="pre">install</span></code> for the SDK.</p>
 </div><div aria-labelledby="tab-2-V2luZG93cw==" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-2-V2luZG93cw==" name="V2luZG93cw==" role="tabpanel" tabindex="0"><p>Build the <code class="docutils literal notranslate"><span class="pre">vio_jsonl</span></code> example using CMake. The process is a bit involved so the commands are collected in <code class="docutils literal notranslate"><span class="pre">./build_windows.sh</span></code>. In PowerShell:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sh</span> <span class="o">./</span><span class="n">build_windows</span><span class="o">.</span><span class="n">sh</span> <span class="o">&lt;</span><span class="n">path</span>\<span class="n">to</span>\<span class="n">spectacularAI_k4aPlugin</span>\<span class="n">lib</span>\<span class="n">cmake</span>\<span class="n">spectacularAI</span><span class="o">&gt;</span>
 </pre></div>
@@ -240,7 +238,7 @@ e.g. check that open <cite>k4aviewer</cite>.</p>
 </div></div>
 </section>
 <section id="api-reference">
-<h2>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading"></a></h2>
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading"></a></h2>
 <p>The classes specific to Azure Kinect are documented below. For the main output classes, refer to the C++ documentation in <a class="reference internal" href="../core.html#core-sdk"><span class="std std-ref">Core SDK</span></a>.</p>
 <p>Defined in <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;spectacularAI/k4a/configuration.hpp&gt;</span></code></p>
 <dl class="cpp type">
@@ -373,7 +371,7 @@ e.g. check that open <cite>k4aviewer</cite>.</p>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI9k4aPlugin8Pipeline12startSessionEv">
-<span id="_CPPv3N13spectacularAI9k4aPlugin8Pipeline12startSessionEv"></span><span id="_CPPv2N13spectacularAI9k4aPlugin8Pipeline12startSessionEv"></span><span id="spectacularAI::k4aPlugin::Pipeline::startSession"></span><span class="target" id="classspectacularAI_1_1k4aPlugin_1_1Pipeline_1ab8bcd0ec192c90d9c94c59314ef6267b"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../cpp/latest/index.html#_CPPv4N13spectacularAI9k4aPlugin7SessionE" title="spectacularAI::k4aPlugin::Session"><span class="n"><span class="pre">Session</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">startSession</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><br /></dt>
+<span id="_CPPv3N13spectacularAI9k4aPlugin8Pipeline12startSessionEv"></span><span id="_CPPv2N13spectacularAI9k4aPlugin8Pipeline12startSessionEv"></span><span id="spectacularAI::k4aPlugin::Pipeline::startSession"></span><span class="target" id="classspectacularAI_1_1k4aPlugin_1_1Pipeline_1a75f5c06d3cbb024759c1f693e952fa43"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../cpp/latest/index.html#_CPPv4N13spectacularAI9k4aPlugin7SessionE" title="spectacularAI::k4aPlugin::Session"><span class="n"><span class="pre">Session</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">startSession</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><br /></dt>
 <dd><p>Start a new VIO session on the background. Internally starts the k4a device and creates threads for camera and imu. </p>
 </dd></dl>
 
@@ -393,7 +391,7 @@ e.g. check that open <cite>k4aviewer</cite>.</p>
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI9k4aPlugin8Pipeline5pimplE">
-<span id="_CPPv3N13spectacularAI9k4aPlugin8Pipeline5pimplE"></span><span id="_CPPv2N13spectacularAI9k4aPlugin8Pipeline5pimplE"></span><span id="spectacularAI::k4aPlugin::Pipeline::pimpl__std::unique_ptr:impl:"></span><span class="target" id="classspectacularAI_1_1k4aPlugin_1_1Pipeline_1a87736065f84f89d8ad558bafc911c9ea"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">impl</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pimpl</span></span></span><a class="headerlink" href="#_CPPv4N13spectacularAI9k4aPlugin8Pipeline5pimplE" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3N13spectacularAI9k4aPlugin8Pipeline5pimplE"></span><span id="_CPPv2N13spectacularAI9k4aPlugin8Pipeline5pimplE"></span><span id="spectacularAI::k4aPlugin::Pipeline::pimpl__std::unique_ptr:impl:"></span><span class="target" id="classspectacularAI_1_1k4aPlugin_1_1Pipeline_1a87736065f84f89d8ad558bafc911c9ea"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">impl</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pimpl</span></span></span><a class="headerlink" href="#_CPPv4N13spectacularAI9k4aPlugin8Pipeline5pimplE" title="Link to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 </div>
@@ -423,13 +421,13 @@ e.g. check that open <cite>k4aviewer</cite>.</p>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI9k4aPlugin7Session9getOutputEv">
-<span id="_CPPv3N13spectacularAI9k4aPlugin7Session9getOutputEv"></span><span id="_CPPv2N13spectacularAI9k4aPlugin7Session9getOutputEv"></span><span id="spectacularAI::k4aPlugin::Session::getOutput"></span><span class="target" id="structspectacularAI_1_1k4aPlugin_1_1Session_1a598c0ffe4415cbb82213cf034bf680c8"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="../cpp/latest/index.html#_CPPv4N13spectacularAI9VioOutputE" title="spectacularAI::VioOutput"><span class="n"><span class="pre">VioOutput</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getOutput</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<span id="_CPPv3N13spectacularAI9k4aPlugin7Session9getOutputEv"></span><span id="_CPPv2N13spectacularAI9k4aPlugin7Session9getOutputEv"></span><span id="spectacularAI::k4aPlugin::Session::getOutput"></span><span class="target" id="structspectacularAI_1_1k4aPlugin_1_1Session_1aaa7ea5ea0b42c19669ad49e30aeb1a36"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="../cpp/latest/index.html#_CPPv4N13spectacularAI9VioOutputE" title="spectacularAI::VioOutput"><span class="n"><span class="pre">VioOutput</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getOutput</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
 <dd><p>Get output from the queue, if available. If not returns {}. </p>
 </dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI9k4aPlugin7Session13waitForOutputEv">
-<span id="_CPPv3N13spectacularAI9k4aPlugin7Session13waitForOutputEv"></span><span id="_CPPv2N13spectacularAI9k4aPlugin7Session13waitForOutputEv"></span><span id="spectacularAI::k4aPlugin::Session::waitForOutput"></span><span class="target" id="structspectacularAI_1_1k4aPlugin_1_1Session_1a739697db454c689086c4a05b0dbdc4f1"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="../cpp/latest/index.html#_CPPv4N13spectacularAI9VioOutputE" title="spectacularAI::VioOutput"><span class="n"><span class="pre">VioOutput</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">waitForOutput</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<span id="_CPPv3N13spectacularAI9k4aPlugin7Session13waitForOutputEv"></span><span id="_CPPv2N13spectacularAI9k4aPlugin7Session13waitForOutputEv"></span><span id="spectacularAI::k4aPlugin::Session::waitForOutput"></span><span class="target" id="structspectacularAI_1_1k4aPlugin_1_1Session_1aac841610ca56bca71f594f30952ecb12"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="../cpp/latest/index.html#_CPPv4N13spectacularAI9VioOutputE" title="spectacularAI::VioOutput"><span class="n"><span class="pre">VioOutput</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">waitForOutput</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
 <dd><p>Wait until new output is available and then return it. </p>
 </dd></dl>
 

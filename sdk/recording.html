@@ -1,26 +1,23 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Recording &mdash; spectacularAI  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/custom.css?v=3a41478c" />
 
   
     <link rel="shortcut icon" href="https://www.spectacularai.com/favicon/favicon.ico"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b3ba4146"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -106,48 +103,48 @@
            <div itemprop="articleBody">
              
   <section id="recording">
-<h1>Recording<a class="headerlink" href="#recording" title="Permalink to this heading"></a></h1>
-<p>The core SDK includes a built-in data recorder which leverages FFmpeg for video encoding.
-The data created using the recorder can used for</p>
+<h1>Recording<a class="headerlink" href="#recording" title="Link to this heading"></a></h1>
+<p>The core SDK includes a built-in data recorder that leverages FFmpeg for video encoding.
+The data created using the recorder can be used for</p>
 <ul class="simple">
 <li><p>Troubleshooting (together with Spectacular AI support)</p></li>
 <li><p>Post-processing and exporting for <a class="reference internal" href="tools/nerf.html"><span class="doc std std-doc">NeRF &amp; 3DGS training</span></a></p></li>
 <li><p>Other research and development purposes</p></li>
 </ul>
 <p>The easiest way to use the recorder is through the pre-built recording tools that are included with the SDK packages, e.g., <code class="docutils literal notranslate"><span class="pre">sai-record-realsense</span></code> or <code class="docutils literal notranslate"><span class="pre">sai-cli</span> <span class="pre">record</span> <span class="pre">oak</span></code>.</p>
-<p>It can also be enabled in any software integrating the SDK by setting the <code class="docutils literal notranslate"><span class="pre">recordingFolder</span></code> in the device-specific <code class="docutils literal notranslate"><span class="pre">Configuration</span></code> class (or the VIO builder). Refer to the <a class="reference internal" href="wrappers.html"><span class="doc std std-doc">wrapper</span></a> pages for more details and examples.</p>
+<p>It can be enabled in any software integrating the SDK by setting the <code class="docutils literal notranslate"><span class="pre">recordingFolder</span></code> in the device-specific <code class="docutils literal notranslate"><span class="pre">Configuration</span></code> class (or the VIO builder), Refer to the <a class="reference internal" href="wrappers.html"><span class="doc std std-doc">wrapper</span></a> pages for more details and examples.</p>
 <p>In all cases, remember to first <a class="reference external" href="https://spectacularai.github.io/docs/sdk/index.html#ffmpeg">install FFmpeg</a>.</p>
 <section id="data-format">
-<h2>Data format<a class="headerlink" href="#data-format" title="Permalink to this heading"></a></h2>
-<p>The recording format created by the SDK and <em>Spectacular Rec</em> applications is <a class="reference external" href="https://github.com/SpectacularAI/docs/blob/main/other/DATA_FORMAT.md">documented here</a>. It is based on encoded videos and JSONL, making it a convenient and effective choice for high-resolution, high-frequency multi-camera, multi-sensor data. In particular, we can efficiently and economically store</p>
+<h2>Data format<a class="headerlink" href="#data-format" title="Link to this heading"></a></h2>
+<p>The recording format created by the SDK and <em>Spectacular Rec</em> applications is <a class="reference external" href="https://github.com/SpectacularAI/docs/blob/main/other/DATA_FORMAT.md">documented in this page</a>. It is based on encoded videos and JSONL, making it a convenient and effective choice for high-resolution, high-frequency multi-camera, multi-sensor data. In particular, the SDK can efficiently and economically store:</p>
 <ul class="simple">
 <li><p>Multi-camera RGB or monochrome data</p></li>
 <li><p>Depth data (via PNGs or FFV1)</p></li>
 <li><p>IMU, synchronized with the camera frames</p></li>
 <li><p>Other sensors, e.g., barometer or GPS</p></li>
 </ul>
-<p>A Spectacular AI <em>SDK recording</em> is a folder (possibly compressed to a zip file) that contains the files:</p>
+<p>A Spectacular AI <em>SDK recording</em> is a folder (possibly compressed into a zip file) that contains the following files:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">data.jsonl</span></code> for sensor data and frame metadata</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">data.mkv</span></code> (or <code class="docutils literal notranslate"><span class="pre">mp4</span></code>) and possibly <code class="docutils literal notranslate"><span class="pre">data2.*</span></code>, <code class="docutils literal notranslate"><span class="pre">data3.*</span></code> in multi-camera cases</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">calibration.json</span></code> the current calibration file</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">vio_config.yaml</span></code> the parameters used for the recording</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data.mkv</span></code> (or <code class="docutils literal notranslate"><span class="pre">mp4</span></code>), and possibly <code class="docutils literal notranslate"><span class="pre">data2.*</span></code>, <code class="docutils literal notranslate"><span class="pre">data3.*</span></code> in multi-camera cases</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">calibration.json</span></code> - the current calibration file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">vio_config.yaml</span></code> - the parameters used for the recording</p></li>
 <li><p>possibly other auxiliary files</p></li>
 </ul>
 </section>
 <section id="recording-settings">
-<h2>Recording settings<a class="headerlink" href="#recording-settings" title="Permalink to this heading"></a></h2>
-<p>It is possible to control FFmpeg encoding parameters using the <code class="docutils literal notranslate"><span class="pre">--ffmpeg_codec</span></code> command line option (for recording tools) or the <code class="docutils literal notranslate"><span class="pre">ffmpegVideoCodec</span></code> parameter in <code class="docutils literal notranslate"><span class="pre">vio_config.yaml</span></code>. For example, the following option disables all encoding and writes raw video, which minimizes the CPU consumption overhead caused by enabling recording (on the other hand, this requires a lot of disk space and decent write speed). The contents of this argument are inserted right after <code class="docutils literal notranslate"><span class="pre">-c:v</span></code> flag, i.e. with option below will be same as <code class="docutils literal notranslate"><span class="pre">-c:v</span> <span class="pre">rawvideo</span></code> if you use <code class="docutils literal notranslate"><span class="pre">ffmpeg</span></code> executable via command line:</p>
+<h2>Recording settings<a class="headerlink" href="#recording-settings" title="Link to this heading"></a></h2>
+<p>FFmpeg encoding parameters can be controlled using the <code class="docutils literal notranslate"><span class="pre">--ffmpeg_codec</span></code> command line option (for recording tools) or the <code class="docutils literal notranslate"><span class="pre">ffmpegVideoCodec</span></code> parameter in <code class="docutils literal notranslate"><span class="pre">vio_config.yaml</span></code>. For example, the following option disables all encoding and writes raw video, which minimizes the CPU consumption overhead caused by enabling recording. (On the other hand, this requires a lot of disk space and a decent write speed.) The contents of this argument are inserted right after the <code class="docutils literal notranslate"><span class="pre">-c:v</span></code> flag; for example, the option below will be the same as <code class="docutils literal notranslate"><span class="pre">-c:v</span> <span class="pre">rawvideo</span></code> if you use the <code class="docutils literal notranslate"><span class="pre">ffmpeg</span></code> executable via the command line:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ffmpegVideoCodec: rawvideo
 </pre></div>
 </div>
-<p>The parameter can also be used to enable platform-specific codecs. When using hardware encoding, it’s recommended to use transport stream (TS) container. Otherwise the encoder will likely conflict with the in-memory write buffer and fail. The following examples enable hardware-accelerated video recording on specific platforms:</p>
-<p>Raspberry Pi 4:</p>
+<p>The parameter can also be used to enable platform-specific codecs. When using hardware encoding, it is recommended to use a transport stream (TS) container. Otherwise, the encoder will likely conflict with the in-memory write buffer and fail. The following examples enable hardware-accelerated video recording on specific platforms:</p>
+<p><strong>Raspberry Pi 4:</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ffmpegVideoCodec: &quot;h264_v4l2m2m -b:v 16M&quot;
 ffmpegVideoContainer: &quot;ts&quot;
 </pre></div>
 </div>
-<p>Nvidia Jetson Xavier platforms (not Orin Nano). May require a custom FFmpeg build</p>
+<p><strong>Nvidia Jetson Xavier platforms (not Orin Nano).</strong> May require a custom FFmpeg build</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ffmpegVideoCodec: &quot;h264_nvenc -b:v 16M&quot;
 ffmpegVideoContainer: &quot;ts&quot;
 </pre></div>
@@ -156,11 +153,11 @@ ffmpegVideoContainer: &quot;ts&quot;
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ffmpegDebug: True
 </pre></div>
 </div>
-<p>The SDK uses an in-memory buffer with FFmpeg to avoid small disk I/O stalls impacting performance. You can incease this from the default 20 MB per camera if you encounter any of the warnings “ffmpegWriteBuffer is full”, “ffmpegWriteBuffer is too small”, “ffmpegWriteBuffer exceeded”, notice long I/O stalls, or use high frame rates or high resolutions. For example:</p>
+<p>The SDK uses an in-memory buffer with FFmpeg to avoid small disk I/O stalls impacting performance. You can increase this from the default 20 MB per camera if you encounter any of the warnings “ffmpegWriteBuffer is full”, “ffmpegWriteBuffer is too small”, “ffmpegWriteBuffer exceeded”, notice long I/O stalls, or use high frame rates or high resolutions. For example:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ffmpegWriteBufferCapacityMegabytes: 50
 </pre></div>
 </div>
-<p>You can disable this buffer and write straight to disk with following setting, this is <strong>not</strong> recommended when live tracking is enabled, because I/O blocking will also block tracking. This may help if you encounter issues with hardware encoding and setting <code class="docutils literal notranslate"><span class="pre">ffmpegVideoContainer</span></code> to <code class="docutils literal notranslate"><span class="pre">&quot;ts&quot;</span></code> did not help.</p>
+<p>You can disable this buffer and write straight to disk with the following setting. This is <strong>not</strong> recommended when live tracking is enabled, because I/O blocking will also block tracking. This may help if you encounter issues with hardware encoding and setting <code class="docutils literal notranslate"><span class="pre">ffmpegVideoContainer</span></code> to <code class="docutils literal notranslate"><span class="pre">&quot;ts&quot;</span></code> does not help.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ffmpegUseWriteBuffer: False
 </pre></div>
 </div>

@@ -1,27 +1,25 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ORBBEC &mdash; spectacularAI  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=3a41478c" />
 
   
     <link rel="shortcut icon" href="https://www.spectacularai.com/favicon/favicon.ico"/>
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
-        <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
-        <script src="../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/tabs.js?v=3030b3cb"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -107,10 +105,10 @@
            <div itemprop="articleBody">
              
   <section id="orbbec">
-<h1>ORBBEC<a class="headerlink" href="#orbbec" title="Permalink to this heading"></a></h1>
+<h1>ORBBEC<a class="headerlink" href="#orbbec" title="Link to this heading"></a></h1>
 <p><strong>Spectacular AI C++ plugin for ORBBEC cameras</strong></p>
 <section id="supported-devices">
-<span id="supported-devices-label"></span><h2>Supported devices<a class="headerlink" href="#supported-devices" title="Permalink to this heading"></a></h2>
+<span id="supported-devices-label"></span><h2>Supported devices<a class="headerlink" href="#supported-devices" title="Link to this heading"></a></h2>
 <p>The SDK has been verified to work with these devices:</p>
 <blockquote>
 <div><ul class="simple">
@@ -122,7 +120,7 @@
 <p>Other devices should work with minimal changes. Please see the <a class="reference internal" href="#unsupported-devices-label"><span class="std std-ref">unsupported devices</span></a> section.</p>
 </section>
 <section id="quick-start">
-<h2>Quick start<a class="headerlink" href="#quick-start" title="Permalink to this heading"></a></h2>
+<h2>Quick start<a class="headerlink" href="#quick-start" title="Link to this heading"></a></h2>
 <video width="100%" muted loop autoplay>
     <source src="https://spectacularai.github.io/docs/video/preview-orbbec.mp4" type="video/mp4">
     Your browser does not support the video tag.
@@ -134,7 +132,7 @@
 </pre></div>
 </div>
 </li>
-<li><p>Attach your Orbbec device to a USB3 port</p></li>
+<li><p>Attach your Orbbec device to a USB 3.0 port</p></li>
 <li><p>Run the JSONL example (smoke test):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="nb">bin</span>
 <span class="o">./</span><span class="n">vio_jsonl</span>
@@ -152,7 +150,7 @@
 </ol>
 </div><div aria-labelledby="tab-0-V2luZG93cw==" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-V2luZG93cw==" name="V2luZG93cw==" role="tabpanel" tabindex="0"><ol class="arabic">
 <li><p>If you have not used the Orbbec device before, you will need to setup timestamp registration. Please follow the official instructions in <a class="reference external" href="https://github.com/orbbec/OrbbecSDK?tab=readme-ov-file#environment-setup">OrbbecSDK</a>.</p></li>
-<li><p>Attach your Orbbec device to a USB3 port</p></li>
+<li><p>Attach your Orbbec device to a USB 3.0 port</p></li>
 <li><p>Run the JSONL example (smoke test):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="nb">bin</span>
 <span class="o">./</span><span class="n">vio_jsonl</span><span class="o">.</span><span class="n">exe</span>
@@ -171,9 +169,9 @@
 </div></div>
 </section>
 <section id="recording-data">
-<h2>Recording data<a class="headerlink" href="#recording-data" title="Permalink to this heading"></a></h2>
+<h2>Recording data<a class="headerlink" href="#recording-data" title="Link to this heading"></a></h2>
 <p>Orbbec data can be recorded using the <code class="docutils literal notranslate"><span class="pre">sai-record-orbbec</span></code> tool included in the SDK package (in the <code class="docutils literal notranslate"><span class="pre">bin</span></code> directory).
-First connect an Orbbec device over USB3, then run (add <code class="docutils literal notranslate"><span class="pre">.exe</span></code> on Windows):</p>
+First, connect an Orbbec device over USB 3.0, then run (add <code class="docutils literal notranslate"><span class="pre">.exe</span></code> on Windows):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">sai</span><span class="o">-</span><span class="n">record</span><span class="o">-</span><span class="n">orbbec</span> <span class="c1"># Record with visualization, requires pip install spectacularAI[full]</span>
 <span class="o">./</span><span class="n">sai</span><span class="o">-</span><span class="n">record</span><span class="o">-</span><span class="n">orbbec</span> <span class="o">--</span><span class="n">recording_only</span> <span class="o">--</span><span class="n">no_preview</span> <span class="c1"># More lightweight</span>
 <span class="o">./</span><span class="n">sai</span><span class="o">-</span><span class="n">record</span><span class="o">-</span><span class="n">orbbec</span> <span class="o">--</span><span class="n">output</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">output</span><span class="o">/</span><span class="n">folder</span> <span class="c1"># Set recording directory</span>
@@ -183,7 +181,7 @@ First connect an Orbbec device over USB3, then run (add <code class="docutils li
 <p>The source code of recording tool is also available at <a class="reference external" href="https://github.com/SpectacularAI/sdk/tree/main/cpp/orbbec">https://github.com/SpectacularAI/sdk/tree/main/cpp/orbbec</a>
 which allows customizing the recording tool, if necessary.</p>
 <section id="unsupported-devices">
-<span id="unsupported-devices-label"></span><h3>Unsupported devices<a class="headerlink" href="#unsupported-devices" title="Permalink to this heading"></a></h3>
+<span id="unsupported-devices-label"></span><h3>Unsupported devices<a class="headerlink" href="#unsupported-devices" title="Link to this heading"></a></h3>
 <p>The SDK should work on most Orbbec devices, but has only been tested with devices listed <a class="reference internal" href="#supported-devices-label"><span class="std std-ref">here</span></a>.
 Other devices require setting certain parameters manually. Namely, the IMU-to-camera matrix needs to be set if the device model was not recognized by the SDK.
 For example:</p>
@@ -201,7 +199,7 @@ For example:</p>
 </section>
 </section>
 <section id="installation-as-a-library">
-<h2>Installation as a library<a class="headerlink" href="#installation-as-a-library" title="Permalink to this heading"></a></h2>
+<h2>Installation as a library<a class="headerlink" href="#installation-as-a-library" title="Link to this heading"></a></h2>
 <p>The following commands should be run in the folder where you have unpacked the SDK release package.</p>
 <div class="sphinx-tabs docutils container">
 <div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-TGludXg=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-1-TGludXg=" name="TGludXg=" role="tab" tabindex="0">Linux</button><button aria-controls="panel-1-V2luZG93cw==" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-1-V2luZG93cw==" name="V2luZG93cw==" role="tab" tabindex="-1">Windows</button></div><div aria-labelledby="tab-1-TGludXg=" class="sphinx-tabs-panel group-tab" id="panel-1-TGludXg=" name="TGludXg=" role="tabpanel" tabindex="0"><ol class="arabic">
@@ -240,11 +238,11 @@ For example:</p>
 </div></div>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
 <p>The following instructions show how to compile and run the <a class="reference external" href="https://github.com/SpectacularAI/sdk-examples/tree/main/cpp/orbbec/">Spectacular AI ORBBEC SDK examples</a>.</p>
 <blockquote>
 <div><ol class="arabic">
-<li><p>(Optional) install the SDK as a library (see above).</p></li>
+<li><p>(Optional) Install the SDK as a library (see above).</p></li>
 <li><p>Clone the SDK examples repository:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="o">--</span><span class="n">recursive</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">SpectacularAI</span><span class="o">/</span><span class="n">sdk</span><span class="o">-</span><span class="n">examples</span><span class="o">.</span><span class="n">git</span>
 </pre></div>
@@ -269,7 +267,7 @@ For example:</p>
 </div></div>
 </section>
 <section id="api-reference">
-<h2>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading"></a></h2>
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading"></a></h2>
 <p>The classes specific to the Spectacular AI ORBBEC Wrapper are documented below. For the main output classes, refer to the C++ documentation in <a class="reference internal" href="../core.html#core-sdk"><span class="std std-ref">Core SDK</span></a>.</p>
 <p>Defined in <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;spectacularAI/orbbec/configuration.hpp&gt;</span></code></p>
 <dl class="cpp type">
@@ -442,7 +440,7 @@ For example:</p>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin8Pipeline12startSessionEv">
-<span id="_CPPv3N13spectacularAI12orbbecPlugin8Pipeline12startSessionEv"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin8Pipeline12startSessionEv"></span><span id="spectacularAI::orbbecPlugin::Pipeline::startSession"></span><span class="target" id="classspectacularAI_1_1orbbecPlugin_1_1Pipeline_1a3d4914bcc975f66f55b4f643642313f4"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../cpp/latest/index.html#_CPPv4N13spectacularAI12orbbecPlugin7SessionE" title="spectacularAI::orbbecPlugin::Session"><span class="n"><span class="pre">Session</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">startSession</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><br /></dt>
+<span id="_CPPv3N13spectacularAI12orbbecPlugin8Pipeline12startSessionEv"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin8Pipeline12startSessionEv"></span><span id="spectacularAI::orbbecPlugin::Pipeline::startSession"></span><span class="target" id="classspectacularAI_1_1orbbecPlugin_1_1Pipeline_1a013be936905c0b14c4064d02b7956a93"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../cpp/latest/index.html#_CPPv4N13spectacularAI12orbbecPlugin7SessionE" title="spectacularAI::orbbecPlugin::Session"><span class="n"><span class="pre">Session</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">startSession</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><br /></dt>
 <dd><p>Start a new VIO session on the background. </p>
 </dd></dl>
 
@@ -456,7 +454,7 @@ For example:</p>
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin8Pipeline5pimplE">
-<span id="_CPPv3N13spectacularAI12orbbecPlugin8Pipeline5pimplE"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin8Pipeline5pimplE"></span><span id="spectacularAI::orbbecPlugin::Pipeline::pimpl__std::unique_ptr:impl:"></span><span class="target" id="classspectacularAI_1_1orbbecPlugin_1_1Pipeline_1abec7d5c890c0cf92fb45dacf0f39ae0d"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">impl</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pimpl</span></span></span><a class="headerlink" href="#_CPPv4N13spectacularAI12orbbecPlugin8Pipeline5pimplE" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3N13spectacularAI12orbbecPlugin8Pipeline5pimplE"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin8Pipeline5pimplE"></span><span id="spectacularAI::orbbecPlugin::Pipeline::pimpl__std::unique_ptr:impl:"></span><span class="target" id="classspectacularAI_1_1orbbecPlugin_1_1Pipeline_1abec7d5c890c0cf92fb45dacf0f39ae0d"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">impl</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pimpl</span></span></span><a class="headerlink" href="#_CPPv4N13spectacularAI12orbbecPlugin8Pipeline5pimplE" title="Link to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 </div>
@@ -486,13 +484,13 @@ For example:</p>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin7Session9getOutputEv">
-<span id="_CPPv3N13spectacularAI12orbbecPlugin7Session9getOutputEv"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin7Session9getOutputEv"></span><span id="spectacularAI::orbbecPlugin::Session::getOutput"></span><span class="target" id="structspectacularAI_1_1orbbecPlugin_1_1Session_1a1ef1f9724b9163a450d18b9602803deb"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="../cpp/latest/index.html#_CPPv4N13spectacularAI9VioOutputE" title="spectacularAI::VioOutput"><span class="n"><span class="pre">VioOutput</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getOutput</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<span id="_CPPv3N13spectacularAI12orbbecPlugin7Session9getOutputEv"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin7Session9getOutputEv"></span><span id="spectacularAI::orbbecPlugin::Session::getOutput"></span><span class="target" id="structspectacularAI_1_1orbbecPlugin_1_1Session_1a7d6f6a4e9c52475d4f568f764850c868"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="../cpp/latest/index.html#_CPPv4N13spectacularAI9VioOutputE" title="spectacularAI::VioOutput"><span class="n"><span class="pre">VioOutput</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getOutput</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
 <dd><p>Get output from the queue, if available. If not returns {}. </p>
 </dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N13spectacularAI12orbbecPlugin7Session13waitForOutputEv">
-<span id="_CPPv3N13spectacularAI12orbbecPlugin7Session13waitForOutputEv"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin7Session13waitForOutputEv"></span><span id="spectacularAI::orbbecPlugin::Session::waitForOutput"></span><span class="target" id="structspectacularAI_1_1orbbecPlugin_1_1Session_1ac8e78c224136b1c8ac14f4173781623e"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="../cpp/latest/index.html#_CPPv4N13spectacularAI9VioOutputE" title="spectacularAI::VioOutput"><span class="n"><span class="pre">VioOutput</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">waitForOutput</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<span id="_CPPv3N13spectacularAI12orbbecPlugin7Session13waitForOutputEv"></span><span id="_CPPv2N13spectacularAI12orbbecPlugin7Session13waitForOutputEv"></span><span id="spectacularAI::orbbecPlugin::Session::waitForOutput"></span><span class="target" id="structspectacularAI_1_1orbbecPlugin_1_1Session_1aa7887adc38506e3d9dee3e73e1cc0cf5"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="../cpp/latest/index.html#_CPPv4N13spectacularAI9VioOutputE" title="spectacularAI::VioOutput"><span class="n"><span class="pre">VioOutput</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">waitForOutput</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
 <dd><p>Wait until new output is available and then return it. </p>
 </dd></dl>
 
