@@ -96,7 +96,7 @@
             <li class="breadcrumb-item"><a href="core.html">Core SDK</a></li>
         <li class="breadcrumb-item active">Tracking API</li>
     <li class="wy-breadcrumbs-aside version">
-        v1.53
+        v1.54
     </li>
     </ul>
 
@@ -1152,6 +1152,12 @@ SDK’s internal output buffers, which can cause it to terminate with a fatal er
 <span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">GnssVioOutputStatus</span></span></span><br /></dt>
 <dd><p>GNSS-VIO output type </p>
 <p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp">
+<span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DEAD_RECKONING</span></span></span><br /></dt>
+<dd><p>In this state, VIO is not active but the SDK is performing approximate positioning using less accurate methods such as dead reckoning. In dead reckoning mode, the velocity output is generally not accurate and must not be used for speed control. </p>
+</dd></dl>
+
 <dl class="cpp enumerator">
 <dt class="sig sig-object cpp">
 <span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">VIO</span></span></span><br /></dt>
